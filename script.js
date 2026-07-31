@@ -10,7 +10,7 @@
      TODO(dev): set BETA_RELEASE to the real launch timestamp (UTC).
      The Figma design shows a static 13d : 23h : 59m — this ticks for real.
      ==================================================================== */
-  var BETA_RELEASE = new Date('2026-08-11T23:59:00Z');
+  var BETA_RELEASE = new Date('2026-08-21T23:59:00Z');
 
   var els = {
     days:  document.getElementById('cdDays'),
