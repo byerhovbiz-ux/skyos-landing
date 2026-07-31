@@ -204,7 +204,7 @@
       .then(function (response) {
         if (!response.ok) throw new Error('HTTP ' + response.status);
         form.reset();
-        setStatus('You’re on the list. Check your inbox — and your spam folder.', 'success');
+        setStatus('You’re on the list. We’ll email you when the beta opens.', 'success');
         burstConfetti(btn);
       })
       .catch(function () {
