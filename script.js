@@ -155,11 +155,15 @@
      script and stylesheet so the page keeps its own design. The form ID is
      public — it only accepts subscriptions, it cannot read the list.
 
-     Kit is set to double opt-in: subscribers land as "unconfirmed" until
-     they click the link in Kit's confirmation email. Confirmed subscribers
-     appear under Subscribers in the Kit dashboard.
+     9742377 is the "Clare form" in Kit — the only real form on the account,
+     and the one carrying the opt-in settings. Careful when changing this:
+     Kit returns {"status":"success"} for stale form IDs too, so a wrong ID
+     looks like it works while the signups go nowhere.
+
+     Double opt-in is off on that form (auto-confirm on, confirmation email
+     unticked), so subscribers are confirmed the moment they submit.
      ==================================================================== */
-  var KIT_ENDPOINT = 'https://app.kit.com/forms/9739669/subscriptions';
+  var KIT_ENDPOINT = 'https://app.kit.com/forms/9742377/subscriptions';
 
   var form   = document.getElementById('waitlistForm');
   var input  = document.getElementById('email');
