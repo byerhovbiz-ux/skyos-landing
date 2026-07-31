@@ -155,15 +155,17 @@
      script and stylesheet so the page keeps its own design. The form ID is
      public — it only accepts subscriptions, it cannot read the list.
 
-     9742377 is the "Clare form" in Kit — the only real form on the account,
-     and the one carrying the opt-in settings. Careful when changing this:
-     Kit returns {"status":"success"} for stale form IDs too, so a wrong ID
-     looks like it works while the signups go nowhere.
+     IMPORTANT — Kit gives one form TWO ids, and they are not interchangeable:
+       9739669  submission endpoint  (the `action` in Kit's embed code)  ← use this
+       9742377  designer id          (app.kit.com/forms/designers/9742377/edit)
+     Both are the "Clare form". Only the first accepts subscriptions. Kit
+     answers {"status":"success"} either way, so testing the endpoint cannot
+     tell them apart — always copy the id out of the embed code.
 
      Double opt-in is off on that form (auto-confirm on, confirmation email
      unticked), so subscribers are confirmed the moment they submit.
      ==================================================================== */
-  var KIT_ENDPOINT = 'https://app.kit.com/forms/9742377/subscriptions';
+  var KIT_ENDPOINT = 'https://app.kit.com/forms/9739669/subscriptions';
 
   var form   = document.getElementById('waitlistForm');
   var input  = document.getElementById('email');
