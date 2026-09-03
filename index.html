@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SkyOS — Early Access</title>
-  <meta name="description" content="Join the SkyOS waitlist. Zero spam. Instant invite when beta arrives.">
+  <meta name="description" content="No context resets. No repeating yourself.">
 
   <meta property="og:title" content="SkyOS — Early Access">
-  <meta property="og:description" content="Join the waitlist. Instant invite when beta arrives.">
+  <meta property="og:description" content="No context resets. No repeating yourself.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,59 +30,7 @@
       </p>
     </div>
 
-    <!-- Submissions POST straight to Kit (form 9739669) from this form —
-         no iframe, no popup, no redirect. Handled by fetch() in script.js.
-         Kit's own embed script and stylesheet are deliberately not loaded;
-         only the endpoint is used, so this design stays untouched. -->
-    <form class="waitlist" id="waitlistForm" novalidate>
-      <label class="sr-only" for="email">Email address</label>
-
-      <div class="waitlist__field">
-        <input class="waitlist__input"
-               id="email"
-               name="email_address"
-               type="email"
-               inputmode="email"
-               autocomplete="email"
-               placeholder="Enter your email"
-               required
-               aria-describedby="waitlistNote">
-        <button class="waitlist__btn" type="submit">Join Waitlist</button>
-      </div>
-
-      <p class="waitlist__note" id="waitlistNote">
-        Zero spam. Instant invite when beta arrives.
-      </p>
-
-      <p class="waitlist__status" id="waitlistStatus" role="status" aria-live="polite"></p>
-    </form>
-
-    <hr class="hero__rule">
-
-    <section class="countdown" aria-labelledby="countdownLabel">
-      <h2 class="countdown__label" id="countdownLabel">TIME LEFT BEFORE BETA</h2>
-
-      <div class="countdown__row">
-        <div class="countdown__card">
-          <span class="countdown__num" id="cdDays">13</span>
-          <span class="countdown__unit">days</span>
-        </div>
-
-        <span class="countdown__sep" aria-hidden="true">:</span>
-
-        <div class="countdown__card">
-          <span class="countdown__num" id="cdHours">23</span>
-          <span class="countdown__unit">hours</span>
-        </div>
-
-        <span class="countdown__sep" aria-hidden="true">:</span>
-
-        <div class="countdown__card">
-          <span class="countdown__num" id="cdMins">59</span>
-          <span class="countdown__unit">mins</span>
-        </div>
-      </div>
-    </section>
+    <a class="cta" href="https://app.skyos.ink">Try SkyOS</a>
 
   </div>
 
@@ -95,8 +43,6 @@
   </div>
 
 </main>
-
-<script src="script.js" defer></script>
 
 <!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
      Vercel itself, so it 404s harmlessly if Analytics is switched off in

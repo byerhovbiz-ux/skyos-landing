@@ -13,9 +13,6 @@
   --accent:         #0A66C2;   /* submit button */
   --accent-hover:   #08529C;
   --accent-press:   #073F78;
-  --field:          #E5F2FF;   /* email input fill */
-  --line:           #E2EAF2;   /* dividers, input border */
-  --surface:        #FFFFFF;
 
   --bg-from:        #F4F9FC;
   --bg-to:          #FFFFFF;
@@ -53,20 +50,8 @@ img { display: block; max-width: 100%; height: auto; }
 h1, h2 { margin: 0; font-weight: 700; }
 p { margin: 0; }
 
-input, button { font: inherit; color: inherit; }
 
 :focus-visible { outline: none; box-shadow: var(--focus-ring); }
-
-.sr-only {
-  position: absolute;
-  width: 1px; height: 1px;
-  margin: -1px; padding: 0;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  white-space: nowrap;
-  border: 0;
-}
 
 /* =========================================================================
    MOBILE  (base — matches "mobile-landing-page", 402px wide)
@@ -116,129 +101,28 @@ input, button { font: inherit; color: inherit; }
   text-wrap: balance;      /* even line lengths where supported */
 }
 
-/* ----------------------------------------------------------- WAITLIST */
-.waitlist {
+/* ---------------------------------------------------------------- CTA
+   Inherits the old submit button's box exactly — same 56px height, same
+   accent, same radius and transitions — so removing the form changed what
+   the control DOES, not how the page looks. An <a>, so it needs the
+   centring a <button> got for free. */
+.cta {
   display: flex;
-  flex-direction: column;
-  width: 100%;
-  gap: 12px;              /* Figma FormContainer gap */
-}
-
-/* On mobile the field and button stack; on desktop the button sits
-   inside the field's right edge. */
-.waitlist__field {
-  display: contents;
-}
-
-.waitlist__input {
-  width: 100%;
-  height: 56px;
-  padding: 0 20px;   /* matches desktop so both read the same */
-  background: var(--field);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-  font-size: 16px;
-  color: var(--ink);
-}
-.waitlist__input::placeholder { color: var(--ink-muted); opacity: 1; }
-
-.waitlist__btn {
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 56px;
   background: var(--accent);
-  border: 0;
   border-radius: var(--r-card);
   color: #fff;
   font-size: 16px;
   font-weight: 600;
+  text-decoration: none;
   cursor: pointer;
   transition: background-color .18s ease, transform .12s ease;
 }
-.waitlist__btn:hover { background: var(--accent-hover); }
-.waitlist__btn:active { background: var(--accent-press); transform: translateY(1px); }
-
-.waitlist__note {
-  color: var(--ink-muted);
-  font-size: 13px;
-  text-align: center;
-}
-
-.waitlist__status {
-  font-size: 13px;
-  font-weight: 500;
-  text-align: center;
-}
-/* Takes no space until it has something to say, so the vertical
-   rhythm below it matches the Figma frame exactly. */
-.waitlist__status:empty { display: none; }
-.waitlist__status[data-state="error"]   { color: #B4232B; }
-.waitlist__status[data-state="success"] { color: var(--accent); }
-
-/* --------------------------------------------------------------- RULE */
-.hero__rule {
-  width: 100%;
-  margin: 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-}
-
-/* ---------------------------------------------------------- COUNTDOWN */
-.countdown {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;              /* Figma CountdownSection gap */
-  width: 100%;
-}
-
-.countdown__label {
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 0;
-  color: var(--ink);
-}
-
-.countdown__row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;              /* Figma TimerRow gap */
-}
-
-.countdown__card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;               /* Figma CountdownCard gap */
-  width: 80px;
-  height: 85px;
-  background: var(--surface);
-  border: 1px solid var(--ink);
-  border-radius: var(--r-card);
-}
-
-.countdown__num {
-  font-size: 32px;
-  font-weight: 600;
-  line-height: 1;
-  font-variant-numeric: tabular-nums;
-  color: var(--ink);
-}
-
-.countdown__unit {
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--ink-muted);
-}
-
-.countdown__sep {
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--ink);
-}
+.cta:hover { background: var(--accent-hover); }
+.cta:active { background: var(--accent-press); transform: translateY(1px); }
 
 /* ------------------------------------------------------------- VISUAL
    Figma mobile: HeroVisual 402×549, image 960×838 at (−279, −146).
@@ -304,75 +188,20 @@ input, button { font: inherit; color: inherit; }
     font-weight: 300;
   }
 
-  /* Figma: title block ends 451, field starts 489. The subtitle now sits
-     between them, so the gap below it is reduced to keep the same rhythm. */
-  .waitlist { margin-top: 30px; gap: 0; }
-
-  /* Field + button become one combined control */
-  .waitlist__field {
-    display: block;
-    position: relative;
-    width: 100%;
-  }
-
-  .waitlist__input {
+  /* Figma: title block ends 451, the control starts 489. The subtitle sits
+     between them, so 30px keeps the original rhythm. Width is the content's
+     own rather than the 155px the button had inset in the field — standing on
+     its own it would read as a fragment of a control that is no longer there. */
+  .cta {
+    display: inline-flex;
+    width: auto;
+    margin-top: 30px;
     height: 60px;
-    padding: 0 175px 0 20px;   /* room for the inset button */
-    border: 0;
-    border-radius: var(--r-card-desktop);
-    font-size: 20px;
-    font-weight: 300;
-  }
-
-  .waitlist__btn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 155px;
-    height: 60px;
+    padding: 0 44px;
     border-radius: var(--r-card-desktop);
     font-size: 20px;
     font-weight: 500;
   }
-
-  .waitlist__note {
-    margin-top: 14px;
-    font-size: 15px;
-    font-weight: 300;
-    text-align: left;
-  }
-
-  .waitlist__status { text-align: left; }
-
-  /* The desktop design has no divider between form and countdown */
-  .hero__rule { display: none; }
-
-  .countdown {
-    align-items: flex-start;
-    margin-top: 66px;        /* Figma: note 581 → label 647 */
-    gap: 15px;
-  }
-
-  .countdown__label {
-    font-size: 20px;
-    font-weight: 400;
-  }
-
-  /* Figma leaves 42px between cards with the ":" centred inside that gap,
-     so the flex gap is (42 − colon width) / 2. */
-  .countdown__row { gap: 15px; }
-
-  .countdown__card {
-    width: 100px;
-    height: 100px;
-    gap: 6px;
-    border-radius: var(--r-card-desktop);
-    background: transparent;  /* desktop cards are unfilled in Figma */
-  }
-
-  .countdown__num  { font-size: 40px; font-weight: 500; }
-  .countdown__unit { font-size: 17px; font-weight: 300; }
-  .countdown__sep  { font-size: 40px; font-weight: 500; }
 
   /* ----------------------------------------------------------- VISUAL
      Figma desktop: image 1165×1130 at (−205, −46) inside 1440×1024.  */
