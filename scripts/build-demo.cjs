@@ -96,14 +96,6 @@ const page = `<!doctype html>
     content: ""; flex: 1; height: 1px; background: var(--soft-sky);
   }
 
-  /* The pill the app renders under a reply that wrote notes. */
-  .dt-saved {
-    align-self: flex-start; display: inline-flex; align-items: center;
-    padding: 7px 14px; background: var(--surface);
-    border: 1px solid var(--separator); border-radius: 999px;
-    color: var(--ink-2); font-size: 15px;
-  }
-
   /* The frame gets a phone-width viewport on small screens. Below 1024 the
      app's own desktop rules stop applying, so .dt-side falls back to an
      <aside>'s default block — it has to be hidden explicitly. A 420px rail
@@ -182,7 +174,10 @@ const page = `<!doctype html>
             <span>${sized(I.share, 22)}</span>
             <span>${sized(I.moreDots, 20)}</span>
           </div>
-          <span class="dt-saved">Saved 3 notes to memory</span>
+          <!-- The app's own extractionBadge(): a .mem-badge carrying
+               FIG.memNav(13). Mine was a hand-written pill at the wrong size
+               with no icon in it. -->
+          <div class="mem-badge mem-ok">${svg('width="13" height="11.26" viewBox="0 0 22.4002 19.4"', I.memnav)}Saved 3 notes to memory</div>
         </div>
 
         <div class="dt-gap"><span>two weeks later</span></div>
