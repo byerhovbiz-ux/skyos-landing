@@ -42,6 +42,13 @@ const sized = (tpl, s, extra) => {
 const svg = (attrs, body) =>
   `<svg ${attrs} fill="none" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
 
+// The app's icon(name, size) for its stroked set, reproduced exactly: same
+// 24 viewBox, same 1.8 stroke, same joins.
+const stroked = (body, size) =>
+  `<svg width="${size}" height="${size}" viewBox="0 0 24 24" fill="none" `
+  + `stroke="currentColor" stroke-width="1.8" stroke-linecap="round" `
+  + `stroke-linejoin="round">${body}</svg>`;
+
 const page = `<!doctype html>
 <html lang="en">
 <head>
@@ -91,6 +98,16 @@ const page = `<!doctype html>
     border: 1px solid var(--separator); border-radius: 999px;
     color: var(--ink-2); font-size: 15px;
   }
+
+  /* The frame gets a phone-width viewport on small screens. Below 1024 the
+     app's own desktop rules stop applying, so .dt-side falls back to an
+     <aside>'s default block — it has to be hidden explicitly. A 420px rail
+     would leave nothing for the conversation, which is the part that
+     argues. */
+  @media (max-width: 900px) {
+    .dt-side { display: none; }
+    .dt-main { width: 100%; }
+  }
 </style>
 </head>
 <body>
@@ -99,6 +116,13 @@ const page = `<!doctype html>
   <div class="screen dt-shell">
 
     <aside class="dt-side">
+      <!-- Search and the rail toggle, as icon() draws them: stroked at 1.8 on
+           a 24 viewBox. Their absence left the sidebar's top corner blank. -->
+      <div class="dt-side-top">
+        <span class="dt-side-btn">${stroked('<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>', 20)}</span>
+        <span class="dt-side-btn">${stroked('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M9 4v16"/>', 20)}</span>
+      </div>
+
       <div class="drawer-cloud"><span class="cloud-float">${mascot(200)}</span></div>
 
       <div class="drawer-scroll">
@@ -118,14 +142,23 @@ const page = `<!doctype html>
       <div class="drawer-foot">
         <span class="drawer-foot-account compact">
           <div class="avatar-initials">A</div>
-          <span class="who-line">Aleksander<span class="who-dot">&middot;</span><span class="who-tier">SkyOS+</span></span>
+          <span class="who-line">Aleksander<span class="who-dot">&middot;</span><span class="who-tier">Beta</span></span>
           <span class="foot-chev">${sized(I.chevron, 18)}</span>
         </span>
       </div>
     </aside>
 
     <div class="dt-main">
-      <div class="dt-topbar"><span class="dt-proj">Booking app</span></div>
+      <div class="dt-topbar">
+        <div class="dt-proj"><span>Booking app</span></div>
+        <!-- The bar's own controls: project memory, then the project menu.
+             Without them the top-right corner is empty and the card reads as
+             a mockup of the app rather than the app. -->
+        <div class="dt-bar-acts">
+          <span class="circle-btn">${svg('width="21" height="18.18" viewBox="0 0 22.4002 19.4"', I.memnav)}</span>
+          <span class="circle-btn">${sized(I.kebab, 20)}</span>
+        </div>
+      </div>
 
       <div class="transcript">
         <div class="msg-user-row">

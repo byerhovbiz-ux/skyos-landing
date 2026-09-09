@@ -436,7 +436,7 @@ p { margin: 0; }
   .cta__note { margin-top: 0; font-size: 15px; }
 
   /* Matches the wide iframe viewport (1280x880). */
-  .demo { margin-top: 56px; aspect-ratio: 128 / 88; }
+  .demo { margin-top: 56px; aspect-ratio: 16 / 9; }
   .shot__caption { text-align: center; }
 
   .compare { padding: 104px 0; }

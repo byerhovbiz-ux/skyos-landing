@@ -41,6 +41,7 @@ const out = {
   cloudD: jsonConst('CLOUD_D'),
   chevron: templateAfter('chevron_down: (s'),
   chevronD: jsonConst('SVG_CHEVRON_DOWN'),
+  kebab: templateAfter('kebabRow: (s = 22)'),
 };
 
 fs.writeFileSync('.tmp-icons.json', JSON.stringify(out));

@@ -153,10 +153,10 @@
 <!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
      Vercel itself, so it 404s harmlessly if Analytics is switched off in
      the project dashboard. -->
-<!-- The frame renders at a real window size and is scaled to the card, so the
-     app inside lays out as it would on a desktop rather than as a squeezed
-     narrow window. Two sizes: a desktop viewport above 900px, a phone-width
-     one below, which is the same breakpoint the card changes shape at. -->
+<!-- The frame renders at a real window size and is scaled down to the card,
+     so the app lays out as a desktop app rather than as a squeezed narrow
+     one. Two viewports, chosen by the card's own width: 1600x900 once there
+     is room for the rail, 420x800 below that. -->
 <script>
 (function () {
   var card = document.querySelector('.demo');
@@ -168,11 +168,13 @@
     // 420px phone viewport up to fill a 750px card.
     var r = card.getBoundingClientRect();
     var wide = r.width >= 640;
-    // Heights are measured, not guessed: the wide layout needs 851px for
-    // the head, the four messages at the app's 36px spacing, and the
-    // composer. 880 leaves the top message a little air above it.
-    var vw = wide ? 1280 : 420;
-    var vh = wide ? 880 : 800;
+    // Sized to a real window rather than to the card: at 1280 the app's
+    // fixed 18-20px type reads far larger than it does in a real window.
+    // 1600, not 1920: wide enough that the app's fixed 18-20px type keeps
+    // the proportions of a real window, narrow enough that it is still
+    // ~12px once the card scales it down. At 1920 it fell to 10.
+    var vw = wide ? 1600 : 420;
+    var vh = wide ? 900 : 800;
     frame.style.width = vw + 'px';
     frame.style.height = vh + 'px';
     // The two viewports share the card's aspect at each breakpoint, so
