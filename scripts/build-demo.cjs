@@ -32,8 +32,11 @@ const mascot = (size) => I.mascotTpl
   .split('${sh.matrix}').join('0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0');
 
 const sized = (tpl, s, extra) => {
-  // chevron_down's template references its path constant by name.
-  let out = tpl.split('${SVG_CHEVRON_DOWN}').join(I.chevronD);
+  // Several FIG icons reference their path data by constant name, so the
+  // extracted template still carries the reference.
+  let out = tpl
+    .split('${SVG_CHEVRON_DOWN}').join(I.chevronD)
+    .split('${SVG_SHARE}').join(I.shareD);
   out = out.split('${s}').join(s);
   for (const [from, to] of extra || []) out = out.split(from).join(to);
   return out;
@@ -77,9 +80,11 @@ const page = `<!doctype html>
      the way a real one sits at its latest message. */
   .transcript { justify-content: flex-end; overflow: hidden; }
 
-  /* Affordances that would be lying in a still. */
-  .composer .plus, .composer .mic, .composer .orb,
-  .drawer-item, .proj-row, .drawer-foot-account { cursor: default; }
+  /* The pointer reaches the frame so the app's hover states fire, but
+     nothing in here does anything when clicked — so the cursor never
+     promises one. */
+  * { cursor: default !important; }
+  textarea { pointer-events: none; }
 
   /* The time divider — the claim the card exists to make. Two weeks on, the
      answer cannot be coming from the conversation above it. */

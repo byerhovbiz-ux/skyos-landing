@@ -137,13 +137,14 @@ p { margin: 0; }
 }
 .nav__cta:hover { background: var(--accent-hover); }
 
-/* The arrow the Figma draws on the button. Its own span so it can sit a
-   little above the text baseline without dragging the label with it. */
+/* The arrow the Figma draws on the button. An SVG rather than U+2197:
+   the text glyph comes from whichever font has it, at a weight and baseline
+   that never match the label beside it. */
 .cta__arrow {
+  width: 1em;
+  height: 1em;
   margin-left: 7px;
-  font-size: .95em;
-  line-height: 1;
-  transform: translateY(-1px);
+  flex: 0 0 auto;
 }
 
 /* =========================================================================
@@ -240,7 +241,6 @@ p { margin: 0; }
   height: 800px;
   border: 0;
   transform-origin: 0 0;
-  pointer-events: none;
 }
 
 /* =========================================================================

@@ -27,7 +27,7 @@
   </a>
   <nav class="nav__links">
     <a class="nav__signin" href="https://app.skyos.ink">Sign in</a>
-    <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS<span class="cta__arrow" aria-hidden="true">&#8599;</span></a>
+    <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS<svg class="cta__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
   </nav>
 </header>
 
@@ -50,10 +50,10 @@
          icon vectors. It sits in an iframe because that stylesheet styles
          body, #app and * globally — inlined here it would restyle this page.
 
-         Not a link. It is a picture of the app, and clicking a picture that
-         then navigates is a small surprise the page does not need — the CTA
-         in the header is always on screen for that. pointer-events:none
-         keeps the frame inert and tabindex keeps it out of the tab order. -->
+         Not a link — clicking a picture of an app and being navigated is a
+         surprise the page does not need, and the header CTA is on screen the
+         whole time. The pointer does reach it though, so the app's own hover
+         states fire; tabindex keeps the frame out of the tab order. -->
     <div class="demo">
       <iframe class="demo__frame" src="demo.html" title="SkyOS" loading="lazy" tabindex="-1" scrolling="no"></iframe>
     </div>
@@ -123,7 +123,7 @@
 
     <h2 class="close__title">Stop re-explaining your project.</h2>
 
-    <a class="cta" href="https://app.skyos.ink">Try SkyOS<span class="cta__arrow" aria-hidden="true">&#8599;</span></a>
+    <a class="cta" href="https://app.skyos.ink">Try SkyOS<svg class="cta__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
     <p class="cta__note">Free while it&rsquo;s in beta.</p>
 
   </div>

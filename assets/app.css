@@ -26,6 +26,9 @@
      invented. Same trick --fade-rgb already uses: CSS cannot pull components
      out of a hex, so the triplet has to be its own token. */
   --ink-2-rgb: 85, 107, 130;
+  /* Sky Blue's channels, so it can be used at opacity the way --ink-2 already
+     is. Every other accent wash in the file hardcodes "10, 102, 194". */
+  --accent-rgb: 10, 102, 194;
 
   /* Sky Blue lifted toward White. The orb is Sky Blue at rest, this while it
      thinks and Deep Sky while it speaks, so the only requirement is that it
@@ -1397,7 +1400,14 @@ input { font-family: inherit; }
 /* Project rows carry no glyph; the slot stays so names align with "New project". */
 .proj-row .ico { display: flex; justify-content: center; width: 20px; color: var(--ink-2); flex: 0 0 auto; }
 .proj-row .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.proj-row.active { background: var(--raised); }
+/* Soft Sky, not Cloud White.
+   Cloud White is a hair off the drawer's own white, so "selected" was the
+   faintest mark on the screen — and any hover light enough to sit under it was
+   invisible. Selection now uses the blue the rest of the app already selects
+   and presses with (--accent-wash is Soft Sky, and .drawer-item:active uses
+   it), which leaves room for a hover beneath it: white -> #F3F7FC on hover ->
+   #E5F2FF when it is the project you are in. */
+.proj-row.active { background: var(--soft-sky); }
 .proj-row .pinned { display: flex; color: var(--ink-2); flex: 0 0 auto; }
 .proj-row.renaming { padding: 4px 8px; }
 .proj-rename {
@@ -2382,7 +2392,7 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
     flex: 0 0 auto;
   }
   #app.desk .dt-side-btn {
-    width: 34px; height: 34px; border-radius: 999px;
+    width: 34px; height: 34px; border-radius: var(--r);
     display: flex; align-items: center; justify-content: center;
     /* --ink, like New Project and Memory below it. At --ink-2 it was the only
        lit control in the column drawn in the caption colour, which reads as
@@ -2521,7 +2531,7 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   #app.desk .who-dot { margin: 0 6px; color: var(--ink-3); }
   #app.desk .who-tier { color: var(--ink-2); }
   #app.desk .drawer-foot-account.compact .foot-chev { flex: 0 0 auto; color: var(--ink-2); display: flex; }
-  #app.desk .dt-side .foot-gear { flex: 0 0 auto; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: 999px; color: var(--ink-2); }
+  #app.desk .dt-side .foot-gear { flex: 0 0 auto; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border-radius: var(--r); color: var(--ink-2); }
   #app.desk .dt-side .foot-gear:hover { background: var(--raised); }
   /* The scroll area clears the shorter footer now. */
   #app.desk .dt-side .drawer-scroll { padding-bottom: 92px; }
@@ -2532,7 +2542,7 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
      chevron stays beside the name instead of being pushed across the row. */
   #app.desk .foot-bug {
     margin-left: auto; flex: 0 0 auto;
-    width: 32px; height: 32px; border-radius: 999px;
+    width: 32px; height: 32px; border-radius: var(--r);
     display: flex; align-items: center; justify-content: center;
     color: var(--ink-2);
   }
@@ -2602,7 +2612,7 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
    no hover there, so the button simply stays visible on coarse pointers. */
 .proj-dots {
   flex: 0 0 auto;
-  width: 28px; height: 28px; border-radius: 999px;
+  width: 28px; height: 28px; border-radius: var(--r);
   display: flex; align-items: center; justify-content: center;
   color: var(--ink-2);
   opacity: 0;
@@ -3180,7 +3190,7 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
 .imp-nudge-cta:active { color: var(--ink); }
 .imp-nudge-x {
   display: flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; padding: 0; border-radius: 999px;
+  width: 22px; height: 22px; padding: 0; border-radius: var(--r);
   color: var(--ink-3);
 }
 .imp-nudge-x:active { color: var(--ink-2); }
@@ -3285,3 +3295,81 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
      40px that separated it from a lone heading. */
   .login-desk .wd-card { margin-top: 26px; }
 }
+
+/* ===== Hover =========================================================
+   The app was built phone-first, so most controls had a :active press state
+   and nothing for a pointer — on desktop, rows and icon buttons gave no sign
+   they were clickable until you clicked them.
+
+   All of it behind @media (hover: hover). A touch browser resolves :hover on
+   tap and then leaves it stuck until you touch something else, so a row you
+   tapped would stay lit as though it were selected.
+
+   The wash is a translucent ink rather than --raised, and deliberately: --raised
+   is the same value as the page background, so it shows up on the white drawer
+   and vanishes on a settings screen. An alpha wash works on both. */
+@media (hover: hover) {
+  /* --- rows: the sidebar, settings, and the menus that share their shape --- */
+  /* Sky Blue at 5%, landing on #F3F7FC.
+     Grey at 6% composited to #F5F6F8 — neutral, in a UI whose every other light
+     surface leans blue. Tinting it fixed the colour but 8% overshot: hover came
+     out DARKER than the selected row, so hovering looked more selected than
+     being selected. 5% puts hover at roughly Cloud White's lightness, under the
+     Soft Sky the selected row now carries. */
+  .drawer-item:not(.is-soon):hover,
+  .set-row:not(.is-soon):hover,
+  .about-row:not(.about-version):hover,
+  .mode-row:not(.sel):hover,
+  .note-menu-row:hover,
+  .pm-row:hover {
+    background: rgba(var(--accent-rgb), 0.05);
+  }
+  /* Already rounded and inset, and .active already owns --raised — hovering an
+     inactive row must read as lighter than the selected one, not equal to it. */
+  .proj-row:not(.active):hover { background: rgba(var(--accent-rgb), 0.05); }
+
+  /* --- icon buttons: square with rounded corners, not a disc --- */
+  .imp-nudge-x:hover { background: rgba(var(--ink-2-rgb), 0.08); color: var(--ink-2); }
+
+  /* --- the blue buttons, everywhere they appear --- */
+  /* Deep Sky, the palette's own darker blue, and already what .fb-btn.primary
+     uses on hover — so blue buttons now agree with each other instead of this
+     one place inventing a shade. It also flips with the theme (#053666 light,
+     #2A6FB8 dark), which a hardcoded darkening does not: mixing the accent
+     toward black is backwards on a dark ground, where hover has to get lighter.
+     The shadow grows with it so the button lifts under the pointer, then
+     settles on :active, which already scales it down. */
+  .btn:not([disabled]):hover,
+  .prof-btn:not([disabled]):hover,
+  .imp-btn.filled:not([disabled]):hover {
+    background: color-mix(in srgb, var(--accent) 75%, var(--deep-sky));
+    box-shadow: 0 6px 12px rgba(14, 30, 44, 0.24);
+  }
+  .btn, .prof-btn, .imp-btn.filled { transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease, box-shadow 0.12s ease; }
+
+  /* Secondary and text controls, so the whole flow responds consistently. */
+  .imp-btn.ghost:hover { background: rgba(var(--accent-rgb), 0.05); }
+  .textbtn:hover { color: var(--ink); }
+  .textbtn.have-acct:hover b { text-decoration: underline; }
+  .imp-copy:hover { background: var(--accent-wash); }
+  .mem-import:hover { background: rgba(var(--accent-rgb), 0.05); border-radius: var(--r); }
+}
+
+/* The press.
+   Full Deep Sky is too much for a pointer merely resting on a button — it read
+   as a state change rather than a highlight. It is right for the press, where
+   the button is being held and the question is whether it registered, so hover
+   takes a quarter of the way there and holding it down goes the whole way.
+
+   Outside the hover query on purpose: a press is the one state a touch screen
+   does have, and it is the only feedback a phone gets. */
+.btn:not([disabled]):active,
+.prof-btn:not([disabled]):active,
+.imp-btn.filled:not([disabled]):active {
+  background: var(--deep-sky);
+  box-shadow: 0 2px 5px rgba(14, 30, 44, 0.22);
+}
+/* .btn already scales; the others did not move at all under a finger. */
+.prof-btn:not([disabled]):active,
+.imp-btn.filled:not([disabled]):active { transform: scale(0.98); }
+.prof-btn, .imp-btn.filled { transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease; }
