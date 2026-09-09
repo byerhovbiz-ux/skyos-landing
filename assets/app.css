@@ -29,6 +29,12 @@
   /* Sky Blue's channels, so it can be used at opacity the way --ink-2 already
      is. Every other accent wash in the file hardcodes "10, 102, 194". */
   --accent-rgb: 10, 102, 194;
+  /* The hover wash's base: Sky Blue pulled most of the way toward Blue Gray.
+     Straight Sky Blue at 3% still read as a blue tint against a row that is
+     itself nearly white; straight Blue Gray read as plain grey in a UI whose
+     other light surfaces all lean blue. This is the point between them, and it
+     is a mix of two palette colours rather than a new one. */
+  --hover-base: color-mix(in srgb, var(--accent) 45%, var(--ink-2));
 
   /* Sky Blue lifted toward White. The orb is Sky Blue at rest, this while it
      thinks and Deep Sky while it speaks, so the only requirement is that it
@@ -1400,14 +1406,7 @@ input { font-family: inherit; }
 /* Project rows carry no glyph; the slot stays so names align with "New project". */
 .proj-row .ico { display: flex; justify-content: center; width: 20px; color: var(--ink-2); flex: 0 0 auto; }
 .proj-row .nm { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-/* Soft Sky, not Cloud White.
-   Cloud White is a hair off the drawer's own white, so "selected" was the
-   faintest mark on the screen — and any hover light enough to sit under it was
-   invisible. Selection now uses the blue the rest of the app already selects
-   and presses with (--accent-wash is Soft Sky, and .drawer-item:active uses
-   it), which leaves room for a hover beneath it: white -> #F3F7FC on hover ->
-   #E5F2FF when it is the project you are in. */
-.proj-row.active { background: var(--soft-sky); }
+.proj-row.active { background: var(--raised); }
 .proj-row .pinned { display: flex; color: var(--ink-2); flex: 0 0 auto; }
 .proj-row.renaming { padding: 4px 8px; }
 .proj-rename {
@@ -3310,23 +3309,23 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
    and vanishes on a settings screen. An alpha wash works on both. */
 @media (hover: hover) {
   /* --- rows: the sidebar, settings, and the menus that share their shape --- */
-  /* Sky Blue at 5%, landing on #F3F7FC.
-     Grey at 6% composited to #F5F6F8 — neutral, in a UI whose every other light
-     surface leans blue. Tinting it fixed the colour but 8% overshot: hover came
-     out DARKER than the selected row, so hovering looked more selected than
-     being selected. 5% puts hover at roughly Cloud White's lightness, under the
-     Soft Sky the selected row now carries. */
+  /* 3% of --hover-base, landing on #F9FBFC.
+     Faint by necessity, not by taste: the selected row is Cloud White
+     (#F4F9FC), only about seven points off the drawer's white, so the whole
+     hover range has to fit inside that gap or it outranks selection. The tint
+     is what took the tuning — 6% grey read neutral, 8% blue came out darker
+     than selected, 3% pure blue still read blue. */
   .drawer-item:not(.is-soon):hover,
   .set-row:not(.is-soon):hover,
   .about-row:not(.about-version):hover,
   .mode-row:not(.sel):hover,
   .note-menu-row:hover,
   .pm-row:hover {
-    background: rgba(var(--accent-rgb), 0.05);
+    background: color-mix(in srgb, var(--hover-base) 3%, transparent);
   }
   /* Already rounded and inset, and .active already owns --raised — hovering an
      inactive row must read as lighter than the selected one, not equal to it. */
-  .proj-row:not(.active):hover { background: rgba(var(--accent-rgb), 0.05); }
+  .proj-row:not(.active):hover { background: color-mix(in srgb, var(--hover-base) 3%, transparent); }
 
   /* --- icon buttons: square with rounded corners, not a disc --- */
   .imp-nudge-x:hover { background: rgba(var(--ink-2-rgb), 0.08); color: var(--ink-2); }
@@ -3348,11 +3347,11 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   .btn, .prof-btn, .imp-btn.filled { transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease, box-shadow 0.12s ease; }
 
   /* Secondary and text controls, so the whole flow responds consistently. */
-  .imp-btn.ghost:hover { background: rgba(var(--accent-rgb), 0.05); }
+  .imp-btn.ghost:hover { background: color-mix(in srgb, var(--hover-base) 3%, transparent); }
   .textbtn:hover { color: var(--ink); }
   .textbtn.have-acct:hover b { text-decoration: underline; }
   .imp-copy:hover { background: var(--accent-wash); }
-  .mem-import:hover { background: rgba(var(--accent-rgb), 0.05); border-radius: var(--r); }
+  .mem-import:hover { background: color-mix(in srgb, var(--hover-base) 3%, transparent); border-radius: var(--r); }
 }
 
 /* The press.
