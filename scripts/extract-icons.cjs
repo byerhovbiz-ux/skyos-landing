@@ -46,6 +46,10 @@ const out = {
   share: templateAfter('share: (s'),
   moreDots: templateAfter('moreDots: (s'),
   shareD: jsonConst('SVG_SHARE'),
+  // The edit button on your own message. FIG.rename draws on an 18 viewBox,
+  // not 24 like the stroked set.
+  rename: jsonConst("SVG_RENAME"),
+
   // The phone chat header: hamburger and kebab, both drawn at 48.
   menu: templateAfter("menu: (s = 48)"),
   kebab48: templateAfter("kebab: (s = 48)"),

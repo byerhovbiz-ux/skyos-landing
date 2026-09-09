@@ -161,11 +161,24 @@ const msgActions = `
 // Two turns rather than one because the transcript is bottom-aligned: a
 // single exchange leaves the top 60% of the card empty.
 
+// Your own message carries a strip too — copy, share, edit — absolutely
+// positioned under the bubble at opacity 0 until the row is hovered. It is
+// the one control in the card that is invisible until you look for it, so
+// leaving it out cost the card a whole interaction. data-tip is what draws
+// the tooltip: the ::after reads the attribute, no script involved.
+const userActions = `
+          <div class="actions user-actions">
+            <button type="button" tabindex="-1" data-tip="Copy message">${sized(I.copy, 20)}</button>
+            <button type="button" tabindex="-1" data-tip="Share prompt">${sized(I.share, 22)}</button>
+            <button type="button" tabindex="-1" data-tip="Edit message">${svg('width="20" height="20" viewBox="0 0 18 18"', I.rename)}</button>
+          </div>`;
+
 const turn = (ask, reply, saved) => `
         <div class="msg-user-row">
           <!-- Short enough to survive the crop. The transcript is bottom-
                aligned, so a longer message loses its own beginning. -->
           <div class="msg-user">${ask}</div>
+${userActions}
         </div>
 
         <div class="msg-ai">
