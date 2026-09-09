@@ -50,16 +50,68 @@
          explains the product. -->
     <p class="hero__note">No card. Runs in your browser.</p>
 
-    <figure class="shot">
-      <img src="assets/app-desktop.webp"
-           alt="SkyOS answering &ldquo;remind me why we didn&rsquo;t go with Clerk&rdquo; with the original reason, under a line reading &ldquo;Saved 3 notes to memory&rdquo;"
-           width="2160" height="1153"
-           fetchpriority="high" decoding="async">
-      <figcaption class="shot__caption">
-        Three notes saved from the first message. The last answer comes
-        from them, not from re-reading the conversation.
-      </figcaption>
-    </figure>
+    <!-- The product surface, rebuilt in HTML rather than shown as a
+         screenshot: crisp at any resolution, real selectable text, and the
+         rows can answer a cursor — which is what makes it read as the app
+         rather than a picture of one. The whole card is a single link and
+         nothing inside it is focusable, so it stays one tab stop. -->
+    <a class="demo" href="https://app.skyos.ink" aria-label="Open SkyOS">
+      <span class="demo__app" aria-hidden="true">
+
+        <span class="demo__side">
+          <span class="demo__brand">
+            <svg class="demo__mark" viewBox="0 0 24 24"><path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/></svg>
+            SkyOS
+          </span>
+
+          <span class="demo__nav">
+            <span class="demo__row">New Project</span>
+            <span class="demo__row">Memory</span>
+            <span class="demo__row demo__row--dim">Integrations</span>
+          </span>
+
+          <span class="demo__label">Recents</span>
+          <span class="demo__nav">
+            <span class="demo__row demo__row--on">Booking app</span>
+            <span class="demo__row">Meridian redesign</span>
+          </span>
+        </span>
+
+        <span class="demo__main">
+          <span class="demo__head">Booking app</span>
+
+          <span class="demo__thread">
+            <span class="demo__you">
+              Building a booking app for small salons. Going with Supabase for
+              auth instead of Clerk since Clerk got expensive at scale.
+            </span>
+
+            <span class="demo__ai">
+              <svg class="demo__cloud" viewBox="0 0 24 24"><path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/></svg>
+              <span class="demo__body">This keeps the stack lean: Supabase for authentication and Stripe for payments, with no extra provider costs at launch.</span>
+              <span class="demo__saved">Saved 3 notes to memory</span>
+            </span>
+
+            <span class="demo__gap"><span>two weeks later</span></span>
+
+            <span class="demo__you">Remind me why we didn&rsquo;t go with Clerk</span>
+
+            <span class="demo__ai">
+              <svg class="demo__cloud" viewBox="0 0 24 24"><path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/></svg>
+              <span class="demo__body">We didn&rsquo;t go with Clerk because it got expensive at scale; you chose Supabase for auth instead.</span>
+            </span>
+          </span>
+
+          <span class="demo__composer">Ask SkyOS</span>
+        </span>
+
+      </span>
+    </a>
+
+    <p class="shot__caption">
+      Three notes saved from the first message. Two weeks on, the answer
+      comes from them.
+    </p>
 
   </div>
 </main>
