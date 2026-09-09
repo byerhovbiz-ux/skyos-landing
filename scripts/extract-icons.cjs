@@ -46,6 +46,16 @@ const out = {
   share: templateAfter('share: (s'),
   moreDots: templateAfter('moreDots: (s'),
   shareD: jsonConst('SVG_SHARE'),
+  // The phone chat header: hamburger and kebab, both drawn at 48.
+  menu: templateAfter("menu: (s = 48)"),
+  kebab48: templateAfter("kebab: (s = 48)"),
+
+  // The settings dialog's left-hand nav.
+  user: jsonConst("SVG_USER"),
+  gridInt: jsonConst("SVG_GRID_INT"),
+  hdd: jsonConst("SVG_HDD"),
+  gear2: jsonConst("SVG_GEAR2"),
+  shield: jsonConst("SVG_SHIELD"),
   bug: '<path d="M8 7a4 4 0 0 1 8 0"/><rect x="7" y="7" width="10" height="11" rx="5"/><path d="M3 11h4M17 11h4M4 17l3-1.5M20 17l-3-1.5M4.5 6L7 7.5M19.5 6L17 7.5"/>',
 };
 

@@ -166,6 +166,10 @@ p { margin: 0; }
 /* The <br> in the markup is the Figma's line break. It only helps once the
    line is long enough to need shaping, so below 900px it is ignored and the
    headline wraps to the column instead. */
+/* The space in front of the <br> is load-bearing: with the break switched off
+   there is nothing else between "not" and "to", and the headline read
+   "notto". When the break is on, that trailing space collapses at the end of
+   the line and costs nothing. */
 .hero__title br { display: none; }
 
 .hero__subtitle {
@@ -229,10 +233,16 @@ p { margin: 0; }
   background: var(--surface);
 }
 
+/* The memory card is a picture of one panel, not of the whole window: the
+   dialog is a fixed 1120x820 however large the window gets, so in the hero's
+   1990px viewport it would swim in scrim. A smaller window fills the card
+   with the thing the card is about. Its viewport is 1440x900, hence 8/5. */
+.demo--memory { aspect-ratio: 42 / 84; }
+
 /* The app draws itself for a full window, so the frame is given one and
    scaled down rather than squeezed. These dimensions only govern the first
-   paint — the scaler in index.html sets the real pair, 1600x900 or 420x800,
-   from the card's width. */
+   paint — the scaler in index.html sets the real pair from the card's width
+   and its own data-vw / data-vh. */
 .demo__frame {
   position: absolute;
   top: 0;
@@ -345,6 +355,31 @@ p { margin: 0; }
 .why__lead + .why__lead { margin-top: 16px; }
 
 /* =========================================================================
+   NOTES — the second app card
+
+   The hero card shows a decision being written down; this one shows what was
+   written. They have to be two cards: the memory panel is a modal over a
+   blurred scrim, so in the app the conversation is behind it, not beside it.
+   ========================================================================= */
+.notes { padding: 72px 0; }
+
+.notes__title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: var(--lh);
+}
+
+.notes__lead {
+  margin-top: 14px;
+  max-width: 620px;
+  color: var(--ink-muted);
+  font-size: 17px;
+  line-height: 1.6;
+}
+
+.notes .demo { margin-top: 36px; }
+
+/* =========================================================================
    CLOSE
    ========================================================================= */
 .close {
@@ -425,13 +460,15 @@ p { margin: 0; }
 
   .cta__note { font-size: 15px; }
 
-  /* Matches the wide iframe viewport (1280x880). */
+  /* Matches the wide iframe viewports: 1990x1120 and, for memory, 1440x900. */
   .demo { margin-top: 56px; aspect-ratio: 199 / 112; }
+  .demo--memory { aspect-ratio: 8 / 5; }
 
   .compare { padding: 104px 0; }
 
   .compare__title,
   .why__title,
+  .notes__title,
   .close__title { font-size: 40px; }
 
   .compare__title { margin-bottom: 36px; }
@@ -482,6 +519,7 @@ p { margin: 0; }
   .compare { padding: 120px 0; }
   .compare__title,
   .why__title,
+  .notes__title,
   .close__title { font-size: 42px; }
 
   .col { padding: 30px 32px; }

@@ -3372,3 +3372,89 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
 .prof-btn:not([disabled]):active,
 .imp-btn.filled:not([disabled]):active { transform: scale(0.98); }
 .prof-btn, .imp-btn.filled { transition: transform 0.12s ease, background 0.12s ease, box-shadow 0.12s ease; }
+
+/* ===== Message actions ==============================================
+   Hover for the six buttons under a message — copy / share / edit on your own,
+   copy / share / more on SkyOS's. They had a press state and nothing for a
+   pointer, so on desktop there was no sign which glyph you were about to hit.
+   Rounded square, matching every other icon button. */
+@media (hover: hover) {
+  .actions button:hover {
+    background: rgba(var(--ink-2-rgb), 0.10);
+    color: var(--ink);
+  }
+}
+/* The assistant's row has no padding of its own, so its buttons need the same
+   box the user's already have or the highlight would hug the glyph. */
+.actions button { border-radius: 6px; transition: background 0.12s ease, color 0.12s ease; }
+.msg-ai .actions button { width: 30px; height: 30px; padding: 5px; align-items: center; justify-content: center; }
+/* The row is 20px-gapped for reading; with a visible highlight the boxes need
+   to not touch, but the glyph rhythm should not change either — the padding
+   above already carries it. */
+
+/* Wrapping is never right for this strip: three icons on two lines under a
+   one-word message read as two separate controls. */
+.actions.user-actions { flex-wrap: nowrap; }
+
+/* ...and when they genuinely do not fit, they move beside the bubble instead
+   of under it. placeUserActions() measures and sets this. */
+.msg-user-row.acts-side .user-actions {
+  top: 50%;
+  bottom: auto;
+  left: auto;
+  right: calc(100% + 8px);
+  transform: translateY(-50%);
+  width: max-content;
+  margin-top: 0;
+}
+/* The tooltip hangs below each button; beside a bubble there is room for it,
+   but it must not push the transcript sideways. */
+.msg-user-row.acts-side .user-actions button::after { left: auto; right: 0; transform: none; }
+
+/* ===== Topbar and composer icon buttons =============================
+   The topbar pair already had a hover — var(--raised) — which is the same
+   value as the chat background it sits on, so it painted nothing. The composer
+   trio had no hover at all. Same wash as the message actions, so every icon
+   button in the app answers the pointer the same way. */
+@media (hover: hover) {
+  #app.desk .dt-topbar .circle-btn:hover {
+    background: rgba(var(--ink-2-rgb), 0.10);
+    color: var(--ink);
+  }
+  /* + and the mic are bare glyphs with no box of their own. Widening them would
+     move the composer's layout, so the highlight is a pseudo-element centred
+     behind the icon — ::before, because ::after is already carrying the 44px
+     tap target, and because content paints above it without needing z-index. */
+  .composer .plus:hover::before,
+  .composer .mic:hover::before { background: rgba(var(--ink-2-rgb), 0.10); }
+  /* The orb is a filled accent button, so it follows the blue buttons rather
+     than the icon buttons: a quarter toward Deep Sky on hover. */
+  .composer .orb:hover { background: color-mix(in srgb, var(--accent) 75%, var(--deep-sky)); }
+}
+#app.desk .dt-topbar .circle-btn { border-radius: var(--r); transition: background 0.12s ease, color 0.12s ease; }
+.composer .plus::before,
+.composer .mic::before {
+  content: ''; position: absolute;
+  left: 50%; top: 50%; transform: translate(-50%, -50%);
+  /* 44px, the same box as the tap target underneath. 34 cleared a 24px glyph
+     by five pixels a side and read as an outline; 40 was still tight. Purely
+     decorative — pointer-events off so the mic's box, which reaches under the
+     orb sitting 3px beside it, cannot take the orb's clicks. */
+  width: 44px; height: 44px; border-radius: var(--r);
+  background: transparent;
+  pointer-events: none;
+  transition: background 0.12s ease;
+}
+/* The press, on touch as well as pointer. */
+.composer .plus:active::before,
+.composer .mic:active::before { background: rgba(var(--ink-2-rgb), 0.16); }
+.composer .orb { transition: background 0.12s ease, transform 0.12s ease; }
+.composer .orb:active { background: var(--deep-sky); transform: scale(0.96); }
+#app.desk .dt-topbar .circle-btn:active { background: rgba(var(--ink-2-rgb), 0.16); }
+
+/* The mic glyph is not centred in its own artwork: FIG.mic's viewBox is
+   0 0 24 24.4364, and the ink runs x=4 to x=22.01, so its centre sits at 13
+   against a viewBox centre of 12. Measured, not guessed — one unit right, which
+   is 0.92px at the 22px it renders at. Everything else about the icon is
+   centred, so only x moves. */
+.composer .mic::before { left: calc(50% + 0.92px); }
