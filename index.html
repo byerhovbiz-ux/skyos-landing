@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkyOS — an AI chat that doesn't lose the thread</title>
+  <title>SkyOS — AI optimized not to go vague</title>
   <meta name="description" content="Ask an AI what you decided a month ago and you get &quot;we discussed pricing&quot; instead of the number. SkyOS writes decisions down as they happen and keeps them word for word.">
 
-  <meta property="og:title" content="SkyOS — an AI chat that doesn't lose the thread">
+  <meta property="og:title" content="SkyOS — AI optimized not to go vague">
   <meta property="og:description" content="Ask an AI what you decided a month ago and you get &quot;we discussed pricing&quot; instead of the number. SkyOS keeps it word for word.">
   <meta property="og:type" content="website">
 
@@ -18,139 +18,127 @@
 </head>
 <body>
 
-<!-- =========================================================== HERO
-     The old hero said "No context resets. No repeating yourself." Someone
-     who signed up and sent three messages still reported having no idea
-     what the product was for, so the pitch now leads with the symptom in
-     the reader's own words rather than with the claim.
-     ============================================================== -->
+<!-- Home / About / Contact are in the Figma but have no pages behind them,
+     so the nav ships with only the two links that go somewhere. -->
+<header class="nav">
+  <a class="nav__brand" href="/">
+    <svg class="nav__mark" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/>
+    </svg>
+    SkyOS
+  </a>
+  <nav class="nav__links">
+    <a class="nav__signin" href="https://app.skyos.ink">Sign in</a>
+    <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS</a>
+  </nav>
+</header>
+
+
+<!-- =========================================================== HERO -->
 <main class="hero">
+  <div class="wrap">
 
-  <div class="hero__content">
+    <h1 class="hero__title">AI optimized not<br>to go vague.</h1>
 
-    <div class="hero__heading">
-      <h1 class="hero__title">An AI chat that doesn&rsquo;t lose the thread</h1>
-      <p class="hero__subtitle">
-        Ask an AI what you decided a month ago and you get
-        &ldquo;we discussed pricing.&rdquo; Not the number.
-      </p>
+    <p class="hero__subtitle">
+      Ask an AI what you decided a month ago and you get
+      &ldquo;we discussed pricing.&rdquo; Not the number.
+    </p>
+
+    <div class="hero__actions">
+      <a class="cta" href="https://app.skyos.ink">Try SkyOS &mdash; free</a>
+      <p class="cta__note">No card. Runs in your browser.</p>
     </div>
 
-    <a class="cta" href="https://app.skyos.ink">Try SkyOS &mdash; free</a>
-    <p class="cta__note">No card. Works in your browser on desktop and mobile.</p>
+    <figure class="shot">
+      <img src="assets/app-desktop.webp"
+           alt="SkyOS answering &ldquo;remind me why we didn&rsquo;t go with Clerk&rdquo; with the original reason, under a line reading &ldquo;Saved 3 notes to memory&rdquo;"
+           width="2160" height="1153"
+           fetchpriority="high" decoding="async">
+      <figcaption class="shot__caption">
+        Three notes saved from the first message. The last answer comes
+        from them, not from re-reading the conversation.
+      </figcaption>
+    </figure>
 
   </div>
-
-  <!-- Kept from the original Figma composition. The crop percentages in
-       styles.css are hand-tuned to this render's dimensions, so the app
-       screenshot gets its own section below rather than being swapped in
-       here. -->
-  <div class="hero__visual">
-    <img src="assets/hero-phone.png"
-         alt="The SkyOS mobile app in use"
-         width="4096" height="3976"
-         fetchpriority="high" decoding="async">
-  </div>
-
 </main>
 
 
-<!-- =========================================================== PROBLEM -->
-<section class="band">
-  <div class="band__inner">
+<!-- =========================================================== COMPARE
+     The one section that does the arguing. Same question, two answers —
+     which is the whole product in a glance. -->
+<section class="compare">
+  <div class="wrap">
 
-    <h2 class="band__title">Long chats go vague</h2>
+    <h2 class="compare__title">Same question, a month later</h2>
 
-    <p class="band__lead">
-      The further into a conversation you get, the more the specifics blur.
-      Old messages quietly drop out of view, and everything still there
-      carries the same weight &mdash; the decision you made in hour one and
-      the idea you threw out ten minutes later look identical.
-    </p>
+    <div class="compare__grid">
 
-    <p class="band__lead">
-      So you re-explain the project every time you come back to it, or you
-      keep the real facts in a document on the side and paste them in by
-      hand.
+      <div class="col col--them">
+        <h3 class="col__head">Other AI</h3>
+        <p class="col__line">&ldquo;We discussed pricing.&rdquo;</p>
+        <p class="col__line">&ldquo;You mentioned a deadline.&rdquo;</p>
+        <p class="col__line">&ldquo;We talked about which auth provider to use.&rdquo;</p>
+      </div>
+
+      <div class="col col--us">
+        <h3 class="col__head">SkyOS</h3>
+        <p class="col__line">&ldquo;$15 a month, annual billing only.&rdquo;</p>
+        <p class="col__line">&ldquo;Live before the 15th.&rdquo;</p>
+        <p class="col__line">&ldquo;Supabase, not Clerk &mdash; Clerk got expensive at scale.&rdquo;</p>
+      </div>
+
+    </div>
+
+    <p class="compare__note">
+      Both remember the conversation happened. Only one kept what was in it.
     </p>
 
   </div>
 </section>
 
 
-<!-- =========================================================== PROOF
-     The one screenshot that shows the mechanism rather than the interface:
-     a note being saved, then the answer that uses it. -->
-<section class="shot">
-  <figure class="shot__frame">
-    <img src="assets/app-desktop.webp"
-         alt="SkyOS answering &ldquo;remind me why we didn&rsquo;t go with Clerk&rdquo; with the original reason, under a line reading &ldquo;Saved 3 notes to memory&rdquo;"
-         width="1600" height="1000"
-         loading="lazy" decoding="async">
-    <figcaption class="shot__caption">
-      It saved three notes from the first message. The last answer is drawn
-      from them.
-    </figcaption>
-  </figure>
-</section>
+<!-- =========================================================== WHY -->
+<section class="why">
+  <div class="wrap wrap--narrow">
 
+    <h2 class="why__title">Why the specifics go first</h2>
 
-<!-- =========================================================== HOW -->
-<section class="band band--tint">
-  <div class="band__inner">
+    <p class="why__lead">
+      Long chats don&rsquo;t fail all at once. Old messages quietly drop out
+      of view, and everything still there carries the same weight &mdash; a
+      decision you made in hour one and an idea you threw out ten minutes
+      later look identical.
+    </p>
 
-    <h2 class="band__title">What SkyOS does instead</h2>
+    <p class="why__lead">
+      The usual fix is to ask for a summary and start fresh. But a summary is
+      exactly where specifics die: the number becomes &ldquo;pricing,&rdquo;
+      the date becomes &ldquo;the deadline,&rdquo; and you don&rsquo;t notice
+      until it answers with something different.
+    </p>
 
-    <ul class="points">
-      <li class="point">
-        <h3 class="point__title">Writes decisions down when they happen</h3>
-        <p class="point__body">
-          Not at the end, not on request. As you talk, the things you settle
-          on become short notes &mdash; what you chose, why, and what you
-          ruled out.
-        </p>
-      </li>
-
-      <li class="point">
-        <h3 class="point__title">Keeps them word for word</h3>
-        <p class="point__body">
-          Nothing is summarised on the way in or on the way out. That&rsquo;s
-          the difference between &ldquo;$15/month, annual only&rdquo; and
-          &ldquo;we discussed pricing.&rdquo;
-        </p>
-      </li>
-
-      <li class="point">
-        <h3 class="point__title">Updates when you change your mind</h3>
-        <p class="point__body">
-          Say something different and the note changes with you, so the old
-          decision stops competing with the new one. A transcript can&rsquo;t
-          do that &mdash; the old message just sits there.
-        </p>
-      </li>
-
-      <li class="point">
-        <h3 class="point__title">Shows you everything it kept</h3>
-        <p class="point__body">
-          Every note is visible, dated, and yours to edit or delete. Nothing
-          is remembered that you can&rsquo;t see.
-        </p>
-      </li>
-    </ul>
+    <p class="why__lead">
+      SkyOS writes each decision down as it happens and keeps it word for
+      word &mdash; nothing summarised on the way in or on the way out. When
+      you change your mind, the note changes with you, so the old decision
+      stops competing with the new one.
+    </p>
 
   </div>
 </section>
 
 
 <!-- =========================================================== CLOSE -->
-<section class="band band--close">
-  <div class="band__inner band__inner--narrow">
+<section class="close">
+  <div class="wrap wrap--narrow">
 
-    <h2 class="band__title">Bring what your AI already knows</h2>
+    <h2 class="close__title">Bring what your AI already knows</h2>
 
-    <p class="band__lead">
-      SkyOS can import the memory from ChatGPT, Claude or Gemini, so it
-      starts knowing your work instead of starting blank.
+    <p class="why__lead">
+      Import your memory from ChatGPT, Claude or Gemini and SkyOS starts
+      knowing your work instead of starting blank.
     </p>
 
     <a class="cta" href="https://app.skyos.ink">Try SkyOS &mdash; free</a>
@@ -161,13 +149,15 @@
 
 
 <footer class="foot">
-  <p class="foot__line">SkyOS &mdash; built by one person, in the open.</p>
-  <nav class="foot__nav">
-    <a href="https://app.skyos.ink/privacy.html">Privacy</a>
-    <a href="https://app.skyos.ink/terms.html">Terms</a>
-    <a href="https://app.skyos.ink/pricing.html">Pricing</a>
-    <a href="mailto:hello@skyos.ink">Contact</a>
-  </nav>
+  <div class="wrap">
+    <p class="foot__line">SkyOS &mdash; built by one person.</p>
+    <nav class="foot__nav">
+      <a href="https://app.skyos.ink/privacy.html">Privacy</a>
+      <a href="https://app.skyos.ink/terms.html">Terms</a>
+      <a href="https://app.skyos.ink/pricing.html">Pricing</a>
+      <a href="mailto:hello@skyos.ink">Contact</a>
+    </nav>
+  </div>
 </footer>
 
 <!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
