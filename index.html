@@ -50,63 +50,17 @@
          explains the product. -->
     <p class="hero__note">No card. Runs in your browser.</p>
 
-    <!-- The product surface, rebuilt in HTML rather than shown as a
-         screenshot: crisp at any resolution, real selectable text, and the
-         rows can answer a cursor — which is what makes it read as the app
-         rather than a picture of one. The whole card is a single link and
-         nothing inside it is focusable, so it stays one tab stop. -->
-    <a class="demo" href="https://app.skyos.ink" aria-label="Open SkyOS">
-      <span class="demo__app" aria-hidden="true">
+    <!-- The card is the app: demo.html loads assets/app.css, which is
+         pwa/styles.css copied verbatim, applied to the app's own class names and
+         icon vectors. It sits in an iframe because that stylesheet styles
+         body, #app and * globally — inlined here it would restyle this page.
 
-        <span class="demo__side">
-          <span class="demo__brand">
-            <svg class="demo__mark" viewBox="0 0 24 24"><path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/></svg>
-            SkyOS
-          </span>
-
-          <span class="demo__nav">
-            <span class="demo__row">New Project</span>
-            <span class="demo__row">Memory</span>
-            <span class="demo__row demo__row--dim">Integrations</span>
-          </span>
-
-          <span class="demo__label">Recents</span>
-          <span class="demo__nav demo__nav--proj">
-            <span class="demo__row demo__row--on">Booking app</span>
-            <span class="demo__row">Meridian redesign</span>
-          </span>
-        </span>
-
-        <span class="demo__main">
-          <span class="demo__head">Booking app</span>
-
-          <span class="demo__thread">
-            <span class="demo__you">
-              Building a booking app for small salons. Going with Supabase for
-              auth instead of Clerk since Clerk got expensive at scale.
-            </span>
-
-            <span class="demo__ai">
-              <svg class="demo__cloud" viewBox="0 0 24 24"><path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/></svg>
-              <span class="demo__body">This keeps the stack lean: Supabase for authentication and Stripe for payments, with no extra provider costs at launch.</span>
-              <span class="demo__saved">Saved 3 notes to memory</span>
-            </span>
-
-            <span class="demo__gap"><span>two weeks later</span></span>
-
-            <span class="demo__you">Remind me why we didn&rsquo;t go with Clerk</span>
-
-            <span class="demo__ai">
-              <svg class="demo__cloud" viewBox="0 0 24 24"><path d="M6.5 18.5A4.5 4.5 0 0 1 6 9.6a6 6 0 0 1 11.6-1.2 4.2 4.2 0 0 1-.6 10.1z"/></svg>
-              <span class="demo__body">We didn&rsquo;t go with Clerk because it got expensive at scale; you chose Supabase for auth instead.</span>
-            </span>
-          </span>
-
-          <span class="demo__composer">Ask SkyOS</span>
-        </span>
-
-      </span>
-    </a>
+         pointer-events:none on the frame so the overlay link takes every
+         click; the iframe itself is inert and out of the tab order. -->
+    <div class="demo">
+      <iframe class="demo__frame" src="demo.html" title="SkyOS" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+      <a class="demo__hit" href="https://app.skyos.ink" aria-label="Open SkyOS"></a>
+    </div>
 
     <p class="shot__caption">
       Three notes saved from the first message. Two weeks on, the answer
@@ -198,6 +152,39 @@
 <!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
      Vercel itself, so it 404s harmlessly if Analytics is switched off in
      the project dashboard. -->
+<!-- The frame renders at a real window size and is scaled to the card, so the
+     app inside lays out as it would on a desktop rather than as a squeezed
+     narrow window. Two sizes: a desktop viewport above 900px, a phone-width
+     one below, which is the same breakpoint the card changes shape at. -->
+<script>
+(function () {
+  var card = document.querySelector('.demo');
+  var frame = card && card.querySelector('.demo__frame');
+  if (!frame) return;
+
+  function fit() {
+    // Keyed off the card, not the window. Keying off the window blew a
+    // 420px phone viewport up to fill a 750px card.
+    var r = card.getBoundingClientRect();
+    var wide = r.width >= 640;
+    // Heights are measured, not guessed: the wide layout needs 851px for
+    // the head, the four messages at the app's 36px spacing, and the
+    // composer. 880 leaves the top message a little air above it.
+    var vw = wide ? 1280 : 420;
+    var vh = wide ? 880 : 800;
+    frame.style.width = vw + 'px';
+    frame.style.height = vh + 'px';
+    // The two viewports share the card's aspect at each breakpoint, so
+    // scaling by width alone fills it exactly.
+    frame.style.transform = 'scale(' + (r.width / vw) + ')';
+  }
+
+  fit();
+  if (window.ResizeObserver) new ResizeObserver(fit).observe(card);
+  window.addEventListener('resize', fit);
+})();
+</script>
+
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

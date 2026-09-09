@@ -205,39 +205,29 @@ p { margin: 0; }
 }
 
 /* =========================================================================
-   DEMO — the product surface, in HTML
+   DEMO — the card is the app itself
 
-   Every value below is lifted from pwa/styles.css rather than approximated,
-   so the card is the app rather than something that resembles it:
+   demo.html loads assets/app.css (pwa/styles.css, copied verbatim) against
+   the app's own class names and icon vectors. Nothing here restyles what is
+   inside the frame; these rules only give it a shape on the page.
 
-     --r: 10px                    the app's corner radius
-     .msg-user   radius 10px 0 10px 10px, 12px 10px padding, 18px/1.5,
-                 max-width min(280px, 84%), 0 1px 2px shadow
-     .msg-ai     column, 11px gap, 30px avatar
-     .ai-text    18px / 1.5
-     .transcript 36px gap, 27px 16px 28px padding
-     .composer   56px min-height, 14px gap, 0 13px 0 15px, 19px placeholder
-     .proj-row   38px tall, 18px, active fill --raised (Cloud White)
-     .drawer-item 48px tall, 20px, 21px gap
-     .drawer-sec  15px, weight 300, Blue Gray
-
-   The card renders at 1080px against a real window's ~1400px, so the whole
-   thing is scaled with zoom rather than by rewriting every size — that way
-   the numbers above stay recognisable as the app's own.
+   Copied rather than imported because the two projects deploy separately —
+   re-run scripts/sync-demo.cjs after a change to the app's styles.
    ========================================================================= */
-:root {
-  --sky-soft: #E5F2FF;    /* Soft Sky      */
-  --sky-cloud: #F4F9FC;   /* Cloud White — --raised in the app */
-  --sky-r: 10px;          /* --r */
-}
-
 .demo {
-  display: block;
+  position: relative;
   margin-top: 40px;
   border-radius: var(--r-card);
-  text-decoration: none;
-  color: inherit;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px rgba(14, 30, 44, .10);
   transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+  /* Portrait on phones: at 16:10 a 327px card is 204px tall, which clips the
+     exchange to its last message and loses the setup that gives it meaning. */
+  /* Matches the narrow iframe viewport (420x800) so scaling by width fills
+     it exactly and nothing is cropped. */
+  aspect-ratio: 42 / 80;
+  background: var(--surface);
 }
 
 .demo:hover {
@@ -245,192 +235,27 @@ p { margin: 0; }
   box-shadow: 0 26px 60px rgba(14, 30, 44, .14);
 }
 
-.demo__app {
-  display: flex;
-  overflow: hidden;
-  background: var(--surface);
-  border: 1px solid var(--line);
+/* The app draws itself for a full window. The frame is given one — 1280
+   wide, scaled down to the card — rather than being squeezed, so the layout
+   inside is the desktop one at its real proportions instead of a narrow
+   window's. */
+.demo__frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1280px;
+  height: 800px;
+  border: 0;
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+/* Covers the frame so every click goes to the app, and carries the focus
+   ring for keyboard users since the iframe is out of the tab order. */
+.demo__hit {
+  position: absolute;
+  inset: 0;
   border-radius: var(--r-card);
-  box-shadow: 0 18px 44px rgba(14, 30, 44, .10);
-  /* Portrait on phones: at 16:10 a 327px card is 204px tall, which clips the
-     exchange to its last message and loses the setup that gives it meaning. */
-  aspect-ratio: 4 / 5;
-  /* The app's own text sizes are 18–20px, drawn for a full window. Shrinking
-     the whole surface keeps their relationships intact; restating them at
-     12px each would have quietly become a different design. */
-  zoom: .62;
-}
-
-/* -------------------------------------------------------------- SIDEBAR
-   The app's drawer: 309px, Cloud White fill on the active project, section
-   label in Blue Gray at weight 300. Hidden on phones — a two-column chrome
-   at 375px leaves nothing for the conversation, which is the part that
-   carries the argument. */
-.demo__side {
-  display: none;
-  flex-direction: column;
-  width: 309px;
-  flex: 0 0 309px;
-  padding: 22px 0;
-  border-right: 1px solid var(--line);
-  background: var(--surface);
-}
-
-.demo__brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 0 17px 26px;
-  font-family: var(--font-serif);
-  font-size: 26px;
-  font-weight: 700;
-  color: var(--ink);
-}
-
-.demo__mark { width: 26px; height: 26px; fill: var(--accent); }
-
-.demo__nav { display: flex; flex-direction: column; }
-
-/* .drawer-item */
-.demo__row {
-  display: flex;
-  align-items: center;
-  height: 48px;
-  padding: 0 17px;
-  color: var(--ink);
-  font-size: 20px;
-  font-weight: 500;
-}
-
-.demo__row--dim { color: rgba(85, 107, 130, .55); }
-
-/* .drawer-sec */
-.demo__label {
-  padding: 28px 0 15px 18px;
-  color: var(--ink-muted);
-  font-size: 15px;
-  font-weight: 300;
-}
-
-/* .proj-row — note the active fill is --raised (Cloud White), not Soft Sky */
-.demo__nav--proj .demo__row {
-  height: 38px;
-  margin: 0 16px 9px;
-  padding: 0 13px;
-  border-radius: var(--sky-r);
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.demo__row--on { background: var(--sky-cloud); }
-
-.demo:hover .demo__nav--proj .demo__row:not(.demo__row--on) {
-  background: rgba(244, 249, 252, .7);
-}
-
-/* ---------------------------------------------------------------- MAIN */
-.demo__main {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  min-width: 0;
-  background: var(--sky-cloud);
-}
-
-.demo__head {
-  padding: 20px 24px 0;
-  color: var(--ink);
-  font-size: 20px;
-  font-weight: 600;
-}
-
-/* .transcript — bottom-aligned, since a real chat sits at its latest
-   message. Top-aligned it left a third of the card empty. */
-.demo__thread {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: flex-end;
-  gap: 36px;
-  padding: 27px 24px 28px;
-  overflow: hidden;
-}
-
-/* .msg-user — the squared top-right corner is the app's, not a slip */
-.demo__you {
-  align-self: flex-end;
-  max-width: min(280px, 84%);
-  padding: 12px 10px;
-  background: var(--surface);
-  border-radius: var(--sky-r) 0 var(--sky-r) var(--sky-r);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
-  color: var(--ink);
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-/* .msg-ai */
-.demo__ai {
-  align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-}
-
-.demo__cloud { width: 30px; height: 30px; fill: var(--accent); }
-
-/* .ai-text */
-.demo__body {
-  color: var(--ink);
-  font-size: 18px;
-  line-height: 1.5;
-}
-
-/* The one element the page exists to show. */
-.demo__saved {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  padding: 6px 12px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--ink-muted);
-  font-size: 14px;
-}
-
-/* The time gap is the claim: the second answer isn't in the first one's
-   context any more. Without it the exchange is a chatbot repeating itself
-   two lines later. */
-.demo__gap {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--ink-muted);
-  font-size: 14px;
-  font-weight: 300;
-}
-
-.demo__gap::before,
-.demo__gap::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--sky-soft);
-}
-
-/* .composer */
-.demo__composer {
-  display: flex;
-  align-items: center;
-  min-height: 56px;
-  margin: 0 24px 24px;
-  padding: 0 13px 0 15px;
-  background: var(--surface);
-  border-radius: var(--sky-r);
-  box-shadow: 0 0 111px rgba(14, 30, 44, .13);
-  color: rgba(85, 107, 130, .8);
-  font-size: 19px;
 }
 
 .shot__caption {
@@ -624,9 +449,8 @@ p { margin: 0; }
 
   .cta__note { margin-top: 0; font-size: 15px; }
 
-  .demo { margin-top: 56px; }
-  .demo__app { aspect-ratio: 16 / 10; }
-  .demo__side { display: flex; }
+  /* Matches the wide iframe viewport (1280x880). */
+  .demo { margin-top: 56px; aspect-ratio: 128 / 88; }
   .shot__caption { text-align: center; }
 
   .compare { padding: 104px 0; }
