@@ -244,28 +244,30 @@ p { margin: 0; }
   border-radius: var(--r-card);
 }
 
-/* The SkyOS column is the answer, so it carries the accent. Kept to a tinted
-   edge and heading rather than a filled card — a solid blue block next to a
-   white one reads as a pricing table. */
+/* The Figma inverts the obvious treatment: SkyOS stays on the light surface
+   and the competitor card goes dark. It works because the dark one reads as
+   the state you're leaving rather than as the one being sold. */
 .col--us {
-  border-color: rgba(10, 102, 194, .28);
-  box-shadow: 0 10px 30px rgba(10, 102, 194, .07);
+  box-shadow: 0 10px 30px rgba(14, 30, 44, .06);
+}
+
+.col--them {
+  background: #5B6E82;
+  border-color: transparent;
 }
 
 .col__head {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 600;
-  letter-spacing: .08em;
-  text-transform: uppercase;
-  color: var(--ink-muted);
+  color: var(--ink);
   margin-bottom: 18px;
 }
 
-.col--us .col__head { color: var(--accent); }
+.col--them .col__head { color: #fff; }
 
 .col__line {
-  color: var(--ink-muted);
+  color: var(--ink);
   font-size: 16px;
   line-height: 1.5;
   padding: 14px 0;
@@ -274,7 +276,14 @@ p { margin: 0; }
 
 .col__line:first-of-type { border-top: 0; padding-top: 0; }
 
-.col--us .col__line { color: var(--ink); font-weight: 500; }
+/* On the dark card the divider has to lighten rather than darken, or it
+   disappears into the fill. Text sits at 90% rather than the 82% that
+   matches the light card's muted tone — at 82% it measured 4.15:1 on this
+   fill, under the 4.5:1 needed for body copy. */
+.col--them .col__line {
+  color: rgba(255, 255, 255, .9);
+  border-top-color: rgba(255, 255, 255, .18);
+}
 
 .compare__note {
   margin-top: 24px;
