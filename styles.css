@@ -295,9 +295,12 @@ p { margin: 0; }
 /* =========================================================================
    WHY
    ========================================================================= */
+/* White, not tinted. The page gradient runs behind hero, compare and close,
+   so this one solid band is what separates the argument from the pitch on
+   either side of it. */
 .why {
   padding: 72px 0;
-  background: rgba(10, 102, 194, .035);
+  background: var(--surface);
 }
 
 .why__title {
