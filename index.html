@@ -55,11 +55,12 @@
          icon vectors. It sits in an iframe because that stylesheet styles
          body, #app and * globally — inlined here it would restyle this page.
 
-         pointer-events:none on the frame so the overlay link takes every
-         click; the iframe itself is inert and out of the tab order. -->
+         Not a link. It is a picture of the app, and clicking a picture that
+         then navigates is a small surprise the page does not need — the CTA
+         in the header is always on screen for that. pointer-events:none
+         keeps the frame inert and tabindex keeps it out of the tab order. -->
     <div class="demo">
       <iframe class="demo__frame" src="demo.html" title="SkyOS" loading="lazy" tabindex="-1" scrolling="no"></iframe>
-      <a class="demo__hit" href="https://app.skyos.ink" aria-label="Open SkyOS"></a>
     </div>
 
     <p class="shot__caption">

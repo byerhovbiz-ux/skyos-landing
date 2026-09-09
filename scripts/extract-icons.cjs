@@ -32,6 +32,15 @@ const out = {
   mic: templateAfter('mic: (s = 24)'),
   wave: templateAfter('wave: (s = 36)'),
   cloud: templateAfter('function cloudAvatar'),
+  // The sidebar mascot. mascot() builds its markup around CLOUD_D and two
+  // ids that vary by variant, so the template comes out with placeholders
+  // in it and build-demo fills them for the 'drawer' variant.
+  // Anchored on the return, not on the function: the first backtick inside
+  // mascot() belongs to the filter id, not the SVG.
+  mascotTpl: templateAfter('return `<svg width="${size}" height="${h}" viewBox="0 0 342 226"'),
+  cloudD: jsonConst('CLOUD_D'),
+  chevron: templateAfter('chevron_down: (s'),
+  chevronD: jsonConst('SVG_CHEVRON_DOWN'),
 };
 
 fs.writeFileSync('.tmp-icons.json', JSON.stringify(out));
