@@ -27,7 +27,7 @@
   </a>
   <nav class="nav__links">
     <a class="nav__signin" href="https://app.skyos.ink">Sign in</a>
-    <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS</a>
+    <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS<span class="cta__arrow" aria-hidden="true">&#8599;</span></a>
   </nav>
 </header>
 
@@ -123,7 +123,7 @@
 
     <h2 class="close__title">Stop re-explaining your project.</h2>
 
-    <a class="cta" href="https://app.skyos.ink">Try SkyOS</a>
+    <a class="cta" href="https://app.skyos.ink">Try SkyOS<span class="cta__arrow" aria-hidden="true">&#8599;</span></a>
     <p class="cta__note">Free while it&rsquo;s in beta.</p>
 
   </div>
@@ -158,13 +158,12 @@
     // 420px phone viewport up to fill a 750px card.
     var r = card.getBoundingClientRect();
     var wide = r.width >= 640;
-    // Sized to a real window rather than to the card: at 1280 the app's
-    // fixed 18-20px type reads far larger than it does in a real window.
-    // 1600, not 1920: wide enough that the app's fixed 18-20px type keeps
-    // the proportions of a real window, narrow enough that it is still
-    // ~12px once the card scales it down. At 1920 it fell to 10.
-    var vw = wide ? 1600 : 420;
-    var vh = wide ? 900 : 800;
+    // Sized to the window this is a picture of. The app zooms #app by 1.1
+    // at desktop widths, so a 1920 frame is only 1745 CSS px inside — and
+    // the transcript's own max(24px, (100% - 1252px) / 2) then resolves to
+    // 37px instead of the ~68 a real 1990px window gives it. Hence 1990.
+    var vw = wide ? 1990 : 420;
+    var vh = wide ? 1120 : 800;
     frame.style.width = vw + 'px';
     frame.style.height = vh + 'px';
     // The two viewports share the card's aspect at each breakpoint, so

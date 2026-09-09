@@ -42,6 +42,10 @@ const out = {
   chevron: templateAfter('chevron_down: (s'),
   chevronD: jsonConst('SVG_CHEVRON_DOWN'),
   kebab: templateAfter('kebabRow: (s = 22)'),
+  copy: templateAfter('copy: (s'),
+  share: templateAfter('share: (s'),
+  moreDots: templateAfter('moreDots: (s'),
+  bug: '<path d="M8 7a4 4 0 0 1 8 0"/><rect x="7" y="7" width="10" height="11" rx="5"/><path d="M3 11h4M17 11h4M4 17l3-1.5M20 17l-3-1.5M4.5 6L7 7.5M19.5 6L17 7.5"/>',
 };
 
 fs.writeFileSync('.tmp-icons.json', JSON.stringify(out));

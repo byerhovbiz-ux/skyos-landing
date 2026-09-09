@@ -145,6 +145,7 @@ const page = `<!doctype html>
           <span class="who-line">Aleksander<span class="who-dot">&middot;</span><span class="who-tier">Beta</span></span>
           <span class="foot-chev">${sized(I.chevron, 18)}</span>
         </span>
+        <span class="foot-bug">${stroked(I.bug, 20)}</span>
       </div>
     </aside>
 
@@ -171,6 +172,11 @@ const page = `<!doctype html>
         <div class="msg-ai">
           ${cloud(30)}
           <div class="ai-text">This keeps the stack lean: Supabase for authentication and Stripe for payments, with no extra provider costs at launch.</div>
+          <div class="actions">
+            <span>${sized(I.copy, 20)}</span>
+            <span>${sized(I.share, 22)}</span>
+            <span>${sized(I.moreDots, 20)}</span>
+          </div>
           <span class="dt-saved">Saved 3 notes to memory</span>
         </div>
 
@@ -183,6 +189,11 @@ const page = `<!doctype html>
         <div class="msg-ai">
           ${cloud(30)}
           <div class="ai-text">We didn&rsquo;t go with Clerk because it got expensive at scale; you chose Supabase for auth instead.</div>
+          <div class="actions">
+            <span>${sized(I.copy, 20)}</span>
+            <span>${sized(I.share, 22)}</span>
+            <span>${sized(I.moreDots, 20)}</span>
+          </div>
         </div>
       </div>
 

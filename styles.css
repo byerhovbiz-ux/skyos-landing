@@ -137,6 +137,15 @@ p { margin: 0; }
 }
 .nav__cta:hover { background: var(--accent-hover); }
 
+/* The arrow the Figma draws on the button. Its own span so it can sit a
+   little above the text baseline without dragging the label with it. */
+.cta__arrow {
+  margin-left: 7px;
+  font-size: .95em;
+  line-height: 1;
+  transform: translateY(-1px);
+}
+
 /* =========================================================================
    HERO
    ========================================================================= */
@@ -417,7 +426,7 @@ p { margin: 0; }
   .cta__note { font-size: 15px; }
 
   /* Matches the wide iframe viewport (1280x880). */
-  .demo { margin-top: 56px; aspect-ratio: 16 / 9; }
+  .demo { margin-top: 56px; aspect-ratio: 199 / 112; }
 
   .compare { padding: 104px 0; }
 
