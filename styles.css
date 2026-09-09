@@ -127,9 +127,14 @@ p { margin: 0; }
 /* ------------------------------------------------------------- VISUAL
    Figma mobile: HeroVisual 402×549, image 960×838 at (−279, −146).
    Reproduced as percentages so the crop holds at any width.            */
+/* Full-bleed by cancelling the hero's own 24px padding rather than with
+   100vw — vw includes the scrollbar, so once the page grew long enough to
+   need one, 100vw overflowed the viewport and the whole page scrolled
+   sideways. */
 .hero__visual {
   position: relative;
-  width: 100vw;
+  width: auto;
+  margin-inline: -24px;
   margin-top: 40px;
   aspect-ratio: 402 / 549;
   overflow: hidden;
@@ -173,8 +178,12 @@ p { margin: 0; }
     gap: 0;                 /* desktop uses explicit offsets below */
   }
 
+  /* Sized down from the original 75px: that was tuned to the two-word
+     "SkyOS / Early Access" lockup. This headline is a full sentence, and at
+     75px it ran to four lines in the 460px column. */
   .hero__title {
-    font-size: clamp(52px, 5.2vw, 75px);
+    font-size: clamp(40px, 4vw, 58px);
+    text-wrap: balance;
   }
 
   .hero__heading {
@@ -239,4 +248,208 @@ p { margin: 0; }
     animation-duration: .001ms !important;
     transition-duration: .001ms !important;
   }
+}
+
+/* =========================================================================
+   BELOW THE FOLD
+
+   Everything from here down was added after a tester signed up, sent three
+   messages and still reported "zero context of value proposition anywhere
+   on the site." The hero alone was never going to answer that, so the page
+   now explains the problem, shows the mechanism, and closes.
+
+   Mobile-first like the rest of the file; the same 900px breakpoint.
+   ========================================================================= */
+
+.band {
+  padding: 64px 24px;
+}
+
+/* A tint rather than a border, so the sections read as a rhythm instead of
+   a stack of boxes. Sits on the body gradient, which is why it needs alpha
+   rather than a flat colour. */
+.band--tint {
+  background: rgba(10, 102, 194, .035);
+}
+
+.band--close {
+  padding-bottom: 72px;
+  text-align: center;
+}
+
+.band__inner {
+  width: 100%;
+  max-width: 720px;
+  margin-inline: auto;
+}
+
+.band__inner--narrow {
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.band__title {
+  font-family: var(--font-serif);
+  font-size: 32px;
+  line-height: var(--lh);
+  color: var(--ink);
+  margin-bottom: 20px;
+}
+
+.band__lead {
+  color: var(--ink-muted);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.band__lead + .band__lead {
+  margin-top: 16px;
+}
+
+/* The close section's button is a second instance of .cta. On mobile that
+   rule is full-width, which is right in the hero and too wide here, so the
+   narrow wrapper caps it. */
+.band--close .cta {
+  margin-top: 28px;
+  max-width: 320px;
+}
+
+/* --------------------------------------------------------------- POINTS */
+.points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 32px;
+}
+
+.point__title {
+  margin: 0 0 8px;
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.point__body {
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* ------------------------------------------------------------ SCREENSHOT
+   The asset is a clean capture with its own white ground, so it gets a
+   border and a soft lift rather than a device frame — a phone bezel around
+   a desktop screenshot reads as a mobile-app promo. */
+.shot {
+  padding: 0 24px 64px;
+}
+
+.shot__frame {
+  margin: 0;
+  width: 100%;
+  max-width: 900px;
+  margin-inline: auto;
+}
+
+.shot__frame img {
+  width: 100%;
+  border: 1px solid rgba(14, 30, 44, .08);
+  border-radius: var(--r-card);
+  box-shadow: 0 18px 44px rgba(14, 30, 44, .10);
+}
+
+.shot__caption {
+  margin-top: 14px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ------------------------------------------------------------ CTA NOTE */
+.cta__note {
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------------- FOOT */
+.foot {
+  padding: 0 24px 40px;
+  text-align: center;
+  color: var(--ink-muted);
+  font-size: 14px;
+}
+
+.foot__line {
+  margin-bottom: 12px;
+}
+
+.foot__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.foot__nav a {
+  color: var(--ink-muted);
+  text-decoration: none;
+}
+
+.foot__nav a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* =========================================================================
+   DESKTOP  (≥900px)
+   ========================================================================= */
+@media (min-width: 900px) {
+
+  .band {
+    padding: 88px 40px;
+  }
+
+  .band--close {
+    padding-bottom: 96px;
+  }
+
+  .band__title {
+    font-size: 40px;
+    margin-bottom: 24px;
+  }
+
+  .band__lead {
+    font-size: 19px;
+    font-weight: 300;
+  }
+
+  /* Two columns once there's room. The four points are short enough that a
+     single column leaves a long ribbon of whitespace beside them. */
+  .points {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px 48px;
+  }
+
+  .point__title { font-size: 18px; }
+  .point__body  { font-size: 17px; font-weight: 300; }
+
+  .shot {
+    padding: 0 40px 88px;
+  }
+
+  /* .cta is inline-flex on desktop, so the close section centres it via the
+     flex column rather than the button's own width. */
+  .band--close .cta {
+    max-width: none;
+  }
+
+  .cta__note { font-size: 15px; }
 }
