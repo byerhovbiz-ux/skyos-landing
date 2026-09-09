@@ -153,11 +153,16 @@ const page = `<!doctype html>
         </div>
       </div>
 
-      <div class="composer">
-        <span class="plus">${sized(I.plus, 20, [['${(s * 20.3636 / 20).toFixed(2)}', '20.36']])}</span>
-        <textarea rows="1" placeholder="Ask SkyOS" readonly tabindex="-1"></textarea>
-        <span class="mic">${sized(I.mic, 24, [['${(s * 24.4364 / 24).toFixed(2)}', '24.44']])}</span>
-        <span class="orb">${sized(I.wave, 36)}</span>
+      <!-- .composer-wrap is what holds the bar off the edges and caps it at
+           the app's reading width. Without it the composer sits flush to
+           both walls, which is not what the app does. -->
+      <div class="composer-wrap">
+        <div class="composer">
+          <span class="plus">${sized(I.plus, 20, [['${(s * 20.3636 / 20).toFixed(2)}', '20.36']])}</span>
+          <textarea rows="1" placeholder="Ask SkyOS" readonly tabindex="-1"></textarea>
+          <span class="mic">${sized(I.mic, 24, [['${(s * 24.4364 / 24).toFixed(2)}', '24.44']])}</span>
+          <span class="orb">${sized(I.wave, 36)}</span>
+        </div>
       </div>
     </div>
 
