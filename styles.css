@@ -207,13 +207,30 @@ p { margin: 0; }
 /* =========================================================================
    DEMO — the product surface, in HTML
 
-   Colours are the app's own tokens (--soft-sky, --ink-2, --raised) copied
-   from pwa/styles.css rather than eyedropped, so the two stay in step.
+   Every value below is lifted from pwa/styles.css rather than approximated,
+   so the card is the app rather than something that resembles it:
 
-   It is one <a> with everything inside it inert: the rows highlight on
-   hover of the card, not individually, because a row that lights up under
-   the cursor implies it does something of its own and it doesn't.
+     --r: 10px                    the app's corner radius
+     .msg-user   radius 10px 0 10px 10px, 12px 10px padding, 18px/1.5,
+                 max-width min(280px, 84%), 0 1px 2px shadow
+     .msg-ai     column, 11px gap, 30px avatar
+     .ai-text    18px / 1.5
+     .transcript 36px gap, 27px 16px 28px padding
+     .composer   56px min-height, 14px gap, 0 13px 0 15px, 19px placeholder
+     .proj-row   38px tall, 18px, active fill --raised (Cloud White)
+     .drawer-item 48px tall, 20px, 21px gap
+     .drawer-sec  15px, weight 300, Blue Gray
+
+   The card renders at 1080px against a real window's ~1400px, so the whole
+   thing is scaled with zoom rather than by rewriting every size — that way
+   the numbers above stay recognisable as the app's own.
    ========================================================================= */
+:root {
+  --sky-soft: #E5F2FF;    /* Soft Sky      */
+  --sky-cloud: #F4F9FC;   /* Cloud White — --raised in the app */
+  --sky-r: 10px;          /* --r */
+}
+
 .demo {
   display: block;
   margin-top: 40px;
@@ -235,22 +252,26 @@ p { margin: 0; }
   border: 1px solid var(--line);
   border-radius: var(--r-card);
   box-shadow: 0 18px 44px rgba(14, 30, 44, .10);
-  /* Locks the card's proportions so the page doesn't reflow as it loads.
-     Portrait on phones — at 16:10 a 327px-wide card is 204px tall, which
-     clips the exchange down to the last message and loses the setup that
-     makes the last one mean anything. */
+  /* Portrait on phones: at 16:10 a 327px card is 204px tall, which clips the
+     exchange to its last message and loses the setup that gives it meaning. */
   aspect-ratio: 4 / 5;
+  /* The app's own text sizes are 18–20px, drawn for a full window. Shrinking
+     the whole surface keeps their relationships intact; restating them at
+     12px each would have quietly become a different design. */
+  zoom: .62;
 }
 
-/* ------------------------------------------------------------- SIDEBAR
-   Hidden on phones. At 375px a two-column app chrome leaves ~40px for the
-   conversation, which is the part that carries the argument. */
+/* -------------------------------------------------------------- SIDEBAR
+   The app's drawer: 309px, Cloud White fill on the active project, section
+   label in Blue Gray at weight 300. Hidden on phones — a two-column chrome
+   at 375px leaves nothing for the conversation, which is the part that
+   carries the argument. */
 .demo__side {
   display: none;
   flex-direction: column;
-  gap: 14px;
-  width: 26%;
-  padding: 16px;
+  width: 309px;
+  flex: 0 0 309px;
+  padding: 22px 0;
   border-right: 1px solid var(--line);
   background: var(--surface);
 }
@@ -258,40 +279,53 @@ p { margin: 0; }
 .demo__brand {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 10px;
+  padding: 0 17px 26px;
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: 26px;
   font-weight: 700;
   color: var(--ink);
 }
 
-.demo__mark { width: 15px; height: 15px; fill: var(--accent); }
+.demo__mark { width: 26px; height: 26px; fill: var(--accent); }
 
-.demo__nav { display: flex; flex-direction: column; gap: 2px; }
+.demo__nav { display: flex; flex-direction: column; }
 
+/* .drawer-item */
 .demo__row {
-  padding: 6px 8px;
-  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  height: 48px;
+  padding: 0 17px;
   color: var(--ink);
-  font-size: 12px;
-  line-height: 1.4;
-  transition: background-color .2s ease;
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .demo__row--dim { color: rgba(85, 107, 130, .55); }
 
-/* The open project. Soft Sky is the app's own active-row fill. */
-.demo__row--on { background: #E5F2FF; color: var(--ink); font-weight: 500; }
-
-.demo:hover .demo__row:not(.demo__row--on):not(.demo__row--dim) {
-  background: #F4F9FC;
+/* .drawer-sec */
+.demo__label {
+  padding: 28px 0 15px 18px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  font-weight: 300;
 }
 
-.demo__label {
-  padding-left: 8px;
-  color: rgba(85, 107, 130, .72);
-  font-size: 10px;
-  letter-spacing: .04em;
+/* .proj-row — note the active fill is --raised (Cloud White), not Soft Sky */
+.demo__nav--proj .demo__row {
+  height: 38px;
+  margin: 0 16px 9px;
+  padding: 0 13px;
+  border-radius: var(--sky-r);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.demo__row--on { background: var(--sky-cloud); }
+
+.demo:hover .demo__nav--proj .demo__row:not(.demo__row--on) {
+  background: rgba(244, 249, 252, .7);
 }
 
 /* ---------------------------------------------------------------- MAIN */
@@ -300,83 +334,81 @@ p { margin: 0; }
   flex: 1;
   flex-direction: column;
   min-width: 0;
-  background: #F4F9FC;
+  background: var(--sky-cloud);
 }
 
 .demo__head {
-  padding: 12px 16px;
+  padding: 20px 24px 0;
   color: var(--ink);
-  font-size: 12px;
+  font-size: 20px;
   font-weight: 600;
 }
 
-/* Bottom-aligned: a real chat is scrolled to its latest message, so the
-   exchange sits against the composer. Top-aligned it left a third of the
-   card empty and read as an app with nothing in it. */
+/* .transcript — bottom-aligned, since a real chat sits at its latest
+   message. Top-aligned it left a third of the card empty. */
 .demo__thread {
   display: flex;
   flex: 1;
   flex-direction: column;
   justify-content: flex-end;
-  gap: 12px;
-  padding: 4px 16px 12px;
+  gap: 36px;
+  padding: 27px 24px 28px;
   overflow: hidden;
 }
 
-/* Sent messages sit right in a white bubble; replies run full width with a
-   cloud beside them. Same shape as the app. */
+/* .msg-user — the squared top-right corner is the app's, not a slip */
 .demo__you {
   align-self: flex-end;
-  max-width: 74%;
-  padding: 9px 12px;
+  max-width: min(280px, 84%);
+  padding: 12px 10px;
   background: var(--surface);
-  border-radius: 10px;
+  border-radius: var(--sky-r) 0 var(--sky-r) var(--sky-r);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
   color: var(--ink);
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
+/* .msg-ai */
 .demo__ai {
-  position: relative;
-  padding-left: 22px;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+}
+
+.demo__cloud { width: 30px; height: 30px; fill: var(--accent); }
+
+/* .ai-text */
+.demo__body {
   color: var(--ink);
-  font-size: 12px;
-  line-height: 1.45;
+  font-size: 18px;
+  line-height: 1.5;
 }
 
-.demo__cloud {
-  position: absolute;
-  left: 0;
-  top: 1px;
-  width: 15px;
-  height: 15px;
-  fill: var(--accent);
-}
-
-.demo__body { display: block; }
-
-/* The one element the page is really here to show. */
+/* The one element the page exists to show. */
 .demo__saved {
+  align-self: flex-start;
   display: inline-flex;
   align-items: center;
-  margin-top: 8px;
-  padding: 4px 9px;
+  padding: 6px 12px;
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 999px;
   color: var(--ink-muted);
-  font-size: 10px;
+  font-size: 14px;
 }
 
-/* The time gap is the claim: the second answer is not in the first one's
-   context any more. Without it the exchange is just a chatbot repeating
-   itself two lines later. */
+/* The time gap is the claim: the second answer isn't in the first one's
+   context any more. Without it the exchange is a chatbot repeating itself
+   two lines later. */
 .demo__gap {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: rgba(85, 107, 130, .72);
-  font-size: 10px;
+  gap: 12px;
+  color: var(--ink-muted);
+  font-size: 14px;
+  font-weight: 300;
 }
 
 .demo__gap::before,
@@ -384,16 +416,21 @@ p { margin: 0; }
   content: "";
   flex: 1;
   height: 1px;
-  background: var(--line);
+  background: var(--sky-soft);
 }
 
+/* .composer */
 .demo__composer {
-  margin: 0 16px 14px;
-  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  margin: 0 24px 24px;
+  padding: 0 13px 0 15px;
   background: var(--surface);
-  border-radius: 10px;
-  color: rgba(85, 107, 130, .72);
-  font-size: 12px;
+  border-radius: var(--sky-r);
+  box-shadow: 0 0 111px rgba(14, 30, 44, .13);
+  color: rgba(85, 107, 130, .8);
+  font-size: 19px;
 }
 
 .shot__caption {
@@ -590,11 +627,6 @@ p { margin: 0; }
   .demo { margin-top: 56px; }
   .demo__app { aspect-ratio: 16 / 10; }
   .demo__side { display: flex; }
-  .demo__head { padding: 14px 20px; font-size: 13px; }
-  .demo__thread { gap: 14px; padding: 6px 20px 14px; }
-  .demo__you, .demo__ai, .demo__composer { font-size: 13px; }
-  .demo__row { font-size: 13px; }
-  .demo__brand { font-size: 16px; }
   .shot__caption { text-align: center; }
 
   .compare { padding: 104px 0; }
