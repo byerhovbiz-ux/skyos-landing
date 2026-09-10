@@ -131,7 +131,9 @@ const composer = `
       <div class="composer-wrap">
         <div class="composer">
           <span class="plus">${sized(I.plus, 20, [['${(s * 20.3636 / 20).toFixed(2)}', '20.36']])}</span>
-          <textarea rows="1" placeholder="Ask SkyOS" readonly tabindex="-1"></textarea>
+          <!-- "Reply", not "Ask": the app switches the placeholder once the
+               conversation has an answer in it, and this one has two. -->
+          <textarea rows="1" placeholder="Reply to SkyOS" readonly tabindex="-1"></textarea>
           <span class="mic">${sized(I.mic, 24, [['${(s * 24.4364 / 24).toFixed(2)}', '24.44']])}</span>
           <span class="orb">${sized(I.wave, 36)}</span>
         </div>

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- The link preview: what Reddit, X, Slack and iMessage show for skyos.ink.
+     Rendered to og.png by scripts/build-og.cjs — edit this, then run that.
+
+     Previews are shown small (Reddit's mobile card is about 140px tall), so
+     everything is set large and there is exactly one argument on it: the
+     comparison the page itself leads with. No app screenshot — at thumbnail
+     size its text is a grey smear, and the comparison survives the shrink. -->
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@400;600&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1E2C;
+    --muted: #556B82;
+    --line: rgba(14, 30, 44, .09);
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    display: flex;
+    flex-direction: column;
+    padding: 58px 72px 64px;
+    background: linear-gradient(180deg, #F4F9FC 0%, #FFFFFF 100%);
+    color: var(--ink);
+    font-family: Inter, system-ui, sans-serif;
+  }
+
+  .top { display: flex; align-items: center; justify-content: space-between; }
+  .brand {
+    display: flex; align-items: center; gap: 14px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 40px; font-weight: 700;
+  }
+  .brand svg { width: 46px; height: 46px; }
+  .url { color: var(--muted); font-size: 26px; }
+
+  h1 {
+    margin-top: 40px;
+    font-family: "Cormorant Garamond", Georgia, serif;
+    font-size: 78px; font-weight: 700; line-height: 1.04;
+  }
+
+  .ask {
+    margin-top: auto;
+    color: var(--muted);
+    font-size: 26px;
+  }
+
+  /* The page's own compare cards, at preview scale. The SkyOS side is wider so
+     its quote holds one line — at an even split "only”" wrapped on its own. */
+  .grid {
+    margin-top: 18px;
+    display: grid;
+    grid-template-columns: 1.35fr 1fr;
+    gap: 24px;
+  }
+  .col { padding: 28px 32px; border-radius: 16px; }
+  .us { background: #fff; border: 1px solid var(--line); box-shadow: 0 14px 36px rgba(14, 30, 44, .08); }
+  .them { background: #5B6E82; color: #fff; }
+  .head { font-size: 22px; font-weight: 600; }
+  .q { margin-top: 12px; font-size: 32px; line-height: 1.22; }
+  .them .q { color: rgba(255, 255, 255, .9); }
+</style>
+</head>
+<body>
+
+  <div class="top">
+    <div class="brand">
+      <svg viewBox="0 0 30.1458 30.1458" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="c" x1="15.1304" y1="8.0729" x2="15.1304" y2="21.562" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#E2EEF9"/></linearGradient></defs><path d="M30.0729 15.0729C30.0729 23.3572 23.3572 30.0729 15.0729 30.0729C6.78863 30.0729 0.0728984 23.3572 0.0728984 15.0729C0.0728984 6.78863 6.78863 0.0728984 15.0729 0.0728984C23.3572 0.0728984 30.0729 6.78863 30.0729 15.0729Z" fill="#0A66C2"/><path d="M22.8747 21.5621H7.33517C3.56981 21.1638 2.96786 16.5971 6.03217 15.5001C6.06699 15.4876 6.08914 15.4523 6.08867 15.4154C6.08153 14.8432 6.93557 12.2017 9.77179 12.3124C9.81363 12.314 9.85094 12.283 9.85646 12.2415C9.94015 11.6127 10.8966 8.27233 14.9531 8.07587C15.6549 8.04188 18.9156 8.24381 20.0502 11.8215C20.0606 11.8542 20.0936 11.8764 20.1279 11.8739C22.5795 11.6901 23.3321 13.5872 23.314 14.6037C23.3134 14.6376 23.3348 14.6674 23.3674 14.6769C23.9357 14.8432 25.988 15.5496 26.0701 17.9657C26.1617 20.6617 24.0046 21.5135 22.8747 21.5621Z" fill="url(#c)"/></svg>
+      SkyOS
+    </div>
+    <div class="url">skyos.ink</div>
+  </div>
+
+  <h1>AI optimized not to go vague.</h1>
+
+  <div class="ask">Same question, a month later</div>
+
+  <div class="grid">
+    <div class="col us">
+      <div class="head">SkyOS</div>
+      <div class="q">&ldquo;$15 a month, annual billing only&rdquo;</div>
+    </div>
+    <div class="col them">
+      <div class="head">Other AI</div>
+      <div class="q">&ldquo;We discussed pricing&rdquo;</div>
+    </div>
+  </div>
+
+</body>
+</html>
