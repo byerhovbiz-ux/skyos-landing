@@ -46,6 +46,7 @@
     SkyOS
   </a>
   <nav class="nav__links">
+    <a class="nav__contact" href="mailto:hello@skyos.ink">Contact</a>
     <a class="nav__signin" href="https://app.skyos.ink">Sign in</a>
     <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS<svg class="cta__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
   </nav>
@@ -72,8 +73,9 @@
 
          Not a link — clicking a picture of an app and being navigated is a
          surprise the page does not need, and the header CTA is on screen the
-         whole time. The pointer does reach it though, so the app's own hover
-         states fire; tabindex keeps the frame out of the tab order. -->
+         whole time. A mouse does reach it though, so the app's own hover
+         states fire; on touch screens swipes pass straight through to the page
+         (see .demo__frame in styles.css). tabindex keeps it out of tab order. -->
     <div class="demo" data-vw="1990" data-vh="1120">
       <iframe class="demo__frame" src="demo.html" title="SkyOS" loading="lazy" tabindex="-1" scrolling="no"></iframe>
     </div>

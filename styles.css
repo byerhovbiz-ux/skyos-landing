@@ -113,14 +113,26 @@ p { margin: 0; }
   gap: 8px;
 }
 
-.nav__signin {
+/* Contact is a text link beside Sign in, not a third button: a second filled
+   button in the bar would split attention away from Try SkyOS. */
+.nav__signin,
+.nav__contact {
   padding: 8px 12px;
   color: var(--ink-muted);
   font-size: 15px;
   text-decoration: none;
   border-radius: 8px;
 }
-.nav__signin:hover { color: var(--ink); }
+.nav__signin:hover,
+.nav__contact:hover { color: var(--ink); }
+
+/* Off below 480px. On a phone the brand, Sign in and Try SkyOS already fill
+   the bar — at 375 there are 23px to spare and Contact needs about 84. The
+   footer carries it there. */
+.nav__contact { display: none; }
+@media (min-width: 480px) {
+  .nav__contact { display: inline-flex; }
+}
 
 .nav__cta {
   display: inline-flex;
@@ -252,6 +264,16 @@ p { margin: 0; }
   height: 800px;
   border: 0;
   transform-origin: 0 0;
+}
+
+/* On touch screens the frames ignore touches entirely. app.css sets
+   overscroll-behavior: none on html and body, which is right for an installed
+   app that must never rubber-band, but inside a frame it also stops a swipe
+   passing out to this page. The cards cover most of a phone's screen, so the
+   page could only be moved by pinch-zooming (reported on mobile Brave). Touch
+   has no hover, so the frames lose nothing by letting swipes through. */
+@media (hover: none), (pointer: coarse) {
+  .demo__frame { pointer-events: none; }
 }
 
 /* =========================================================================

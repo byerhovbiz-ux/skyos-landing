@@ -41,6 +41,13 @@
   * { cursor: default !important; }
   textarea { pointer-events: none; }
 
+  /* The app forbids overscroll on html and body so an installed app never
+     rubber-bands. In a frame the same rule keeps a scroll from chaining out to
+     the landing page, so a gesture that starts on the card goes nowhere. Touch
+     screens are also handled on the page side, where the frames ignore touches;
+     this covers trackpads and touchscreen laptops, which keep their hovers. */
+  html, body { overscroll-behavior: auto; touch-action: auto; }
+
   /* Only one of the two headers at a time. */
   .topbar { display: none; }
 
