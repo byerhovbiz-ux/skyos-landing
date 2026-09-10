@@ -4,12 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SkyOS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <!-- The app's stylesheet, unmodified. -->
 <link rel="stylesheet" href="assets/app.css">
+
+<!-- The serif, and AFTER app.css on purpose. app.css declares Cormorant
+     Garamond from fonts/CormorantGaramond-Variable.ttf, relative to itself —
+     here that is assets/fonts/, which does not exist. Every load logged a 404
+     and fell back to a Google request for 500 and 700 only, so the 600 the app
+     uses eleven times, the Settings title among them, rendered at 700.
+
+     This is the same variable font over the same 300-700 weight axis. Declared
+     last, its faces win the match and app.css's src is never requested. The
+     sans needs nothing: the app's --sans is the system stack, so the Inter this
+     used to load was never drawn. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
   /* The only additions, and each one is here because this is a still rather
@@ -136,7 +146,7 @@
         <div class="msg-user-row">
           <!-- Short enough to survive the crop. The transcript is bottom-
                aligned, so a longer message loses its own beginning. -->
-          <div class="msg-user">Going with Supabase for auth instead of Clerk &mdash; Clerk got expensive at scale.</div>
+          <div class="msg-user">Going with Supabase for auth &mdash; its free tier covers 5&times; the users Clerk&rsquo;s does.</div>
 
           <div class="actions user-actions">
             <button type="button" tabindex="-1" data-tip="Copy message"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4.75" y="3.75" width="12" height="12" rx="3" stroke="currentColor" stroke-width="1.5"/><rect x="0.75" y="7.75" width="12" height="12" rx="3" fill="var(--bg-top)" stroke="currentColor" stroke-width="1.5"/></svg></button>
@@ -244,7 +254,7 @@
             <div class="settings-section">Booking app</div>
             <div class="card settings-card">
               <div class="note-line">
-                <span class="note-text">Auth is Supabase. Clerk was rejected because it got expensive at scale.<span class="note-when">today</span></span>
+                <span class="note-text">Auth is Supabase: its free tier covers 5× the users Clerk’s does.<span class="note-when">today</span></span>
                 <span class="note-kebab"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="5" r="1.9" fill="currentColor"/><circle cx="12" cy="12" r="1.9" fill="currentColor"/><circle cx="12" cy="19" r="1.9" fill="currentColor"/></svg></span>
               </div><div class="note-line">
                 <span class="note-text">Payments go through Stripe.<span class="note-when">today</span></span>

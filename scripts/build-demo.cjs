@@ -193,7 +193,7 @@ ${msgActions}
 const transcript = `
       <div class="transcript">
 ${turn(
-  'Going with Supabase for auth instead of Clerk &mdash; Clerk got expensive at scale.',
+  'Going with Supabase for auth &mdash; its free tier covers 5&times; the users Clerk&rsquo;s does.',
   'This keeps the stack lean: Supabase for authentication and Stripe for payments, with no extra provider costs at launch.',
   '3 notes')}
 ${turn(
@@ -228,7 +228,7 @@ ${turn(
 // stay under that: nine clipped the last row and the footnote in half. The
 // panel scrolls in the app; in a still it just cuts.
 const notes = [
-  ['Auth is Supabase. Clerk was rejected because it got expensive at scale.', 'today'],
+  ['Auth is Supabase: its free tier covers 5× the users Clerk’s does.', 'today'],
   ['Payments go through Stripe.', 'today'],
   ['No paid provider costs at launch.', 'today'],
   ['Launch is before the 15th.', 'today'],
@@ -284,12 +284,22 @@ const page = (extraStyle, dialog) => `<!doctype html>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>SkyOS</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
 <!-- The app's stylesheet, unmodified. -->
 <link rel="stylesheet" href="assets/app.css">
+
+<!-- The serif, and AFTER app.css on purpose. app.css declares Cormorant
+     Garamond from fonts/CormorantGaramond-Variable.ttf, relative to itself —
+     here that is assets/fonts/, which does not exist. Every load logged a 404
+     and fell back to a Google request for 500 and 700 only, so the 600 the app
+     uses eleven times, the Settings title among them, rendered at 700.
+
+     This is the same variable font over the same 300-700 weight axis. Declared
+     last, its faces win the match and app.css's src is never requested. The
+     sans needs nothing: the app's --sans is the system stack, so the Inter this
+     used to load was never drawn. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300..700&display=swap" rel="stylesheet">
 
 <style>
   /* The only additions, and each one is here because this is a still rather

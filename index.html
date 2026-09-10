@@ -10,6 +10,17 @@
   <meta property="og:description" content="Ask an AI what you decided a month ago and you get &quot;we discussed pricing&quot; instead of the number. SkyOS keeps it word for word.">
   <meta property="og:type" content="website">
 
+  <!-- The app's own icon, so a tab on skyos.ink and one on app.skyos.ink carry
+       the same mark. With no icon declared the browser asked for /favicon.ico,
+       got a 404, and drew its default globe. The PNG is for browsers that
+       still ignore SVG favicons. -->
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <!-- White, not the app's Cloud White: on this page the bar sits directly on
+       the nav, which is white at 72% and reads as #FCFDFE. -->
+  <meta name="theme-color" content="#FFFFFF">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -162,9 +173,6 @@
   </div>
 </footer>
 
-<!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
-     Vercel itself, so it 404s harmlessly if Analytics is switched off in
-     the project dashboard. -->
 <!-- Each frame renders at a real window size and is scaled down to its card,
      so the app lays out as a desktop app rather than as a squeezed narrow
      one. Two viewports per card, chosen by the card's own width: the pair in
@@ -212,6 +220,9 @@
 })();
 </script>
 
+<!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
+     Vercel itself, so it 404s harmlessly locally and if Analytics is switched
+     off in the project dashboard. -->
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
