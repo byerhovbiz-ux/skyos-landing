@@ -46,7 +46,11 @@
     SkyOS
   </a>
   <nav class="nav__links">
-    <a class="nav__contact" href="mailto:hello@skyos.ink">Contact</a>
+    <!-- Copies the address instead of opening a mail app (see the script at the
+         end). mailto: hands off to whatever the OS has registered — on Windows
+         that is Outlook, usually never set up — so the click landed people in
+         an app they had never opened. The href stays as the no-script fallback. -->
+    <a class="nav__contact" href="mailto:hello@skyos.ink" data-copy-email>Contact</a>
     <!-- ?signin asks the app for its sign-in screen. Without it a returning
          visitor on a new browser lands on the welcome and is walked into
          onboarding. The app ignores parameters it does not know, so until it
@@ -187,7 +191,7 @@
     <nav class="foot__nav">
       <a href="https://app.skyos.ink/privacy.html">Privacy</a>
       <a href="https://app.skyos.ink/terms.html">Terms</a>
-      <a href="mailto:hello@skyos.ink">Contact</a>
+      <a href="mailto:hello@skyos.ink" data-copy-email>Contact</a>
     </nav>
   </div>
 </footer>
@@ -236,6 +240,47 @@
   });
   window.addEventListener('resize', function () {
     Array.prototype.forEach.call(cards, fit);
+  });
+})();
+</script>
+
+<!-- What a Contact click shows: the address, already on the clipboard, and a
+     way into a mail app for anyone who does use one. role=status so a screen
+     reader announces it. -->
+<div class="toast" role="status" aria-live="polite" hidden>
+  <span class="toast__text">hello@skyos.ink copied</span>
+  <a class="toast__open" href="mailto:hello@skyos.ink">Open mail app</a>
+</div>
+<script>
+(function () {
+  var ADDRESS = 'hello@skyos.ink';
+  var toast = document.querySelector('.toast');
+  var text = toast.querySelector('.toast__text');
+  var hideTimer, offTimer;
+
+  function show(copied) {
+    // If the clipboard refused, the address is still on screen to select.
+    text.textContent = copied ? ADDRESS + ' copied' : ADDRESS;
+    clearTimeout(hideTimer);
+    clearTimeout(offTimer);
+    toast.hidden = false;
+    requestAnimationFrame(function () { toast.classList.add('is-on'); });
+    hideTimer = setTimeout(hide, 6000);
+  }
+  function hide() {
+    toast.classList.remove('is-on');
+    offTimer = setTimeout(function () { toast.hidden = true; }, 220);
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll('[data-copy-email]'), function (link) {
+    link.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(ADDRESS).then(function () { show(true); }, function () { show(false); });
+      } else {
+        show(false);
+      }
+    });
   });
 })();
 </script>
