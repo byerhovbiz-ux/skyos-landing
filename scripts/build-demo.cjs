@@ -263,10 +263,11 @@ ${aiMsg(S.replyFinal)}
 // opening exchange saves, and are all the run's panel shows; the still card
 // shows the fuller project.
 //
-// SEVEN IS THE CEILING for the still. A .note-line is 68px and the dialog's
-// scroller is 618px tall at that frame size, so 54 (section) + n*68 + 67
-// (foot) has to stay under it: nine clipped the last row and the footnote in
-// half. The panel scrolls in the app; in a still it just cuts.
+// SEVEN IS THE CEILING for the still. Since notes gained edit and delete
+// buttons a row is 74px in the desktop dialog and 91px on a phone: seven fill
+// the desktop panel exactly, and the phone frame needs 870px (data-vh-narrow
+// in index.html). Nine clipped the last row and the footnote in half. The
+// panel scrolls in the app; in a still it just cuts.
 const notes = [
   ['Auth is Supabase: its free tier covers 5× the users Clerk’s does.', 'today'],
   ['Payments go through Stripe.', 'today'],
@@ -279,7 +280,10 @@ const notes = [
 
 const noteRows = (list) => list.map(([t, when]) => `<div class="note-line">
                 <span class="note-text">${esc(t)}<span class="note-when">${when}</span></span>
-                <span class="note-kebab">${sized(I.kebab, 22)}</span>
+                <div class="note-tools">
+                  <button type="button" tabindex="-1" class="note-tool tipped" data-tip="Edit">${svg('width="18" height="18" viewBox="0 0 18 18"', I.rename)}</button>
+                  <button type="button" tabindex="-1" class="note-tool note-tool-danger tipped" data-tip="Delete">${svg('width="18" height="18" viewBox="0 0 18 18"', I.trash)}</button>
+                </div>
               </div>`).join('');
 
 const navRow = (label, ico, on, soon) => (soon
@@ -310,7 +314,7 @@ const memoryDialog = (list) => `
             <div class="card settings-card">
               ${noteRows(list)}
             </div>
-            <div class="note-foot">Decisions and details that live only in this project. Click &#8942; to edit or delete one, or just say so in chat. Notes are stored on our servers and are not end-to-end encrypted.</div>
+            <div class="note-foot">Decisions and details that live only in this project. Edit or delete one from its row, or just say so in chat. Notes are stored on our servers and are not end-to-end encrypted.</div>
           </div>
         </div>
         <span class="dt-modal-x">${stroked('<path d="M6 6l12 12M18 6L6 18"/>', 20)}</span>
@@ -332,7 +336,7 @@ const phoneNotes = (list) => `
       <div class="card settings-card">
         ${noteRows(list)}
       </div>
-      <div class="note-foot">Decisions and details that live only in this project. Tap &#8942; to edit or delete one, or just say so in chat. Notes are stored on our servers and are not end-to-end encrypted.</div>
+      <div class="note-foot">Decisions and details that live only in this project. Edit or delete one from its row, or just say so in chat. Notes are stored on our servers and are not end-to-end encrypted.</div>
     </div>
   </div>`;
 

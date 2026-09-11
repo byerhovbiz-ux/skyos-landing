@@ -59,8 +59,9 @@ rule written as `.actions button:hover` never matches a span.
   1440×900 because the dialog is a fixed 1120×820 and a wider frame is mostly
   scrim. Change a frame size and the card's `aspect-ratio` in styles.css must
   change with it.
-- **Seven notes is the ceiling.** A note row is 68px and the panel scrolls in
-  the app but just cuts in a still. The count is commented in build-demo.cjs.
+- **Seven notes is the ceiling.** A row is 74px on desktop and 91px on a phone
+  with its edit and delete buttons; the panel scrolls in the app but just cuts
+  in a still, so the phone frame is 870px tall. Commented in build-demo.cjs.
 - **Below 1024px the app's desktop rules stop applying.** `.dt-side`,
   `.dt-topbar` and `.dt-modal` all lose their layout, so the narrow frames hide
   or unwrap them explicitly and show the phone's own `.topbar` instead.

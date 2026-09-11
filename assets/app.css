@@ -1504,8 +1504,8 @@ input { font-family: inherit; }
    list was out of true. overflow:hidden so the row hover fill stops at the
    rounded corners now that rows reach them. */
 .settings-card { background: var(--surface); border: none; border-radius: 10px; box-shadow: 0 0 4px var(--shadow); padding: 0; }
-/* The card can never clip: .note-menu is absolutely positioned inside a row and
-   has to escape it. So the end rows carry the card's radius themselves. */
+/* The end rows carry the card's radius themselves, so a row's hover fill stops
+   at the corner instead of squaring it off. */
 .settings-card > .note-line:first-child { border-radius: 10px 10px 0 0; }
 .settings-card > .note-line:last-child { border-radius: 0 0 10px 10px; }
 .settings-row { display: flex; align-items: center; gap: 15px; padding: 14px 16px; }
@@ -1527,54 +1527,51 @@ input { font-family: inherit; }
   padding: 12px 16px; font-size: 16px; line-height: 1.45; color: var(--ink);
 }
 .note-text { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-/* The padding is the tap target and the negative margin cancels it, so the row
-   lays out as though the button were only its glyph. 4px of padding around a
-   20px icon was a 28px target — under the 44px a finger needs, and visually a
-   speck against 17px note text. */
-.note-kebab {
-  /* Centred on the ROW, not on the first line. .note-line is align-items:
-     flex-start for the text, which pinned the button to the top — fine on a
-     one-line note, top-heavy on a two-line one with a date under it, and that
-     inconsistency between rows is what read as crooked. */
+/* Both actions live on the row.
+   They were behind a ⋮ that opened a popover offering exactly two things, so
+   every edit and every delete cost a click and a menu first. On hover the pair
+   simply appears — same reveal the kebab had, one less step inside it. */
+.note-tools {
   flex: 0 0 auto; align-self: center;
-  color: var(--ink-3); display: flex;
-  margin: -10px -10px -10px 0; padding: 10px;
+  display: flex; align-items: center; gap: 2px;
+  /* The buttons' own padding is the tap target; the negative margin cancels it
+     so the row lays out as though they were only their glyphs. */
+  margin: -9px -9px -9px 0;
 }
-.note-kebab:active { color: var(--ink); }
+.note-tool {
+  display: flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; padding: 8px;
+  border-radius: var(--r);
+  color: var(--ink-3);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.note-tool-danger { color: color-mix(in srgb, var(--danger) 62%, var(--ink-3)); }
 /* Only where there is a pointer to hover with — a touch screen has no hover
-   state to reveal it, so on a phone it stays put. Same rule the attachment
-   chips use.
-   :has(.note-menu) matters: with the menu open the pointer is over the POPOVER,
-   not the row, so the button that opened it would fade out underneath it. */
+   state to reveal them with, so on a phone they stay put. */
 @media (hover: hover) {
-  .note-kebab { opacity: 0; transition: opacity 0.12s ease; }
-  .note-line:hover .note-kebab,
-  .note-line:has(.note-menu) .note-kebab,
-  .note-kebab:focus-visible { opacity: 1; }
+  .note-tools { opacity: 0; transition: opacity 0.12s ease; }
+  .note-line:hover .note-tools,
+  .note-tools:focus-within { opacity: 1; }
+  .note-tool:hover { background: rgba(var(--ink-2-rgb), 0.10); color: var(--ink); }
+  /* Delete says what it is before it is pressed, not after. */
+  .note-tool-danger:hover {
+    background: color-mix(in srgb, var(--danger) 12%, transparent);
+    color: var(--danger);
+  }
 }
-/* No hover fill. The card is white on a near-white pane, so any tint a hover
-   could use is DARKER than both — there is no lighter shade of white to move
-   to, and a row that darkens under the pointer reads as pressed or disabled
-   rather than live. The ⋮ appearing is the affordance; it is the same thing the
-   attachment chips do, and it costs the row no colour at all. */
+.note-tool:active { background: rgba(var(--ink-2-rgb), 0.16); }
+.note-tool-danger:active { background: color-mix(in srgb, var(--danger) 20%, transparent); color: var(--danger); }
 
-.note-menu {
-  position: absolute; top: 34px; right: 12px; z-index: 5;
-  min-width: 132px; padding: 4px;
-  background: var(--surface); border-radius: var(--r);
-  box-shadow: 0 6px 20px var(--shadow-strong);
-  animation: pop 0.14s ease;
+/* The confirm, in the row rather than in a dialog, so the note being deleted is
+   still readable above the question. */
+.note-confirming { flex-direction: column; align-items: stretch; gap: 10px; }
+.note-confirming .note-actions { display: flex; align-items: center; gap: 8px; }
+.note-ask { flex: 1; min-width: 0; font-size: 14px; color: var(--ink-2); }
+.pill-danger { background: var(--danger); color: #fff; }
+@media (hover: hover) {
+  .pill-danger:hover { background: color-mix(in srgb, var(--danger) 82%, #000); }
 }
-/* Opens upward on the last row, which has nothing below it but the edge of the
-   dialog. */
-.settings-card > .note-line:last-child .note-menu { top: auto; bottom: 34px; }
-.note-menu-row {
-  display: flex; align-items: center; gap: 10px; width: 100%;
-  padding: 10px 12px; border-radius: 8px;
-  font-size: 15px; color: var(--ink); text-align: left;
-}
-.note-menu-row:active { background: var(--raised); }
-.note-menu-row.danger { color: var(--danger); }
+.pill-danger:active { background: color-mix(in srgb, var(--danger) 70%, #000); }
 
 .note-editing { flex-direction: column; align-items: stretch; gap: 10px; }
 .note-input {
@@ -1958,44 +1955,33 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
     right: 0;
     transform: none;
     align-items: center;
-    /* Top-aligned, not centred. The preview below the button is supposed to run
-       off the bottom edge — centring the column would push the wordmark up and
-       leave the product hanging in the middle of nothing. */
-    justify-content: flex-start;
-    /* Scrollable, and the screenshot starts below the fold on purpose. Clipped
-       by overflow:hidden it was a teaser you could never actually look at; the
-       point of showing the product is that someone can scroll down and read it.
-       overflow-x stays hidden so the shot's shadow cannot widen the page. */
+    /* Centred. The screen used to be top-aligned so a product preview could run
+       off the bottom edge; skyos.ink already shows the app, so the preview is
+       gone and the mascot, title, tagline and button are the whole screen.
+       SAFE center, not center: in a short window plain centring overflows in
+       both directions and the top of the stack goes above the scroll origin,
+       where it cannot be scrolled back to. safe falls back to the top edge
+       only when the content does not fit. */
+    justify-content: safe center;
+    /* Still scrollable, for a window too short to hold the stack — the button
+       has to stay reachable. overflow-x stays hidden so nothing can widen the
+       page sideways. */
     overflow-y: auto;
     overflow-x: hidden;
     padding: 96px 24px 96px;
-    /* Cloud White down to white. Keeps the sky tint where the mascot sits, so
-       the blue cloud still has something to sit against, and clears to white by
-       the time it reaches the button. */
-    background: linear-gradient(180deg, var(--cloud-white) 0%, var(--white) 62%);
+    /* The same gradient sign-in uses, so the two screens either side of
+       "Get started" read as one surface. The old stop cleared to white by 62%
+       to melt the screenshot into the page, which it no longer has to do. */
+    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
   }
 
-  /* The stack owns the vertical centring so the CTA can be pushed to the
-     bottom without dragging the title down with it. */
+  /* Sized to its content; the screen centres it. */
   .wd-stack {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    /* The headline block owns the first screenful, so the screenshot begins
-       below the fold rather than peeking into it. Padding alone only pushed
-       things down by a fixed amount and left barely 400px of scroll; tying the
-       height to the window means there is always a full screen above the
-       product and a full one to scroll into.
-       dvh is divided by the scale like every other viewport length here — the
-       zoom multiplies it otherwise. */
-    /* 45dvh, not "the whole screen minus padding". The headline block taking a
-       full screenful pushed the screenshot entirely out of sight, so nothing
-       hinted there was anything to scroll to. At this height the shot rises
-       about halfway into the first view: enough to read as the product and to
-       say plainly that there is more below. */
-    min-height: calc(45dvh / var(--ui-scale));
   }
   /* The mark carries more weight than the wordmark, as in the reference — at
      132 against a 58px title the cloud read as an afterthought above it. */
@@ -2021,55 +2007,13 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
     color: var(--ink-2);
   }
 
-  /* In the flow again. It was pinned to the bottom of the screen back when
-     there was nothing under it; now the product preview follows it, and a
-     button floating at the floor would have the preview sliding underneath. */
+  /* In the flow, directly under the tagline, so the four elements centre as one
+     group rather than the button drifting to the floor of a tall window. */
   .wd-cta {
     margin-top: 60px;
     width: min(530px, calc((100vw - 48px) / var(--ui-scale)));
   }
   .wd-cta .btn { width: 100%; height: 64px; font-size: 22px; border-radius: 12px; }
-
-  /* The screenshot under the promise, capped so it is never scaled past the
-     point of being readable, and clipped by the screen's own overflow when the
-     window is short.
-     The "Saved 3 notes to memory" pill is NOT part of the picture: it was
-     painted out of the webp and is laid back over it as the original vector, so
-     it stays sharp at any density instead of being 2x pixels like the rest of
-     the shot. Everything is a percentage of the image, so the two stay locked
-     together at every size. */
-  .wd-shot-wrap {
-    position: relative;
-    display: block;
-    flex: 0 0 auto;
-    max-width: min(1080px, calc((100vw - 80px) / var(--ui-scale)));
-    margin-top: 70px;
-  }
-  .wd-shot-badge {
-    position: absolute;
-    left: 31.3025%;
-    top: 29.7553%;
-    width: 9.3291%;
-    height: auto;
-    pointer-events: none;
-  }
-  .wd-shot {
-    display: block;
-    /* The wrapper owns the width cap now; the image simply fills it. */
-    width: 100%;
-    height: auto;
-    border-radius: 14px;
-    /* Floating, which takes two shadows rather than one. A single blur reads as
-       a smudge under the edge; the pair reads as height — a wide, faint cast
-       that puts the image well above the page, and a tighter darker one just
-       beneath it that keeps the bottom edge from dissolving into the
-       background. The third is a hairline, so the white screenshot still has a
-       boundary against a white page. */
-    box-shadow:
-      0 44px 120px -24px rgba(14, 30, 44, 0.30),
-      0 12px 32px -8px rgba(14, 30, 44, 0.14),
-      0 0 0 1px rgba(var(--ink-2-rgb), 0.10);
-  }
 
   /* The card. A hairline plus a soft shadow, so it lifts off the page without
      turning into a modal — there is nothing behind it to be modal over. */
@@ -2931,29 +2875,92 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   }
 }
 
-/* ===== Memory import — the optional stage between welcome and login =====
-   Laid out as a numbered two-step task rather than a form: the user has to go
-   somewhere else, do something, and come back, and numbering is what makes a
-   screen survive that round trip.
+/* ===== Memory import dialog ==============================================
+   A modal over the app, opened from the badge under an empty chat or from
+   Settings -> Memory. It used to be a full screen, and a full screen borrowed
+   onboarding's shape — a big title, a Skip button — so opening it from the
+   badge read as being sent back into sign-up.
 
-   Scrolls as one column — the prompt block, the paste box and the footer do not
-   fit a 402px screen together, and a screen you cannot reach the bottom of is
-   worse than one that scrolls. */
-/* 97px of inherited onboarding padding sat above the title on a screen that
-   now ends well short of the fold. Half of it is enough to breathe. */
-/* .screen.imp-screen, not .imp-screen: the base rule is .screen.onboard at
-   (0,2,0) and a single class loses to it, so the override silently did nothing. */
-.screen.imp-screen { overflow-y: auto; -webkit-overflow-scrolling: touch; padding-top: 32px; }
+   Cloud White, not white: everything inside — the grey prompt box, the white
+   paste field, the white note cards — was drawn against the page colour, and on
+   a white panel the field and the cards lose their edge. */
+/* Above the desktop Settings dialog (z 30) and its scrim, because import also
+   opens from inside Settings. */
+.imp-scrim { z-index: 35; }
+/* pointer-events off, so a click in the space beside the box falls through to
+   the scrim underneath. */
+.imp-layer {
+  position: absolute; inset: 0; z-index: 36;
+  display: flex; align-items: center; justify-content: center;
+  padding: 24px 16px;
+  pointer-events: none;
+}
+.imp-dialog {
+  pointer-events: auto;
+  display: flex; flex-direction: column;
+  width: min(580px, 100%);
+  max-height: 100%;
+  background: var(--bg-top);
+  border-radius: 18px;
+  box-shadow: 0 30px 80px var(--shadow-strong), 0 0 0 1px rgba(var(--ink-2-rgb), 0.08);
+  outline: none;
+  animation: pop 0.18s ease;
+}
+/* no-anim before closing, so a closing dialog still plays its exit. */
+.imp-dialog.no-anim { animation: none; }
+.imp-dialog.closing { animation: popout 0.16s ease forwards; }
 
-/* The title sits on its own line now: the × was removed, and Skip in the
-   footer is the single dismissal rather than two controls doing one job. */
-/* The heading of the screen, so it carries weight. Pulled up tight to the top
-   as well — the screen no longer scrolls, so the air above it was doing
-   nothing but pushing the two steps down. */
+.imp-head { display: flex; align-items: flex-start; gap: 12px; padding: 22px 16px 8px 24px; }
+.imp-head-text { flex: 1; min-width: 0; }
 .imp-title {
-  align-self: stretch; text-align: left;
-  font-size: 32px !important; font-weight: 700;
-  margin-top: -8px; margin-bottom: 2px;
+  margin: 0;
+  font-family: var(--serif); font-size: 28px; font-weight: 700; line-height: 1.15;
+  color: var(--ink);
+}
+.imp-sub { margin: 6px 0 0; font-size: 14px; line-height: 1.4; color: var(--ink-2); }
+/* The way out. A rounded square, like every other icon button in the app. */
+.imp-close {
+  flex: 0 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; margin-top: -2px; padding: 0;
+  border-radius: var(--r);
+  color: var(--ink-2);
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.imp-close:active { background: rgba(var(--ink-2-rgb), 0.16); color: var(--ink); }
+@media (hover: hover) {
+  .imp-close:hover { background: rgba(var(--ink-2-rgb), 0.10); color: var(--ink); }
+}
+/* Only the middle scrolls. The title, the × and the button stay put however
+   long the paste or the list of results gets. */
+.imp-body {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; flex-direction: column;
+  overflow-y: auto; -webkit-overflow-scrolling: touch;
+  padding: 0 24px 4px;
+}
+/* The body is a flex column, and flex items shrink by default — so a long
+   result list or a short window SQUASHED the children to fit instead of letting
+   the body scroll. The paste field shrank, and the prompt box, being
+   overflow:hidden, is allowed to shrink all the way to nothing. They keep their
+   own size; the body scrolls. */
+.imp-body > * { flex-shrink: 0; }
+.imp-body > .imp-row:first-child { margin-top: 6px; }
+.imp-foot {
+  flex: 0 0 auto;
+  display: flex; justify-content: flex-end; gap: 10px;
+  padding: 16px 24px 20px;
+}
+.imp-empty { margin: 4px 0 0; font-size: 15px; line-height: 1.5; color: var(--ink-2); }
+
+/* A phone: the same dialog, a little tighter, so the steps are not squeezed
+   under an oversized title. */
+@media (max-width: 480px) {
+  .imp-layer { padding: 16px 12px; }
+  .imp-head { padding: 18px 10px 6px 18px; }
+  .imp-title { font-size: 24px; }
+  .imp-body { padding: 0 18px 4px; }
+  .imp-foot { padding: 14px 18px 16px; }
 }
 
 /* Step rows: a numbered badge and its instruction on one baseline. */
@@ -3094,23 +3101,13 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
 .imp-paste { padding-left: 13px; }
 .imp-meta { padding-left: 13px; }
 
-/* Footer pair. Skip carries no fill so the primary action is unambiguous, and
-   both are full-height targets rather than text links. */
-/* Right-aligned and only as wide as their labels. Two full-width slabs gave
-   Skip the same visual weight as the action, and on a screen whose whole job
-   is to move you forward that is the wrong emphasis. */
-.imp-foot { display: flex; gap: 10px; align-self: stretch; justify-content: flex-end; margin-top: 20px; }
+/* The dialog's one action: right-aligned, only as wide as its label. */
 .imp-btn {
   flex: 0 0 auto; min-height: 40px; padding: 0 22px;
   border-radius: var(--r);
   font-size: 15px; font-weight: 600;
   display: flex; align-items: center; justify-content: center;
 }
-.imp-btn.ghost {
-  background: transparent; color: var(--ink-2);
-  border: 1px solid rgba(var(--ink-2-rgb), 0.28);
-}
-.imp-btn.ghost:active { background: rgba(var(--ink-2-rgb), 0.08); }
 .imp-btn.filled { background: var(--accent); color: #fff; }
 .imp-btn.filled:active { background: var(--accent-press, var(--accent)); }
 /* A tinted accent at 45% still reads as a live button — people tap it and
@@ -3124,29 +3121,8 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
 /* The payoff list. Reuses .settings-card / .note-line from the Memory screen
    verbatim, so the notes look the way they will look once they are saved. */
 .imp-scroll { align-self: stretch; width: 100%; margin-top: 4px; }
-.imp-screen .settings-section { padding-left: 0; padding-right: 0; }
-.imp-screen .note-line { cursor: default; }
-
-@media (min-width: 1024px) {
-  /* A dialog-width column, centred — the same shape the phone gets, not a
-     stretched one.
-
-     Two selectors because .desk means "the desktop shell is on screen", not
-     "the window is wide": during onboarding no shell is rendered, so the
-     class is absent and an #app.desk rule never fires. Same split the
-     sign-in screen already makes a few hundred lines up. */
-  #app.desk .imp-screen,
-  #app:not(.desk) .screen.imp-screen {
-    max-width: 560px; margin-inline: auto;
-    justify-content: safe center;
-    padding-top: 48px; padding-bottom: 48px;
-  }
-  /* The result list grows with its content. Left to stretch it also ate the
-     slack in a tall window, which pushed the primary button to the bottom of
-     the screen with 300px of nothing above it. */
-  #app.desk .imp-screen .imp-scroll,
-  #app:not(.desk) .screen.imp-screen .imp-scroll { flex: 0 0 auto; }
-}
+.imp-dialog .settings-section { padding-left: 0; padding-right: 0; }
+.imp-dialog .note-line { cursor: default; }
 
 /* "More remains" — the other AI said its export was partial, so offer a second
    paste rather than letting the user believe they got everything. */
@@ -3162,7 +3138,7 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
 }
 /* Project rows carry a name in bold plus its description, so they wrap where a
    one-line note does not. */
-.imp-screen .note-line b { font-weight: 600; }
+.imp-dialog .note-line b { font-weight: 600; }
 
 /* ===== Import nudge — one-time offer under the composer on an empty project ==
    An offer, not a banner: no fill, no border, no accent, and the same weight as
@@ -3177,36 +3153,77 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
    re-parented the desktop disclaimer (absolute, bottom-pinned to .dt-main) on
    top of the composer. Reserving the height instead costs one always-empty
    band and breaks nothing. */
+/* The slot is the same height whether or not the badge is in it, so the
+   composer never moves when the offer is dismissed. It tracks the badge's own
+   height — 32px — rather than the old line of text's 22px. */
 .imp-nudge-slot {
-  height: 22px; margin-top: 24px;
-  display: flex; align-items: center; justify-content: center; gap: 4px;
+  height: 32px; margin-top: 20px;
+  display: flex; align-items: center; justify-content: center;
+}
+/* A real badge: white pill, hairline, a lift of shadow. The accent is kept to
+   the memory mark and the arrow, so it reads as an offer rather than a button
+   competing with the composer above it. */
+.imp-nudge {
+  display: inline-flex; align-items: center;
+  height: 32px; max-width: 100%;
+  padding: 0 4px 0 0;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid rgba(var(--ink-2-rgb), 0.16);
+  box-shadow: 0 1px 3px rgba(14, 30, 44, 0.06);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease, transform 0.12s ease;
 }
 .imp-nudge-cta {
-  padding: 2px 0;
-  font-size: 12px; line-height: 16px; font-weight: 400;
+  display: inline-flex; align-items: center; gap: 7px;
+  height: 100%; min-width: 0;
+  padding: 0 8px 0 12px;
+  border-radius: 999px 0 0 999px;
+  font-size: 13px; line-height: 1; font-weight: 500;
   color: var(--ink-2);
+  white-space: nowrap;
+  transition: color 0.15s ease;
 }
-.imp-nudge-cta:active { color: var(--ink); }
+.imp-nudge-ico { display: flex; flex: 0 0 auto; color: var(--accent); }
+.imp-nudge-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.imp-nudge-arrow { display: inline-block; color: var(--accent); transition: transform 0.15s ease; }
+/* Separates accepting the offer from dismissing it, inside one pill. */
+.imp-nudge-sep {
+  flex: 0 0 auto; width: 1px; height: 16px;
+  background: rgba(var(--ink-2-rgb), 0.16);
+}
 .imp-nudge-x {
+  position: relative;
   display: flex; align-items: center; justify-content: center;
-  width: 22px; height: 22px; padding: 0; border-radius: var(--r);
+  width: 24px; height: 24px; margin-left: 4px; padding: 0;
+  border-radius: 8px;
   color: var(--ink-3);
+  transition: background 0.12s ease, color 0.12s ease;
 }
-.imp-nudge-x:active { color: var(--ink-2); }
-/* The dismiss cross is drawn 22x22 to stay quiet next to 12px text, which left
-   a 22x22 tap target — half the 44px minimum, on the one control that has to be
-   easy to hit, because someone reaching for it has already decided they do not
-   want the offer. Same fix the composer uses: the visible size is unchanged and
-   an invisible box carries the tap. Vertical only would not be enough here, so
-   it grows both ways; the CTA beside it is 4px away, so the box is offset to
-   the right rather than centred, to keep the two from stealing each other's
-   taps. */
-.imp-nudge-x { position: relative; }
+/* Drawn 24px to sit inside a 32px pill, which is half the 44px a finger needs,
+   on the one control someone reaches for having already decided against the
+   offer. An invisible box carries the tap; it grows right, past the pill's
+   edge, and barely left, so it cannot take clicks meant for the CTA. */
 .imp-nudge-x::after {
   content: ''; position: absolute;
   top: 50%; transform: translateY(-50%);
-  left: -2px; right: -16px;
+  left: -4px; right: -12px;
   height: 44px;
+}
+/* Press — outside the hover query, since it is the only feedback a phone gets.
+   The whole pill gives under a finger on the CTA; the cross has its own. */
+.imp-nudge:has(.imp-nudge-cta:active) {
+  transform: scale(0.98);
+  background: color-mix(in srgb, var(--accent) 6%, var(--surface));
+}
+.imp-nudge-x:active { background: rgba(var(--ink-2-rgb), 0.16); color: var(--ink); }
+/* Narrow phones: the full sentence does not fit beside the dismiss, and an
+   ellipsis mid-name ("ChatGPT or Cla…") reads as broken. The short form keeps
+   the verb and the noun. */
+/* 400, not 380: the full badge needs a 357px gutter, and at 390 (iPhone 12-15)
+   the gutter is 358 — a 1px fit that any font-rendering difference turns into
+   an ellipsis. 402 and wider keep the whole sentence. */
+@media (max-width: 400px) {
+  .imp-nudge-from { display: none; }
 }
 
 
@@ -3221,30 +3238,6 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   color: var(--ink-2); text-align: left;
 }
 .mem-import:active { color: var(--ink); }
-
-/* ===== Import result on a wide window ==============================
-   The ask step is a form and stays a dialog-width column — a 900px-wide
-   textarea is worse to paste into, not better. The RESULT step is a list, and
-   at phone width it ran past 1200px tall on a 1300px screen: the reader had to
-   scroll a wide, empty page to reach a button. Same content, two columns, and
-   it fits without scrolling at all.
-
-   Deliberately NOT a white card. The note rows are --surface on a --raised
-   page, and that is the only thing separating them; put them on a white panel
-   and the rows disappear into it. Width and density do the work instead. */
-@media (min-width: 1024px) {
-  #app:not(.desk) .screen.imp-screen.imp-result { max-width: 940px; }
-
-  .imp-result .imp-scroll {
-    column-count: 2;
-    column-gap: 28px;
-  }
-  /* A card split down the middle of a section reads as two unrelated lists. */
-  .imp-result .imp-scroll .settings-section,
-  .imp-result .imp-scroll .card { break-inside: avoid; }
-  /* The heading must not be orphaned at the foot of a column either. */
-  .imp-result .imp-scroll .settings-section { break-after: avoid; }
-}
 
 /* "Already have an account? Sign in" — on every onboarding question screen.
    Onboarding runs before sign-in, so without this a returning user has to
@@ -3279,13 +3272,6 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
 }
 
 @media (min-width: 1024px) {
-  /* .wd-screen fades to white by 62% because the WELCOME screen has a device
-     screenshot below the button that has to melt into the page. Sign-in has no
-     such image, so that stop left the bottom half flat white and detached from
-     everything else. Same gradient as the app itself instead. */
-  #app:not(.desk) .screen.wd-screen.login-desk {
-    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
-  }
   /* 62px under the mark carries the welcome screen's headline. Here it would
      push the card off a 900px window. */
   .login-desk .wd-mark-sm { margin-bottom: 22px; }
@@ -3319,7 +3305,6 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   .set-row:not(.is-soon):hover,
   .about-row:not(.about-version):hover,
   .mode-row:not(.sel):hover,
-  .note-menu-row:hover,
   .pm-row:hover {
     background: color-mix(in srgb, var(--hover-base) 3%, transparent);
   }
@@ -3328,7 +3313,15 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   .proj-row:not(.active):hover { background: color-mix(in srgb, var(--hover-base) 3%, transparent); }
 
   /* --- icon buttons: square with rounded corners, not a disc --- */
-  .imp-nudge-x:hover { background: rgba(var(--ink-2-rgb), 0.08); color: var(--ink-2); }
+  /* Hovering the offer lifts the whole badge and nudges the arrow toward where
+     it leads; hovering the cross highlights only the cross. */
+  .imp-nudge:has(.imp-nudge-cta:hover) {
+    border-color: color-mix(in srgb, var(--accent) 35%, transparent);
+    box-shadow: 0 3px 10px rgba(14, 30, 44, 0.08);
+  }
+  .imp-nudge-cta:hover { color: var(--ink); }
+  .imp-nudge-cta:hover .imp-nudge-arrow { transform: translateX(3px); }
+  .imp-nudge-x:hover { background: rgba(var(--ink-2-rgb), 0.10); color: var(--ink); }
 
   /* --- the blue buttons, everywhere they appear --- */
   /* Deep Sky, the palette's own darker blue, and already what .fb-btn.primary
@@ -3347,7 +3340,6 @@ html[data-theme="dark"], html[data-theme="dark"] body { background: #060b12; }
   .btn, .prof-btn, .imp-btn.filled { transition: transform 0.12s ease, opacity 0.12s ease, background 0.12s ease, box-shadow 0.12s ease; }
 
   /* Secondary and text controls, so the whole flow responds consistently. */
-  .imp-btn.ghost:hover { background: color-mix(in srgb, var(--hover-base) 3%, transparent); }
   .textbtn:hover { color: var(--ink); }
   .textbtn.have-acct:hover b { text-decoration: underline; }
   .imp-copy:hover { background: var(--accent-wash); }

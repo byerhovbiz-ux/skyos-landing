@@ -258,9 +258,9 @@ p { margin: 0; }
 /* The memory card is a picture of one panel, not of the whole window: the
    dialog is a fixed 1120x820 however large the window gets, so in the hero's
    1990px viewport it would swim in scrim. A smaller window fills the card
-   with the thing the card is about. Its viewports are 420x840 on phones and
-   1440x900 from 900px up, hence 42/84 here and 8/5 in the desktop block. */
-.demo--memory { aspect-ratio: 42 / 84; }
+   with the thing the card is about. Its viewports are 420x870 on phones and
+   1440x900 from 900px up, hence 42/87 here and 8/5 in the desktop block. */
+.demo--memory { aspect-ratio: 42 / 87; }
 
 /* The app draws itself for a full window, so the frame is given one and
    scaled down rather than squeezed. These dimensions only govern the first

@@ -47,7 +47,11 @@
   </a>
   <nav class="nav__links">
     <a class="nav__contact" href="mailto:hello@skyos.ink">Contact</a>
-    <a class="nav__signin" href="https://app.skyos.ink">Sign in</a>
+    <!-- ?signin asks the app for its sign-in screen. Without it a returning
+         visitor on a new browser lands on the welcome and is walked into
+         onboarding. The app ignores parameters it does not know, so until it
+         reads this one the link behaves exactly as before. -->
+    <a class="nav__signin" href="https://app.skyos.ink/?signin">Sign in</a>
     <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS<svg class="cta__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
   </nav>
 </header>
@@ -60,7 +64,7 @@
     <h1 class="hero__title">AI optimized not <br>to go vague.</h1>
 
     <p class="hero__subtitle">
-      Come back to a project weeks later without explaining it again.
+      Come back to a project weeks later and your decisions are still there, word for word.
     </p>
 
     <!-- What SkyOS IS. The headline says what it does; a visitor from Reddit
@@ -151,13 +155,13 @@
 <section class="notes">
   <div class="wrap">
 
-    <h2 class="notes__title">Word for word, not summarized</h2>
+    <h2 class="notes__title">Word for word, never summarized</h2>
     <p class="notes__lead">
       Open a project&rsquo;s memory and every decision is sitting there in the
       words you said it in &mdash; dated, and yours to edit or delete.
     </p>
 
-    <div class="demo demo--memory" data-vw="1440" data-vh="900" data-vh-narrow="840">
+    <div class="demo demo--memory" data-vw="1440" data-vh="900" data-vh-narrow="870">
       <iframe class="demo__frame" src="demo-memory.html" title="SkyOS memory" loading="lazy" tabindex="-1" scrolling="no"></iframe>
     </div>
 
@@ -213,7 +217,8 @@
     var r = card.getBoundingClientRect();
     var wide = r.width >= 640;
     // 420x800 is a phone, and the default; the memory card asks for a taller
-    // one because seven notes plus the footnote are 9px more than 800 holds.
+    // one, because on a phone seven notes with their edit and delete buttons
+    // plus the footnote need 870.
     var vw = wide ? +card.dataset.vw : (+card.dataset.vwNarrow || 420);
     var vh = wide ? +card.dataset.vh : (+card.dataset.vhNarrow || 800);
     frame.style.width = vw + 'px';

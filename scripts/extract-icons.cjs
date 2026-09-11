@@ -49,6 +49,8 @@ const out = {
   // The edit button on your own message. FIG.rename draws on an 18 viewBox,
   // not 24 like the stroked set.
   rename: jsonConst("SVG_RENAME"),
+  // The note row's delete, beside the same rename icon used for edit.
+  trash: jsonConst("SVG_TRASH"),
 
   // The phone chat header: hamburger and kebab, both drawn at 48.
   menu: templateAfter("menu: (s = 48)"),
