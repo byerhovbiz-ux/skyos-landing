@@ -266,7 +266,7 @@
 
     <div class="contact__actions">
       <button class="contact__btn contact__btn--ghost" type="button" data-close>Cancel</button>
-      <button class="contact__btn" type="submit">Send</button>
+      <button class="contact__btn" type="submit" disabled>Send</button>
     </div>
   </form>
 
@@ -289,6 +289,13 @@
   var status = dialog.querySelector('.contact__status');
   var send = form.querySelector('[type=submit]');
 
+  // Send stays grey until there is something to send: a message and an email.
+  // Whether the email is well-formed is still checked on Send, with a message
+  // saying what is wrong, rather than by a button that just will not light up.
+  function update() {
+    send.disabled = !(form.message.value.trim() && form.email.value.trim());
+  }
+
   function fail(message) { status.textContent = message; status.classList.add('is-error'); }
   function open(e) {
     e.preventDefault();
@@ -296,6 +303,7 @@
     done.hidden = true;
     status.textContent = '';
     status.classList.remove('is-error');
+    update();
     dialog.showModal();
     form.message.focus();
   }
@@ -308,6 +316,7 @@
   // An error is about what was there when Send was pressed; once the field
   // changes it is out of date, so it goes.
   form.addEventListener('input', function () {
+    update();
     if (status.classList.contains('is-error')) { status.textContent = ''; status.classList.remove('is-error'); }
   });
 
@@ -318,6 +327,7 @@
     if (!text) { fail('Write a message first.'); form.message.focus(); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail('Add your email so I can reply.'); form.email.focus(); return; }
     send.disabled = true;
+    send.classList.add('is-sending');
     send.textContent = 'Sending…';
     status.textContent = '';
     status.classList.remove('is-error');
@@ -336,8 +346,9 @@
       })
       .catch(function () { fail('That didn’t send. Try again, or email hello@skyos.ink.'); })
       .then(function () {
-        send.disabled = false;
+        send.classList.remove('is-sending');
         send.textContent = 'Send';
+        update();
         // Disabling the button while sending drops focus to the page; after a
         // failed send, put it back where the next try starts.
         if (!form.hidden && dialog.open) send.focus();
