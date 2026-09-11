@@ -194,6 +194,16 @@ p { margin: 0; }
   text-wrap: balance;
 }
 
+/* One plain line under the promise saying what the product is. Quieter than
+   the subtitle, which carries the pitch; this only answers "a plugin? an API
+   key?" before anyone has to ask it. */
+.hero__what {
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: 15px;
+  line-height: 1.5;
+}
+
 /* ------------------------------------------------------------------ CTA */
 .cta {
   display: flex;
@@ -470,6 +480,8 @@ p { margin: 0; }
     font-weight: 300;
   }
 
+  .hero__what { margin-top: 14px; font-size: 17px; }
+
 
   .cta {
     display: inline-flex;
@@ -542,6 +554,7 @@ p { margin: 0; }
   .hero { padding-top: 104px; }
   .hero__title { font-size: 76px; }
   .hero__subtitle { font-size: 23px; margin-top: 24px; }
+  .hero__what { font-size: 18px; }
 
   .demo { margin-top: 64px; }
 

@@ -9,7 +9,7 @@ styles.css          all page styling — mobile-first, steps at 900px and 1440px
 og.png              the link preview image (generated, see below)
 icons/              favicon + apple-touch-icon, copied from the PWA
 
-demo.html           hero card: the app mid-conversation          (generated)
+demo.html           hero card: the app, playing a scripted run   (generated)
 demo-memory.html    notes card: the project memory panel         (generated)
 assets/app.css      the PWA's styles.css, copied verbatim         (generated)
 
@@ -67,6 +67,33 @@ rule written as `.actions button:hover` never matches a span.
 - **The serif is declared after app.css on purpose.** app.css points at a font
   file relative to itself that does not exist here; declaring the Google face
   last makes it win the match, so that file is never requested.
+
+## The hero card plays
+
+`demo.html` runs a scripted pass through the app, then loops:
+
+1. Empty chat. The Supabase decision types into the composer and sends.
+2. The reply arrives with "Saved 3 notes to memory".
+3. Desktop: a pointer clicks the top bar's memory button and the Settings
+   dialog opens on those three notes. Phone: the Memory screen replaces the
+   chat, the way the app swaps screens, and the back button is tapped.
+4. A long conversation scrolls by — length, not time, is what makes other
+   assistants lose the thread.
+5. "Why didn't we go with Clerk?" is answered in the note's own words.
+
+All of it is in `scripts/build-demo.cjs`: the words in `S` and `FILLER`, the
+sequence and timings in `run()` inside `runScript`. The script only inserts
+markup prebuilt by the same builders as the static card, so a class rename
+in the app breaks the run and the still together, and the sync step fixes both.
+
+- **It pauses while the card is off screen** (an IntersectionObserver inside
+  the frame) and while the tab is hidden, and resumes where it stopped.
+- **No JavaScript, or reduced motion turned on, shows the last frame** — the
+  static markup as served. Nothing to maintain separately.
+- **To check a change, film it in real time.** Headless Chrome's
+  `--virtual-time-budget` does not advance the run, so every frame comes out
+  identical. Drive Chrome over the DevTools protocol and capture at real
+  timestamps instead; the Browser pane pauses the run whenever it is hidden.
 
 ## Link preview
 
