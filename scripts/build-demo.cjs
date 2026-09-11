@@ -463,6 +463,7 @@ const runScript = `
   function reset() {
     removeAll(document, '.scrim, .dt-modal, .demo-notes');
     shell.style.visibility = '';
+    shell.classList.remove('demo-blur');
     if (cursorEl) cursorEl.classList.remove('on');
     var empty = el(T.empty);
     empty.querySelector('.empty-greeting').textContent = greeting();
@@ -550,12 +551,14 @@ const runScript = `
     await moveTo(center(main.querySelector('.dt-bar-acts .circle-btn')), 950);
     await click();
     shell.insertAdjacentHTML('beforeend', T.dialog);
+    shell.classList.add('demo-blur');
     await wait(2900);
     await moveTo(center(shell.querySelector('.dt-modal-x')), 720);
     await click();
     var scrim = shell.querySelector('.scrim'), modal = shell.querySelector('.dt-modal');
     scrim.classList.add('closing');
     modal.classList.add('demo-closing');
+    shell.classList.remove('demo-blur');
     await wait(230);
     scrim.remove();
     modal.remove();
@@ -629,7 +632,7 @@ const runScript = `
 
 // ------------------------------------------------------------------ shell
 
-const page = (extraStyle, dialog, script) => `<!doctype html>
+const page = (extraStyle, dialog, script, shellClass = 'screen dt-shell') => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -681,6 +684,16 @@ const page = (extraStyle, dialog, script) => `<!doctype html>
      this covers trackpads and touchscreen laptops, which keep their hovers. */
   html, body { overscroll-behavior: auto; touch-action: auto; }
 
+  /* The Settings scrim blurs what is behind it with backdrop-filter. Inside a
+     frame the page scales with a transform, software compositing (hardware
+     acceleration off, some VMs and remote desktops) fills part of that
+     backdrop with a mirrored copy of the chat — rows doubled, text upside
+     down. Blurring the app itself draws the same picture on every compositor;
+     the GPU path renders the two identically. */
+  .scrim-blur { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .dt-shell > .dt-side, .dt-shell > .dt-main { transition: filter .2s ease; }
+  .dt-shell.demo-blur > .dt-side, .dt-shell.demo-blur > .dt-main { filter: blur(6px); }
+
   /* Only one of the two headers at a time. */
   .topbar { display: none; }
 
@@ -705,7 +718,7 @@ ${extraStyle}</style>
 <body>
 
 <div id="app" class="desk">
-  <div class="screen dt-shell">
+  <div class="${shellClass}">
 ${sidebar}
 
     <div class="dt-main">
@@ -769,5 +782,5 @@ const dialogStyle = `
 `;
 
 fs.writeFileSync('demo.html', page(runStyle, '', runScript));
-fs.writeFileSync('demo-memory.html', page(dialogStyle, memoryDialog(notes), ''));
+fs.writeFileSync('demo-memory.html', page(dialogStyle, memoryDialog(notes), '', 'screen dt-shell demo-blur'));
 console.log('demo.html + demo-memory.html written');

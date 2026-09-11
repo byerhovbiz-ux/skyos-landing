@@ -50,6 +50,16 @@
      this covers trackpads and touchscreen laptops, which keep their hovers. */
   html, body { overscroll-behavior: auto; touch-action: auto; }
 
+  /* The Settings scrim blurs what is behind it with backdrop-filter. Inside a
+     frame the page scales with a transform, software compositing (hardware
+     acceleration off, some VMs and remote desktops) fills part of that
+     backdrop with a mirrored copy of the chat — rows doubled, text upside
+     down. Blurring the app itself draws the same picture on every compositor;
+     the GPU path renders the two identically. */
+  .scrim-blur { backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .dt-shell > .dt-side, .dt-shell > .dt-main { transition: filter .2s ease; }
+  .dt-shell.demo-blur > .dt-side, .dt-shell.demo-blur > .dt-main { filter: blur(6px); }
+
   /* Only one of the two headers at a time. */
   .topbar { display: none; }
 
@@ -82,7 +92,7 @@
 <body>
 
 <div id="app" class="desk">
-  <div class="screen dt-shell">
+  <div class="screen dt-shell demo-blur">
 
     <aside class="dt-side">
       <!-- Search and the rail toggle, as icon() draws them: stroked at 1.8 on
