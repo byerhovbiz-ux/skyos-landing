@@ -46,11 +46,10 @@
     SkyOS
   </a>
   <nav class="nav__links">
-    <!-- Copies the address instead of opening a mail app (see the script at the
-         end). mailto: hands off to whatever the OS has registered — on Windows
-         that is Outlook, usually never set up — so the click landed people in
-         an app they had never opened. The href stays as the no-script fallback. -->
-    <a class="nav__contact" href="mailto:hello@skyos.ink" data-copy-email>Contact</a>
+    <!-- Opens the contact form at the end of the page. The href is only the
+         no-script fallback: mailto: hands off to whatever the OS has registered,
+         which on Windows is an Outlook nobody set up. -->
+    <a class="nav__contact" href="mailto:hello@skyos.ink" data-contact>Contact</a>
     <!-- ?signin asks the app for its sign-in screen. Without it a returning
          visitor on a new browser lands on the welcome and is walked into
          onboarding. The app ignores parameters it does not know, so until it
@@ -191,7 +190,7 @@
     <nav class="foot__nav">
       <a href="https://app.skyos.ink/privacy.html">Privacy</a>
       <a href="https://app.skyos.ink/terms.html">Terms</a>
-      <a href="mailto:hello@skyos.ink" data-copy-email>Contact</a>
+      <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
     </nav>
   </div>
 </footer>
@@ -244,43 +243,105 @@
 })();
 </script>
 
-<!-- What a Contact click shows: the address, already on the clipboard, and a
-     way into a mail app for anyone who does use one. role=status so a screen
-     reader announces it. -->
-<div class="toast" role="status" aria-live="polite" hidden>
-  <span class="toast__text">hello@skyos.ink copied</span>
-  <a class="toast__open" href="mailto:hello@skyos.ink">Open mail app</a>
-</div>
+<!-- CONTACT
+     A form rather than an address. It posts to the app's /api/feedback, the
+     same box the in-app bug report uses: saved, then emailed with the sender's
+     address as reply-to, so answering is just Reply. A native <dialog> gives
+     the backdrop, Escape and the focus trap for free. -->
+<dialog class="contact" aria-labelledby="contactTitle">
+  <form class="contact__form" novalidate>
+    <h2 class="contact__title" id="contactTitle">Contact</h2>
+    <p class="contact__lead">Questions, feedback, or something broken — tell me and I'll get back to you.</p>
+
+    <label class="contact__label" for="contactMessage">Message</label>
+    <textarea class="contact__field contact__area" id="contactMessage" name="message" rows="5" maxlength="4000"></textarea>
+
+    <label class="contact__label" for="contactEmail">Your email</label>
+    <input class="contact__field" id="contactEmail" name="email" type="email" autocomplete="email" maxlength="200" placeholder="So I can reply">
+
+    <!-- Bots fill every field they find; people never see this one. -->
+    <input class="contact__trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+    <p class="contact__status" role="status" aria-live="polite"></p>
+
+    <div class="contact__actions">
+      <button class="contact__btn contact__btn--ghost" type="button" data-close>Cancel</button>
+      <button class="contact__btn" type="submit">Send</button>
+    </div>
+  </form>
+
+  <div class="contact__done" hidden>
+    <h2 class="contact__title">Sent</h2>
+    <p class="contact__lead">Thanks. I'll reply to <span class="contact__to"></span>.</p>
+    <div class="contact__actions">
+      <button class="contact__btn" type="button" data-close>Close</button>
+    </div>
+  </div>
+</dialog>
 <script>
 (function () {
-  var ADDRESS = 'hello@skyos.ink';
-  var toast = document.querySelector('.toast');
-  var text = toast.querySelector('.toast__text');
-  var hideTimer, offTimer;
+  var dialog = document.querySelector('.contact');
+  // Without <dialog> support the links stay plain mailto.
+  if (!dialog || typeof dialog.showModal !== 'function') return;
+  var ENDPOINT = 'https://app.skyos.ink/api/feedback';
+  var form = dialog.querySelector('.contact__form');
+  var done = dialog.querySelector('.contact__done');
+  var status = dialog.querySelector('.contact__status');
+  var send = form.querySelector('[type=submit]');
 
-  function show(copied) {
-    // If the clipboard refused, the address is still on screen to select.
-    text.textContent = copied ? ADDRESS + ' copied' : ADDRESS;
-    clearTimeout(hideTimer);
-    clearTimeout(offTimer);
-    toast.hidden = false;
-    requestAnimationFrame(function () { toast.classList.add('is-on'); });
-    hideTimer = setTimeout(hide, 6000);
+  function fail(message) { status.textContent = message; status.classList.add('is-error'); }
+  function open(e) {
+    e.preventDefault();
+    form.hidden = false;
+    done.hidden = true;
+    status.textContent = '';
+    status.classList.remove('is-error');
+    dialog.showModal();
+    form.message.focus();
   }
-  function hide() {
-    toast.classList.remove('is-on');
-    offTimer = setTimeout(function () { toast.hidden = true; }, 220);
-  }
+  function close() { dialog.close(); }
 
-  Array.prototype.forEach.call(document.querySelectorAll('[data-copy-email]'), function (link) {
-    link.addEventListener('click', function (e) {
-      e.preventDefault();
-      if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(ADDRESS).then(function () { show(true); }, function () { show(false); });
-      } else {
-        show(false);
-      }
-    });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-contact]'), function (a) { a.addEventListener('click', open); });
+  Array.prototype.forEach.call(dialog.querySelectorAll('[data-close]'), function (b) { b.addEventListener('click', close); });
+  // A click on the backdrop lands on the dialog element itself.
+  dialog.addEventListener('click', function (e) { if (e.target === dialog) close(); });
+  // An error is about what was there when Send was pressed; once the field
+  // changes it is out of date, so it goes.
+  form.addEventListener('input', function () {
+    if (status.classList.contains('is-error')) { status.textContent = ''; status.classList.remove('is-error'); }
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var text = form.message.value.trim();
+    var email = form.email.value.trim();
+    if (!text) { fail('Write a message first.'); form.message.focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail('Add your email so I can reply.'); form.email.focus(); return; }
+    send.disabled = true;
+    send.textContent = 'Sending…';
+    status.textContent = '';
+    status.classList.remove('is-error');
+    fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: text, email: email, screen: 'skyos.ink contact', website: form.website.value })
+    })
+      .then(function (r) { if (!r.ok) throw new Error(String(r.status)); })
+      .then(function () {
+        dialog.querySelector('.contact__to').textContent = email;
+        form.reset();
+        form.hidden = true;
+        done.hidden = false;
+        done.querySelector('[data-close]').focus();
+      })
+      .catch(function () { fail('That didn’t send. Try again, or email hello@skyos.ink.'); })
+      .then(function () {
+        send.disabled = false;
+        send.textContent = 'Send';
+        // Disabling the button while sending drops focus to the page; after a
+        // failed send, put it back where the next try starts.
+        if (!form.hidden && dialog.open) send.focus();
+      });
   });
 })();
 </script>
