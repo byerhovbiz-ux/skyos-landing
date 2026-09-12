@@ -197,11 +197,27 @@ p { margin: 0; }
 /* One plain line under the promise saying what the product is. Quieter than
    the subtitle, which carries the pitch; this only answers "a plugin? an API
    key?" before anyone has to ask it. */
-.hero__what {
-  margin-top: 12px;
+/* Three facts on one line, dotted apart, small and muted: a spec strip rather
+   than a second subtitle. */
+.hero__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+  margin-top: 14px;
   color: var(--ink-muted);
-  font-size: 15px;
-  line-height: 1.5;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.hero__meta span { display: inline-flex; align-items: center; }
+.hero__meta span + span::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: .55;
 }
 
 /* ------------------------------------------------------------------ CTA */
@@ -343,6 +359,7 @@ p { margin: 0; }
 }
 
 .col__line:first-of-type { border-top: 0; padding-top: 0; }
+.col__line:last-of-type { padding-bottom: 0; }
 
 /* On the dark card the divider has to lighten rather than darken, or it
    disappears into the fill. Text sits at 90% rather than the 82% that
@@ -351,13 +368,6 @@ p { margin: 0; }
 .col--them .col__line {
   color: rgba(255, 255, 255, .9);
   border-top-color: rgba(255, 255, 255, .18);
-}
-
-.compare__note {
-  margin-top: 24px;
-  color: var(--ink-muted);
-  font-size: 16px;
-  line-height: 1.6;
 }
 
 /* =========================================================================
@@ -379,6 +389,7 @@ p { margin: 0; }
 }
 
 .why__lead {
+  max-width: 62ch;
   color: var(--ink-muted);
   font-size: 17px;
   font-weight: 400;
@@ -574,7 +585,7 @@ p { margin: 0; }
     font-weight: 300;
   }
 
-  .hero__what { margin-top: 14px; font-size: 17px; }
+  .hero__meta { margin-top: 18px; font-size: 15px; }
 
 
   .cta {
@@ -613,7 +624,6 @@ p { margin: 0; }
   .col { padding: 32px; }
   .col__line { font-size: 17px; padding: 18px 0; }
 
-  .compare__note { font-size: 17px; }
 
   .why { padding: 104px 0; }
   .why__lead { font-size: 19px; font-weight: 300; }
@@ -648,7 +658,7 @@ p { margin: 0; }
   .hero { padding-top: 104px; }
   .hero__title { font-size: 76px; }
   .hero__subtitle { font-size: 23px; margin-top: 24px; }
-  .hero__what { font-size: 18px; }
+  .hero__meta { font-size: 16px; }
 
   .demo { margin-top: 64px; }
 
@@ -661,7 +671,6 @@ p { margin: 0; }
   .col { padding: 30px 32px; }
   .col__head { font-size: 17px; margin-bottom: 14px; }
   .col__line { font-size: 18px; padding: 18px 0; }
-  .compare__note { font-size: 19px; }
 
   .why { padding: 120px 0; }
   .why__lead { font-size: 21px; }
