@@ -389,7 +389,6 @@ p { margin: 0; }
 }
 
 .why__lead {
-  max-width: 62ch;
   color: var(--ink-muted);
   font-size: 17px;
   font-weight: 400;
@@ -397,6 +396,9 @@ p { margin: 0; }
 }
 
 .why__lead + .why__lead { margin-top: 16px; }
+
+/* Stacked on a phone, side by side from 900px up (see the desktop block). */
+.why__cols { max-width: 62ch; }
 
 /* =========================================================================
    NOTES — the second app card
@@ -627,6 +629,13 @@ p { margin: 0; }
 
   .why { padding: 104px 0; }
   .why__lead { font-size: 19px; font-weight: 300; }
+  .why__cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    max-width: none;
+  }
+  .why__cols .why__lead + .why__lead { margin-top: 0; }
 
   /* The notes section was added with only its mobile values, so on desktop it
      sat at 72px while every section around it stepped up to 104, and its lead
