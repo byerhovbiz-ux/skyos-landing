@@ -300,6 +300,12 @@
   var done = dialog.querySelector('.contact__done');
   var status = dialog.querySelector('.contact__status');
   var send = form.querySelector('[type=submit]');
+  // The address someone used last time, kept in their own browser so a second
+  // message does not mean typing it again. The landing page has no session of
+  // its own — it cannot ask the app who is signed in.
+  var STORE = 'skyos.contact.email';
+  function remembered() { try { return localStorage.getItem(STORE) || ''; } catch (e) { return ''; } }
+  function remember(value) { try { localStorage.setItem(STORE, value); } catch (e) { /* private mode */ } }
 
   // Send stays grey until there is something to send: a message and an email.
   // Whether the email is well-formed is still checked on Send, with a message
@@ -315,6 +321,7 @@
     done.hidden = true;
     status.textContent = '';
     status.classList.remove('is-error');
+    if (!form.email.value) form.email.value = remembered();
     update();
     dialog.showModal();
     form.message.focus();
@@ -350,6 +357,7 @@
     })
       .then(function (r) { if (!r.ok) throw new Error(String(r.status)); })
       .then(function () {
+        remember(email);
         dialog.querySelector('.contact__to').textContent = email;
         form.reset();
         form.hidden = true;
