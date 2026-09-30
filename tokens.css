@@ -1,0 +1,32 @@
+/* SkyOS — the palette, in one place.
+   Every screen links this file, so a colour can only be changed here and no
+   screen can quietly drift from the others.
+
+   --muted is 3.5:1 against the page: icons at rest and disabled labels only.
+   Anything meant to be read is --subtext. Red is for broken connections and
+   destructive actions, nowhere else. */
+:root {
+  --ink: #0D0D0D;           /* 19.4:1 */
+  --ink-hover: #292929;
+  --subtext: #6B6B6B;       /* 5.3:1 ✓ */
+  --muted: #8A8A8A;         /* 3.5:1 — icons only */
+  --border: #E6E6E6;
+  --border-strong: #CCCCCC;
+  --surface: #FFFFFF;
+  --surface-sunk: #F1F1F1;
+  --bg: #FCFCFC;
+  --on-ink: #FFFFFF;
+  --danger: #D92D20;        /* 4.8:1 ✓ */
+  --danger-wash: #FDF2F1;
+
+  /* Third-party logos — Claude, ChatGPT, Codex — keep their own brand
+     colours. That is the one exception to the monochrome palette above: a
+     brand mark is someone else's identity, not a state of ours. Nothing but a
+     logo may use these, and no other colour may enter this block. */
+  --logo-claude: #D97757;
+  --logo-openai: #0D0D0D;
+  --logo-codex: #111111;
+
+  --radius-card: 16px;
+  --radius-btn: 12px;
+}

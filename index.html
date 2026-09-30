@@ -3,385 +3,304 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkyOS — AI optimized not to go vague</title>
-  <meta name="description" content="Ask an AI what you decided a month ago and you get &quot;we discussed pricing&quot; instead of the number. SkyOS writes decisions down as they happen and keeps them word for word.">
+  <title>SkyOS — one memory for Claude, ChatGPT and Codex</title>
+  <meta name="description" content="Tell one AI what you decided and the others know it too. SkyOS keeps your decisions as notes that Claude, ChatGPT and Codex all read — exact numbers, names and reasons, dated, and yours to edit.">
 
-  <meta property="og:title" content="SkyOS — AI optimized not to go vague">
-  <meta property="og:description" content="Ask an AI what you decided a month ago and you get &quot;we discussed pricing&quot; instead of the number. SkyOS keeps it word for word.">
+  <meta property="og:title" content="SkyOS — one memory for Claude, ChatGPT and Codex">
+  <meta property="og:description" content="Tell one AI what you decided and the others know it too.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.skyos.ink/">
   <!-- The link preview Reddit, X, Slack and iMessage show. Absolute and on www:
-       skyos.ink 308-redirects there, and not every crawler follows a redirect
-       to fetch an image. Rebuilt from scripts/og.html by scripts/build-og.cjs. -->
+       skyos.ink redirects there, and not every crawler follows a redirect to
+       fetch an image. Rebuilt from scripts/og.html by scripts/build-og.cjs. -->
   <meta property="og:image" content="https://www.skyos.ink/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="SkyOS, AI optimized not to go vague. Asked about pricing a month later, SkyOS answers “$15 a month, annual billing only”; other AI answers “We discussed pricing”.">
+  <meta property="og:image:alt" content="SkyOS: one memory for Claude, ChatGPT and Codex.">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- The app's own icon, so a tab on skyos.ink and one on app.skyos.ink carry
-       the same mark. With no icon declared the browser asked for /favicon.ico,
-       got a 404, and drew its default globe. The PNG is for browsers that
-       still ignore SVG favicons. -->
-  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
-  <link rel="icon" href="icons/icon-192.png" type="image/png" sizes="192x192">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
-  <!-- White, not the app's Cloud White: on this page the bar sits directly on
-       the nav, which is white at 72% and reads as #FCFDFE. -->
+  <!-- The same mark as app.skyos.ink. Google's favicon service reads these for
+       skyos.ink, and Claude shows that picture on the SkyOS connector. -->
+  <link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
   <meta name="theme-color" content="#FFFFFF">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+  <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- Home / About / Contact are in the Figma but have no pages behind them,
-     so the nav ships with only the two links that go somewhere. -->
-<header class="nav">
-  <a class="nav__brand" href="/">
-    <svg class="nav__mark" aria-hidden="true" width="26" height="26" viewBox="0 0 30.1458 30.1458" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="skyAvatarCloud" x1="15.1304" y1="8.0729" x2="15.1304" y2="21.562" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#E2EEF9"/></linearGradient></defs><path d="M30.0729 15.0729C30.0729 23.3572 23.3572 30.0729 15.0729 30.0729C6.78863 30.0729 0.0728984 23.3572 0.0728984 15.0729C0.0728984 6.78863 6.78863 0.0728984 15.0729 0.0728984C23.3572 0.0728984 30.0729 6.78863 30.0729 15.0729Z" fill="#0A66C2"/><path d="M22.8747 21.5621H7.33517C3.56981 21.1638 2.96786 16.5971 6.03217 15.5001C6.06699 15.4876 6.08914 15.4523 6.08867 15.4154C6.08153 14.8432 6.93557 12.2017 9.77179 12.3124C9.81363 12.314 9.85094 12.283 9.85646 12.2415C9.94015 11.6127 10.8966 8.27233 14.9531 8.07587C15.6549 8.04188 18.9156 8.24381 20.0502 11.8215C20.0606 11.8542 20.0936 11.8764 20.1279 11.8739C22.5795 11.6901 23.3321 13.5872 23.314 14.6037C23.3134 14.6376 23.3348 14.6674 23.3674 14.6769C23.9357 14.8432 25.988 15.5496 26.0701 17.9657C26.1617 20.6617 24.0046 21.5135 22.8747 21.5621Z" fill="url(#skyAvatarCloud)"/></svg>
-    SkyOS
-  </a>
-  <nav class="nav__links">
-    <!-- Opens the contact form at the end of the page. The href is only the
-         no-script fallback: mailto: hands off to whatever the OS has registered,
-         which on Windows is an Outlook nobody set up. -->
-    <a class="nav__contact" href="mailto:hello@skyos.ink" data-contact>Contact</a>
-    <!-- ?signin asks the app for its sign-in screen. Without it a returning
-         visitor on a new browser lands on the welcome and is walked into
-         onboarding. The app ignores parameters it does not know, so until it
-         reads this one the link behaves exactly as before. -->
-    <a class="nav__signin" href="https://app.skyos.ink/?signin">Sign in</a>
-    <a class="nav__cta" href="https://app.skyos.ink">Try SkyOS<svg class="cta__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-  </nav>
+<!-- Every mark on the page, once. The tool logos are the app's own (site.js
+     in the app), trimmed to their glyphs so the three read at the same size;
+     each keeps its brand colour through the --logo-* tokens. -->
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 29 26"><path d="M13.4533 12.55H25.4775M4.74452 4.42994L13.2469 12.9323M8.63629 23.556L14.6484 13.1427" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="13.4532" cy="12.8322" r="4.5339" fill="currentColor"/><circle cx="3.9694" cy="3.9694" r="3.9694" fill="currentColor"/><circle cx="9.2193" cy="23.05" r="2.558" fill="currentColor"/><circle cx="25.4775" cy="12.8322" r="3.1226" fill="currentColor"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-claude" viewBox="0 0 256 257"><path fill="currentColor" d="m50.228 170.321 50.357-28.257.843-2.463-.843-1.361h-2.462l-8.426-.518-28.775-.778-24.952-1.037-24.175-1.296-6.092-1.297L0 125.796l.583-3.759 5.12-3.434 7.324.648 16.202 1.101 24.304 1.685 17.629 1.037 26.118 2.722h4.148l.583-1.685-1.426-1.037-1.101-1.037-25.147-17.045-27.22-18.017-14.258-10.37-7.713-5.25-3.888-4.925-1.685-10.758 7-7.713 9.397.649 2.398.648 9.527 7.323 20.35 15.75L94.817 91.9l3.889 3.24 1.555-1.102.195-.777-1.75-2.917-14.453-26.118-15.425-26.572-6.87-11.018-1.814-6.61c-.648-2.723-1.102-4.991-1.102-7.778l7.972-10.823L71.42 0 82.05 1.426l4.472 3.888 6.61 15.101 10.694 23.786 16.591 32.34 4.861 9.592 2.592 8.879.973 2.722h1.685v-1.556l1.36-18.211 2.528-22.36 2.463-28.776.843-8.1 4.018-9.722 7.971-5.25 6.222 2.981 5.12 7.324-.713 4.73-3.046 19.768-5.962 30.98-3.889 20.739h2.268l2.593-2.593 10.499-13.934 17.628-22.036 7.778-8.749 9.073-9.657 5.833-4.601h11.018l8.1 12.055-3.628 12.443-11.342 14.388-9.398 12.184-13.48 18.147-8.426 14.518.778 1.166 2.01-.194 30.46-6.481 16.462-2.982 19.637-3.37 8.88 4.148.971 4.213-3.5 8.62-20.998 5.184-24.628 4.926-36.682 8.685-.454.324.519.648 16.526 1.555 7.065.389h17.304l32.21 2.398 8.426 5.574 5.055 6.805-.843 5.184-12.962 6.611-17.498-4.148-40.83-9.721-14-3.5h-1.944v1.167l11.666 11.406 21.387 19.314 26.767 24.887 1.36 6.157-3.434 4.86-3.63-.518-23.526-17.693-9.073-7.972-20.545-17.304h-1.36v1.814l4.73 6.935 25.017 37.59 1.296 11.536-1.814 3.76-6.481 2.268-7.13-1.297-14.647-20.544-15.1-23.138-12.185-20.739-1.49.843-7.194 77.448-3.37 3.953-7.778 2.981-6.48-4.925-3.436-7.972 3.435-15.749 4.148-20.544 3.37-16.333 3.046-20.285 1.815-6.74-.13-.454-1.49.194-15.295 20.999-23.267 31.433-18.406 19.702-4.407 1.75-7.648-3.954.713-7.064 4.277-6.286 25.47-32.405 15.36-20.092 9.917-11.6-.065-1.686h-.583L44.07 198.125l-12.055 1.555-5.185-4.86.648-7.972 2.463-2.593 20.35-13.999-.064.065Z"/></symbol>
+  <symbol id="i-chatgpt" viewBox="105 105 401 401"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M252.794 108.802C289.191 99.0484 326.265 110.305 351.148 135.135C385.113 126.072 422.85 134.862 449.492 161.505C476.136 188.149 484.925 225.888 475.862 259.85V259.854C500.696 284.735 511.95 321.81 502.198 358.207C492.447 394.602 464.161 421.084 430.215 430.217C421.083 464.162 394.603 492.448 358.206 502.199C321.812 511.951 284.734 500.693 259.852 475.864C225.887 484.927 188.15 476.137 161.507 449.495C134.864 422.851 126.073 385.111 135.136 351.149C110.304 326.266 99.0496 289.192 108.801 252.795C118.552 216.4 146.84 189.918 180.784 180.785C189.917 146.841 216.396 118.553 252.794 108.802ZM374.292 407.145C374.292 411.271 372.092 415.086 368.517 417.148L283.723 466.102C302.487 480.585 327.555 486.459 352.217 479.852C386.997 470.532 410.068 439.312 410.555 405.006V317.717C410.555 315.08 409.125 312.621 406.843 311.303L374.292 292.509V407.145ZM251.868 415.897C248.296 417.959 243.893 417.959 240.317 415.897L155.526 366.942C152.366 390.436 159.811 415.08 177.866 433.136H177.863C203.325 458.594 241.896 462.962 271.85 446.232L347.449 402.586C349.735 401.268 351.148 398.8 351.148 396.163V358.579L251.868 415.897ZM368.602 220.628C366.319 219.309 363.474 219.318 361.191 220.637L328.641 239.431L427.921 296.749C431.496 298.811 433.697 302.627 433.697 306.752V404.661C455.622 395.654 473.244 376.881 479.851 352.218C489.169 317.442 473.668 281.85 444.201 264.274L368.602 220.628ZM177.303 206.34C155.377 215.348 137.756 234.122 131.148 258.783C121.832 293.561 137.331 329.153 166.799 346.727L242.398 390.373C244.68 391.692 247.525 391.684 249.807 390.366L282.357 371.572L183.078 314.253C179.504 312.189 177.303 308.375 177.303 304.251V206.34ZM259.849 279.145V331.858L305.5 358.213L351.15 331.858V279.145L305.5 252.789L259.849 279.145ZM327.276 144.9C308.512 130.418 283.445 124.543 258.782 131.15C224.002 140.471 200.931 171.691 200.445 205.995V293.286C200.445 295.923 201.875 298.381 204.158 299.7L236.707 318.493V203.856C236.707 199.731 238.909 195.916 242.483 193.853L327.276 144.9ZM433.137 177.867C407.675 152.407 369.103 148.038 339.149 164.769L263.55 208.415C261.265 209.734 259.852 212.202 259.852 214.838V252.423L359.132 195.105C362.703 193.041 367.108 193.041 370.682 195.105L455.473 244.06C458.635 220.567 451.189 195.922 433.135 177.867H433.137Z"/></symbol>
+  <symbol id="i-codex" viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M8.086.457a6.105 6.105 0 013.046-.415c1.333.153 2.521.72 3.564 1.7a.117.117 0 00.107.029c1.408-.346 2.762-.224 4.061.366l.063.03.154.076c1.357.703 2.33 1.77 2.918 3.198.278.679.418 1.388.421 2.126a5.655 5.655 0 01-.18 1.631.167.167 0 00.04.155 5.982 5.982 0 011.578 2.891c.385 1.901-.01 3.615-1.183 5.14l-.182.22a6.063 6.063 0 01-2.934 1.851.162.162 0 00-.108.102c-.255.736-.511 1.364-.987 1.992-1.199 1.582-2.962 2.462-4.948 2.451-1.583-.008-2.986-.587-4.21-1.736a.145.145 0 00-.14-.032c-.518.167-1.04.191-1.604.185a5.924 5.924 0 01-2.595-.622 6.058 6.058 0 01-2.146-1.781c-.203-.269-.404-.522-.551-.821a7.74 7.74 0 01-.495-1.283 6.11 6.11 0 01-.017-3.064.166.166 0 00.008-.074.115.115 0 00-.037-.064 5.958 5.958 0 01-1.38-2.202 5.196 5.196 0 01-.333-1.589 6.915 6.915 0 01.188-2.132c.45-1.484 1.309-2.648 2.577-3.493.282-.188.55-.334.802-.438.286-.12.573-.22.861-.304a.129.129 0 00.087-.087A6.016 6.016 0 015.635 2.31C6.315 1.464 7.132.846 8.086.457zm-.804 7.85a.848.848 0 00-1.473.842l1.694 2.965-1.688 2.848a.849.849 0 001.46.864l1.94-3.272a.849.849 0 00.007-.854l-1.94-3.393zm5.446 6.24a.849.849 0 000 1.695h4.848a.849.849 0 000-1.696h-4.848z"/></symbol>
+  <symbol id="i-pencil" viewBox="0 0 18.9985 19.0566"><path d="M6.71869 8.42703L13.5878 1.55795C14.741 0.404743 16.5961 0.505022 17.6491 1.7585C18.5516 2.86157 18.4012 4.51617 17.3984 5.51895L15.9945 6.92285M13.7883 9.17912L6.46799 16.4493C6.26743 16.6499 6.06688 16.7502 5.81618 16.8504L0.752108 18.3045L2.20615 13.2404C2.25629 12.9897 2.40671 12.7892 2.60726 12.5886L4.46242 10.7334M12.0836 3.06213L15.9945 6.97299" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 18.0528 18.0528"><path d="M16.6988 3.38489L15.8729 16.104C15.8296 16.8188 15.2374 17.3758 14.5216 17.3758H3.53112C2.81533 17.3758 2.2232 16.8179 2.17987 16.104L1.35396 3.38489M17.3758 3.38489H11.7343L11.283 0.676978H6.76978L6.31846 3.38489H0.676978M12.8626 6.99544L12.4113 13.7652M9.02638 6.99544V13.7652M5.19017 6.99544L5.64149 13.7652M5.41583 3.38489H12.6369" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 12 12"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-check" viewBox="0 0 12 12"><path d="M2.5 6.3 5 8.7l4.5-5.2" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner container">
+    <a class="brand" href="/">
+      <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+      <span class="wordmark">SkyOS</span>
+    </a>
+    <nav class="topbar-links" aria-label="Account">
+      <a class="link" href="https://app.skyos.ink/">Sign in</a>
+      <!-- Straight to the sign-up form rather than the app's welcome screen:
+           one click fewer for the thing this page asks people to do. -->
+      <a class="btn btn-sm" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+    </nav>
+  </div>
 </header>
 
+<main>
 
-<!-- =========================================================== HERO -->
-<main class="hero">
-  <div class="wrap">
+  <!-- ======================================================== HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <h1 class="hero-title">One memory for Claude, ChatGPT and Codex.</h1>
+        <p class="hero-lead">Tell ChatGPT what you decided, and Claude and Codex remember it too.</p>
+        <p class="hero-spec"><span>Kept word for word</span> · <span>Dated</span> · <span>Never summarised</span></p>
+        <!-- The Connect page works without an account, so the setup can be
+             seen before signing up. -->
+        <div class="hero-actions">
+          <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
+        </div>
+      </div>
 
-    <h1 class="hero__title">AI optimized not <br>to go vague.</h1>
+      <!-- The demo: one decision on its way through. Said in ChatGPT, kept as
+           a note, asked for in Claude a week later; the Claude chat says
+           "continue" first because that is how a new chat reaches an existing
+           memory. Each tool row names the SkyOS tool that really runs at that
+           point. demo.js plays it. Without JavaScript it shows the last
+           step as written here; with reduced motion it starts there and
+           doesn't play by itself. -->
+      <figure class="demo" data-demo aria-label="Demo: a price decided in ChatGPT is saved as a SkyOS note and recalled in Claude a week later.">
+        <div class="demo-head">
+          <button class="demo-step" type="button" data-show="0" aria-pressed="false">
+            <svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>
+            <span class="demo-step-text"><span class="demo-step-name">ChatGPT</span><span class="demo-step-when">Monday</span></span>
+          </button>
+          <svg class="demo-arrow" width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <button class="demo-step" type="button" data-show="1" aria-pressed="false">
+            <svg class="brand-mark" width="20" height="18" aria-hidden="true"><use href="#i-mark"/></svg>
+            <span class="demo-step-text"><span class="demo-step-name">SkyOS</span><span class="demo-step-when">Memory</span></span>
+          </button>
+          <svg class="demo-arrow" width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
+          <button class="demo-step" type="button" data-show="2" aria-pressed="true">
+            <svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>
+            <span class="demo-step-text"><span class="demo-step-name">Claude</span><span class="demo-step-when">A week later</span></span>
+          </button>
+        </div>
 
-    <p class="hero__subtitle">
-      Come back to a project weeks later and your decisions are still there, word for word.
-    </p>
+        <div class="demo-stage">
+          <div class="demo-scene" data-scene="0">
+            <p class="bubble bubble-user" data-step="user">Let's go annual-only: $15 a month.</p>
+            <div class="tool-call" data-step="call" data-busy="Saving to SkyOS">
+              <svg class="tool-call-mark" width="17" height="15" aria-hidden="true"><use href="#i-mark"/></svg>
+              <span class="tool-call-text"><span class="tool-call-label"><span data-label>Saved to SkyOS</span><svg class="tool-call-done" width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg></span><code>skyos_save</code></span>
+            </div>
+            <p class="bubble" data-step="answer">Done — Northwind is $15 a month, billed annually only.</p>
+          </div>
 
-    <!-- What SkyOS IS, as three facts rather than a sentence: a visitor from
-         Reddit had to ask whether it was a plugin or wanted an API key, and a
-         full sentence under the subtitle read as a second subtitle. -->
-    <p class="hero__meta">
-      <span>Chat app in your browser</span>
-      <span>No API key</span>
-      <span>Free in beta</span>
-    </p>
+          <div class="demo-scene demo-scene-memory" data-scene="1">
+            <p class="memory-name">Northwind pricing</p>
+            <p class="memory-meta">Used in ChatGPT</p>
+            <p class="memory-meta memory-say">To use this memory in a new chat, say: <span class="say-phrase">continue Northwind pricing</span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.3" y="5.3" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M10.7 3.2v-.1A1.6 1.6 0 0 0 9.1 1.5H3.1A1.6 1.6 0 0 0 1.5 3.1v6a1.6 1.6 0 0 0 1.6 1.6h.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></p>
+            <p class="memory-topic">Pricing</p>
+            <div class="memory-row" data-step="note">
+              <span class="memory-date">Today</span>
+              <p class="memory-note">$15 a month, annual billing only.</p>
+              <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
+            </div>
+          </div>
 
-    <!-- No CTA here. The header one is sticky, so it never leaves the
-         screen — a second button 300px below it is the same button twice. -->
+          <div class="demo-scene is-active" data-scene="2">
+            <p class="bubble bubble-user" data-step="user">continue Northwind pricing. What price did we settle on?</p>
+            <div class="tool-call" data-step="call" data-busy="Opening Northwind pricing">
+              <svg class="tool-call-mark" width="17" height="15" aria-hidden="true"><use href="#i-mark"/></svg>
+              <span class="tool-call-text"><span class="tool-call-label"><span data-label>Opened Northwind pricing</span><svg class="tool-call-done" width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg></span><code>skyos_use_memory</code></span>
+            </div>
+            <p class="bubble" data-step="answer">$15 a month, billed annually only. You settled on it a week ago.</p>
+          </div>
+        </div>
 
-    <!-- The card is the app: demo.html loads assets/app.css, which is
-         pwa/styles.css copied verbatim, applied to the app's own class names and
-         icon vectors. It sits in an iframe because that stylesheet styles
-         body, #app and * globally — inlined here it would restyle this page.
-
-         Not a link — clicking a picture of an app and being navigated is a
-         surprise the page does not need, and the header CTA is on screen the
-         whole time. A mouse does reach it though, so the app's own hover
-         states fire; on touch screens swipes pass straight through to the page
-         (see .demo__frame in styles.css). tabindex keeps it out of tab order. -->
-    <div class="demo" data-vw="1990" data-vh="1120">
-      <iframe class="demo__frame" src="demo.html" title="SkyOS" loading="lazy" tabindex="-1" scrolling="no"></iframe>
+        <div class="demo-foot">
+          <span>Example</span>
+          <button class="demo-control" type="button" data-toggle aria-label="Pause">
+            <svg class="demo-icon-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="8.4" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>
+            <svg class="demo-icon-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.7v8.6a.6.6 0 0 0 .9.5l6.8-4.3a.6.6 0 0 0 0-1L4.9 2.2a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>
+          </button>
+          <button class="demo-control" type="button" data-replay aria-label="Play from the start">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 2.5v2.6h2.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </figure>
     </div>
+  </section>
 
+  <!-- ===================================================== COMPARE -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Same question, a week later, in another app</h2>
+      <div class="compare">
+        <div class="compare-col">
+          <h3 class="compare-head">With SkyOS</h3>
+          <p class="compare-line">“$15 a month, annual billing only.”</p>
+          <p class="compare-line">“Live before 15 October.”</p>
+          <p class="compare-line">“Supabase — it allows five times Clerk’s free users.”</p>
+        </div>
+        <div class="compare-col compare-col-without">
+          <h3 class="compare-head">Without it</h3>
+          <p class="compare-line">“I don’t have any details about your pricing.”</p>
+          <p class="compare-line">“I don’t know about a deadline.”</p>
+          <p class="compare-line">“You haven’t told me which sign-in service you chose.”</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  </div>
+  <!-- ================================================ HOW IT WORKS -->
+  <section class="section" id="how">
+    <div class="container">
+      <h2 class="section-title">How it works</h2>
+      <ol class="steps">
+        <li class="step">
+          <span class="step-num" aria-hidden="true">1</span>
+          <h3 class="step-title">Connect your tools</h3>
+          <p class="step-body">Add SkyOS to Claude, ChatGPT or Codex with one address, then sign in. A few minutes each.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">2</span>
+          <h3 class="step-title">Chat as usual</h3>
+          <p class="step-body">SkyOS keeps what you decide as short notes: exact numbers, names and reasons. Small talk isn’t saved.</p>
+        </li>
+        <li class="step">
+          <span class="step-num" aria-hidden="true">3</span>
+          <h3 class="step-title">Pick up anywhere</h3>
+          <p class="step-body">Each chat has its own memory. To bring one into another chat or app, type “continue” and its name.</p>
+        </li>
+      </ol>
+      <!-- The three logos never split across lines: on a narrow phone "Works
+           with" goes above them instead. -->
+      <p class="works-with">
+        <span class="works-label">Works with</span>
+        <span class="works-tools">
+          <span class="works-tool"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span>
+          <span class="works-tool"><svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>ChatGPT</span>
+          <span class="works-tool"><svg class="logo logo-codex" width="18" height="18" aria-hidden="true"><use href="#i-codex"/></svg>Codex</span>
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ======================================================= NOTES
+       The Memory page as it is in the app: a memory, its topics, and each
+       note with its date and its edit and delete buttons. -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Your notes, in plain sight</h2>
+      <p class="section-lead">Every note is on your Memory page, grouped by topic and dated. Edit or delete any of them.</p>
+
+      <figure class="memory" aria-label="Example of the Memory page: a memory called Northwind pricing, with notes under the topics Pricing and Launch.">
+        <div class="memory-head">
+          <p class="memory-name">Northwind pricing</p>
+          <p class="memory-meta">Used in ChatGPT and Claude</p>
+        </div>
+        <p class="memory-topic">Pricing</p>
+        <div class="memory-row">
+          <span class="memory-date">1 week ago</span>
+          <p class="memory-note">$15 a month, annual billing only.</p>
+          <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
+        </div>
+        <div class="memory-row">
+          <span class="memory-date">1 week ago</span>
+          <p class="memory-note">No free tier, to keep support load down.</p>
+          <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
+        </div>
+        <p class="memory-topic">Launch</p>
+        <div class="memory-row">
+          <span class="memory-date">6 days ago</span>
+          <p class="memory-note">Live before 15 October.</p>
+          <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
+        </div>
+      </figure>
+
+      <p class="section-note">SkyOS keeps only the last few messages of each chat, and deletes them after 30 quiet days. Notes stay until you delete them.</p>
+    </div>
+  </section>
+
+  <!-- ========================================================= FAQ
+       Every answer is also in privacy.html or on the tools' own plan pages;
+       nothing here goes further than they do. -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Questions</h2>
+      <dl class="faq">
+        <div class="faq-item">
+          <dt class="faq-q">What does SkyOS keep?</dt>
+          <dd class="faq-a">Only what your AI sends when it saves: your message and its reply. SkyOS keeps the last five of each chat, just long enough to write the notes, and deletes them after 30 quiet days. Notes stay until you delete them.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-q">Who can read my notes?</dt>
+          <dd class="faq-a">You. It isn’t end-to-end encrypted, so SkyOS’s operator can see it too, and looks only when you ask for help, to fix something that broke, to deal with abuse, or when the law requires it. To write a note, SkyOS sends the exchange to OpenAI, which doesn’t train on it. The details are in the <a href="/privacy">Privacy page</a>.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-q">Do I need a paid plan?</dt>
+          <dd class="faq-a">Not for Claude or Codex: Claude’s free plan allows one custom connector, and Codex comes with every ChatGPT plan, free included. ChatGPT itself needs Developer mode, which OpenAI lists for Plus, Pro, Business, Enterprise and Edu, though it also shows up on some free accounts.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-q">What does it cost?</dt>
+          <dd class="faq-a">Nothing while SkyOS is in beta.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ======================================================= CLOSE -->
+  <section class="section close">
+    <div class="container">
+      <h2 class="close-title">Stop re-explaining your project.</h2>
+      <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+      <p class="close-note">Free while in beta.</p>
+    </div>
+  </section>
+
 </main>
 
-
-<!-- =========================================================== COMPARE
-     The one section that does the arguing. Same question, two answers —
-     which is the whole product in a glance. -->
-<section class="compare">
-  <div class="wrap">
-
-    <h2 class="compare__title">Same question, a month later</h2>
-
-    <!-- SkyOS reads first: the answer before the contrast, and the dark card
-         on the right lands as the state you're leaving. -->
-    <div class="compare__grid">
-
-      <div class="col col--us">
-        <h3 class="col__head">SkyOS</h3>
-        <p class="col__line">&ldquo;$15 a month, annual billing only&rdquo;</p>
-        <p class="col__line">&ldquo;Live before the 15th&rdquo;</p>
-        <p class="col__line">&ldquo;Supabase &mdash; 5&times; Clerk&rsquo;s free-user ceiling&rdquo;</p>
-      </div>
-
-      <div class="col col--them">
-        <h3 class="col__head">Other AI</h3>
-        <p class="col__line">&ldquo;We discussed pricing&rdquo;</p>
-        <p class="col__line">&ldquo;You mentioned a deadline&rdquo;</p>
-        <p class="col__line">&ldquo;We talked about which auth to use&rdquo;</p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<!-- =========================================================== WHY -->
-<section class="why">
-  <div class="wrap">
-
-    <h2 class="why__title">Why AI forgets what you decided in a long chat</h2>
-
-    <!-- Two columns from 900px up. One measure of text against an empty right
-         half made the section read as a bubble floating in a white band. -->
-    <div class="why__cols">
-    <p class="why__lead">
-      Every AI chat can only hold so much of the conversation at once. As a
-      project runs on, the earliest messages fall out of that window, and what
-      is left competes for attention &mdash; the decision you made in hour one
-      and the idea you dropped ten minutes later look the same to it. Ask what
-      you settled on and you get the topic back instead of the answer.
-    </p>
-
-    <p class="why__lead">
-      SkyOS reads each exchange as it happens and writes the decisions into
-      that project&rsquo;s memory. Those notes travel with every message, so a
-      chat that has been running for weeks answers from what was decided, not
-      from whatever is still in view.
-    </p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- =========================================================== NOTES
-     The second app card. The hero shows a decision being written down; this
-     shows what got written. Two cards rather than one because the memory
-     panel is a modal over a blurred scrim — in the app the conversation is
-     behind it, not beside it, so no single frame holds both. -->
-<section class="notes">
-  <div class="wrap">
-
-    <h2 class="notes__title">Word for word, never summarized</h2>
-    <p class="notes__lead">
-      Open a project&rsquo;s memory and every decision is sitting there in the
-      words you said it in &mdash; dated, and yours to edit or delete.
-    </p>
-
-    <div class="demo demo--memory" data-vw="1440" data-vh="900" data-vh-narrow="870">
-      <iframe class="demo__frame" src="demo-memory.html" title="SkyOS memory" loading="lazy" tabindex="-1" scrolling="no"></iframe>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- =========================================================== CLOSE -->
-<section class="close">
-  <div class="wrap wrap--narrow">
-
-    <h2 class="close__title">Stop re-explaining your project.</h2>
-
-    <a class="cta" href="https://app.skyos.ink">Try SkyOS<svg class="cta__arrow" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
-    <p class="cta__note">Free while it&rsquo;s in beta.</p>
-
-  </div>
-</section>
-
-
-<footer class="foot">
-  <div class="wrap">
-    <nav class="foot__nav">
-      <a href="https://app.skyos.ink/privacy.html">Privacy</a>
-      <a href="https://app.skyos.ink/terms.html">Terms</a>
+<footer class="footer">
+  <div class="container footer-inner">
+    <nav class="footer-links" aria-label="Legal and contact">
+      <a href="/privacy">Privacy</a>
+      <a href="/terms">Terms</a>
+      <!-- The href is only the fallback without JavaScript: mailto hands off to
+           whatever mail app the system has, which on Windows is often an
+           Outlook nobody set up. -->
       <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
     </nav>
   </div>
 </footer>
 
-<!-- Each frame renders at a real window size and is scaled down to its card,
-     so the app lays out as a desktop app rather than as a squeezed narrow
-     one. Two viewports per card, chosen by the card's own width: the pair in
-     its data-vw / data-vh once there is room for the rail, 420x800 below.
+<!-- The Contact form: every [data-contact] link opens it (contact.js). -->
+<script src="contact.js"></script>
+<script src="demo.js"></script>
 
-     The hero's 1990 is sized to the window it is a picture of. The app zooms
-     #app by 1.1 at desktop widths, so a 1920 frame is only 1745 CSS px
-     inside — and the transcript's own max(24px, (100% - 1252px) / 2) then
-     resolves to 37px instead of the ~68 a real 1990px window gives it.
-
-     The memory card's 1440 is smaller on purpose: .dt-modal is a fixed
-     1120x820 at any window size, so the wider the frame, the more of it is
-     scrim. -->
-<script>
-(function () {
-  var cards = document.querySelectorAll('.demo');
-
-  function fit(card) {
-    var frame = card.querySelector('.demo__frame');
-    if (!frame) return;
-    // Keyed off the card, not the window. Keying off the window blew a
-    // 420px phone viewport up to fill a 750px card.
-    var r = card.getBoundingClientRect();
-    var wide = r.width >= 640;
-    // 420x800 is a phone, and the default; the memory card asks for a taller
-    // one, because on a phone seven notes with their edit and delete buttons
-    // plus the footnote need 870.
-    var vw = wide ? +card.dataset.vw : (+card.dataset.vwNarrow || 420);
-    var vh = wide ? +card.dataset.vh : (+card.dataset.vhNarrow || 800);
-    frame.style.width = vw + 'px';
-    frame.style.height = vh + 'px';
-    // Each viewport shares its card's aspect at that breakpoint, so scaling
-    // by width alone fills it exactly.
-    frame.style.transform = 'scale(' + (r.width / vw) + ')';
-  }
-
-  Array.prototype.forEach.call(cards, function (card) {
-    fit(card);
-    if (window.ResizeObserver) {
-      new ResizeObserver(function () { fit(card); }).observe(card);
-    }
-  });
-  window.addEventListener('resize', function () {
-    Array.prototype.forEach.call(cards, fit);
-  });
-})();
-</script>
-
-<!-- CONTACT
-     A form rather than an address. It posts to the app's /api/feedback, the
-     same box the in-app bug report uses: saved, then emailed with the sender's
-     address as reply-to, so answering is just Reply. A native <dialog> gives
-     the backdrop, Escape and the focus trap for free. -->
-<dialog class="contact" aria-labelledby="contactTitle">
-  <button class="contact__x" type="button" data-close aria-label="Close">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
-  </button>
-  <form class="contact__form" novalidate>
-    <h2 class="contact__title" id="contactTitle">Contact</h2>
-    <p class="contact__lead">Questions, feedback, or something broken — tell me and I'll get back to you.</p>
-
-    <label class="contact__label" for="contactMessage">Message</label>
-    <textarea class="contact__field contact__area" id="contactMessage" name="message" rows="5" maxlength="4000"></textarea>
-
-    <label class="contact__label" for="contactEmail">Your email</label>
-    <input class="contact__field" id="contactEmail" name="email" type="email" autocomplete="email" maxlength="200" placeholder="So I can reply">
-
-    <!-- Bots fill every field they find; people never see this one. -->
-    <input class="contact__trap" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-
-    <p class="contact__status" role="status" aria-live="polite"></p>
-
-    <div class="contact__actions">
-      <button class="contact__btn" type="submit" disabled>Send</button>
-    </div>
-  </form>
-
-  <div class="contact__done" hidden>
-    <h2 class="contact__title">Sent</h2>
-    <p class="contact__lead">Thanks. I'll reply to <span class="contact__to"></span>.</p>
-    <div class="contact__actions">
-      <button class="contact__btn" type="button" data-close>Close</button>
-    </div>
-  </div>
-</dialog>
-<script>
-(function () {
-  var dialog = document.querySelector('.contact');
-  // Without <dialog> support the links stay plain mailto.
-  if (!dialog || typeof dialog.showModal !== 'function') return;
-  var ENDPOINT = 'https://app.skyos.ink/api/feedback';
-  var form = dialog.querySelector('.contact__form');
-  var done = dialog.querySelector('.contact__done');
-  var status = dialog.querySelector('.contact__status');
-  var send = form.querySelector('[type=submit]');
-  // The address someone used last time, kept in their own browser so a second
-  // message does not mean typing it again. The landing page has no session of
-  // its own — it cannot ask the app who is signed in.
-  var STORE = 'skyos.contact.email';
-  function remembered() { try { return localStorage.getItem(STORE) || ''; } catch (e) { return ''; } }
-  function remember(value) { try { localStorage.setItem(STORE, value); } catch (e) { /* private mode */ } }
-
-  // Send stays grey until there is something to send: a message and an email.
-  // Whether the email is well-formed is still checked on Send, with a message
-  // saying what is wrong, rather than by a button that just will not light up.
-  function update() {
-    send.disabled = !(form.message.value.trim() && form.email.value.trim());
-  }
-
-  function fail(message) { status.textContent = message; status.classList.add('is-error'); }
-  function open(e) {
-    e.preventDefault();
-    form.hidden = false;
-    done.hidden = true;
-    status.textContent = '';
-    status.classList.remove('is-error');
-    if (!form.email.value) form.email.value = remembered();
-    update();
-    dialog.showModal();
-    form.message.focus();
-  }
-  function close() { dialog.close(); }
-
-  Array.prototype.forEach.call(document.querySelectorAll('[data-contact]'), function (a) { a.addEventListener('click', open); });
-  Array.prototype.forEach.call(dialog.querySelectorAll('[data-close]'), function (b) { b.addEventListener('click', close); });
-  // A click on the backdrop lands on the dialog element itself.
-  dialog.addEventListener('click', function (e) { if (e.target === dialog) close(); });
-  // An error is about what was there when Send was pressed; once the field
-  // changes it is out of date, so it goes.
-  form.addEventListener('input', function () {
-    update();
-    if (status.classList.contains('is-error')) { status.textContent = ''; status.classList.remove('is-error'); }
-  });
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var text = form.message.value.trim();
-    var email = form.email.value.trim();
-    if (!text) { fail('Write a message first.'); form.message.focus(); return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { fail('Add your email so I can reply.'); form.email.focus(); return; }
-    send.disabled = true;
-    send.classList.add('is-sending');
-    send.textContent = 'Sending…';
-    status.textContent = '';
-    status.classList.remove('is-error');
-    fetch(ENDPOINT, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text: text, email: email, screen: 'skyos.ink contact', website: form.website.value })
-    })
-      .then(function (r) { if (!r.ok) throw new Error(String(r.status)); })
-      .then(function () {
-        remember(email);
-        dialog.querySelector('.contact__to').textContent = email;
-        form.reset();
-        form.hidden = true;
-        done.hidden = false;
-        done.querySelector('[data-close]').focus();
-      })
-      .catch(function () { fail('That didn’t send. Try again, or email hello@skyos.ink.'); })
-      .then(function () {
-        send.classList.remove('is-sending');
-        send.textContent = 'Send';
-        update();
-        // Disabling the button while sending drops focus to the page; after a
-        // failed send, put it back where the next try starts.
-        if (!form.hidden && dialog.open) send.focus();
-      });
-  });
-})();
-</script>
-
-<!-- Vercel Web Analytics. Cookieless, no consent banner needed. Served by
-     Vercel itself, so it 404s harmlessly locally and if Analytics is switched
-     off in the project dashboard. -->
+<!-- Vercel Web Analytics: cookieless, so no consent banner. Served by Vercel
+     itself, so it 404s harmlessly locally. -->
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

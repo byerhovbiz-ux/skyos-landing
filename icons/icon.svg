@@ -1,12 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#3E8EDE"/>
-      <stop offset="1" stop-color="#0A66C2"/>
-    </linearGradient>
-  </defs>
-  <rect width="512" height="512" rx="112" fill="url(#bg)"/>
-  <g fill="#fff" transform="translate(90 168) scale(1.05)">
-    <path d="M277.382 196.937H65.4797C14.1338 191.506 5.9254 129.233 47.7115 114.274C48.1864 114.104 48.4883 113.623 48.482 113.118C48.3846 105.317 60.0305 69.295 98.7063 70.8049C99.2768 70.8272 99.7856 70.4048 99.8609 69.8388C101.002 61.2642 114.045 15.7132 169.36 13.0342C178.93 12.5707 223.395 15.3243 238.867 64.1105C239.008 64.5574 239.459 64.8601 239.926 64.8251C273.357 62.319 283.62 88.1891 283.372 102.05C283.364 102.513 283.656 102.918 284.101 103.048C291.851 105.316 319.836 114.949 320.956 147.896C322.205 184.659 292.79 196.274 277.382 196.937Z"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.5 -2 30 30">
+<style>
+  path { stroke: #0D0D0D; }
+  circle { fill: #0D0D0D; }
+  @media (prefers-color-scheme: dark) {
+    path { stroke: #FFFFFF; }
+    circle { fill: #FFFFFF; }
+  }
+</style>
+<path d="M13.4533 12.55H25.4775M4.74452 4.42994L13.2469 12.9323M8.63629 23.556L14.6484 13.1427" fill="none" stroke-width="1.2" stroke-linecap="round"/>
+<circle cx="13.4532" cy="12.8322" r="4.5339"/><circle cx="3.9694" cy="3.9694" r="3.9694"/><circle cx="9.2193" cy="23.05" r="2.558"/><circle cx="25.4775" cy="12.8322" r="3.1226"/>
 </svg>

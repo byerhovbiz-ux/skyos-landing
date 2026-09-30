@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — SkyOS</title>
+  <meta name="description" content="What SkyOS stores, who processes it, how long it is kept, and how to delete it.">
+  <link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
+  <meta name="theme-color" content="#FFFFFF">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 29 26"><path d="M13.4533 12.55H25.4775M4.74452 4.42994L13.2469 12.9323M8.63629 23.556L14.6484 13.1427" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="13.4532" cy="12.8322" r="4.5339" fill="currentColor"/><circle cx="3.9694" cy="3.9694" r="3.9694" fill="currentColor"/><circle cx="9.2193" cy="23.05" r="2.558" fill="currentColor"/><circle cx="25.4775" cy="12.8322" r="3.1226" fill="currentColor"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner container">
+    <a class="brand" href="/">
+      <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+      <span class="wordmark">SkyOS</span>
+    </a>
+    <nav class="topbar-links" aria-label="Account">
+      <a class="link" href="https://app.skyos.ink/">Sign in</a>
+      <a class="btn btn-sm" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main class="container legal">
+  <h1>Privacy Policy</h1>
+  <p class="legal-updated">SkyOS · Last updated 27 September 2026</p>
+
+  <p>SkyOS gives the AI tools you already use — Claude, ChatGPT and Codex — one shared memory. To do that it stores notes about your work, and a few of your recent messages, in a form our operator can read. This page says exactly what, where and for how long, so you can decide what to tell your AI tools with SkyOS connected.</p>
+
+  <h2>Who we are</h2>
+  <p>SkyOS, at skyos.ink, app.skyos.ink and api.skyos.ink, is operated by Gennadii Kosaryntsev, an individual developer based in Kazakhstan. For anything in this policy — a copy of your data, a correction, deletion, a complaint — write to <a href="mailto:hello@skyos.ink">hello@skyos.ink</a>.</p>
+
+  <h2>What SkyOS receives</h2>
+  <p>SkyOS sees only what a connected AI tool sends it through SkyOS’s three tools:</p>
+  <ul>
+    <li><strong>Recall:</strong> your latest message and an ID the AI tool chose for the chat, so SkyOS can return that chat’s notes. The message is used to answer and not kept.</li>
+    <li><strong>Save:</strong> your message and the AI’s answer.</li>
+    <li><strong>Continue:</strong> the name of the memory you asked for.</li>
+  </ul>
+  <p>SkyOS does not see the rest of your history in those tools, your other chats, or files you give them. What your AI tool sends is decided by the tool and the instructions you give it; each tool’s own privacy policy covers everything else it does.</p>
+
+  <h2>What we store</h2>
+  <ul>
+    <li><strong>Your account:</strong> the user ID from our sign-in provider and your email address.</li>
+    <li><strong>Memories and notes:</strong> each memory’s name, and its notes — short sentences with a topic and the dates they were saved or changed.</li>
+    <li><strong>Recent messages:</strong> the last five exchanges (your message and the AI’s answer) of each chat, which SkyOS reads to write notes.</li>
+    <li><strong>Chats:</strong> for each chat, which tool it is in, the ID the tool gave it, which memory it uses, and when it was last used.</li>
+    <li><strong>Tools:</strong> which of your tools have connected, and when each last reached SkyOS or saved.</li>
+    <li><strong>Dashboard sign-ins:</strong> a record that keeps you signed in to app.skyos.ink.</li>
+    <li><strong>Contact messages:</strong> what you write in the Contact form on skyos.ink, and your email address.</li>
+  </ul>
+  <p>We don’t sell your data, show you ads, or use what you store to train AI models.</p>
+
+  <h2>It is not end-to-end encrypted</h2>
+  <p>Everything travels over encrypted connections, but it is stored in a form our operator can read. A person looks at your data only when you ask for help, to fix something that broke, to deal with abuse, or when the law requires it.</p>
+
+  <h2>Who processes it, and where</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Provider</th><th>What it does</th><th>Where</th></tr></thead>
+      <tbody>
+        <tr><td>Vercel</td><td>Runs SkyOS’s servers and this site; keeps server logs; counts visits to skyos.ink without cookies</td><td>United States</td></tr>
+        <tr><td>Upstash</td><td>The database: everything under “What we store”</td><td>United States</td></tr>
+        <tr><td>WorkOS</td><td>Sign-in for you and for your AI tools: your email address, your name if your Google account provides it, and sign-in records</td><td>United States</td></tr>
+        <tr><td>OpenAI</td><td>Reads each saved exchange, with that memory’s notes, to write notes; reads a new chat’s first messages to name its memory</td><td>United States</td></tr>
+        <tr><td>Resend</td><td>Delivers Contact messages to our inbox</td><td>United States</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>OpenAI does not use what we send it to train its models, and may keep it for up to 30 days to watch for abuse, under its own terms; that copy is outside what our deletion can reach.</p>
+
+  <h2>Signing in</h2>
+  <p>You sign in through WorkOS, with your email address or your Google account; we never see your password. When you connect an AI tool, it signs in the same way and receives a token that lets it use SkyOS as you. The tool keeps that token; SkyOS checks it on every request and does not store it. To cut a tool off, remove SkyOS in that tool — disconnecting it on the SkyOS dashboard only updates the dashboard.</p>
+
+  <h2>Server logs</h2>
+  <p>Our logs record that something happened — a recall, a save, a sign-in, an error — with the tool’s name and a shortened fingerprint of the IDs involved. They never contain your messages, notes, email address or sign-in tokens. Vercel keeps them for a short time.</p>
+
+  <h2>Cookies and browser storage</h2>
+  <ul>
+    <li><strong>app.skyos.ink:</strong> one cookie, <code>skyos_session</code>, keeps you signed in to the dashboard for 30 days; <code>skyos_login</code> lasts an hour and exists only while you sign in. WorkOS’s sign-in pages set their own cookies. No tracking or advertising cookies.</li>
+    <li><strong>skyos.ink:</strong> no cookies. Visits are counted without them, and the Contact form remembers the email address you typed in your own browser, so you don’t retype it.</li>
+  </ul>
+
+  <h2>How long we keep it</h2>
+  <ul>
+    <li><strong>Notes and memories:</strong> until you delete them, or your account.</li>
+    <li><strong>Recent messages:</strong> deleted automatically once a chat has been quiet for 30 days; only the last five are ever kept.</li>
+    <li><strong>Chats that never saved anything:</strong> removed after 30 days.</li>
+    <li><strong>Your account:</strong> until you ask us to delete it.</li>
+    <li><strong>Dashboard sign-ins:</strong> 30 days from your last visit.</li>
+    <li><strong>Contact messages:</strong> in our inbox, and a backup of the latest 500 on the server, deleted a year after the last one arrives.</li>
+  </ul>
+
+  <h2>Deleting your data</h2>
+  <p>On the Memory page you can delete any note, or a whole memory with all its notes and the recent messages of its chats; it is gone at once. To delete your account and everything in it, write to <a href="mailto:hello@skyos.ink">hello@skyos.ink</a> from the email address on your account, and we will do it within 30 days.</p>
+
+  <h2>If you are in the EU, the EEA or the UK</h2>
+  <p>We process your data to provide the service you signed up for, and, for security, abuse prevention and answering Contact messages, because we have a legitimate interest in doing so. You can ask for a copy of your data, a correction, its deletion, or a copy in a portable format, and you can object to processing. You can also complain to your data protection authority. Your data is processed in the United States, under the safeguards our providers offer for such transfers, such as the EU’s standard contractual clauses.</p>
+
+  <h2>If you are in California</h2>
+  <p>We do not sell or share your personal information, and we do not use it for targeted advertising. You can ask to know, correct or delete what we hold about you, and we won’t treat you differently for asking.</p>
+
+  <h2>Security</h2>
+  <p>Each account’s data is kept under its own keys, and every request is checked against the account it signed in as, so one account cannot read or change another’s. Access to the production systems is limited to the operator.</p>
+
+  <h2>Children</h2>
+  <p>SkyOS is not intended for anyone under 16, and we do not knowingly collect their data. If you believe a child has signed up, write to us and we will delete the account.</p>
+
+  <h2>Changes</h2>
+  <p>When this policy changes we update this page and its date. If a change matters to how your data is used, we will email you before it takes effect.</p>
+</main>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <nav class="footer-links" aria-label="Legal and contact">
+      <a href="/privacy" aria-current="page">Privacy</a>
+      <a href="/terms">Terms</a>
+      <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="contact.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

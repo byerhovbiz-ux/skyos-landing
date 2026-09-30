@@ -1,100 +1,54 @@
 # skyos.ink — landing page
 
-Static page, no build step, no dependencies. Deployed with the Vercel CLI; the
-app itself lives separately at app.skyos.ink.
+Static pages, no build step, no dependencies. Deployed with the Vercel CLI; the
+app lives separately at app.skyos.ink and its server at api.skyos.ink.
 
 ```
-index.html          markup, plus the script that scales the app cards
-styles.css          all page styling — mobile-first, steps at 900px and 1440px
-og.png              the link preview image (generated, see below)
-icons/              favicon + apple-touch-icon, copied from the PWA
-
-demo.html           hero card: the app, playing a scripted run   (generated)
-demo-memory.html    notes card: the project memory panel         (generated)
-assets/app.css      the PWA's styles.css, copied verbatim         (generated)
-
+index.html      the page: what SkyOS is, how it works, the Memory page drawn
+privacy.html    Privacy Policy   → /privacy
+terms.html      Terms of Service → /terms
+styles.css      all styling — phone first, widens at 720px and 960px
+tokens.css      the app's palette, copied from the app's tokens.css
+contact.js      the Contact form, built on any page with a data-contact link
+vercel.json     cleanUrls, so /privacy and /terms work without .html
+icons/, favicon.ico   the SkyOS mark, the same files as the app
+og.png          the link preview image (generated, see below)
 scripts/
-  sync-demo.cjs     copy app.css, re-extract icons, rebuild both cards
-  extract-icons.cjs pull the app's own SVGs out of pwa/app.js
-  build-demo.cjs    write demo.html and demo-memory.html
-  og.html           source of the link preview
-  build-og.cjs      render og.html to og.png with headless Chrome/Edge
-serve.mjs           local preview server
+  og.html       source of the link preview
+  build-og.cjs  renders og.html to og.png with headless Chrome/Edge
+serve.mjs       local preview server
 ```
+
+## Same design as the app
+
+The colours come from `tokens.css`, a copy of the app's own. If the app's
+palette changes, copy the file again. Type, buttons, corner radii and the top
+bar follow the app's styles, so going from this page to app.skyos.ink changes
+nothing but the content. Light only, like the app.
+
+The drawings on the page (the conversation that moves from ChatGPT to Claude,
+and the Memory page) are HTML, not screenshots. If the app's Memory page
+changes shape, update `.memory` in index.html and styles.css to match.
+
+## Every claim is checked against the app
+
+What the page, Privacy and Terms say has to be true of the new SkyOS: what it
+stores and for how long, who processes it, and what setup takes. When the app
+changes any of that, change these pages in the same go.
+
+## Contact
+
+`contact.js` posts to `https://api.skyos.ink/contact` (the app's server,
+`api/contact.ts`), which accepts only skyos.ink and www.skyos.ink, saves the
+message and emails it through Resend with the sender as reply-to. Mail needs
+`RESEND_API_KEY` and `FEEDBACK_TO` set on the portage-mcp project in Vercel.
 
 ## Preview and deploy
 
 ```bash
-node serve.mjs            # http://localhost:4321
-npx vercel --prod --yes   # needs `vercel login` on this machine
+node serve.mjs                        # http://localhost:4321
+npx vercel@59.15.1 --prod --yes       # needs `vercel login` on this machine
 ```
-
-## The app cards are the app
-
-The two cards are not screenshots or lookalikes. Each is an iframe loading the
-PWA's real stylesheet against the app's real class names and icon vectors, so
-hovers and layout behave as they do in the app.
-
-They are iframes because app.css styles `body`, `#app` and `*` globally —
-inlined, it would restyle this page.
-
-**After any visual change to the PWA:**
-
-```bash
-node scripts/sync-demo.cjs
-```
-
-then look at both cards before deploying. The sync tracks styles and icons
-only. If the app's *markup* changes — a new button, a renamed class, a control
-that is a `<button>` in the app but a `<span>` here — build-demo.cjs has to be
-updated by hand. That has been the source of every stale card so far: a hover
-rule written as `.actions button:hover` never matches a span.
-
-### Things that will bite
-
-- **Frame sizes are load-bearing.** Each card renders the app at a real window
-  size and scales it down (`data-vw` / `data-vh` on the card). The hero is
-  1990×1120 because the app zooms `#app` by 1.1 at desktop widths, and at
-  anything narrower the transcript gutter collapses. The memory card is
-  1440×900 because the dialog is a fixed 1120×820 and a wider frame is mostly
-  scrim. Change a frame size and the card's `aspect-ratio` in styles.css must
-  change with it.
-- **Seven notes is the ceiling.** A row is 74px on desktop and 91px on a phone
-  with its edit and delete buttons; the panel scrolls in the app but just cuts
-  in a still, so the phone frame is 870px tall. Commented in build-demo.cjs.
-- **Below 1024px the app's desktop rules stop applying.** `.dt-side`,
-  `.dt-topbar` and `.dt-modal` all lose their layout, so the narrow frames hide
-  or unwrap them explicitly and show the phone's own `.topbar` instead.
-- **The serif is declared after app.css on purpose.** app.css points at a font
-  file relative to itself that does not exist here; declaring the Google face
-  last makes it win the match, so that file is never requested.
-
-## The hero card plays
-
-`demo.html` runs a scripted pass through the app, then loops:
-
-1. Empty chat. The Supabase decision types into the composer and sends.
-2. The reply arrives with "Saved 3 notes to memory".
-3. Desktop: a pointer clicks the top bar's memory button and the Settings
-   dialog opens on those three notes. Phone: the Memory screen replaces the
-   chat, the way the app swaps screens, and the back button is tapped.
-4. A long conversation scrolls by — length, not time, is what makes other
-   assistants lose the thread.
-5. "Why didn't we go with Clerk?" is answered in the note's own words.
-
-All of it is in `scripts/build-demo.cjs`: the words in `S` and `FILLER`, the
-sequence and timings in `run()` inside `runScript`. The script only inserts
-markup prebuilt by the same builders as the static card, so a class rename
-in the app breaks the run and the still together, and the sync step fixes both.
-
-- **It pauses while the card is off screen** (an IntersectionObserver inside
-  the frame) and while the tab is hidden, and resumes where it stopped.
-- **No JavaScript, or reduced motion turned on, shows the last frame** — the
-  static markup as served. Nothing to maintain separately.
-- **To check a change, film it in real time.** Headless Chrome's
-  `--virtual-time-budget` does not advance the run, so every frame comes out
-  identical. Drive Chrome over the DevTools protocol and capture at real
-  timestamps instead; the Browser pane pauses the run whenever it is hidden.
 
 ## Link preview
 
@@ -108,3 +62,9 @@ node scripts/build-og.cjs
 The meta tags point at `https://www.skyos.ink/og.png` — `www`, because the
 apex redirects there. Platforms cache previews, so a changed image can take a
 while to appear on a link that was already posted.
+
+## Icons
+
+The icons are what Google's favicon service shows for skyos.ink, and Claude
+takes the SkyOS connector's icon from there. Google refreshes its copy on its
+own schedule, so a changed icon takes days to reach Claude.

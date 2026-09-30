@@ -1,477 +1,318 @@
-/* ==========================================================================
-   SkyOS — landing page
+/* skyos.ink — the landing page, Terms and Privacy.
+   The palette is the app's own tokens.css, copied here, and the type, radii,
+   buttons and top bar follow the app, so moving from this page to
+   app.skyos.ink changes nothing but the content. Light only, like the app.
+   Phone first; the layout widens at 720px and 960px. */
 
-   Structure follows the "Landing page" frame in Figma (1440×2095): nav, a
-   left-aligned hero over the app itself in a frame, then the Other AI / SkyOS
-   comparison. Taken as a layout, not pixel-for-pixel — the Figma is a rough
-   pass with placeholder boxes.
-
-   Replaces the earlier single-screen version, whose hero was a hand-cropped
-   phone render. Those crop percentages were tuned to one image at one size
-   and are gone with it.
-
-   Mobile-first. Breakpoints at 900px and 1440px.
-   ========================================================================== */
-
-/* --------------------------------------------------------------- TOKENS */
-:root {
-  --ink:            #0E1E2C;   /* headlines, body */
-  --ink-muted:      #556B82;   /* secondary text */
-  --accent:         #0A66C2;
-  --accent-hover:   #08529C;
-  --accent-press:   #073F78;
-
-  --bg-from:        #F4F9FC;
-  --bg-to:          #FFFFFF;
-  --surface:        #FFFFFF;
-  --line:           rgba(14, 30, 44, .09);
-
-  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
-  --font-sans:  "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
-
-  --lh: 1.19;                  /* 118.98% in Figma */
-
-  --r-card: 12px;
-  --r-card-desktop: 10px;
-
-  --pad: 24px;                 /* page gutter, mobile */
-
-  --ease: cubic-bezier(.22, .9, .28, 1);
-
-  --focus-ring: 0 0 0 2px rgba(10, 102, 194, .35);
-}
-
-/* ----------------------------------------------------------- RESET/BASE */
 *, *::before, *::after { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
-
+html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
 body {
   margin: 0;
-  min-height: 100svh;
-  background: linear-gradient(180deg, var(--bg-from) 0%, var(--bg-to) 100%);
-  background-attachment: fixed;
+  background: var(--bg);
   color: var(--ink);
-  font-family: var(--font-sans);
-  line-height: var(--lh);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
+h1, h2, h3, p, figure, ol, ul { margin: 0; }
+/* Hidden means hidden, whatever display a class gives it (demo steps). */
+[hidden] { display: none !important; }
+a { color: inherit; }
+.sprite { display: none; }
 
-img { display: block; max-width: 100%; height: auto; }
-h1, h2, h3 { margin: 0; font-weight: 700; }
-p { margin: 0; }
-
-:focus-visible { outline: none; box-shadow: var(--focus-ring); }
-
-/* Shared column. Everything on the page sits inside one of these, so the
-   gutters only have to be described once. */
-.wrap {
+.container {
+  --gutter-x: 16px;
   width: 100%;
-  max-width: 1320px;
-  margin-inline: auto;
-  padding-inline: var(--pad);
+  max-width: calc(1120px + 2 * var(--gutter-x));
+  margin: 0 auto;
+  padding: 0 var(--gutter-x);
 }
 
-.wrap--narrow { max-width: 720px; }
-
-/* =========================================================================
-   NAV
-   ========================================================================= */
-.nav {
-  display: flex;
+/* ---- buttons, as in the app ------------------------------------------- */
+.btn {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 16px var(--pad);
-  border-bottom: 1px solid var(--line);
-  background: rgba(255, 255, 255, .72);
-  backdrop-filter: blur(10px);
+  justify-content: center;
+  gap: 10px;
+  height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-btn);
+  background: var(--ink);
+  color: var(--on-ink);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+.btn:hover { background: var(--ink-hover); }
+.btn:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.btn-secondary { background: var(--surface); color: var(--ink); box-shadow: inset 0 0 0 1px var(--border-strong); }
+.btn-secondary:hover { background: var(--surface-sunk); }
+.btn-sm { height: 36px; padding: 0 14px; font-size: 14px; }
+/* Nothing to send yet: grey, not a faded ink that still reads as ready. */
+.btn:disabled { background: var(--surface-sunk); color: var(--subtext); cursor: default; }
+/* Sending keeps its colour: it is busy, not unavailable. */
+.btn.is-sending:disabled { background: var(--ink); color: var(--on-ink); opacity: 0.7; }
+
+/* ---- top bar, as in the app ------------------------------------------- */
+.topbar {
   position: sticky;
   top: 0;
   z-index: 10;
+  display: flex;
+  min-height: 64px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
 }
+.topbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { display: inline-flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; }
+.brand-mark { flex: none; color: var(--ink); }
+.wordmark { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
+.topbar-links { display: flex; align-items: center; gap: 20px; font-size: 14px; }
+.link { color: var(--ink); text-decoration: none; }
+.link:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-.nav__brand {
+/* ---- hero -------------------------------------------------------------- */
+.hero { padding: 48px 0 0; }
+/* Headline and demo stacked on a phone, side by side from 1080px. */
+.hero-grid { display: grid; gap: 40px; }
+.hero-title {
+  max-width: 13em;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.hero-lead { max-width: 40em; margin-top: 20px; font-size: 18px; color: var(--subtext); text-wrap: pretty; }
+/* What sets SkyOS apart, as a small spec line rather than a second subline. */
+.hero-spec { margin-top: 16px; font-size: 14px; color: var(--subtext); }
+.hero-spec span { white-space: nowrap; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+
+/* The demo: one decision on its way through ChatGPT, SkyOS and Claude, in
+   a card beside the headline. The header's steps switch between them, and
+   every step sits in the same box, so switching never moves the page. */
+.demo {
+  width: 100%;
+  max-width: 560px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  box-shadow: 0 24px 60px -32px rgba(13, 13, 13, 0.22);
+  overflow: hidden;
+}
+.demo-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+/* A border only on the step showing, like the app's nav. */
+.demo-step {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background: transparent;
   color: var(--ink);
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 700;
-  text-decoration: none;
+  font: inherit;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.demo-step[aria-pressed="true"] { border-color: var(--ink); background: var(--surface); }
+.demo-step-text { display: flex; flex-direction: column; line-height: 1.3; }
+.demo-step-name { font-size: 13px; font-weight: 500; }
+.demo-step-when { font-size: 12px; color: var(--subtext); }
+.demo-arrow { flex: none; color: var(--muted); }
+
+/* As tall as its tallest step, the Memory page. */
+.demo-stage { position: relative; height: 256px; }
+.demo-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 20px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+}
+.demo-scene.is-active { visibility: visible; opacity: 1; transition: opacity 0.25s ease; }
+
+.bubble { font-size: 15px; line-height: 1.5; }
+.bubble-user {
+  align-self: flex-end;
+  max-width: 85%;
+  padding: 10px 14px;
+  background: var(--surface-sunk);
+  border-radius: 14px;
 }
 
-.nav__mark {
+/* A SkyOS call: what it did, and the name of the tool that ran. */
+.tool-call { display: flex; align-items: flex-start; gap: 10px; }
+.tool-call-mark { flex: none; margin-top: 2px; color: var(--ink); }
+.tool-call-text { display: flex; flex-direction: column; line-height: 1.35; }
+.tool-call-label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink); }
+.tool-call-done { flex: none; color: var(--subtext); }
+.tool-call code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: var(--subtext); }
+.tool-call.is-busy .tool-call-mark { animation: demo-pulse 0.9s ease-in-out infinite; }
+.tool-call.is-busy .tool-call-done { visibility: hidden; }
+
+/* The Memory page, smaller. */
+.demo-scene-memory { gap: 0; justify-content: center; }
+.demo .memory-name { font-size: 20px; }
+.demo .memory-topic { margin-top: 18px; }
+.memory-say { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; }
+.memory-say .say-phrase { font-weight: 500; color: var(--ink); }
+/* A note arriving: a wash that fades, so the eye goes to it. */
+.memory-row.is-new .memory-note { animation: demo-note 1.6s ease-out; }
+
+.demo-foot {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 6px 8px 6px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--subtext);
+}
+.demo-foot > span { margin-right: auto; }
+.demo-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--subtext);
+  cursor: pointer;
+}
+.demo-control:hover { background: var(--surface-sunk); color: var(--ink); }
+.demo.is-paused .demo-icon-pause, .demo:not(.is-paused) .demo-icon-play { display: none; }
+
+/* A step arriving fades up a little. */
+.demo-scene [data-step] { animation: demo-in 0.3s ease-out; }
+@media (prefers-reduced-motion: reduce) {
+  .demo *, .demo *::before { animation: none !important; transition: none !important; }
+}
+
+/* On a phone the Memory page wraps to more lines, and the header only fits
+   tighter, then without logos. */
+@media (max-width: 560px) {
+  .demo-stage { height: 300px; }
+}
+@media (max-width: 480px) {
+  .demo-head { gap: 2px; padding: 8px; }
+  .demo-step { gap: 6px; padding: 6px; }
+}
+@media (max-width: 360px) {
+  .demo-step svg { display: none; }
+  .demo-stage { height: 344px; }
+}
+
+@keyframes demo-in { from { opacity: 0; transform: translateY(4px); } }
+@keyframes demo-note { from { background: var(--surface-sunk); border-color: var(--border-strong); } to { background: var(--surface); } }
+@keyframes demo-pulse { 50% { opacity: 0.3; } }
+
+.logo { display: block; flex: none; }
+.logo-claude { color: var(--logo-claude); }
+.logo-chatgpt { color: var(--logo-openai); }
+.logo-codex { color: var(--logo-codex); }
+
+/* ---- sections ---------------------------------------------------------- */
+.section { padding: 80px 0 0; }
+.section-title { font-size: 26px; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; text-wrap: balance; }
+.section-lead { max-width: 38em; margin-top: 12px; font-size: 17px; color: var(--subtext); }
+.section-note { max-width: 44em; margin-top: 20px; font-size: 14px; color: var(--subtext); }
+
+.compare { display: grid; gap: 12px; margin-top: 28px; }
+.compare-col { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.compare-col-without { background: var(--surface-sunk); border-color: transparent; }
+.compare-head { font-size: 15px; font-weight: 600; }
+.compare-line { margin-top: 14px; font-size: 17px; line-height: 1.45; }
+.compare-col-without .compare-line { color: var(--subtext); }
+
+.steps { display: grid; gap: 12px; margin-top: 28px; padding: 0; list-style: none; }
+.step { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.step-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   width: 26px;
   height: 26px;
+  border-radius: 999px;
+  background: var(--surface-sunk);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--subtext);
 }
+.step-title { margin-top: 14px; font-size: 18px; font-weight: 600; }
+.step-body { margin-top: 6px; font-size: 15px; color: var(--subtext); }
+.works-with { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 24px; font-size: 15px; }
+.works-label { font-size: 14px; color: var(--subtext); }
+.works-tools { display: inline-flex; gap: 22px; white-space: nowrap; }
+.works-tool { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
 
-.nav__links {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+/* The Memory page, drawn with the app's own rows: date, note, actions. */
+.memory { margin-top: 28px; padding: 24px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.memory-name { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.memory-meta { margin-top: 4px; font-size: 14px; color: var(--subtext); }
+.memory-topic { margin-top: 28px; font-size: 16px; font-weight: 600; }
+.memory-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 14px; margin-top: 12px; }
+.memory-date { grid-column: 1 / -1; font-size: 13px; color: var(--subtext); }
+.memory-note { padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; }
+.memory-actions { display: flex; gap: 14px; color: var(--muted); }
 
-/* Contact is a text link beside Sign in, not a third button: a second filled
-   button in the bar would split attention away from Try SkyOS. */
-.nav__signin,
-.nav__contact {
-  padding: 8px 12px;
-  color: var(--ink-muted);
-  font-size: 15px;
-  text-decoration: none;
-  border-radius: 8px;
-}
-.nav__signin:hover,
-.nav__contact:hover { color: var(--ink); }
+/* All four answers open: a question in ink, its answer in subtext. */
+.faq { display: grid; gap: 28px; margin-top: 28px; }
+.faq-q { font-size: 17px; font-weight: 600; color: var(--ink); }
+.faq-a { margin: 6px 0 0; font-size: 15px; line-height: 1.6; color: var(--subtext); }
+.faq-a a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap; }
 
-/* Off below 480px. On a phone the brand, Sign in and Try SkyOS already fill
-   the bar — at 375 there are 23px to spare and Contact needs about 84. The
-   footer carries it there. */
-.nav__contact { display: none; }
-@media (min-width: 480px) {
-  .nav__contact { display: inline-flex; }
-}
+.close { padding-bottom: 96px; text-align: center; }
+.close-title { font-size: 28px; font-weight: 600; letter-spacing: -0.015em; text-wrap: balance; }
+.close .btn { margin-top: 24px; }
+.close-note { margin-top: 12px; font-size: 14px; color: var(--subtext); }
 
-.nav__cta {
-  display: inline-flex;
-  align-items: center;
-  height: 38px;
-  padding: 0 16px;
-  background: var(--accent);
-  border-radius: 8px;
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  text-decoration: none;
-  transition: background-color .18s ease;
-}
-.nav__cta:hover { background: var(--accent-hover); }
+/* ---- footer ------------------------------------------------------------ */
+/* Just the links, on the page itself: a bar here read as a second header. */
+.footer-inner { display: flex; justify-content: center; padding-top: 8px; padding-bottom: 40px; }
+.footer-links { display: flex; gap: 22px; font-size: 14px; }
+.footer-links a { color: var(--subtext); text-decoration: none; }
+.footer-links a:hover { color: var(--ink); }
 
-/* The arrow the Figma draws on the button. An SVG rather than U+2197:
-   the text glyph comes from whichever font has it, at a weight and baseline
-   that never match the label beside it. */
-.cta__arrow {
-  width: 1em;
-  height: 1em;
-  margin-left: 7px;
-  flex: 0 0 auto;
-}
+/* ---- Terms and Privacy ------------------------------------------------- */
+.legal { max-width: calc(720px + 2 * var(--gutter-x)); padding-top: 48px; padding-bottom: 96px; }
+.legal h1 { font-size: 34px; font-weight: 600; line-height: 1.2; letter-spacing: -0.015em; }
+.legal-updated { margin-top: 8px; font-size: 14px; color: var(--subtext); }
+.legal h2 { margin-top: 40px; font-size: 20px; font-weight: 600; line-height: 1.3; }
+.legal p, .legal li { font-size: 16px; line-height: 1.65; }
+.legal p { margin-top: 12px; }
+.legal ul { margin-top: 12px; padding-left: 22px; }
+.legal li + li { margin-top: 6px; }
+.legal a { text-underline-offset: 3px; }
+.table-wrap { margin-top: 16px; overflow-x: auto; }
+.legal table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
+.legal th, .legal td { padding: 10px 14px 10px 0; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
+.legal th { font-weight: 600; }
 
-/* =========================================================================
-   HERO
-   ========================================================================= */
-.hero {
-  display: block;
-  padding-top: 48px;
-}
-
-.hero__title {
-  font-family: var(--font-serif);
-  font-size: 44px;
-  line-height: var(--lh);
-  color: var(--ink);
-  text-wrap: balance;
-}
-
-/* The <br> in the markup is the Figma's line break. It only helps once the
-   line is long enough to need shaping, so below 900px it is ignored and the
-   headline wraps to the column instead. */
-/* The space in front of the <br> is load-bearing: with the break switched off
-   there is nothing else between "not" and "to", and the headline read
-   "notto". When the break is on, that trailing space collapses at the end of
-   the line and costs nothing. */
-.hero__title br { display: none; }
-
-.hero__subtitle {
-  max-width: 64ch;
-  margin-top: 16px;
-  color: var(--ink-muted);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.5;
-  text-wrap: balance;
-}
-
-/* One plain line under the promise saying what the product is. Quieter than
-   the subtitle, which carries the pitch; this only answers "a plugin? an API
-   key?" before anyone has to ask it. */
-/* Three facts on one line, dotted apart, small and muted: a spec strip rather
-   than a second subtitle. */
-.hero__meta {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 6px 10px;
-  margin-top: 14px;
-  color: var(--ink-muted);
-  font-size: 14px;
-  line-height: 1.4;
-}
-.hero__meta span { display: inline-flex; align-items: center; }
-.hero__meta span + span::before {
-  content: '';
-  width: 3px;
-  height: 3px;
-  margin-right: 10px;
-  border-radius: 50%;
-  background: currentColor;
-  opacity: .55;
-}
-
-/* ------------------------------------------------------------------ CTA */
-.cta {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 56px;
-  background: var(--accent);
-  border-radius: var(--r-card);
-  color: #fff;
-  font-size: 16px;
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
-  transition: background-color .18s ease, transform .12s ease;
-}
-.cta:hover { background: var(--accent-hover); }
-.cta:active { background: var(--accent-press); transform: translateY(1px); }
-
-.cta__note {
-  margin-top: 18px;
-  color: var(--ink-muted);
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* =========================================================================
-   DEMO — the card is the app itself
-
-   demo.html loads assets/app.css (pwa/styles.css, copied verbatim) against
-   the app's own class names and icon vectors. Nothing here restyles what is
-   inside the frame; these rules only give it a shape on the page.
-
-   Copied rather than imported because the two projects deploy separately —
-   re-run scripts/sync-demo.cjs after a change to the app's styles.
-   ========================================================================= */
-.demo {
-  position: relative;
-  margin-top: 40px;
-  border-radius: var(--r-card);
-  overflow: hidden;
-  border: 1px solid var(--line);
-  box-shadow: 0 18px 44px rgba(14, 30, 44, .10);
-  /* Portrait on phones: at 16:10 a 327px card is 204px tall, which clips the
-     exchange to its last message and loses the setup that gives it meaning. */
-  /* Matches the narrow iframe viewport (420x800) so scaling by width fills
-     it exactly and nothing is cropped. */
-  aspect-ratio: 42 / 80;
-  background: var(--surface);
-}
-
-/* The memory card is a picture of one panel, not of the whole window: the
-   dialog is a fixed 1120x820 however large the window gets, so in the hero's
-   1990px viewport it would swim in scrim. A smaller window fills the card
-   with the thing the card is about. Its viewports are 420x870 on phones and
-   1440x900 from 900px up, hence 42/87 here and 8/5 in the desktop block. */
-.demo--memory { aspect-ratio: 42 / 87; }
-
-/* The app draws itself for a full window, so the frame is given one and
-   scaled down rather than squeezed. These dimensions only govern the first
-   paint — the scaler in index.html sets the real pair from the card's width
-   and its own data-vw / data-vh. */
-.demo__frame {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 420px;
-  height: 800px;
-  border: 0;
-  transform-origin: 0 0;
-}
-
-/* On touch screens the frames ignore touches entirely. app.css sets
-   overscroll-behavior: none on html and body, which is right for an installed
-   app that must never rubber-band, but inside a frame it also stops a swipe
-   passing out to this page. The cards cover most of a phone's screen, so the
-   page could only be moved by pinch-zooming (reported on mobile Brave). Touch
-   has no hover, so the frames lose nothing by letting swipes through. */
-@media (hover: none), (pointer: coarse) {
-  .demo__frame { pointer-events: none; }
-}
-
-/* =========================================================================
-   COMPARE
-   ========================================================================= */
-.compare {
-  padding: 72px 0;
-}
-
-.compare__title {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  line-height: var(--lh);
-  margin-bottom: 28px;
-}
-
-.compare__grid {
-  display: grid;
-  gap: 20px;
-}
-
-.col {
-  padding: 24px;
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: var(--r-card);
-}
-
-/* The Figma inverts the obvious treatment: SkyOS stays on the light surface
-   and the competitor card goes dark. It works because the dark one reads as
-   the state you're leaving rather than as the one being sold. */
-.col--us {
-  box-shadow: 0 10px 30px rgba(14, 30, 44, .06);
-}
-
-.col--them {
-  background: #5B6E82;
-  border-color: transparent;
-}
-
-.col__head {
-  font-family: var(--font-sans);
-  font-size: 15px;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 18px;
-}
-
-.col--them .col__head { color: #fff; }
-
-.col__line {
-  color: var(--ink);
-  font-size: 16px;
-  line-height: 1.5;
-  padding: 14px 0;
-  border-top: 1px solid var(--line);
-}
-
-.col__line:first-of-type { border-top: 0; padding-top: 0; }
-.col__line:last-of-type { padding-bottom: 0; }
-
-/* On the dark card the divider has to lighten rather than darken, or it
-   disappears into the fill. Text sits at 90% rather than the 82% that
-   matches the light card's muted tone — at 82% it measured 4.15:1 on this
-   fill, under the 4.5:1 needed for body copy. */
-.col--them .col__line {
-  color: rgba(255, 255, 255, .9);
-  border-top-color: rgba(255, 255, 255, .18);
-}
-
-/* =========================================================================
-   WHY
-   ========================================================================= */
-/* White, not tinted. The page gradient runs behind hero, compare and close,
-   so this one solid band is what separates the argument from the pitch on
-   either side of it. */
-.why {
-  padding: 72px 0;
-  background: var(--surface);
-}
-
-.why__title {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  line-height: var(--lh);
-  margin-bottom: 20px;
-}
-
-.why__lead {
-  color: var(--ink-muted);
-  font-size: 17px;
-  font-weight: 400;
-  line-height: 1.6;
-}
-
-.why__lead + .why__lead { margin-top: 16px; }
-
-/* Stacked on a phone, side by side from 900px up (see the desktop block). */
-.why__cols { max-width: 62ch; }
-
-/* =========================================================================
-   NOTES — the second app card
-
-   The hero card shows a decision being written down; this one shows what was
-   written. They have to be two cards: the memory panel is a modal over a
-   blurred scrim, so in the app the conversation is behind it, not beside it.
-   ========================================================================= */
-.notes { padding: 72px 0; }
-
-.notes__title {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  line-height: var(--lh);
-}
-
-.notes__lead {
-  margin-top: 14px;
-  max-width: 620px;
-  color: var(--ink-muted);
-  font-size: 17px;
-  line-height: 1.6;
-}
-
-.notes .demo { margin-top: 36px; }
-
-/* =========================================================================
-   CLOSE
-   ========================================================================= */
-.close {
-  padding: 72px 0 80px;
-  text-align: center;
-}
-
-.close__title {
-  font-family: var(--font-serif);
-  font-size: 32px;
-  line-height: var(--lh);
-  margin-bottom: 20px;
-}
-
-.close .cta {
-  margin: 28px auto 0;
-  max-width: 320px;
-}
-
-/* =========================================================================
-   FOOT
-   ========================================================================= */
-.foot {
-  padding: 0 0 40px;
-  color: var(--ink-muted);
-  font-size: 14px;
-  text-align: center;
-}
-
-
-.foot__nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.foot__nav a { color: var(--ink-muted); text-decoration: none; }
-.foot__nav a:hover { color: var(--accent); text-decoration: underline; }
-
-/* =========================================================================
-   CONTACT
-
-   The form behind both Contact links, in a native <dialog>. 16px text in the
-   fields so iOS does not zoom the page when one is focused.
-   ========================================================================= */
+/* ---- Contact (built by contact.js) ------------------------------------- */
 .contact {
   position: relative;
   width: min(480px, calc(100% - 32px));
@@ -479,15 +320,13 @@ p { margin: 0; }
   margin: auto;
   padding: 28px;
   border: 0;
-  border-radius: 16px;
+  border-radius: var(--radius-card);
   background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 30px 80px rgba(14, 30, 44, .28);
+  box-shadow: 0 30px 80px rgba(13, 13, 13, 0.18);
 }
-.contact::backdrop { background: rgba(14, 30, 44, .32); }
-
-/* The close, in the corner. Same glyph and box as the app's own dialog. */
-.contact__x {
+.contact::backdrop { background: rgba(13, 13, 13, 0.32); }
+.contact-x {
   position: absolute;
   top: 14px;
   right: 14px;
@@ -500,215 +339,54 @@ p { margin: 0; }
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: var(--ink-muted);
+  color: var(--subtext);
   cursor: pointer;
-  transition: background-color .12s ease, color .12s ease;
 }
-.contact__x:hover { background: rgba(14, 30, 44, .06); color: var(--ink); }
-
-.contact__title {
-  font-family: var(--font-serif);
-  font-size: 30px;
-  line-height: var(--lh);
-}
-.contact__lead {
-  margin-top: 8px;
-  color: var(--ink-muted);
-  font-size: 15px;
-  line-height: 1.5;
-}
-.contact__label {
-  display: block;
-  margin-top: 18px;
-  font-size: 14px;
-  font-weight: 500;
-}
-.contact__field {
+.contact-x:hover { background: var(--surface-sunk); color: var(--ink); }
+.contact-title { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
+.contact-lead { margin-top: 8px; font-size: 15px; color: var(--subtext); }
+.contact-label { display: block; margin-top: 18px; font-size: 14px; font-weight: 500; }
+.contact-field {
   display: block;
   width: 100%;
   margin-top: 6px;
   padding: 11px 12px;
-  border: 1px solid rgba(14, 30, 44, .16);
-  border-radius: 10px;
-  background: #fff;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-btn);
+  background: var(--surface);
   color: var(--ink);
   font: inherit;
   font-size: 16px;
 }
-.contact__field:focus { outline: none; border-color: var(--accent); box-shadow: var(--focus-ring); }
-.contact__area { min-height: 120px; resize: vertical; line-height: 1.45; }
-
+.contact-field:focus { outline: none; border-color: var(--ink); }
+.contact-area { min-height: 120px; resize: vertical; line-height: 1.45; }
 /* Off screen rather than display:none, which some bots skip. */
-.contact__trap { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; }
+.contact-trap { position: absolute; left: -10000px; width: 1px; height: 1px; opacity: 0; }
+.contact-status { min-height: 20px; margin-top: 12px; font-size: 14px; color: var(--subtext); }
+.contact-status.is-error { color: var(--danger); }
+.contact-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
 
-.contact__status {
-  min-height: 20px;
-  margin-top: 12px;
-  color: var(--ink-muted);
-  font-size: 14px;
-}
-.contact__status.is-error { color: #B42318; }
-
-.contact__actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 16px;
-}
-.contact__btn {
-  height: 44px;
-  padding: 0 20px;
-  border: 0;
-  border-radius: 10px;
-  background: var(--accent);
-  color: #fff;
-  font: inherit;
-  font-size: 15px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color .18s ease;
-}
-.contact__btn:hover { background: var(--accent-hover); }
-/* Nothing to send yet: grey, not a faded blue, which still reads as ready.
-   After :hover in the file so hovering a grey button does not turn it blue. */
-.contact__btn:disabled {
-  background: rgba(14, 30, 44, .08);
-  color: var(--ink-muted);
-  cursor: default;
-}
-/* Sending keeps its colour: it is busy, not unavailable. */
-.contact__btn.is-sending:disabled { background: var(--accent); color: #fff; opacity: .7; }
-
-
-/* =========================================================================
-   DESKTOP  (≥900px)
-   ========================================================================= */
-@media (min-width: 900px) {
-
-  :root { --pad: 40px; }
-
-  .nav { padding: 18px var(--pad); }
-
+/* ---- wider ------------------------------------------------------------- */
+@media (min-width: 720px) {
+  .container { --gutter-x: 24px; }
   .hero { padding-top: 88px; }
-
-  /* Sized so the two-line break in the markup holds without a third line.
-     The old 75px was tuned to the two-word "SkyOS / Early Access" lockup and
-     ran to four lines with a sentence in it. */
-  .hero__title {
-    font-size: clamp(48px, 5vw, 68px);
-    max-width: 16ch;
-  }
-
-  .hero__title br { display: inline; }
-
-  .hero__subtitle {
-    margin-top: 20px;
-    font-size: 21px;
-    font-weight: 300;
-  }
-
-  .hero__meta { margin-top: 18px; font-size: 15px; }
-
-
-  .cta {
-    display: inline-flex;
-    width: auto;
-    height: 60px;
-    padding: 0 40px;
-    border-radius: var(--r-card-desktop);
-    font-size: 18px;
-    font-weight: 500;
-  }
-
-  .cta__note { font-size: 15px; }
-
-  /* Matches the wide iframe viewports: 1990x1120 and, for memory, 1440x900. */
-  .demo { margin-top: 56px; aspect-ratio: 199 / 112; }
-  .demo--memory { aspect-ratio: 8 / 5; }
-
-  .compare { padding: 104px 0; }
-
-  .compare__title,
-  .why__title,
-  .notes__title,
-  .close__title { font-size: 40px; }
-
-  .compare__title { margin-bottom: 36px; }
-
-  /* The point of the section is reading across, so the two columns have to
-     sit side by side. Below 900px they stack and the pairing is carried by
-     order alone. */
-  .compare__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-  }
-
-  .col { padding: 32px; }
-  .col__line { font-size: 17px; padding: 18px 0; }
-
-
-  .why { padding: 104px 0; }
-  .why__lead { font-size: 19px; font-weight: 300; }
-  .why__cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    max-width: none;
-  }
-  .why__cols .why__lead + .why__lead { margin-top: 0; }
-
-  /* The notes section was added with only its mobile values, so on desktop it
-     sat at 72px while every section around it stepped up to 104, and its lead
-     stayed at 17px regular beside a 19px light one. */
-  .notes { padding: 104px 0; }
-  .notes__lead { font-size: 19px; font-weight: 300; max-width: 700px; }
-
-  .close { padding: 104px 0 112px; }
-  .close .cta { max-width: none; }
+  .hero-lead { font-size: 20px; }
+  .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .faq { grid-template-columns: 1fr 1fr; gap: 36px 48px; }
+  .section { padding-top: 112px; }
+  .section-title { font-size: 30px; }
+  .close { padding-bottom: 128px; }
+  .close-title { font-size: 34px; }
+  .memory { padding: 32px; }
+  .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; gap: 16px; }
+  .memory-date { grid-column: auto; font-size: 14px; }
+  .legal { padding-top: 72px; }
 }
 
-/* ------------------------------------------------------ REDUCED MOTION */
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  *, *::before, *::after {
-    animation-duration: .001ms !important;
-    transition-duration: .001ms !important;
-  }
-}
 
-/* =========================================================================
-   LARGE SCREENS (>=1440px)
-
-   The column stops growing at 1320, so on a 1920 monitor the type was
-   sitting small in a wide, empty page. One step up in scale, not a second
-   layout.
-   ========================================================================= */
-@media (min-width: 1440px) {
-  .hero { padding-top: 104px; }
-  .hero__title { font-size: 76px; }
-  .hero__subtitle { font-size: 23px; margin-top: 24px; }
-  .hero__meta { font-size: 16px; }
-
-  .demo { margin-top: 64px; }
-
-  .compare { padding: 120px 0; }
-  .compare__title,
-  .why__title,
-  .notes__title,
-  .close__title { font-size: 42px; }
-
-  .col { padding: 30px 32px; }
-  .col__head { font-size: 17px; margin-bottom: 14px; }
-  .col__line { font-size: 18px; padding: 18px 0; }
-
-  .why { padding: 120px 0; }
-  .why__lead { font-size: 21px; }
-
-  .notes { padding: 120px 0; }
-  .notes__lead { font-size: 21px; max-width: 780px; }
-  .wrap--narrow { max-width: 820px; }
-
-  .close { padding: 120px 0 128px; }
-  .cta { height: 64px; padding: 0 46px; font-size: 20px; }
-  .cta__note { margin-top: 22px; font-size: 16px; }
+@media (min-width: 1080px) {
+  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 540px); align-items: center; column-gap: 56px; }
+  .hero-title { font-size: clamp(46px, 4.4vw, 56px); }
+  .demo { max-width: none; }
 }

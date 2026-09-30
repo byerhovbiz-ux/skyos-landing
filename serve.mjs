@@ -14,13 +14,16 @@ const TYPES = {
   '.png': 'image/png',
   '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
+  '.ico': 'image/vnd.microsoft.icon',
 };
 
 createServer(async (req, res) => {
   const path = req.url.split('?')[0];
-  const rel = normalize(path === '/' ? 'index.html' : path.replace(/^\//, ''));
+  let rel = normalize(path === '/' ? 'index.html' : path.replace(/^\//, ''));
   // Keep traversal inside the folder — normalize resolves ".." before this.
   if (rel.startsWith('..')) { res.writeHead(403).end('forbidden'); return; }
+  // /privacy serves privacy.html, as cleanUrls in vercel.json does.
+  if (!extname(rel)) rel += '.html';
 
   try {
     const body = await readFile(join(ROOT, rel));
