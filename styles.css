@@ -279,6 +279,11 @@ a { color: inherit; }
 .memory-note { padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; }
 .memory-actions { display: flex; gap: 14px; color: var(--muted); }
 
+/* What happens to the user's data: four short facts under the Memory page. */
+.trust { display: grid; gap: 10px 32px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--subtext); }
+.trust li { display: flex; align-items: center; gap: 10px; }
+.trust svg { flex: none; color: var(--ink); }
+
 /* All four answers open: a question in ink, its answer in subtext. */
 .faq { display: grid; gap: 28px; margin-top: 28px; }
 .faq-q { font-size: 17px; font-weight: 600; color: var(--ink); }
@@ -374,6 +379,7 @@ a { color: inherit; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
   .faq { grid-template-columns: 1fr 1fr; gap: 36px 48px; }
+  .trust { grid-template-columns: 1fr 1fr; }
   .section { padding-top: 112px; }
   .section-title { font-size: 30px; }
   .close { padding-bottom: 128px; }

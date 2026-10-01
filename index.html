@@ -73,7 +73,7 @@
       <div class="hero-copy">
         <h1 class="hero-title">One memory for Claude, ChatGPT and Codex.</h1>
         <p class="hero-lead">Tell ChatGPT what you decided, and Claude and Codex remember it too.</p>
-        <p class="hero-spec"><span>Kept word for word</span> · <span>Dated</span> · <span>Never summarised</span></p>
+        <p class="hero-spec"><span>Exact figures and names</span> · <span>Dated</span> · <span>Never summarised</span></p>
         <!-- The Connect page works without an account, so the setup can be
              seen before signing up. -->
         <div class="hero-actions">
@@ -240,7 +240,13 @@
         </div>
       </figure>
 
-      <p class="section-note">SkyOS keeps only the last few messages of each chat, and deletes them after 30 quiet days. Notes stay until you delete them.</p>
+      <!-- Each line is in privacy.html: nothing here goes further. -->
+      <ul class="trust" aria-label="Your data">
+        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Never used to train AI models</li>
+        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Delete any note or memory, any time</li>
+        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Recent messages deleted after 30 quiet days</li>
+        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Each account kept apart from every other</li>
+      </ul>
     </div>
   </section>
 
@@ -260,12 +266,20 @@
           <dd class="faq-a">You. It isn’t end-to-end encrypted, so SkyOS’s operator can see it too, and looks only when you ask for help, to fix something that broke, to deal with abuse, or when the law requires it. To write a note, SkyOS sends the exchange to OpenAI, which doesn’t train on it. The details are in the <a href="/privacy">Privacy page</a>.</dd>
         </div>
         <div class="faq-item">
+          <dt class="faq-q">ChatGPT and Claude already remember things. Why SkyOS?</dt>
+          <dd class="faq-a">Their memory stays inside their own app: what you tell ChatGPT, Claude never sees. SkyOS is one memory that Claude, ChatGPT and Codex all read, and its notes keep the exact figures and names, each with its date.</dd>
+        </div>
+        <div class="faq-item">
+          <dt class="faq-q">What if a note is old or wrong?</dt>
+          <dd class="faq-a">Every note keeps the date it was saved. Once a figure or a status in a note is more than a month old, SkyOS tells your AI to say when it was true, “as of 18 August”, rather than present it as current. When you change your mind, the note is rewritten, not duplicated, and you can edit or delete any note on your Memory page.</dd>
+        </div>
+        <div class="faq-item">
           <dt class="faq-q">Do I need a paid plan?</dt>
           <dd class="faq-a">Not for Claude or Codex: Claude’s free plan allows one custom connector, and Codex comes with every ChatGPT plan, free included. ChatGPT itself needs Developer mode, which OpenAI lists for Plus, Pro, Business, Enterprise and Edu, though it also shows up on some free accounts.</dd>
         </div>
         <div class="faq-item">
           <dt class="faq-q">What does it cost?</dt>
-          <dd class="faq-a">Nothing while SkyOS is in beta.</dd>
+          <dd class="faq-a">Nothing while SkyOS is in beta, and signing up needs no card.</dd>
         </div>
       </dl>
     </div>
@@ -276,7 +290,7 @@
     <div class="container">
       <h2 class="close-title">Stop re-explaining your project.</h2>
       <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-      <p class="close-note">Free while in beta.</p>
+      <p class="close-note">Free while in beta. No card needed.</p>
     </div>
   </section>
 
