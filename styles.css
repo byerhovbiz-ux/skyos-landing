@@ -2,7 +2,7 @@
    The palette is the app's own tokens.css, copied here, and the type, radii,
    buttons and top bar follow the app, so moving from this page to
    app.skyos.ink changes nothing but the content. Light only, like the app.
-   Phone first; the layout widens at 720px and 960px. */
+   Phone first; the layout widens at 720px and 1080px. */
 
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
@@ -74,8 +74,10 @@ a { color: inherit; }
 .brand-mark { flex: none; color: var(--ink); }
 .wordmark { font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
 .topbar-links { display: flex; align-items: center; gap: 20px; font-size: 14px; }
-.link { color: var(--ink); text-decoration: none; }
+.link { position: relative; color: var(--ink); text-decoration: none; }
 .link:hover { text-decoration: underline; text-underline-offset: 3px; }
+/* Finger-sized targets around small links; the links look the same. */
+.link::after, .footer-links a::after { content: ""; position: absolute; inset: -12px -8px; }
 
 /* ---- hero -------------------------------------------------------------- */
 .hero { padding: 48px 0 0; }
@@ -104,7 +106,7 @@ a { color: inherit; }
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
-  box-shadow: 0 24px 60px -32px rgba(13, 13, 13, 0.22);
+  box-shadow: 0 24px 60px -32px color-mix(in srgb, var(--ink) 22%, transparent);
   overflow: hidden;
 }
 .demo-head {
@@ -274,10 +276,12 @@ a { color: inherit; }
 .memory-name { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
 .memory-meta { margin-top: 4px; font-size: 14px; color: var(--subtext); }
 .memory-topic { margin-top: 28px; font-size: 16px; font-weight: 600; }
-.memory-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 14px; margin-top: 12px; }
-.memory-date { grid-column: 1 / -1; font-size: 13px; color: var(--subtext); }
-.memory-note { padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; }
-.memory-actions { display: flex; gap: 14px; color: var(--muted); }
+/* On a phone, as in the app: the date and the note's buttons share a line
+   above the note, which keeps the whole width. */
+.memory-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date actions" "note note"; align-items: center; gap: 8px 14px; margin-top: 12px; }
+.memory-date { grid-area: date; font-size: 13px; color: var(--subtext); }
+.memory-note { grid-area: note; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; }
+.memory-actions { grid-area: actions; display: flex; gap: 14px; color: var(--muted); }
 
 /* What happens to the user's data: four short facts under the Memory page. */
 .trust { display: grid; gap: 10px 32px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--subtext); }
@@ -299,7 +303,7 @@ a { color: inherit; }
 /* Just the links, on the page itself: a bar here read as a second header. */
 .footer-inner { display: flex; justify-content: center; padding-top: 8px; padding-bottom: 40px; }
 .footer-links { display: flex; gap: 22px; font-size: 14px; }
-.footer-links a { color: var(--subtext); text-decoration: none; }
+.footer-links a { position: relative; color: var(--subtext); text-decoration: none; }
 .footer-links a:hover { color: var(--ink); }
 
 /* ---- Terms and Privacy ------------------------------------------------- */
@@ -328,9 +332,9 @@ a { color: inherit; }
   border-radius: var(--radius-card);
   background: var(--surface);
   color: var(--ink);
-  box-shadow: 0 30px 80px rgba(13, 13, 13, 0.18);
+  box-shadow: 0 30px 80px color-mix(in srgb, var(--ink) 18%, transparent);
 }
-.contact::backdrop { background: rgba(13, 13, 13, 0.32); }
+.contact::backdrop { background: color-mix(in srgb, var(--ink) 32%, transparent); }
 .contact-x {
   position: absolute;
   top: 14px;
@@ -385,8 +389,8 @@ a { color: inherit; }
   .close { padding-bottom: 128px; }
   .close-title { font-size: 34px; }
   .memory { padding: 32px; }
-  .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; gap: 16px; }
-  .memory-date { grid-column: auto; font-size: 14px; }
+  .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 16px; }
+  .memory-date { font-size: 14px; }
   .legal { padding-top: 72px; }
 }
 
