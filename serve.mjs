@@ -15,6 +15,7 @@ const TYPES = {
   '.webp': 'image/webp',
   '.svg': 'image/svg+xml',
   '.ico': 'image/vnd.microsoft.icon',
+  '.woff2': 'font/woff2',
 };
 
 createServer(async (req, res) => {
