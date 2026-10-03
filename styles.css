@@ -391,6 +391,8 @@ a { color: inherit; }
   .memory { padding: 32px; }
   .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 16px; }
   .memory-date { font-size: 14px; }
+  /* As in the app: a run of notes from the same day shows its date once. */
+  .memory-date.is-repeat { visibility: hidden; }
   .legal { padding-top: 72px; }
 }
 
