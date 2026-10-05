@@ -93,8 +93,6 @@ a { color: inherit; }
 }
 .hero-lead { max-width: 40em; margin-top: 20px; font-size: 18px; color: var(--subtext); text-wrap: pretty; }
 /* What sets SkyOS apart, as a small spec line rather than a second subline. */
-.hero-spec { margin-top: 16px; font-size: 14px; color: var(--subtext); }
-.hero-spec span { white-space: nowrap; }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 
 /* The demo: one decision on its way through ChatGPT, SkyOS and Claude, in
