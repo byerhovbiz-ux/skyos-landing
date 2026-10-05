@@ -260,6 +260,7 @@ a { color: inherit; }
 .steps { display: grid; gap: 12px; margin-top: 28px; padding: 0; list-style: none; }
 .step { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
 .step-num {
+  flex: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -271,8 +272,10 @@ a { color: inherit; }
   font-weight: 500;
   color: var(--subtext);
 }
-.step-title { margin-top: 14px; font-size: 18px; font-weight: 600; }
-.step-body { margin-top: 6px; font-size: 15px; color: var(--subtext); }
+/* Number and title on one line, as on the app's Connect page. */
+.step-head { display: flex; align-items: center; gap: 10px; }
+.step-title { font-size: 18px; font-weight: 600; }
+.step-body { margin-top: 8px; font-size: 15px; color: var(--subtext); }
 .works-with { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 24px; font-size: 15px; }
 .works-label { font-size: 14px; color: var(--subtext); }
 .works-tools { display: inline-flex; gap: 22px; white-space: nowrap; }
@@ -295,7 +298,7 @@ a { color: inherit; }
 .trust li { display: flex; align-items: center; gap: 10px; }
 .trust svg { flex: none; color: var(--ink); }
 
-/* All four answers open: a question in ink, its answer in subtext. */
+/* Every answer open: a question in ink, its answer in subtext. */
 .faq { display: grid; gap: 28px; margin-top: 28px; }
 .faq-q { font-size: 17px; font-weight: 600; color: var(--ink); }
 .faq-a { margin: 6px 0 0; font-size: 15px; line-height: 1.6; color: var(--subtext); }
