@@ -77,7 +77,7 @@ a { color: inherit; }
 .link { position: relative; color: var(--ink); text-decoration: none; }
 .link:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* Finger-sized targets around small links; the links look the same. */
-.link::after, .footer-links a::after { content: ""; position: absolute; inset: -12px -8px; }
+.link::after { content: ""; position: absolute; inset: -12px -8px; }
 
 /* ---- hero -------------------------------------------------------------- */
 /* Centred, the way the best-known product pages open, with the demo below
@@ -342,22 +342,27 @@ a { color: inherit; }
 .faq-a { margin: 6px 0 0; font-size: 15px; line-height: 1.6; color: var(--subtext); }
 .faq-a a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap; }
 
-/* The last ask, on a dark card: ink and white, nothing new. */
-.close { padding-bottom: 72px; }
-.close-card { padding: 56px 24px; border-radius: 24px; background: var(--ink); color: var(--on-ink); text-align: center; }
-.close-title { font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
-.close .btn { margin-top: 28px; }
-.close-note { margin-top: 14px; font-size: 14px; color: var(--border-strong); }
-.btn-inverse { background: var(--surface); color: var(--ink); }
-.btn-inverse:hover { background: var(--surface-sunk); }
-.btn-inverse:focus-visible { outline-color: var(--on-ink); }
+/* The last ask: a big centred line and both ways in, on the page itself. */
+.close { padding-bottom: 96px; text-align: center; }
+.close-title { max-width: 12em; margin: 0 auto; font-size: 36px; font-weight: 600; line-height: 1.05; letter-spacing: -0.035em; text-wrap: balance; }
+.close-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+.close-note { margin-top: 16px; font-size: 14px; color: var(--subtext); }
 
 /* ---- footer ------------------------------------------------------------ */
-/* Just the links, on the page itself: a bar here read as a second header. */
-.footer-inner { display: flex; justify-content: center; padding-top: 8px; padding-bottom: 40px; }
-.footer-links { display: flex; gap: 22px; font-size: 14px; }
-.footer-links a { position: relative; color: var(--subtext); text-decoration: none; }
-.footer-links a:hover { color: var(--ink); }
+/* A full-width band in the palette's light grey: brand on the left, link
+   columns on the right, then the copyright and legal links. */
+.footer { background: var(--surface-sunk); }
+.footer-top { display: grid; gap: 40px; padding: 56px 0 40px; }
+.footer-tagline { max-width: 22em; margin-top: 12px; font-size: 15px; color: var(--subtext); }
+.footer-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+.footer-col { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.footer-head { margin-bottom: 4px; font-size: 14px; font-weight: 600; }
+.footer-col a, .footer-legal a { position: relative; font-size: 14px; color: var(--subtext); text-decoration: none; }
+.footer-col a:hover, .footer-legal a:hover, .footer-legal a[aria-current="page"] { color: var(--ink); }
+/* Finger-sized targets; the stacked links keep apart. */
+.footer-col a::after, .footer-legal a::after { content: ""; position: absolute; inset: -5px -6px; }
+.footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 20px 0 32px; border-top: 1px solid var(--border-strong); font-size: 13px; color: var(--subtext); }
+.footer-legal { display: flex; gap: 22px; }
 
 /* ---- Terms and Privacy ------------------------------------------------- */
 .legal { max-width: calc(720px + 2 * var(--gutter-x)); padding-top: 48px; padding-bottom: 96px; }
@@ -443,9 +448,10 @@ a { color: inherit; }
   .section { padding-top: 128px; }
   .section-head { margin-bottom: 48px; }
   .section-title { font-size: 42px; }
-  .close { padding-bottom: 96px; }
-  .close-card { padding: 88px 48px; }
-  .close-title { font-size: 44px; }
+  .close { padding-bottom: 144px; }
+  .close-title { font-size: 60px; }
+  .footer-top { grid-template-columns: minmax(0, 1fr) auto; padding: 72px 0 56px; }
+  .footer-cols { grid-template-columns: repeat(2, 180px); gap: 48px; }
   .memory { padding: 32px; }
   .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 16px; }
   .memory-date { font-size: 14px; }

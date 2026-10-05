@@ -317,26 +317,55 @@
   <!-- ======================================================= CLOSE -->
   <section class="section close">
     <div class="container">
-      <div class="close-card">
       <h2 class="close-title">Stop re-explaining your project.</h2>
-      <a class="btn btn-inverse" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-      <p class="close-note">Free while in beta. No card needed.</p>
+      <div class="close-actions">
+        <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+        <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
       </div>
+      <p class="close-note">Free while in beta. No card needed.</p>
     </div>
   </section>
 
 </main>
 
+<!-- Brand and links on a full-width band, as the best-known product pages
+     end; only pages that exist, and each tool's own setup on Connect. -->
 <footer class="footer">
-  <div class="container footer-inner">
-    <nav class="footer-links" aria-label="Legal and contact">
-      <a href="/privacy">Privacy</a>
-      <a href="/terms">Terms</a>
-      <!-- The href is only the fallback without JavaScript: mailto hands off to
-           whatever mail app the system has, which on Windows is often an
-           Outlook nobody set up. -->
-      <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
-    </nav>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+          <span class="wordmark">SkyOS</span>
+        </a>
+        <p class="footer-tagline">One memory for Claude, ChatGPT and Codex.</p>
+      </div>
+      <nav class="footer-cols" aria-label="More">
+        <div class="footer-col">
+          <p class="footer-head">Product</p>
+          <a href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started</a>
+          <a href="https://app.skyos.ink/">Sign in</a>
+          <a href="/#how">How it works</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-head">Connect</p>
+          <a href="https://app.skyos.ink/connect.html#claude">Claude</a>
+          <a href="https://app.skyos.ink/connect.html#chatgpt">ChatGPT</a>
+          <a href="https://app.skyos.ink/connect.html#codex">Codex</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkyOS</span>
+      <nav class="footer-legal" aria-label="Legal and contact">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <!-- The href is only the fallback without JavaScript: mailto hands off to
+             whatever mail app the system has, which on Windows is often an
+             Outlook nobody set up. -->
+        <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
+      </nav>
+    </div>
   </div>
 </footer>
 
