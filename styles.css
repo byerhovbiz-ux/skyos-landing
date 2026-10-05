@@ -264,7 +264,8 @@ a { color: inherit; }
 .hub-join::before, .hub-join::after { content: ""; position: absolute; left: calc(50% - 0.5px); width: 1px; background: var(--border-strong); }
 .hub-join::before { top: 0; height: 100%; }
 .hub-join::after { top: 100%; height: 14px; }
-.mini-mem { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-weight: 600; }
+/* SkyOS, larger than the apps it joins. */
+.hub-core { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
 .mini-bubble { align-self: flex-end; max-width: 85%; padding: 8px 12px; background: var(--surface); border-radius: 12px; font-size: 14px; }
 .mini-answer { font-size: 14px; line-height: 1.5; }
 .mini-answer strong { font-weight: 600; }
