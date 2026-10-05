@@ -80,23 +80,45 @@ a { color: inherit; }
 .link::after, .footer-links a::after { content: ""; position: absolute; inset: -12px -8px; }
 
 /* ---- hero -------------------------------------------------------------- */
+/* Centred, the way the best-known product pages open, with the demo below
+   as the product shot. */
 .hero { padding: 48px 0 0; }
-/* Headline and demo stacked on a phone, side by side from 1080px. */
-.hero-grid { display: grid; gap: 40px; }
+.hero-copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  font-size: 13px;
+  font-weight: 500;
+}
 .hero-title {
   max-width: 13em;
-  font-size: clamp(36px, 7vw, 64px);
+  margin-top: 20px;
+  font-size: clamp(38px, 6.2vw, 72px);
   font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
   text-wrap: balance;
 }
-.hero-lead { max-width: 40em; margin-top: 20px; font-size: 18px; color: var(--subtext); text-wrap: pretty; }
-/* What sets SkyOS apart, as a small spec line rather than a second subline. */
-.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.hero-lead { max-width: 30em; margin-top: 20px; font-size: 18px; color: var(--subtext); text-wrap: balance; }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+/* The demo on a dotted stage, drawn from the palette's own greys. */
+.hero-stage {
+  margin-top: 48px;
+  padding: 24px 12px;
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  background: radial-gradient(circle, var(--border-strong) 1px, transparent 1.5px) 0 0 / 20px 20px, var(--surface-sunk);
+}
+.hero-stage .demo { margin: 0 auto; }
+.hero .works-with { justify-content: center; margin-top: 28px; }
 
 /* The demo: one decision on its way through ChatGPT, SkyOS and Claude, in
-   a card beside the headline. The header's steps switch between them, and
+   a card under the headline. The header's steps switch between them, and
    every step sits in the same box, so switching never moves the page. */
 .demo {
   width: 100%;
@@ -237,11 +259,13 @@ a { color: inherit; }
 
 /* ---- sections ---------------------------------------------------------- */
 .section { padding: 80px 0 0; }
-.section-title { font-size: 26px; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; text-wrap: balance; }
-.section-lead { max-width: 38em; margin-top: 12px; font-size: 17px; color: var(--subtext); }
+/* Every section opens with a centred title, then its content. */
+.section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
+.section-title { font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
+.section-lead { max-width: 34em; margin: 12px auto 0; font-size: 17px; color: var(--subtext); text-wrap: balance; }
 .section-note { max-width: 44em; margin-top: 20px; font-size: 14px; color: var(--subtext); }
 
-.compare { display: grid; gap: 12px; margin-top: 28px; }
+.compare { display: grid; gap: 12px; }
 .compare-col { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
 .compare-col-without { background: var(--surface-sunk); border-color: transparent; }
 .compare-head { font-size: 15px; font-weight: 600; }
@@ -250,39 +274,53 @@ a { color: inherit; }
 
 /* Why: rows split by thin lines, not cards, so it reads differently from
    How it works. On a phone the claim sits above its sentence. */
-.why { margin-top: 20px; }
+.why { max-width: 880px; margin: 0 auto; }
 .why-row { display: grid; gap: 4px; padding: 20px 0; }
+.why-row:first-child { padding-top: 0; }
 .why-row + .why-row { border-top: 1px solid var(--border); }
 .why-row:last-child { padding-bottom: 0; }
 .why-claim { font-size: 17px; font-weight: 600; color: var(--ink); }
 .why-text { margin: 0; font-size: 16px; line-height: 1.5; color: var(--subtext); }
 
-.steps { display: grid; gap: 12px; margin-top: 28px; padding: 0; list-style: none; }
-.step { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.step-num {
-  flex: none;
+/* How it works: the steps on a timeline, beside what step 1 really is. */
+.how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.timeline { display: grid; gap: 28px; padding: 0; list-style: none; }
+.tl-step { position: relative; display: grid; grid-template-columns: 26px minmax(0, 1fr); column-gap: 16px; }
+/* The line from one number down to the next. */
+.tl-step:not(:last-child)::before { content: ""; position: absolute; left: 12.5px; top: 34px; bottom: -22px; width: 1px; background: var(--border-strong); }
+.tl-num {
+  grid-row: 1 / span 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 26px;
   height: 26px;
   border-radius: 999px;
-  background: var(--surface-sunk);
+  background: var(--ink);
+  color: var(--on-ink);
   font-size: 13px;
   font-weight: 500;
-  color: var(--subtext);
 }
-/* Number and title on one line, as on the app's Connect page. */
-.step-head { display: flex; align-items: center; gap: 10px; }
-.step-title { font-size: 18px; font-weight: 600; }
-.step-body { margin-top: 8px; font-size: 15px; color: var(--subtext); }
+.tl-title { font-size: 18px; font-weight: 600; line-height: 26px; }
+.tl-body { grid-column: 2; margin-top: 4px; font-size: 15px; color: var(--subtext); }
+.how-visual {
+  display: grid;
+  align-content: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 12px;
+  background: radial-gradient(circle, var(--border-strong) 1px, transparent 1.5px) 0 0 / 20px 20px, var(--surface-sunk);
+}
+.addr { display: grid; gap: 6px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+.addr-tool { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
+.addr code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; color: var(--subtext); overflow-wrap: anywhere; }
 .works-with { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 22px; margin-top: 24px; font-size: 15px; }
 .works-label { font-size: 14px; color: var(--subtext); }
 .works-tools { display: inline-flex; gap: 22px; white-space: nowrap; }
 .works-tool { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
 
 /* The Memory page, drawn with the app's own rows: date, note, actions. */
-.memory { margin-top: 28px; padding: 24px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.memory { max-width: 880px; margin: 0 auto; padding: 24px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
 .memory-name { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
 .memory-meta { margin-top: 4px; font-size: 14px; color: var(--subtext); }
 .memory-topic { margin-top: 28px; font-size: 16px; font-weight: 600; }
@@ -294,20 +332,25 @@ a { color: inherit; }
 .memory-actions { grid-area: actions; display: flex; gap: 14px; color: var(--muted); }
 
 /* What happens to the user's data: four short facts under the Memory page. */
-.trust { display: grid; gap: 10px 32px; margin: 24px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--subtext); }
+.trust { display: grid; gap: 10px 28px; max-width: 880px; margin: 24px auto 0; padding: 0; list-style: none; font-size: 14px; color: var(--subtext); }
 .trust li { display: flex; align-items: center; gap: 10px; }
 .trust svg { flex: none; color: var(--ink); }
 
 /* Every answer open: a question in ink, its answer in subtext. */
-.faq { display: grid; gap: 28px; margin-top: 28px; }
+.faq { display: grid; gap: 28px; }
 .faq-q { font-size: 17px; font-weight: 600; color: var(--ink); }
 .faq-a { margin: 6px 0 0; font-size: 15px; line-height: 1.6; color: var(--subtext); }
 .faq-a a { color: var(--ink); text-underline-offset: 3px; white-space: nowrap; }
 
-.close { padding-bottom: 96px; text-align: center; }
-.close-title { font-size: 28px; font-weight: 600; letter-spacing: -0.015em; text-wrap: balance; }
-.close .btn { margin-top: 24px; }
-.close-note { margin-top: 12px; font-size: 14px; color: var(--subtext); }
+/* The last ask, on a dark card: ink and white, nothing new. */
+.close { padding-bottom: 72px; }
+.close-card { padding: 56px 24px; border-radius: 24px; background: var(--ink); color: var(--on-ink); text-align: center; }
+.close-title { font-size: 30px; font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; text-wrap: balance; }
+.close .btn { margin-top: 28px; }
+.close-note { margin-top: 14px; font-size: 14px; color: var(--border-strong); }
+.btn-inverse { background: var(--surface); color: var(--ink); }
+.btn-inverse:hover { background: var(--surface-sunk); }
+.btn-inverse:focus-visible { outline-color: var(--on-ink); }
 
 /* ---- footer ------------------------------------------------------------ */
 /* Just the links, on the page itself: a bar here read as a second header. */
@@ -388,18 +431,21 @@ a { color: inherit; }
 /* ---- wider ------------------------------------------------------------- */
 @media (min-width: 720px) {
   .container { --gutter-x: 24px; }
-  .hero { padding-top: 88px; }
+  .hero { padding-top: 80px; }
   .hero-lead { font-size: 20px; }
+  .hero-stage { margin-top: 64px; padding: 56px 24px; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .why-row { grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 32px; align-items: baseline; padding: 24px 0; }
   .why-row:last-child { padding-bottom: 0; }
   .faq { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 40px; }
-  .trust { grid-template-columns: 1fr 1fr; }
-  .section { padding-top: 112px; }
-  .section-title { font-size: 30px; }
-  .close { padding-bottom: 128px; }
-  .close-title { font-size: 34px; }
+  .trust { grid-template-columns: 1fr 1fr; padding: 0 4px; }
+  .section { padding-top: 128px; }
+  .section-head { margin-bottom: 48px; }
+  .section-title { font-size: 42px; }
+  .close { padding-bottom: 96px; }
+  .close-card { padding: 88px 48px; }
+  .close-title { font-size: 44px; }
   .memory { padding: 32px; }
   .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 16px; }
   .memory-date { font-size: 14px; }
@@ -410,7 +456,5 @@ a { color: inherit; }
 
 
 @media (min-width: 1080px) {
-  .hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 540px); align-items: center; column-gap: 56px; }
-  .hero-title { font-size: clamp(46px, 4.4vw, 56px); }
-  .demo { max-width: none; }
+  .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }

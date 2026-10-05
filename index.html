@@ -68,8 +68,9 @@
 
   <!-- ======================================================== HERO -->
   <section class="hero">
-    <div class="container hero-grid">
+    <div class="container">
       <div class="hero-copy">
+        <p class="hero-pill">Now in beta</p>
         <h1 class="hero-title">One memory for Claude, ChatGPT and Codex.</h1>
         <p class="hero-lead">Tell ChatGPT what you decided, and Claude and Codex remember it too.</p>
         <!-- The Connect page works without an account, so the setup can be
@@ -87,6 +88,7 @@
            point. demo.js plays it. Without JavaScript it shows the last
            step as written here; with reduced motion it starts there and
            doesn't play by itself. -->
+      <div class="hero-stage">
       <figure class="demo" data-demo aria-label="Demo: a price decided in ChatGPT is saved as a SkyOS note and recalled in Claude a week later.">
         <div class="demo-head">
           <button class="demo-step" type="button" data-show="0" aria-pressed="false">
@@ -148,13 +150,25 @@
           </button>
         </div>
       </figure>
+      </div>
+
+      <!-- The three logos never split across lines: on a narrow phone "Works
+           with" goes above them instead. -->
+      <p class="works-with">
+        <span class="works-label">Works with</span>
+        <span class="works-tools">
+          <span class="works-tool"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span>
+          <span class="works-tool"><svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>ChatGPT</span>
+          <span class="works-tool"><svg class="logo logo-codex" width="18" height="18" aria-hidden="true"><use href="#i-codex"/></svg>Codex</span>
+        </span>
+      </p>
     </div>
   </section>
 
   <!-- ===================================================== COMPARE -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Same question, a week later, in another app</h2>
+      <div class="section-head"><h2 class="section-title">Same question, a week later, in another app</h2></div>
       <div class="compare">
         <div class="compare-col">
           <h3 class="compare-head">With SkyOS</h3>
@@ -178,7 +192,7 @@
        memory product is named. -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Why use SkyOS?</h2>
+      <div class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
       <dl class="why">
         <div class="why-row">
           <dt class="why-claim">One memory, every app</dt>
@@ -203,31 +217,33 @@
   <!-- ================================================ HOW IT WORKS -->
   <section class="section" id="how">
     <div class="container">
-      <h2 class="section-title">How it works</h2>
-      <ol class="steps">
-        <li class="step">
-          <div class="step-head"><span class="step-num" aria-hidden="true">1</span><h3 class="step-title">Connect your tools</h3></div>
-          <p class="step-body">Add SkyOS to Claude, ChatGPT or Codex, sign in, and paste the memory instructions. A few minutes each.</p>
-        </li>
-        <li class="step">
-          <div class="step-head"><span class="step-num" aria-hidden="true">2</span><h3 class="step-title">Chat as usual</h3></div>
-          <p class="step-body">SkyOS turns what you decide into short notes. Small talk isn’t saved.</p>
-        </li>
-        <li class="step">
-          <div class="step-head"><span class="step-num" aria-hidden="true">3</span><h3 class="step-title">Pick up anywhere</h3></div>
-          <p class="step-body">In any connected app, say “continue” and the memory’s name.</p>
-        </li>
-      </ol>
-      <!-- The three logos never split across lines: on a narrow phone "Works
-           with" goes above them instead. -->
-      <p class="works-with">
-        <span class="works-label">Works with</span>
-        <span class="works-tools">
-          <span class="works-tool"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span>
-          <span class="works-tool"><svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>ChatGPT</span>
-          <span class="works-tool"><svg class="logo logo-codex" width="18" height="18" aria-hidden="true"><use href="#i-codex"/></svg>Codex</span>
-        </span>
-      </p>
+      <div class="section-head"><h2 class="section-title">How it works</h2></div>
+      <!-- The steps beside what step 1 really is: one address per tool, the
+           same ones the Connect page hands out (server/lib/config.ts). -->
+      <div class="how">
+        <ol class="timeline">
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">1</span>
+            <h3 class="tl-title">Connect your tools</h3>
+            <p class="tl-body">Add SkyOS to Claude, ChatGPT or Codex, sign in, and paste the memory instructions. A few minutes each.</p>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">2</span>
+            <h3 class="tl-title">Chat as usual</h3>
+            <p class="tl-body">SkyOS turns what you decide into short notes. Small talk isn’t saved.</p>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">3</span>
+            <h3 class="tl-title">Pick up anywhere</h3>
+            <p class="tl-body">In any connected app, say “continue” and the memory’s name.</p>
+          </li>
+        </ol>
+        <figure class="how-visual" aria-label="The address you add for each tool">
+          <div class="addr"><span class="addr-tool"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span><code>https://api.skyos.ink/mcp/claude</code></div>
+          <div class="addr"><span class="addr-tool"><svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>ChatGPT</span><code>https://api.skyos.ink/mcp/chatgpt</code></div>
+          <div class="addr"><span class="addr-tool"><svg class="logo logo-codex" width="18" height="18" aria-hidden="true"><use href="#i-codex"/></svg>Codex</span><code>https://api.skyos.ink/mcp/codex</code></div>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -236,8 +252,10 @@
        note with its date and its edit and delete buttons. -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Your notes, in plain sight</h2>
-      <p class="section-lead">Every note is on your Memory page, grouped by topic and dated. Edit or delete any of them.</p>
+      <div class="section-head">
+        <h2 class="section-title">Your notes, in plain sight</h2>
+        <p class="section-lead">Every note is on your Memory page, grouped by topic and dated. Edit or delete any of them.</p>
+      </div>
 
       <figure class="memory" aria-label="Example of the Memory page: a memory called Northwind pricing, with notes under the topics Pricing and Launch.">
         <div class="memory-head">
@@ -278,7 +296,7 @@
        nothing here goes further than they do. -->
   <section class="section">
     <div class="container">
-      <h2 class="section-title">Questions</h2>
+      <div class="section-head"><h2 class="section-title">Questions</h2></div>
       <dl class="faq">
         <div class="faq-item">
           <dt class="faq-q">What does SkyOS keep?</dt>
@@ -299,9 +317,11 @@
   <!-- ======================================================= CLOSE -->
   <section class="section close">
     <div class="container">
+      <div class="close-card">
       <h2 class="close-title">Stop re-explaining your project.</h2>
-      <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+      <a class="btn btn-inverse" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
       <p class="close-note">Free while in beta. No card needed.</p>
+      </div>
     </div>
   </section>
 
