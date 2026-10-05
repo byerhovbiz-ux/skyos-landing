@@ -139,16 +139,6 @@
           </div>
         </div>
 
-        <div class="demo-foot">
-          <span>Example</span>
-          <button class="demo-control" type="button" data-toggle aria-label="Pause">
-            <svg class="demo-icon-pause" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><rect x="3" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/><rect x="8.4" y="2.5" width="2.6" height="9" rx="1" fill="currentColor"/></svg>
-            <svg class="demo-icon-play" width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M4 2.7v8.6a.6.6 0 0 0 .9.5l6.8-4.3a.6.6 0 0 0 0-1L4.9 2.2a.6.6 0 0 0-.9.5Z" fill="currentColor"/></svg>
-          </button>
-          <button class="demo-control" type="button" data-replay aria-label="Play from the start">
-            <svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 2.5v2.6h2.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </button>
-        </div>
       </figure>
       </div>
 
@@ -193,24 +183,45 @@
   <section class="section">
     <div class="container">
       <div class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
-      <dl class="why">
-        <div class="why-row">
-          <dt class="why-claim">One memory, every app</dt>
-          <dd class="why-text">ChatGPT’s memory stays in ChatGPT. SkyOS works in Claude, ChatGPT and Codex.</dd>
-        </div>
-        <div class="why-row">
-          <dt class="why-claim">Old facts come dated</dt>
-          <dd class="why-text">Once a figure is a month old, your AI says when it was true: “as of 18 August”.</dd>
-        </div>
-        <div class="why-row">
-          <dt class="why-claim">Projects stay apart</dt>
-          <dd class="why-text">Each chat keeps its own memory, so one project never leaks into another.</dd>
-        </div>
-        <div class="why-row">
-          <dt class="why-claim">Nothing to manage</dt>
-          <dd class="why-text">No “remember this”. Change your mind, and the note is rewritten.</dd>
-        </div>
-      </dl>
+      <!-- Each card shows its point in SkyOS's own pieces: the three apps
+           joined to one memory, an answer that gives its date, two memories
+           kept apart, and a note rewritten when the user changes their mind.
+           The pictures are decoration; the words carry the meaning. -->
+      <div class="why">
+        <article class="why-card">
+          <div class="why-visual why-visual-hub" aria-hidden="true">
+            <div class="hub-apps"><span class="hub-app"><svg class="logo logo-claude" width="20" height="20"><use href="#i-claude"/></svg></span><span class="hub-app"><svg class="logo logo-chatgpt" width="20" height="20"><use href="#i-chatgpt"/></svg></span><span class="hub-app"><svg class="logo logo-codex" width="20" height="20"><use href="#i-codex"/></svg></span></div>
+            <span class="hub-join"></span>
+            <span class="mini-mem"><svg class="brand-mark" width="17" height="15"><use href="#i-mark"/></svg>Northwind pricing</span>
+          </div>
+          <h3 class="why-claim">One memory, every app</h3>
+          <p class="why-text">Claude, ChatGPT and Codex read the same notes.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-visual" aria-hidden="true">
+            <p class="mini-bubble">What’s Northwind’s price?</p>
+            <p class="mini-answer"><strong>As of 18 August,</strong> $15 a month, annual billing only.</p>
+          </div>
+          <h3 class="why-claim">Old facts come dated</h3>
+          <p class="why-text">Once a figure is a month old, your AI says when it was true.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-visual" aria-hidden="true">
+            <span class="mini-card"><span class="mini-card-name">Northwind pricing</span><span class="mini-card-note">$15 a month, annual billing only.</span></span>
+            <span class="mini-card"><span class="mini-card-name">Lisbon offsite</span><span class="mini-card-note">12 people, a hotel near Alfama.</span></span>
+          </div>
+          <h3 class="why-claim">Projects stay apart</h3>
+          <p class="why-text">Each chat keeps its own memory, so projects never mix.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-visual" aria-hidden="true">
+            <p class="mini-bubble">Make it $17 instead.</p>
+            <span class="mini-note"><span class="mini-date">Today</span><span class="mini-note-text">$17 a month, annual billing only.</span></span>
+          </div>
+          <h3 class="why-claim">Nothing to manage</h3>
+          <p class="why-text">No “remember this”. Change your mind, and the note is rewritten.</p>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -254,7 +265,7 @@
     <div class="container">
       <div class="section-head">
         <h2 class="section-title">Your notes, in plain sight</h2>
-        <p class="section-lead">Every note is on your Memory page, grouped by topic and dated. Edit or delete any of them.</p>
+        <p class="section-lead">Every note is on your Memory page, grouped by topic and dated. Edit, export or delete any of them.</p>
       </div>
 
       <figure class="memory" aria-label="Example of the Memory page: a memory called Northwind pricing, with notes under the topics Pricing and Launch.">
@@ -281,13 +292,6 @@
         </div>
       </figure>
 
-      <!-- Each line is in privacy.html: nothing here goes further. -->
-      <ul class="trust" aria-label="Your data">
-        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Never used to train AI models</li>
-        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Export your notes, any time</li>
-        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Recent messages deleted after 30 quiet days</li>
-        <li><svg width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg>Each account kept apart from every other</li>
-      </ul>
     </div>
   </section>
 
@@ -304,7 +308,7 @@
         </div>
         <div class="faq-item">
           <dt class="faq-q">Who can read my notes?</dt>
-          <dd class="faq-a">You, and SkyOS’s operator if needed, for example when you ask for help. More in <a href="/privacy">Privacy</a>.</dd>
+          <dd class="faq-a">You, and SkyOS’s operator if needed, for example when you ask for help. Notes are never used to train AI. More in <a href="/privacy">Privacy</a>.</dd>
         </div>
         <div class="faq-item">
           <dt class="faq-q">What does it cost?</dt>

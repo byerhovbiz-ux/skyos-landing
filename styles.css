@@ -196,32 +196,6 @@ a { color: inherit; }
 /* A note arriving: a wash that fades, so the eye goes to it. */
 .memory-row.is-new .memory-note { animation: demo-note 1.6s ease-out; }
 
-.demo-foot {
-  display: flex;
-  align-items: center;
-  gap: 2px;
-  padding: 6px 8px 6px 20px;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-  color: var(--subtext);
-}
-.demo-foot > span { margin-right: auto; }
-.demo-control {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: 0;
-  border-radius: 999px;
-  background: transparent;
-  color: var(--subtext);
-  cursor: pointer;
-}
-.demo-control:hover { background: var(--surface-sunk); color: var(--ink); }
-.demo.is-paused .demo-icon-pause, .demo:not(.is-paused) .demo-icon-play { display: none; }
-
 /* A step arriving fades up a little. */
 .demo-scene [data-step] { animation: demo-in 0.3s ease-out; }
 @media (prefers-reduced-motion: reduce) {
@@ -266,15 +240,40 @@ a { color: inherit; }
 .compare-line { margin-top: 14px; font-size: 17px; line-height: 1.45; }
 .compare-col-without .compare-line { color: var(--subtext); }
 
-/* Why: rows split by thin lines, not cards, so it reads differently from
-   How it works. On a phone the claim sits above its sentence. */
-.why { max-width: 880px; margin: 0 auto; }
-.why-row { display: grid; gap: 4px; padding: 20px 0; }
-.why-row:first-child { padding-top: 0; }
-.why-row + .why-row { border-top: 1px solid var(--border); }
-.why-row:last-child { padding-bottom: 0; }
-.why-claim { font-size: 17px; font-weight: 600; color: var(--ink); }
-.why-text { margin: 0; font-size: 16px; line-height: 1.5; color: var(--subtext); }
+/* Why: four cards, each a small picture of its point above a short line. */
+.why { display: grid; gap: 16px; }
+.why-card { padding: 8px 8px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.why-visual {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  height: 172px;
+  padding: 16px max(16px, calc(50% - 170px));
+  border-radius: 10px;
+  background: var(--surface-sunk);
+}
+.why-claim { margin: 20px 16px 0; font-size: 18px; font-weight: 600; }
+.why-text { margin: 6px 16px 0; font-size: 15px; color: var(--subtext); }
+/* The pictures' pieces, in the demo's own style. */
+.why-visual-hub { align-items: center; gap: 0; }
+.hub-apps { display: flex; gap: 14px; }
+.hub-app { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+/* Lines from the three apps down to the one memory. */
+.hub-join { position: relative; width: 116px; height: 18px; border: 1px solid var(--border-strong); border-top: 0; border-radius: 0 0 12px 12px; }
+.hub-join::before, .hub-join::after { content: ""; position: absolute; left: calc(50% - 0.5px); width: 1px; background: var(--border-strong); }
+.hub-join::before { top: 0; height: 100%; }
+.hub-join::after { top: 100%; height: 14px; }
+.mini-mem { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 8px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; font-size: 14px; font-weight: 600; }
+.mini-bubble { align-self: flex-end; max-width: 85%; padding: 8px 12px; background: var(--surface); border-radius: 12px; font-size: 14px; }
+.mini-answer { font-size: 14px; line-height: 1.5; }
+.mini-answer strong { font-weight: 600; }
+.mini-card { display: grid; gap: 2px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+.mini-card-name { font-size: 14px; font-weight: 600; }
+.mini-card-note { font-size: 13px; color: var(--subtext); }
+.mini-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; }
+.mini-date { font-size: 12px; color: var(--subtext); }
+.mini-note-text { padding: 8px 12px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; font-size: 14px; }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
 .how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
@@ -324,11 +323,6 @@ a { color: inherit; }
 .memory-date { grid-area: date; font-size: 13px; color: var(--subtext); }
 .memory-note { grid-area: note; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; }
 .memory-actions { grid-area: actions; display: flex; gap: 14px; color: var(--muted); }
-
-/* What happens to the user's data: four short facts under the Memory page. */
-.trust { display: grid; gap: 10px 28px; max-width: 880px; margin: 24px auto 0; padding: 0; list-style: none; font-size: 14px; color: var(--subtext); }
-.trust li { display: flex; align-items: center; gap: 10px; }
-.trust svg { flex: none; color: var(--ink); }
 
 /* Every answer open: a question in ink, its answer in subtext. */
 .faq { display: grid; gap: 28px; }
@@ -438,10 +432,8 @@ a { color: inherit; }
   .demo-scene { padding-inline: max(24px, calc(50% - 360px)); }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
-  .why-row { grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 32px; align-items: baseline; padding: 24px 0; }
-  .why-row:last-child { padding-bottom: 0; }
+  .why { grid-template-columns: 1fr 1fr; }
   .faq { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 40px; }
-  .trust { grid-template-columns: 1fr 1fr; padding: 0 4px; }
   .section { padding-top: 128px; }
   .section-head { margin-bottom: 48px; }
   .section-title { font-size: 42px; }
@@ -450,7 +442,7 @@ a { color: inherit; }
   .footer-top { grid-template-columns: minmax(0, 1fr) auto; padding: 72px 0 56px; }
   .footer-cols { grid-template-columns: repeat(2, 180px); gap: 48px; }
   .memory { padding: 32px; }
-  .memory-row { grid-template-columns: 96px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 16px; }
+  .memory-row { grid-template-columns: 84px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 12px; }
   .memory-date { font-size: 14px; }
   /* As in the app: a run of notes from the same day shows its date once. */
   .memory-date.is-repeat { visibility: hidden; }
@@ -466,9 +458,9 @@ a { color: inherit; }
   .demo-step .brand-mark { width: 24px; height: 22px; }
   .demo-step-name { font-size: 16px; }
   .demo-step-when { font-size: 14px; }
-  .demo-stage { height: 332px; }
+  .demo-stage { height: 296px; }
   .demo-scene { gap: 24px; padding: 48px max(56px, calc(50% - 400px)); }
-  .demo-scene-memory { gap: 0; }
+  .demo-scene-memory { gap: 0; padding-block: 32px; }
   .bubble { font-size: 19px; }
   .bubble-user { padding: 14px 20px; border-radius: 18px; }
   .tool-call { gap: 12px; }
@@ -478,11 +470,9 @@ a { color: inherit; }
   .demo .memory-name { font-size: 30px; }
   .demo .memory-meta { font-size: 16px; }
   .demo .memory-topic { margin-top: 24px; font-size: 18px; }
-  .demo .memory-row { grid-template-columns: 112px minmax(0, 1fr) auto; }
+  .demo .memory-row { grid-template-columns: 92px minmax(0, 1fr) auto; }
   .demo .memory-date { font-size: 15px; }
   .demo .memory-note { padding: 16px 20px; font-size: 19px; }
   .demo .memory-actions svg { width: 19px; height: 19px; }
-  .demo-foot { padding: 10px 16px 10px 24px; font-size: 15px; }
-  .demo-control { width: 36px; height: 36px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }

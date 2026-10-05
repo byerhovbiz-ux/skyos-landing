@@ -1,4 +1,4 @@
-// The demo beside the headline: one decision on its way through ChatGPT,
+// The demo under the headline: one decision on its way through ChatGPT,
 // SkyOS and Claude, played in one card and looped.
 //
 // Each step is written in index.html in its finished state; this hides the
@@ -7,16 +7,14 @@
 // note.
 //
 // It pauses while the card is off screen or the tab is hidden, and picks up
-// where it stopped. Picking a step in the header shows it finished and
-// pauses; the footer plays, pauses and starts again. With reduced motion it
+// where it stopped. Picking a step in the header shows it finished and stops
+// the loop there, which is the way to stop it. With reduced motion it
 // doesn't play by itself: it shows the last step finished.
 (function () {
   var demo = document.querySelector('[data-demo]');
   if (!demo) return;
   var scenes = demo.querySelectorAll('.demo-scene');
   var picks = demo.querySelectorAll('[data-show]');
-  var toggle = demo.querySelector('[data-toggle]');
-  var replay = demo.querySelector('[data-replay]');
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var STOP = {};
@@ -56,11 +54,6 @@
   function reset(scene) {
     finish(scene);
     Array.prototype.forEach.call(steps(scene), function (el) { el.hidden = true; });
-  }
-
-  function setPaused(paused) {
-    demo.classList.toggle('is-paused', paused);
-    toggle.setAttribute('aria-label', paused ? 'Play' : 'Pause');
   }
 
   // A pause that counts only while the demo can be seen, and ends the
@@ -121,18 +114,11 @@
 
   function play(from) {
     var id = ++run;
-    setPaused(false);
     var i = from;
     function loop() {
       return playScene(i, id).then(function () { i = (i + 1) % scenes.length; return loop(); });
     }
     loop().catch(function (e) { if (e !== STOP) throw e; });
-  }
-
-  function pause() {
-    run += 1;
-    finish(scenes[current]);
-    setPaused(true);
   }
 
   Array.prototype.forEach.call(picks, function (pick) {
@@ -141,13 +127,8 @@
       var i = Number(pick.dataset.show);
       finish(scenes[i]);
       show(i);
-      setPaused(true);
     });
   });
-  toggle.addEventListener('click', function () {
-    if (demo.classList.contains('is-paused')) play(current); else pause();
-  });
-  replay.addEventListener('click', function () { play(0); });
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
@@ -159,7 +140,6 @@
   if (still) {
     Array.prototype.forEach.call(scenes, finish);
     show(scenes.length - 1);
-    setPaused(true);
     return;
   }
   play(0);
