@@ -154,7 +154,7 @@ a { color: inherit; }
 .demo-arrow { flex: none; color: var(--muted); }
 
 /* As tall as its tallest step, the Memory page. */
-.demo-stage { position: relative; height: 256px; }
+.demo-stage { position: relative; height: 300px; }
 .demo-scene {
   position: absolute;
   inset: 0;
@@ -187,10 +187,24 @@ a { color: inherit; }
 .tool-call.is-busy .tool-call-mark { animation: demo-pulse 0.9s ease-in-out infinite; }
 .tool-call.is-busy .tool-call-done { visibility: hidden; }
 
-/* The Memory page, smaller. */
-.demo-scene-memory { gap: 0; justify-content: center; }
+/* The Memory page, smaller: the app's own top bar, controls, header and
+   rows (memory.html), on the app's page colour. */
+.demo-scene-memory { gap: 0; padding: 0; background: var(--bg); }
+.app-bar { display: flex; align-items: center; gap: 20px; flex: none; height: 44px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.app-brand { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
+.app-nav { display: flex; gap: 4px; }
+.app-nav span { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border: 1px solid transparent; border-radius: 999px; font-size: 13px; color: var(--subtext); }
+.app-nav .is-active { border-color: var(--ink); color: var(--ink); }
+.app-page { padding: 14px 16px 0; }
+.app-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+.app-pill { display: inline-flex; align-items: center; gap: 10px; height: 32px; padding: 0 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; white-space: nowrap; }
+.app-chev, .app-search svg { flex: none; color: var(--muted); }
+.app-search { width: 150px; color: var(--muted); }
+.app-more { flex: none; margin-left: auto; color: var(--ink); }
 .demo .memory-name { font-size: 20px; }
-.demo .memory-topic { margin-top: 18px; }
+.app-topic { margin: 14px 0 8px; font-size: 15px; font-weight: 600; }
+/* Search gets its own row in the app on a phone; here there's no room. */
+@media (max-width: 480px) { .app-search { display: none; } }
 .memory-say { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; }
 .memory-say .say-phrase { font-weight: 500; color: var(--ink); }
 /* A note arriving: a wash that fades, so the eye goes to it. */
@@ -205,7 +219,7 @@ a { color: inherit; }
 /* On a phone the Memory page wraps to more lines, and the header only fits
    tighter, then without logos. */
 @media (max-width: 560px) {
-  .demo-stage { height: 300px; }
+  .demo-stage { height: 352px; }
 }
 @media (max-width: 480px) {
   .demo-head { gap: 2px; padding: 8px; }
@@ -213,7 +227,7 @@ a { color: inherit; }
 }
 @media (max-width: 360px) {
   .demo-step svg { display: none; }
-  .demo-stage { height: 344px; }
+  .demo-stage { height: 352px; }
 }
 
 @keyframes demo-in { from { opacity: 0; transform: translateY(4px); } }
@@ -441,6 +455,8 @@ a { color: inherit; }
   .footer-cols { grid-template-columns: repeat(2, 180px); gap: 48px; }
   .memory { padding: 32px; }
   .memory-row { grid-template-columns: 84px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 12px; }
+  .app-topic, .memory-topic { padding-left: 96px; }
+  .app-bar, .app-page { padding-inline: max(20px, calc(50% - 360px)); }
   .memory-date { font-size: 14px; }
   /* As in the app: a run of notes from the same day shows its date once. */
   .memory-date.is-repeat { visibility: hidden; }
@@ -460,21 +476,22 @@ a { color: inherit; }
   .demo-step .brand-mark { width: 24px; height: 22px; }
   .demo-step-name { font-size: 16px; }
   .demo-step-when { font-size: 14px; }
-  .demo-stage { height: 296px; }
+  .demo-stage { height: 312px; }
   .demo-scene { gap: 24px; padding: 48px max(56px, calc(50% - 400px)); }
-  .demo-scene-memory { gap: 0; padding-block: 32px; }
+  .demo-scene-memory { gap: 0; padding: 0; }
+  .app-bar, .app-page { padding-inline: max(56px, calc(50% - 400px)); }
+  .app-topic { padding-left: 104px; }
   .bubble { font-size: 19px; }
   .bubble-user { padding: 14px 20px; border-radius: 18px; }
   .tool-call { gap: 12px; }
   .tool-call-mark { width: 20px; height: 18px; }
   .tool-call-label { font-size: 16px; }
   .tool-call code { font-size: 14px; }
-  .demo .memory-name { font-size: 30px; }
-  .demo .memory-meta { font-size: 16px; }
-  .demo .memory-topic { margin-top: 24px; font-size: 18px; }
+  .demo .memory-name { font-size: 24px; }
+  .demo .memory-meta { font-size: 14px; }
   .demo .memory-row { grid-template-columns: 92px minmax(0, 1fr) auto; }
   .demo .memory-date { font-size: 15px; }
-  .demo .memory-note { padding: 16px 20px; font-size: 19px; }
+  .demo .memory-note { padding: 12px 16px; font-size: 17px; }
   .demo .memory-actions svg { width: 19px; height: 19px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }
