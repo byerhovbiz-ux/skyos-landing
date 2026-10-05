@@ -106,15 +106,9 @@ a { color: inherit; }
 }
 .hero-lead { max-width: 30em; margin-top: 20px; font-size: 18px; color: var(--subtext); text-wrap: balance; }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
-/* The demo on a dotted stage, drawn from the palette's own greys. */
-.hero-stage {
-  margin-top: 48px;
-  padding: 24px 12px;
-  border: 1px solid var(--border);
-  border-radius: 24px;
-  background: radial-gradient(circle, var(--border-strong) 1px, transparent 1.5px) 0 0 / 20px 20px, var(--surface-sunk);
-}
-.hero-stage .demo { margin: 0 auto; }
+/* The demo is the product shot, as wide as the page's content. */
+.hero-stage { margin-top: 40px; }
+.hero-stage .demo { max-width: none; margin: 0 auto; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
 /* The demo: one decision on its way through ChatGPT, SkyOS and Claude, in
@@ -438,7 +432,10 @@ a { color: inherit; }
   .container { --gutter-x: 24px; }
   .hero { padding-top: 80px; }
   .hero-lead { font-size: 20px; }
-  .hero-stage { margin-top: 64px; padding: 56px 24px; }
+  .hero-stage { margin-top: 64px; }
+  /* A wide window keeps its conversation in a centred column, as ChatGPT
+     and Claude lay a chat out on a wide screen. */
+  .demo-scene { padding-inline: max(24px, calc(50% - 360px)); }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .why-row { grid-template-columns: minmax(0, 280px) minmax(0, 1fr); gap: 32px; align-items: baseline; padding: 24px 0; }
@@ -462,23 +459,30 @@ a { color: inherit; }
 
 
 @media (min-width: 1080px) {
-  /* The demo as the product shot: larger, and its type with it. */
-  .hero-stage { padding: 48px 40px; }
-  .hero-stage .demo { max-width: 800px; }
-  .demo-head { gap: 10px; padding: 12px; }
-  .demo-step { gap: 10px; padding: 8px 14px; }
-  .demo-step-name { font-size: 14px; }
-  .demo-step-when { font-size: 13px; }
-  .demo-stage { height: 272px; }
-  .demo-scene { gap: 20px; padding: 32px 36px; }
+  /* The full-width demo, its type scaled up to match and its column wider. */
+  .demo-head { gap: 14px; padding: 16px; }
+  .demo-step { gap: 12px; padding: 10px 18px; }
+  .demo-step .logo { width: 22px; height: 22px; }
+  .demo-step .brand-mark { width: 24px; height: 22px; }
+  .demo-step-name { font-size: 16px; }
+  .demo-step-when { font-size: 14px; }
+  .demo-stage { height: 332px; }
+  .demo-scene { gap: 24px; padding: 48px max(56px, calc(50% - 400px)); }
   .demo-scene-memory { gap: 0; }
-  .bubble { font-size: 17px; }
-  .bubble-user { padding: 12px 16px; }
-  .tool-call-label { font-size: 15px; }
-  .tool-call code { font-size: 13px; }
-  .demo .memory-name { font-size: 24px; }
-  .demo .memory-meta { font-size: 15px; }
-  .demo .memory-note { font-size: 17px; }
-  .demo-foot { padding: 8px 12px 8px 36px; font-size: 14px; }
+  .bubble { font-size: 19px; }
+  .bubble-user { padding: 14px 20px; border-radius: 18px; }
+  .tool-call { gap: 12px; }
+  .tool-call-mark { width: 20px; height: 18px; }
+  .tool-call-label { font-size: 16px; }
+  .tool-call code { font-size: 14px; }
+  .demo .memory-name { font-size: 30px; }
+  .demo .memory-meta { font-size: 16px; }
+  .demo .memory-topic { margin-top: 24px; font-size: 18px; }
+  .demo .memory-row { grid-template-columns: 112px minmax(0, 1fr) auto; }
+  .demo .memory-date { font-size: 15px; }
+  .demo .memory-note { padding: 16px 20px; font-size: 19px; }
+  .demo .memory-actions svg { width: 19px; height: 19px; }
+  .demo-foot { padding: 10px 16px 10px 24px; font-size: 15px; }
+  .demo-control { width: 36px; height: 36px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }
