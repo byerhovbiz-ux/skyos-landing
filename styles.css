@@ -432,12 +432,15 @@ a { color: inherit; }
 
 /* ---- wider ------------------------------------------------------------- */
 @media (min-width: 720px) {
-  /* The app's wider layouts, at its own sizes. */
+  /* The app's wider layouts, at its own sizes. Side margins as a desktop
+     screen shows them: 24px in a narrow window, up to 80px (the app's own at
+     1440px) in the widest. */
   .ad-stage { height: 600px; }
-  .ad-bar { gap: 72px; height: 68px; padding: 0 24px; }
+  .ad-screen { --ad-gutter: clamp(24px, 12.5% - 60px, 80px); }
+  .ad-bar { gap: 72px; height: 68px; padding: 0 var(--ad-gutter); }
   .ad-nav { gap: 8px; }
   .ad-nav button { padding: 0 12px; }
-  .ad-page { padding: 40px 24px 56px; }
+  .ad-page { padding: 40px var(--ad-gutter) 56px; }
   .ad-h1 { font-size: 34px; }
   .ad-card { padding: 28px; gap: 20px; }
   .ad-card-tools { gap: 24px; }
