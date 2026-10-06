@@ -95,6 +95,8 @@
       return wait(1200, id).then(function () { setCall(el, false); return wait(500, id); });
     }
     if (kind === 'answer') return stream(el, el.dataset.full, id).then(function () { return wait(400, id); });
+    // ChatGPT's buttons under its answer, once the answer is written.
+    if (kind === 'actions') { el.hidden = false; return wait(500, id); }
     if (kind === 'note') {
       el.classList.add('is-new');
       el.hidden = false;

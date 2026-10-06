@@ -187,6 +187,19 @@ a { color: inherit; }
 .tool-call.is-busy .tool-call-mark { animation: demo-pulse 0.9s ease-in-out infinite; }
 .tool-call.is-busy .tool-call-done { visibility: hidden; }
 
+/* ChatGPT, as it shows a SkyOS call: a rounder message pill, grey working
+   lines with chevrons, and the answer's buttons. */
+.demo-scene-gpt .bubble-user { border-radius: 20px; }
+.gpt-work { display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--muted); }
+.gpt-worked, .gpt-tool { display: inline-flex; align-items: center; gap: 8px; }
+.gpt-tool svg:first-child { flex: none; }
+.gpt-chev { flex: none; margin-left: -2px; }
+/* While it works: no "Worked for" yet, and the summary pulses. */
+.gpt-work.is-busy .gpt-worked { visibility: hidden; }
+.gpt-work.is-busy .gpt-tool { animation: demo-pulse 0.9s ease-in-out infinite; }
+.gpt-actions { display: flex; gap: 14px; margin-top: -6px; color: var(--muted); }
+.gpt-actions svg { flex: none; }
+
 /* The Memory page, smaller: the app's own top bar, controls, header and
    rows (memory.html), on the app's page colour. */
 .demo-scene-memory { gap: 0; padding: 0; background: var(--bg); }
@@ -476,9 +489,12 @@ a { color: inherit; }
   .demo-step .brand-mark { width: 24px; height: 22px; }
   .demo-step-name { font-size: 16px; }
   .demo-step-when { font-size: 14px; }
-  .demo-stage { height: 312px; }
+  .demo-stage { height: 336px; }
   .demo-scene { gap: 24px; padding: 48px max(56px, calc(50% - 400px)); }
   .demo-scene-memory { gap: 0; padding: 0; }
+  .gpt-work { gap: 12px; font-size: 16px; }
+  .gpt-actions { gap: 16px; }
+  .gpt-actions svg { width: 18px; height: 18px; }
   .app-bar, .app-page { padding-inline: max(56px, calc(50% - 400px)); }
   .app-topic { padding-left: 104px; }
   .bubble { font-size: 19px; }
