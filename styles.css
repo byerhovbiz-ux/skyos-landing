@@ -111,11 +111,12 @@ a { color: inherit; }
 .hero-stage .demo { max-width: none; margin: 0 auto; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
-/* The demo: the SkyOS app in a window, drawn with dashboard.html's and
-   memory.html's own pieces on the app's page colour, a little smaller. Each
-   page, its top bar included (the app's bar isn't fixed), scrolls inside the
-   window and fades out at the bottom until it is scrolled to its end.
-   Controls show the app's hover effects. */
+/* The demo: the SkyOS app in a window, drawn at the app's own sizes with
+   dashboard.html's and memory.html's own pieces, on the app's page colour.
+   Each page, its top bar included (the app's bar isn't fixed), scrolls
+   inside the window and fades out at the bottom until it is scrolled to its
+   end. Controls show the app's hover effects. Phone sizes first, as in the
+   app below 640px; wider from 720px. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -124,14 +125,7 @@ a { color: inherit; }
   box-shadow: 0 24px 60px -32px color-mix(in srgb, var(--ink) 22%, transparent);
   overflow: hidden;
 }
-.ad-bar { display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
-.ad-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
-.ad-nav { display: flex; gap: 4px; }
-/* The app's nav: a pill round the page you are on. */
-.ad-nav button { height: 26px; padding: 0 11px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 13px; cursor: pointer; transition: color 0.12s ease; }
-.ad-nav button:hover { color: var(--ink); }
-.ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
-.ad-stage { position: relative; height: 526px; }
+.ad-stage { position: relative; height: 560px; }
 .ad-screen {
   position: absolute;
   inset: 0;
@@ -146,31 +140,47 @@ a { color: inherit; }
 }
 .ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
 .ad-screen.is-active { visibility: visible; opacity: 1; transition: opacity 0.3s ease; }
-.ad-page { padding: 20px 16px 28px; }
+
+/* The app's top bar. */
+.ad-bar { display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.ad-brand { display: inline-flex; align-items: center; gap: 12px; font-size: 16px; font-weight: 500; letter-spacing: -0.01em; }
+.ad-brand .brand-mark { width: 27px; height: 24px; }
+.ad-nav { display: flex; gap: 2px; }
+/* A pill round the page you are on. */
+.ad-nav button { height: 28px; padding: 0 10px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 14px; cursor: pointer; transition: color 0.12s ease; }
+.ad-nav button:hover { color: var(--ink); }
+.ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+.ad-page { padding: 28px 16px 48px; }
 
 /* The quiet controls' soft square, and the buttons, as in the app. */
 .ad-link, .ad-mem-name, .ad-icon, .ad-more, .ad-copy, .ad-btn, .ad-pill { cursor: pointer; transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease; }
 .ad-link, .ad-mem-name { margin: 0 -10px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); font: inherit; text-align: left; }
 .ad-link:hover, .ad-mem-name:hover, .ad-icon:hover, .ad-more:hover, .ad-copy:hover { background: var(--surface-sunk); }
 .ad-icon:hover, .ad-copy:hover { color: var(--ink); }
+.ad-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 44px; padding: 0 18px; border-radius: var(--radius-btn); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong); font-size: 15px; font-weight: 500; white-space: nowrap; }
+.ad-btn:hover { background: var(--surface-sunk); }
+.ad-btn-primary { background: var(--ink); color: var(--on-ink); box-shadow: none; }
+.ad-btn-primary:hover { background: var(--ink-hover); }
+.ad-btn-sm { height: 36px; padding: 0 14px; font-size: 14px; }
 
 /* Dashboard: its heading, cards, memories and tools. */
-.ad-h1 { margin-bottom: 16px; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
-.ad-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.ad-card + .ad-card { margin-top: 14px; }
-.ad-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-.ad-card-text { display: flex; flex-direction: column; gap: 5px; }
-.ad-card-title { font-size: 16px; font-weight: 500; }
-.ad-card-sub { font-size: 13px; color: var(--subtext); }
-.ad-plan { font-size: 15px; font-weight: 500; }
-.ad-link { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; font-size: 13px; white-space: nowrap; }
+.ad-h1 { margin-bottom: 24px; font-size: 28px; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; }
+.ad-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.ad-card + .ad-card { margin-top: 16px; }
+.ad-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
+.ad-card-text { display: flex; flex-direction: column; gap: 6px; }
+.ad-card-title { font-size: 18px; font-weight: 500; }
+.ad-card-sub { font-size: 14px; color: var(--subtext); }
+.ad-plan { font-size: 16px; font-weight: 500; }
+.ad-link { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; font-size: 14px; white-space: nowrap; }
 .ad-mems, .ad-tools, .ad-notes { margin: 0; padding: 0; list-style: none; }
-.ad-mem { display: grid; gap: 2px; padding: 6px 0; }
+.ad-mem { display: grid; gap: 2px; padding: 6px 0 10px; }
 .ad-mem + .ad-mem, .ad-tool + .ad-tool { border-top: 1px solid var(--border); }
-.ad-mem-name { justify-self: start; padding: 5px 10px; font-size: 14px; font-weight: 500; }
-.ad-mem-meta { font-size: 13px; color: var(--subtext); }
+.ad-mem-name { justify-self: start; padding: 6px 10px; font-size: 15px; font-weight: 500; }
+.ad-mem-meta { font-size: 14px; color: var(--subtext); }
 /* The tools as their marks; hovering them says which, as in the app. */
-.ad-mem-tools { position: relative; display: inline-flex; gap: 6px; vertical-align: -3px; }
+.ad-mem-tools { position: relative; display: inline-flex; gap: 8px; vertical-align: -4px; }
+.ad-mem-tools .logo { width: 18px; height: 18px; }
 .ad-mem-tools::after {
   content: attr(data-tip);
   position: absolute;
@@ -190,42 +200,44 @@ a { color: inherit; }
   transition: opacity 0.12s ease;
 }
 .ad-mem-tools:hover::after { opacity: 1; transition-delay: 0.15s; }
-.ad-tool { display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 10px 12px; padding: 12px 0; }
+.ad-card-tools { gap: 20px; }
+.ad-tool { display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 12px 14px; padding: 16px 0; }
 .ad-tool:first-child { padding-top: 0; }
-.ad-tool-text { display: flex; flex-direction: column; gap: 3px; }
-.ad-tool-name { font-size: 15px; font-weight: 500; }
-.ad-tool-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
+.ad-tool:last-child { padding-bottom: 0; }
+.ad-tool .logo { width: 24px; height: 24px; }
+.ad-tool-text { display: flex; flex-direction: column; gap: 4px; }
+.ad-tool-name { font-size: 16px; font-weight: 500; line-height: 1.35; }
+.ad-tool-status { display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 1.4; color: var(--subtext); }
 .ad-dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--ink); }
-.ad-btn { justify-self: start; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: var(--radius-btn); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong); font-size: 13px; font-weight: 500; white-space: nowrap; }
-.ad-btn:hover { background: var(--surface-sunk); }
-.ad-btn-primary { background: var(--ink); color: var(--on-ink); box-shadow: none; }
-.ad-btn-primary:hover { background: var(--ink-hover); }
-.ad-tool .ad-btn { grid-column: 2; }
-.ad-card-row .ad-btn { align-self: stretch; }
+.ad-tool .ad-btn { grid-column: 2; justify-self: start; }
+/* On a phone the card's own button takes the width, as in the app. */
+.ad-card-row .ad-btn { width: 100%; }
 
 /* Memory: the picker, search and ⋯, the header, the notes and the footnote. */
-.ad-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
-.ad-pill { display: inline-flex; align-items: center; gap: 12px; height: 38px; padding: 0 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; white-space: nowrap; }
+.ad-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-bottom: 28px; }
+.ad-pill { display: inline-flex; align-items: center; height: 46px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 14px; white-space: nowrap; }
 .ad-pill:hover { border-color: var(--border-strong); }
 .ad-pill svg { flex: none; color: var(--muted); }
-.ad-search { gap: 10px; width: 180px; color: var(--muted); }
-.ad-more { display: flex; margin-left: auto; border-radius: 10px; color: var(--ink); }
-.ad-title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
-.ad-sub { margin-top: 6px; font-size: 13px; color: var(--subtext); }
+.ad-picker { justify-content: space-between; gap: 14px; padding: 0 18px; }
+.ad-search { grid-column: 1 / -1; grid-row: 2; gap: 10px; padding: 0 18px 0 16px; color: var(--muted); }
+.ad-more { display: flex; grid-column: 2; grid-row: 1; width: 40px; height: 40px; border-radius: 10px; color: var(--ink); }
+.ad-more svg { width: 40px; height: 40px; }
+.ad-title { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -0.01em; }
+.ad-sub { margin-top: 6px; font-size: 14px; color: var(--subtext); }
 .ad-say { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; }
 .ad-phrase { font-weight: 500; color: var(--ink); }
-.ad-copy { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 999px; color: var(--muted); }
-.ad-topic { margin-top: 26px; }
-.ad-topic-title { margin-bottom: 12px; font-size: 16px; font-weight: 600; }
-.ad-notes { display: flex; flex-direction: column; gap: 14px; }
+.ad-copy { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; color: var(--muted); }
+.ad-copy svg { width: 15px; height: 15px; }
+.ad-topic { margin-top: 36px; }
+.ad-topic-title { margin-bottom: 16px; font-size: 18px; font-weight: 600; line-height: 1.4; }
+.ad-notes { display: flex; flex-direction: column; gap: 20px; }
 /* On a phone, as in the app: date and buttons above the note. */
-.ad-note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date acts" "body body"; align-items: center; gap: 4px 12px; }
-.ad-note-date { grid-area: date; font-size: 13px; color: var(--subtext); }
-.ad-note-body { grid-area: body; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; font-size: 15px; line-height: 1.5; }
-.ad-acts { grid-area: acts; display: flex; gap: 2px; }
-.ad-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 10px; color: var(--muted); }
-.ad-footnote { margin-top: 36px; font-size: 12px; color: var(--subtext); }
-@media (max-width: 480px) { .ad-search { display: none; } }
+.ad-note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date acts" "body body"; align-items: center; gap: 2px 12px; }
+.ad-note-date { grid-area: date; font-size: 15px; color: var(--subtext); }
+.ad-note-body { grid-area: body; padding: 16px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); font-size: 17px; line-height: 1.55; }
+.ad-acts { grid-area: acts; display: flex; gap: 4px; }
+.ad-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; color: var(--muted); }
+.ad-footnote { margin-top: 40px; font-size: 13px; color: var(--subtext); }
 @media (prefers-reduced-motion: reduce) {
   .demo *, .demo *::before, .demo *::after { animation: none !important; transition: none !important; }
 }
@@ -420,19 +432,32 @@ a { color: inherit; }
 
 /* ---- wider ------------------------------------------------------------- */
 @media (min-width: 720px) {
-  /* The app's wider layouts, as in dashboard.html and memory.html. */
-  .ad-bar { gap: 56px; padding: 0 28px; }
-  .ad-page { padding: 24px 28px; }
-  .ad-card { padding: 22px 24px; }
+  /* The app's wider layouts, at its own sizes. */
+  .ad-stage { height: 600px; }
+  .ad-bar { gap: 72px; height: 68px; padding: 0 24px; }
+  .ad-nav { gap: 8px; }
+  .ad-nav button { padding: 0 12px; }
+  .ad-page { padding: 40px 24px 56px; }
+  .ad-h1 { font-size: 34px; }
+  .ad-card { padding: 28px; gap: 20px; }
+  .ad-card-tools { gap: 24px; }
   .ad-card-row { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
-  .ad-card-row .ad-btn { align-self: auto; }
-  .ad-mem { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 6px 0; }
+  .ad-card-row .ad-btn { width: auto; }
+  .ad-mem { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 14px; min-height: 44px; padding: 0; }
   .ad-mem-tools::after { left: 50%; transform: translateX(-50%); }
-  .ad-tool { grid-template-columns: 22px minmax(0, 1fr) auto; }
+  .ad-tool { grid-template-columns: 24px minmax(0, 1fr) auto; column-gap: 16px; padding: 18px 0; }
   .ad-tool .ad-btn { grid-column: auto; justify-self: end; }
-  .ad-note { grid-template-columns: 104px minmax(0, 1fr) 66px; grid-template-areas: "date body acts"; column-gap: 16px; }
-  .ad-note-date { align-self: start; padding-top: 14px; }
-  .ad-topic-title, .ad-footnote { padding-left: 120px; }
+  .ad-controls { display: flex; gap: 16px; margin-bottom: 40px; }
+  .ad-search { width: 210px; }
+  .ad-more { margin-left: auto; }
+  .ad-title { font-size: 28px; }
+  .ad-topic { margin-top: 44px; }
+  .ad-notes { gap: 14px; }
+  .ad-note { grid-template-columns: 140px minmax(0, 1fr) 84px; grid-template-areas: "date body acts"; column-gap: 20px; }
+  .ad-note-date { align-self: start; padding-top: 20px; }
+  .ad-note-body { padding: 18px 22px; font-size: 18px; }
+  .ad-topic-title, .ad-footnote { padding-left: 160px; }
+  .ad-footnote { margin-top: 56px; }
   .container { --gutter-x: 24px; }
   .hero { padding-top: 80px; }
   .hero-lead { font-size: 20px; }
@@ -452,8 +477,7 @@ a { color: inherit; }
 
 
 @media (min-width: 1080px) {
-  .ad-stage { height: 556px; }
-  .ad-page { padding: 32px 48px; }
+  .ad-stage { height: 640px; }
   /* More air between sections on a wide screen. */
   .section { padding-top: 168px; }
   /* Three across once each card has room for its picture. */

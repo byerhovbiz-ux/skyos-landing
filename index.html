@@ -86,9 +86,9 @@
            page. Each page is whole, its top bar included, and scrolls inside
            the window from its top, as the app's pages do. Its controls show the
            app's hover effects but change nothing: only moving between the two
-           pages works (the bar, "All memories", "Northwind pricing").
-           demo.js switches pages by itself until the visitor scrolls or
-           clicks in it. Without JavaScript it shows the memory's page. -->
+           pages works (the bar, "All memories", "Northwind pricing"). It
+           opens on the memory's page, the simplest and the point of SkyOS,
+           and moves only when the visitor picks the other page. -->
       <div class="hero-stage">
       <figure class="demo" data-demo aria-label="The SkyOS app: the Dashboard with your memories and connected tools, and a memory's page with its notes.">
         <div class="ad-stage">
@@ -117,12 +117,12 @@
                   <li class="ad-mem"><span class="ad-mem-name">Meridian launch</span><span class="ad-mem-meta"><span class="ad-mem-tools" data-tip="Used in ChatGPT and Codex"><svg class="logo logo-chatgpt" width="16" height="16" aria-hidden="true"><use href="#i-chatgpt"/></svg><svg class="logo logo-codex" width="16" height="16" aria-hidden="true"><use href="#i-codex"/></svg></span> · 9 notes · used 4 days ago</span></li>
                 </ul>
               </section>
-              <section class="ad-card">
+              <section class="ad-card ad-card-tools">
                 <span class="ad-card-text"><span class="ad-card-title">Connected tools</span><span class="ad-card-sub">18 notes saved. Every one is listed in Memory, and you can delete any of them.</span></span>
                 <ul class="ad-tools">
-                  <li class="ad-tool"><svg class="logo logo-claude" width="22" height="22" aria-hidden="true"><use href="#i-claude"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Claude</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 5 min ago</span></span><span class="ad-btn">Disconnect</span></li>
-                  <li class="ad-tool"><svg class="logo logo-chatgpt" width="22" height="22" aria-hidden="true"><use href="#i-chatgpt"/></svg><span class="ad-tool-text"><span class="ad-tool-name">ChatGPT</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved just now</span></span><span class="ad-btn">Disconnect</span></li>
-                  <li class="ad-tool"><svg class="logo logo-codex" width="22" height="22" aria-hidden="true"><use href="#i-codex"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Codex</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 4 days ago</span></span><span class="ad-btn">Disconnect</span></li>
+                  <li class="ad-tool"><svg class="logo logo-claude" width="22" height="22" aria-hidden="true"><use href="#i-claude"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Claude</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 5 min ago</span></span><span class="ad-btn ad-btn-sm">Disconnect</span></li>
+                  <li class="ad-tool"><svg class="logo logo-chatgpt" width="22" height="22" aria-hidden="true"><use href="#i-chatgpt"/></svg><span class="ad-tool-text"><span class="ad-tool-name">ChatGPT</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved just now</span></span><span class="ad-btn ad-btn-sm">Disconnect</span></li>
+                  <li class="ad-tool"><svg class="logo logo-codex" width="22" height="22" aria-hidden="true"><use href="#i-codex"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Codex</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 4 days ago</span></span><span class="ad-btn ad-btn-sm">Disconnect</span></li>
                 </ul>
               </section>
               <section class="ad-card">
@@ -144,7 +144,7 @@
             </div>
             <div class="ad-page">
               <div class="ad-controls">
-                <span class="ad-pill">Northwind pricing<svg width="11" height="7" viewBox="0 0 11.2514 6.75083" fill="none" aria-hidden="true"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ad-pill ad-picker">Northwind pricing<svg width="11" height="7" viewBox="0 0 11.2514 6.75083" fill="none" aria-hidden="true"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
                 <span class="ad-pill ad-search"><svg width="14" height="16" viewBox="0 0 14.1087 16.6105" fill="none" aria-hidden="true"><path d="M0.675135 15.9354L4.39092 10.7333M13.4336 6.07575C13.4336 9.05845 11.0157 11.4764 8.03298 11.4764C5.05027 11.4764 2.63231 9.05845 2.63231 6.07575C2.63231 3.09304 5.05027 0.675083 8.03298 0.675083C11.0157 0.675083 13.4336 3.09304 13.4336 6.07575Z" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>Search notes</span>
                 <span class="ad-more"><svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><circle cx="13" cy="20" r="1.6"/><circle cx="20" cy="20" r="1.6"/><circle cx="27" cy="20" r="1.6"/></g></svg></span>
               </div>
