@@ -1,63 +1,38 @@
-// The demo under the headline: one decision on its way through ChatGPT,
-// SkyOS and Claude, played in one card and looped.
+// The demo: the SkyOS app itself, drawn in index.html from the app's own
+// Dashboard and Memory pages. It shows the Dashboard, then the memory's page,
+// where the note just saved from ChatGPT lights up, and loops.
 //
-// Each step is written in index.html in its finished state; this hides the
-// steps and brings them back in order: the user's message, the SkyOS call
-// (busy, then done), the answer word by word, and on the Memory page the
-// note.
-//
-// It pauses while the card is off screen or the tab is hidden, and picks up
-// where it stopped. Picking a step in the header shows it finished and stops
-// the loop there, which is the way to stop it. With reduced motion it
-// doesn't play by itself: it shows the last step finished.
+// It pauses while the window is off screen or the tab is hidden, and picks
+// up where it stopped. Picking Dashboard or Memory in the app's bar shows
+// that page and stops the loop there. With reduced motion it doesn't play by
+// itself: it stays on the memory's page.
 (function () {
   var demo = document.querySelector('[data-demo]');
   if (!demo) return;
-  var scenes = demo.querySelectorAll('.demo-scene');
+  var screens = demo.querySelectorAll('[data-screen]');
   var picks = demo.querySelectorAll('[data-show]');
+  var fresh = demo.querySelector('[data-fresh]');
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var STOP = {};
-  var run = 0;            // the current playthrough; a new one ends the old
-  var current = scenes.length - 1;
+  var run = 0;            // the current loop; a new one, or a pick, ends the old
   var onScreen = true;
   var pageShown = !document.hidden;
 
-  // The finished wording, kept before anything is emptied out.
-  Array.prototype.forEach.call(demo.querySelectorAll('[data-step]'), function (el) {
-    if (el.dataset.step === 'user' || el.dataset.step === 'answer') el.dataset.full = el.textContent;
-    if (el.dataset.step === 'call') el.dataset.done = el.querySelector('[data-label]').textContent;
-  });
-
-  function steps(scene) { return scene.querySelectorAll('[data-step]'); }
-
   function show(i) {
-    current = i;
-    Array.prototype.forEach.call(scenes, function (s, j) { s.classList.toggle('is-active', i === j); });
-    Array.prototype.forEach.call(picks, function (p, j) { p.setAttribute('aria-pressed', String(i === j)); });
+    Array.prototype.forEach.call(screens, function (s, j) { s.classList.toggle('is-active', i === j); });
+    Array.prototype.forEach.call(picks, function (p) { p.setAttribute('aria-pressed', String(Number(p.dataset.show) === i)); });
   }
 
-  function setCall(el, busy) {
-    el.classList.toggle('is-busy', busy);
-    el.querySelector('[data-label]').textContent = busy ? el.dataset.busy : el.dataset.done;
+  // The just-saved note's wash, from the start again.
+  function lightUp() {
+    fresh.classList.remove('is-new');
+    void fresh.offsetWidth;
+    fresh.classList.add('is-new');
   }
 
-  function finish(scene) {
-    Array.prototype.forEach.call(steps(scene), function (el) {
-      el.hidden = false;
-      el.classList.remove('is-new');
-      if (el.dataset.full) el.textContent = el.dataset.full;
-      if (el.dataset.step === 'call') setCall(el, false);
-    });
-  }
-
-  function reset(scene) {
-    finish(scene);
-    Array.prototype.forEach.call(steps(scene), function (el) { el.hidden = true; });
-  }
-
-  // A pause that counts only while the demo can be seen, and ends the
-  // playthrough if a newer one has started.
+  // A pause that counts only while the demo can be seen, and ends the loop if
+  // a newer one has started.
   function wait(ms, id) {
     return new Promise(function (resolve, reject) {
       var left = ms;
@@ -72,53 +47,14 @@
     });
   }
 
-  function stream(el, text, id) {
-    var words = text.split(' ');
-    var n = 0;
-    el.textContent = '';
-    el.hidden = false;
-    function next() {
-      if (n >= words.length) return Promise.resolve();
-      n += 1;
-      el.textContent = words.slice(0, n).join(' ');
-      return wait(70, id).then(next);
-    }
-    return next();
-  }
-
-  function playStep(el, id) {
-    var kind = el.dataset.step;
-    if (kind === 'user') { el.hidden = false; return wait(700, id); }
-    if (kind === 'call') {
-      setCall(el, true);
-      el.hidden = false;
-      return wait(1200, id).then(function () { setCall(el, false); return wait(500, id); });
-    }
-    if (kind === 'answer') return stream(el, el.dataset.full, id).then(function () { return wait(400, id); });
-    // ChatGPT's buttons under its answer, once the answer is written.
-    if (kind === 'actions') { el.hidden = false; return wait(500, id); }
-    if (kind === 'note') {
-      el.classList.add('is-new');
-      el.hidden = false;
-      return wait(2600, id);
-    }
-    return Promise.resolve();
-  }
-
-  function playScene(i, id) {
-    var scene = scenes[i];
-    reset(scene);
-    show(i);
-    return Array.prototype.reduce.call(steps(scene), function (p, el) {
-      return p.then(function () { return playStep(el, id); });
-    }, wait(600, id)).then(function () { return wait(i === scenes.length - 1 ? 3200 : 1600, id); });
-  }
-
-  function play(from) {
+  function play() {
     var id = ++run;
-    var i = from;
     function loop() {
-      return playScene(i, id).then(function () { i = (i + 1) % scenes.length; return loop(); });
+      show(0);
+      return wait(3600, id)
+        .then(function () { show(1); return wait(500, id); })
+        .then(function () { lightUp(); return wait(4800, id); })
+        .then(loop);
     }
     loop().catch(function (e) { if (e !== STOP) throw e; });
   }
@@ -127,8 +63,8 @@
     pick.addEventListener('click', function () {
       run += 1;
       var i = Number(pick.dataset.show);
-      finish(scenes[i]);
       show(i);
+      if (i === 1) lightUp();
     });
   });
 
@@ -139,10 +75,6 @@
   }
   document.addEventListener('visibilitychange', function () { pageShown = !document.hidden; });
 
-  if (still) {
-    Array.prototype.forEach.call(scenes, finish);
-    show(scenes.length - 1);
-    return;
-  }
-  play(0);
+  if (still) { show(1); return; }
+  play();
 })();

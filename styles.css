@@ -16,7 +16,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 h1, h2, h3, p, figure, ol, ul { margin: 0; }
-/* Hidden means hidden, whatever display a class gives it (demo steps). */
+/* Hidden means hidden, whatever display a class gives it. */
 [hidden] { display: none !important; }
 a { color: inherit; }
 .sprite { display: none; }
@@ -111,141 +111,79 @@ a { color: inherit; }
 .hero-stage .demo { max-width: none; margin: 0 auto; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
-/* The demo: one decision on its way through ChatGPT, SkyOS and Claude, in
-   a card under the headline. The header's steps switch between them, and
-   every step sits in the same box, so switching never moves the page. */
+/* The demo: the SkyOS app in a window, drawn with dashboard.html's and
+   memory.html's own pieces on the app's page colour, a little smaller. A
+   window shows part of a page, so the bottom fades out. */
 .demo {
   width: 100%;
-  max-width: 560px;
-  background: var(--surface);
+  background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   box-shadow: 0 24px 60px -32px color-mix(in srgb, var(--ink) 22%, transparent);
   overflow: hidden;
 }
-.demo-head {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  padding: 10px;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
+.ad-bar { display: flex; align-items: center; gap: 28px; height: 56px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.ad-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+.ad-nav { display: flex; gap: 4px; }
+/* The app's nav: a pill round the page you are on. */
+.ad-nav button { height: 26px; padding: 0 11px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 13px; cursor: pointer; }
+.ad-nav button:hover { color: var(--ink); }
+.ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
+.ad-stage {
+  position: relative;
+  height: 470px;
+  -webkit-mask-image: linear-gradient(to bottom, var(--ink) 84%, transparent);
+  mask-image: linear-gradient(to bottom, var(--ink) 84%, transparent);
 }
-/* A border only on the step showing, like the app's nav. */
-.demo-step {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  border: 1px solid transparent;
-  border-radius: 10px;
-  background: transparent;
-  color: var(--ink);
-  font: inherit;
-  text-align: left;
-  white-space: nowrap;
-  cursor: pointer;
-}
-.demo-step[aria-pressed="true"] { border-color: var(--ink); background: var(--surface); }
-.demo-step-text { display: flex; flex-direction: column; line-height: 1.3; }
-.demo-step-name { font-size: 13px; font-weight: 500; }
-.demo-step-when { font-size: 12px; color: var(--subtext); }
-.demo-arrow { flex: none; color: var(--muted); }
+.ad-screen { position: absolute; inset: 0; visibility: hidden; opacity: 0; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+.ad-screen.is-active { visibility: visible; opacity: 1; transition: opacity 0.3s ease; }
+.ad-page { padding: 20px 16px; }
 
-/* As tall as its tallest step, the Memory page. */
-.demo-stage { position: relative; height: 300px; }
-.demo-scene {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 24px 20px;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.25s ease, visibility 0s linear 0.25s;
-}
-.demo-scene.is-active { visibility: visible; opacity: 1; transition: opacity 0.25s ease; }
+/* Dashboard: its cards, memories and tools. */
+.ad-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.ad-card + .ad-card { margin-top: 14px; }
+.ad-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+.ad-card-text { display: flex; flex-direction: column; gap: 5px; }
+.ad-card-title { font-size: 16px; font-weight: 500; }
+.ad-card-sub { font-size: 13px; color: var(--subtext); }
+.ad-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap; }
+.ad-mems, .ad-tools, .ad-notes { margin: 0; padding: 0; list-style: none; }
+.ad-mem { display: grid; gap: 2px; padding: 8px 0; }
+.ad-mem + .ad-mem, .ad-tool + .ad-tool { border-top: 1px solid var(--border); }
+.ad-mem-name { font-size: 14px; font-weight: 500; }
+.ad-mem-meta { font-size: 13px; color: var(--subtext); }
+.ad-mem-tools { display: inline-flex; gap: 6px; vertical-align: -3px; }
+.ad-tool { display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 10px 12px; padding: 12px 0; }
+.ad-tool-text { display: flex; flex-direction: column; gap: 3px; }
+.ad-tool-name { font-size: 15px; font-weight: 500; }
+.ad-tool-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
+.ad-dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--ink); }
+.ad-btn { grid-column: 2; justify-self: start; display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: var(--radius-btn); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong); font-size: 13px; font-weight: 500; }
 
-.bubble { font-size: 15px; line-height: 1.5; }
-.bubble-user {
-  align-self: flex-end;
-  max-width: 85%;
-  padding: 10px 14px;
-  background: var(--surface-sunk);
-  border-radius: 14px;
-}
-
-/* A SkyOS call: what it did, and the name of the tool that ran. */
-.tool-call { display: flex; align-items: flex-start; gap: 10px; }
-.tool-call-mark { flex: none; margin-top: 2px; color: var(--ink); }
-.tool-call-text { display: flex; flex-direction: column; line-height: 1.35; }
-.tool-call-label { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--ink); }
-.tool-call-done { flex: none; color: var(--subtext); }
-.tool-call code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px; color: var(--subtext); }
-.tool-call.is-busy .tool-call-mark { animation: demo-pulse 0.9s ease-in-out infinite; }
-.tool-call.is-busy .tool-call-done { visibility: hidden; }
-
-/* ChatGPT, as it shows a SkyOS call: a rounder message pill, grey working
-   lines with chevrons, and the answer's buttons. */
-.demo-scene-gpt .bubble-user { border-radius: 20px; }
-.gpt-work { display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--muted); }
-.gpt-worked, .gpt-tool { display: inline-flex; align-items: center; gap: 8px; }
-.gpt-tool svg:first-child { flex: none; }
-.gpt-chev { flex: none; margin-left: -2px; }
-/* While it works: no "Worked for" yet, and the summary pulses. */
-.gpt-work.is-busy .gpt-worked { visibility: hidden; }
-.gpt-work.is-busy .gpt-tool { animation: demo-pulse 0.9s ease-in-out infinite; }
-.gpt-actions { display: flex; gap: 14px; margin-top: -6px; color: var(--muted); }
-.gpt-actions svg { flex: none; }
-
-/* The Memory page, smaller: the app's own top bar, controls, header and
-   rows (memory.html), on the app's page colour. */
-.demo-scene-memory { gap: 0; padding: 0; background: var(--bg); }
-.app-bar { display: flex; align-items: center; gap: 20px; flex: none; height: 44px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
-.app-brand { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; letter-spacing: -0.01em; }
-.app-nav { display: flex; gap: 4px; }
-.app-nav span { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border: 1px solid transparent; border-radius: 999px; font-size: 13px; color: var(--subtext); }
-.app-nav .is-active { border-color: var(--ink); color: var(--ink); }
-.app-page { padding: 14px 16px 0; }
-.app-controls { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-.app-pill { display: inline-flex; align-items: center; gap: 10px; height: 32px; padding: 0 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; white-space: nowrap; }
-.app-chev, .app-search svg { flex: none; color: var(--muted); }
-.app-search { width: 150px; color: var(--muted); }
-.app-more { flex: none; margin-left: auto; color: var(--ink); }
-.demo .memory-name { font-size: 20px; }
-.app-topic { margin: 14px 0 8px; font-size: 15px; font-weight: 600; }
-/* Search gets its own row in the app on a phone; here there's no room. */
-@media (max-width: 480px) { .app-search { display: none; } }
-.memory-say { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; }
-.memory-say .say-phrase { font-weight: 500; color: var(--ink); }
-/* A note arriving: a wash that fades, so the eye goes to it. */
-.memory-row.is-new .memory-note { animation: demo-note 1.6s ease-out; }
-
-/* A step arriving fades up a little. */
-.demo-scene [data-step] { animation: demo-in 0.3s ease-out; }
-@media (prefers-reduced-motion: reduce) {
-  .demo *, .demo *::before { animation: none !important; transition: none !important; }
-}
-
-/* On a phone the Memory page wraps to more lines, and the header only fits
-   tighter, then without logos. */
-@media (max-width: 560px) {
-  .demo-stage { height: 352px; }
-}
-@media (max-width: 480px) {
-  .demo-head { gap: 2px; padding: 8px; }
-  .demo-step { gap: 6px; padding: 6px; }
-}
-@media (max-width: 360px) {
-  .demo-step svg { display: none; }
-  .demo-stage { height: 352px; }
-}
-
-@keyframes demo-in { from { opacity: 0; transform: translateY(4px); } }
+/* Memory: the picker, search and ⋯, the header, and the notes. */
+.ad-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
+.ad-pill { display: inline-flex; align-items: center; gap: 12px; height: 38px; padding: 0 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; white-space: nowrap; }
+.ad-pill svg { flex: none; color: var(--muted); }
+.ad-search { gap: 10px; width: 180px; color: var(--muted); }
+.ad-more { display: flex; margin-left: auto; color: var(--ink); }
+.ad-title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
+.ad-sub { margin-top: 6px; font-size: 13px; color: var(--subtext); }
+.ad-say { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; }
+.ad-phrase { font-weight: 500; color: var(--ink); }
+.ad-topic { margin-top: 26px; }
+.ad-topic-title { margin-bottom: 12px; font-size: 16px; font-weight: 600; }
+.ad-notes { display: flex; flex-direction: column; gap: 14px; }
+/* On a phone, as in the app: date and buttons above the note. */
+.ad-note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date acts" "body body"; align-items: center; gap: 6px 12px; }
+.ad-note-date { grid-area: date; font-size: 13px; color: var(--subtext); }
+.ad-note-body { grid-area: body; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; font-size: 15px; line-height: 1.5; }
+.ad-acts { grid-area: acts; display: flex; gap: 12px; color: var(--muted); }
+/* The note just saved: a wash that fades, so the eye goes to it. */
+.ad-note.is-new .ad-note-body { animation: demo-note 1.8s ease-out; }
 @keyframes demo-note { from { background: var(--surface-sunk); border-color: var(--border-strong); } to { background: var(--surface); } }
-@keyframes demo-pulse { 50% { opacity: 0.3; } }
+@media (max-width: 480px) { .ad-search { display: none; } }
+@media (prefers-reduced-motion: reduce) {
+}
 
 .logo { display: block; flex: none; }
 .logo-claude { color: var(--logo-claude); }
@@ -337,18 +275,6 @@ a { color: inherit; }
 .works-label { font-size: 14px; color: var(--subtext); }
 .works-tools { display: inline-flex; gap: 22px; white-space: nowrap; }
 .works-tool { display: inline-flex; align-items: center; gap: 8px; font-weight: 500; }
-
-/* The Memory page, drawn with the app's own rows: date, note, actions. */
-.memory { max-width: 880px; margin: 0 auto; padding: 24px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.memory-name { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
-.memory-meta { margin-top: 4px; font-size: 14px; color: var(--subtext); }
-.memory-topic { margin-top: 28px; font-size: 16px; font-weight: 600; }
-/* On a phone, as in the app: the date and the note's buttons share a line
-   above the note, which keeps the whole width. */
-.memory-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date actions" "note note"; align-items: center; gap: 8px 14px; margin-top: 12px; }
-.memory-date { grid-area: date; font-size: 13px; color: var(--subtext); }
-.memory-note { grid-area: note; padding: 14px 16px; border: 1px solid var(--border); border-radius: 12px; font-size: 16px; }
-.memory-actions { grid-area: actions; display: flex; gap: 14px; color: var(--muted); }
 
 /* Every answer open: a question in ink, its answer in subtext. */
 .faq { display: grid; gap: 28px; }
@@ -449,13 +375,20 @@ a { color: inherit; }
 
 /* ---- wider ------------------------------------------------------------- */
 @media (min-width: 720px) {
+  /* The app's wider layouts, as in dashboard.html and memory.html. */
+  .ad-bar { padding: 0 28px; }
+  .ad-page { padding: 24px 28px; }
+  .ad-card { padding: 22px 24px; }
+  .ad-mem { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 10px 0; }
+  .ad-tool { grid-template-columns: 22px minmax(0, 1fr) auto; }
+  .ad-btn { grid-column: auto; justify-self: end; }
+  .ad-note { grid-template-columns: 104px minmax(0, 1fr) 54px; grid-template-areas: "date body acts"; column-gap: 16px; }
+  .ad-note-date { align-self: start; padding-top: 14px; }
+  .ad-topic-title { padding-left: 120px; }
   .container { --gutter-x: 24px; }
   .hero { padding-top: 80px; }
   .hero-lead { font-size: 20px; }
   .hero-stage { margin-top: 64px; }
-  /* A wide window keeps its conversation in a centred column, as ChatGPT
-     and Claude lay a chat out on a wide screen. */
-  .demo-scene { padding-inline: max(24px, calc(50% - 360px)); }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .faq { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px 40px; }
@@ -466,48 +399,16 @@ a { color: inherit; }
   .close-title { font-size: 52px; }
   .footer-top { grid-template-columns: minmax(0, 1fr) auto; padding: 72px 0 56px; }
   .footer-cols { grid-template-columns: repeat(2, 180px); gap: 48px; }
-  .memory { padding: 32px; }
-  .memory-row { grid-template-columns: 84px minmax(0, 1fr) auto; grid-template-areas: "date note actions"; gap: 12px; }
-  .app-topic, .memory-topic { padding-left: 96px; }
-  .app-bar, .app-page { padding-inline: max(20px, calc(50% - 360px)); }
-  .memory-date { font-size: 14px; }
-  /* As in the app: a run of notes from the same day shows its date once. */
-  .memory-date.is-repeat { visibility: hidden; }
   .legal { padding-top: 72px; }
 }
 
 
 @media (min-width: 1080px) {
+  .ad-stage { height: 500px; }
+  .ad-page { padding: 32px 48px; }
   /* More air between sections on a wide screen. */
   .section { padding-top: 168px; }
   /* Three across once each card has room for its picture. */
   .why { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  /* The full-width demo, its type scaled up to match and its column wider. */
-  .demo-head { gap: 14px; padding: 16px; }
-  .demo-step { gap: 12px; padding: 10px 18px; }
-  .demo-step .logo { width: 22px; height: 22px; }
-  .demo-step .brand-mark { width: 24px; height: 22px; }
-  .demo-step-name { font-size: 16px; }
-  .demo-step-when { font-size: 14px; }
-  .demo-stage { height: 336px; }
-  .demo-scene { gap: 24px; padding: 48px max(56px, calc(50% - 400px)); }
-  .demo-scene-memory { gap: 0; padding: 0; }
-  .gpt-work { gap: 12px; font-size: 16px; }
-  .gpt-actions { gap: 16px; }
-  .gpt-actions svg { width: 18px; height: 18px; }
-  .app-bar, .app-page { padding-inline: max(56px, calc(50% - 400px)); }
-  .app-topic { padding-left: 104px; }
-  .bubble { font-size: 19px; }
-  .bubble-user { padding: 14px 20px; border-radius: 18px; }
-  .tool-call { gap: 12px; }
-  .tool-call-mark { width: 20px; height: 18px; }
-  .tool-call-label { font-size: 16px; }
-  .tool-call code { font-size: 14px; }
-  .demo .memory-name { font-size: 24px; }
-  .demo .memory-meta { font-size: 14px; }
-  .demo .memory-row { grid-template-columns: 92px minmax(0, 1fr) auto; }
-  .demo .memory-date { font-size: 15px; }
-  .demo .memory-note { padding: 12px 16px; font-size: 17px; }
-  .demo .memory-actions svg { width: 19px; height: 19px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }

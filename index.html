@@ -81,89 +81,71 @@
         </div>
       </div>
 
-      <!-- The demo: one decision on its way through. Said in ChatGPT, kept as
-           a note, asked for in Claude a week later; the Claude chat says
-           "continue" first because that is how a new chat reaches an existing
-           memory. Each tool row names the SkyOS tool that really runs at that
-           point. demo.js plays it. Without JavaScript it shows the last
-           step as written here; with reduced motion it starts there and
-           doesn't play by itself. -->
+      <!-- The demo is the SkyOS app itself, drawn in code from dashboard.html
+           and memory.html with the same sample memories as the rest of the
+           page: the Dashboard (scrolled to the memories and tools), then the
+           memory's page, where the note just saved from ChatGPT lights up.
+           demo.js switches between them, and so does the app's own bar.
+           Without JavaScript it shows the memory's page. -->
       <div class="hero-stage">
-      <figure class="demo" data-demo aria-label="Demo: a price decided in ChatGPT is saved as a SkyOS note and recalled in Claude a week later.">
-        <div class="demo-head">
-          <button class="demo-step" type="button" data-show="0" aria-pressed="false">
-            <svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>
-            <span class="demo-step-text"><span class="demo-step-name">ChatGPT</span><span class="demo-step-when">Monday</span></span>
-          </button>
-          <svg class="demo-arrow" width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
-          <button class="demo-step" type="button" data-show="1" aria-pressed="false">
-            <svg class="brand-mark" width="20" height="18" aria-hidden="true"><use href="#i-mark"/></svg>
-            <span class="demo-step-text"><span class="demo-step-name">SkyOS</span><span class="demo-step-when">Memory</span></span>
-          </button>
-          <svg class="demo-arrow" width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg>
-          <button class="demo-step" type="button" data-show="2" aria-pressed="true">
-            <svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>
-            <span class="demo-step-text"><span class="demo-step-name">Claude</span><span class="demo-step-when">A week later</span></span>
-          </button>
+      <figure class="demo" data-demo aria-label="The SkyOS app: the Dashboard with your memories and connected tools, and a memory's page with its notes.">
+        <div class="ad-bar">
+          <span class="ad-brand"><svg class="brand-mark" width="24" height="22" aria-hidden="true"><use href="#i-mark"/></svg>SkyOS</span>
+          <span class="ad-nav">
+            <button type="button" data-show="0" aria-pressed="false">Dashboard</button>
+            <button type="button" data-show="1" aria-pressed="true">Memory</button>
+          </span>
         </div>
-
-        <div class="demo-stage">
-          <!-- ChatGPT as it shows a SkyOS call: the message, "Worked for", a grey
-               summary of the call (ChatGPT words it itself; it names SkyOS,
-               not the tool), the answer and its buttons. -->
-          <div class="demo-scene demo-scene-gpt" data-scene="0">
-            <p class="bubble bubble-user" data-step="user">Let's go annual-only: $15 a month.</p>
-            <div class="gpt-work" data-step="call" data-busy="Using SkyOS…">
-              <span class="gpt-worked">Worked for 4s<svg class="gpt-chev" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.8 5 6.8l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              <span class="gpt-tool"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"><circle cx="8" cy="8" r="2.4"/><path d="M10.4 8v.9a1.75 1.75 0 0 0 3.5 0V8a5.9 5.9 0 1 0-2.3 4.7"/></svg><span data-label>Checked SkyOS and saved the decision</span><svg class="gpt-chev" width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 3.8 5 6.8l3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-            </div>
-            <p class="bubble" data-step="answer">Done — Northwind is $15 a month, billed annually only.</p>
-            <div class="gpt-actions" data-step="actions" aria-hidden="true">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="5.5" y="5.5" width="8" height="8" rx="1.8"/><path d="M10.5 3.5v-.3A1.7 1.7 0 0 0 8.8 1.5H3.2A1.7 1.7 0 0 0 1.5 3.2v5.6a1.7 1.7 0 0 0 1.7 1.7h.3"/></svg>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 14.5V7l2.6-5a1.6 1.6 0 0 1 2 1.9L9 6.5h3.6a1.6 1.6 0 0 1 1.6 1.9l-1 5A1.6 1.6 0 0 1 11.6 14.5H5ZM5 7H2.5v7.5H5"/></svg>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M11 1.5v7.5l-2.6 5a1.6 1.6 0 0 1-2-1.9L7 9.5H3.4a1.6 1.6 0 0 1-1.6-1.9l1-5A1.6 1.6 0 0 1 4.4 1.5H11ZM11 9h2.5V1.5H11"/></svg>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 10.5V2M4.8 5.2 8 2l3.2 3.2M2.5 9.5v3a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2v-3"/></svg>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 8a5.5 5.5 0 0 1-9.6 3.6M2.5 8a5.5 5.5 0 0 1 9.6-3.6M12.3 1.8v2.7H9.6M3.7 14.2v-2.7h2.7"/></svg>
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><circle cx="3.5" cy="8" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="12.5" cy="8" r="1.2"/></svg>
+        <div class="ad-stage">
+          <div class="ad-screen" data-screen="0">
+            <div class="ad-page">
+              <section class="ad-card">
+                <div class="ad-card-head">
+                  <span class="ad-card-text"><span class="ad-card-title">Memories</span><span class="ad-card-sub">3 memories</span></span>
+                  <span class="ad-link">All memories<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </div>
+                <ul class="ad-mems">
+                <li class="ad-mem"><span class="ad-mem-name">Northwind pricing</span><span class="ad-mem-meta"><span class="ad-mem-tools"><svg class="logo logo-chatgpt" width="16" height="16" aria-hidden="true"><use href="#i-chatgpt"/></svg><svg class="logo logo-claude" width="16" height="16" aria-hidden="true"><use href="#i-claude"/></svg></span> · 3 notes · used just now</span></li>
+                <li class="ad-mem"><span class="ad-mem-name">Lisbon offsite</span><span class="ad-mem-meta"><span class="ad-mem-tools"><svg class="logo logo-claude" width="16" height="16" aria-hidden="true"><use href="#i-claude"/></svg></span> · 5 notes · used yesterday</span></li>
+                <li class="ad-mem"><span class="ad-mem-name">Meridian launch</span><span class="ad-mem-meta"><span class="ad-mem-tools"><svg class="logo logo-chatgpt" width="16" height="16" aria-hidden="true"><use href="#i-chatgpt"/></svg><svg class="logo logo-codex" width="16" height="16" aria-hidden="true"><use href="#i-codex"/></svg></span> · 9 notes · used 4 days ago</span></li>
+                </ul>
+              </section>
+              <section class="ad-card">
+                <span class="ad-card-text"><span class="ad-card-title">Connected tools</span><span class="ad-card-sub">17 notes saved. Every one is listed in Memory, and you can delete any of them.</span></span>
+                <ul class="ad-tools">
+                <li class="ad-tool"><svg class="logo logo-claude" width="22" height="22" aria-hidden="true"><use href="#i-claude"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Claude</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 5 min ago</span></span><span class="ad-btn">Disconnect</span></li>
+                <li class="ad-tool"><svg class="logo logo-chatgpt" width="22" height="22" aria-hidden="true"><use href="#i-chatgpt"/></svg><span class="ad-tool-text"><span class="ad-tool-name">ChatGPT</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved just now</span></span><span class="ad-btn">Disconnect</span></li>
+                <li class="ad-tool"><svg class="logo logo-codex" width="22" height="22" aria-hidden="true"><use href="#i-codex"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Codex</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 4 days ago</span></span><span class="ad-btn">Disconnect</span></li>
+                </ul>
+              </section>
             </div>
           </div>
-
-          <!-- The Memory page as the app draws it (app.skyos.ink/memory.html),
-               smaller: its top bar, the memory picker, search and ⋯, the
-               header, and the topic over its notes, lined up with them. -->
-          <div class="demo-scene demo-scene-memory" data-scene="1">
-            <div class="app-bar">
-              <span class="app-brand"><svg class="brand-mark" width="20" height="18"><use href="#i-mark"/></svg>SkyOS</span>
-              <span class="app-nav"><span>Dashboard</span><span class="is-active">Memory</span></span>
-            </div>
-            <div class="app-page">
-              <div class="app-controls">
-                <span class="app-pill">Northwind pricing<svg class="app-chev" width="11" height="7" viewBox="0 0 11.2514 6.75083" fill="none"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-                <span class="app-pill app-search"><svg width="13" height="15" viewBox="0 0 14.1087 16.6105" fill="none"><path d="M0.675135 15.9354L4.39092 10.7333M13.4336 6.07575C13.4336 9.05845 11.0157 11.4764 8.03298 11.4764C5.05027 11.4764 2.63231 9.05845 2.63231 6.07575C2.63231 3.09304 5.05027 0.675083 8.03298 0.675083C11.0157 0.675083 13.4336 3.09304 13.4336 6.07575Z" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>Search notes</span>
-                <svg class="app-more" width="32" height="32" viewBox="0 0 40 40"><g fill="currentColor"><circle cx="13" cy="20" r="1.6"/><circle cx="20" cy="20" r="1.6"/><circle cx="27" cy="20" r="1.6"/></g></svg>
+          <div class="ad-screen is-active" data-screen="1">
+            <div class="ad-page">
+              <div class="ad-controls">
+                <span class="ad-pill">Northwind pricing<svg width="11" height="7" viewBox="0 0 11.2514 6.75083" fill="none" aria-hidden="true"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                <span class="ad-pill ad-search"><svg width="14" height="16" viewBox="0 0 14.1087 16.6105" fill="none" aria-hidden="true"><path d="M0.675135 15.9354L4.39092 10.7333M13.4336 6.07575C13.4336 9.05845 11.0157 11.4764 8.03298 11.4764C5.05027 11.4764 2.63231 9.05845 2.63231 6.07575C2.63231 3.09304 5.05027 0.675083 8.03298 0.675083C11.0157 0.675083 13.4336 3.09304 13.4336 6.07575Z" stroke="currentColor" stroke-width="1.35" stroke-linecap="round"/></svg>Search notes</span>
+                <span class="ad-more"><svg width="32" height="32" viewBox="0 0 40 40" aria-hidden="true"><g fill="currentColor"><circle cx="13" cy="20" r="1.6"/><circle cx="20" cy="20" r="1.6"/><circle cx="27" cy="20" r="1.6"/></g></svg></span>
               </div>
-              <p class="memory-name">Northwind pricing</p>
-              <p class="memory-meta">Used in ChatGPT</p>
-              <p class="memory-meta memory-say">To use this memory in a new chat, say: <span class="say-phrase">continue Northwind pricing</span><svg width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.3" y="5.3" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M10.7 3.2v-.1A1.6 1.6 0 0 0 9.1 1.5H3.1A1.6 1.6 0 0 0 1.5 3.1v6a1.6 1.6 0 0 0 1.6 1.6h.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></p>
-              <p class="app-topic">Pricing</p>
-              <div class="memory-row" data-step="note">
-                <span class="memory-date">Today</span>
-                <p class="memory-note">$15 a month, annual billing only.</p>
-                <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
+              <p class="ad-title">Northwind pricing</p>
+              <p class="ad-sub">Used in ChatGPT and Claude</p>
+              <p class="ad-sub ad-say">To use this memory in a new chat, say: <span class="ad-phrase">continue Northwind pricing</span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5.3" y="5.3" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M10.7 3.2v-.1A1.6 1.6 0 0 0 9.1 1.5H3.1A1.6 1.6 0 0 0 1.5 3.1v6a1.6 1.6 0 0 0 1.6 1.6h.1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></p>
+              <div class="ad-topic">
+                <p class="ad-topic-title">Pricing</p>
+                <ul class="ad-notes">
+                  <li class="ad-note" data-fresh><span class="ad-note-date">Today</span><span class="ad-note-body">$15 a month, annual billing only.</span><span class="ad-acts" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span></li>
+                  <li class="ad-note"><span class="ad-note-date">1 week ago</span><span class="ad-note-body">No free tier, to keep support load down.</span><span class="ad-acts" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span></li>
+                </ul>
+              </div>
+              <div class="ad-topic">
+                <p class="ad-topic-title">Launch</p>
+                <ul class="ad-notes">
+                  <li class="ad-note"><span class="ad-note-date">6 days ago</span><span class="ad-note-body">Live before 15 October.</span><span class="ad-acts" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span></li>
+                </ul>
               </div>
             </div>
           </div>
-
-          <div class="demo-scene is-active" data-scene="2">
-            <p class="bubble bubble-user" data-step="user">continue Northwind pricing. What price did we settle on?</p>
-            <div class="tool-call" data-step="call" data-busy="Opening Northwind pricing">
-              <svg class="tool-call-mark" width="17" height="15" aria-hidden="true"><use href="#i-mark"/></svg>
-              <span class="tool-call-text"><span class="tool-call-label"><span data-label>Opened Northwind pricing</span><svg class="tool-call-done" width="12" height="12" aria-hidden="true"><use href="#i-check"/></svg></span><code>skyos_use_memory</code></span>
-            </div>
-            <p class="bubble" data-step="answer">$15 a month, billed annually only. You settled on it a week ago.</p>
-          </div>
         </div>
-
       </figure>
       </div>
 
@@ -180,42 +162,6 @@
     </div>
   </section>
 
-  <!-- ======================================================= NOTES
-       The Memory page as it is in the app: a memory, its topics, and each
-       note with its date and its edit and delete buttons. -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head">
-        <h2 class="section-title">Your notes, in plain sight</h2>
-        <p class="section-lead">Every note is on your Memory page, grouped by topic and dated. Edit, export or delete any of them.</p>
-      </div>
-
-      <figure class="memory" aria-label="Example of the Memory page: a memory called Northwind pricing, with notes under the topics Pricing and Launch.">
-        <div class="memory-head">
-          <p class="memory-name">Northwind pricing</p>
-          <p class="memory-meta">Used in ChatGPT and Claude</p>
-        </div>
-        <p class="memory-topic">Pricing</p>
-        <div class="memory-row">
-          <span class="memory-date">1 week ago</span>
-          <p class="memory-note">$15 a month, annual billing only.</p>
-          <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
-        </div>
-        <div class="memory-row">
-          <span class="memory-date is-repeat">1 week ago</span>
-          <p class="memory-note">No free tier, to keep support load down.</p>
-          <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
-        </div>
-        <p class="memory-topic">Launch</p>
-        <div class="memory-row">
-          <span class="memory-date">6 days ago</span>
-          <p class="memory-note">Live before 15 October.</p>
-          <span class="memory-actions" aria-hidden="true"><svg width="17" height="17"><use href="#i-pencil"/></svg><svg width="16" height="16"><use href="#i-trash"/></svg></span>
-        </div>
-      </figure>
-
-    </div>
-  </section>
 
   <!-- ===================================================== COMPARE -->
   <section class="section">
