@@ -112,8 +112,9 @@ a { color: inherit; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
 /* The demo: the SkyOS app in a window, drawn with dashboard.html's and
-   memory.html's own pieces on the app's page colour, a little smaller. A
-   window shows part of a page, so the bottom fades out. */
+   memory.html's own pieces on the app's page colour, a little smaller. Each
+   page scrolls inside the window and fades out at the bottom until it is
+   scrolled to its end. Controls show the app's hover effects. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -126,63 +127,106 @@ a { color: inherit; }
 .ad-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
 .ad-nav { display: flex; gap: 4px; }
 /* The app's nav: a pill round the page you are on. */
-.ad-nav button { height: 26px; padding: 0 11px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 13px; cursor: pointer; }
+.ad-nav button { height: 26px; padding: 0 11px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 13px; cursor: pointer; transition: color 0.12s ease; }
 .ad-nav button:hover { color: var(--ink); }
 .ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
-.ad-stage {
-  position: relative;
-  height: 470px;
-  -webkit-mask-image: linear-gradient(to bottom, var(--ink) 84%, transparent);
-  mask-image: linear-gradient(to bottom, var(--ink) 84%, transparent);
+.ad-stage { position: relative; height: 470px; }
+.ad-screen {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+  -webkit-mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
+  mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
-.ad-screen { position: absolute; inset: 0; visibility: hidden; opacity: 0; transition: opacity 0.3s ease, visibility 0s linear 0.3s; }
+.ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
 .ad-screen.is-active { visibility: visible; opacity: 1; transition: opacity 0.3s ease; }
-.ad-page { padding: 20px 16px; }
+.ad-page { padding: 20px 16px 28px; }
 
-/* Dashboard: its cards, memories and tools. */
+/* The quiet controls' soft square, and the buttons, as in the app. */
+.ad-link, .ad-mem-name, .ad-icon, .ad-more, .ad-copy, .ad-btn, .ad-pill { cursor: pointer; transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease; }
+.ad-link, .ad-mem-name { margin: 0 -10px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); font: inherit; text-align: left; }
+.ad-link:hover, .ad-mem-name:hover, .ad-icon:hover, .ad-more:hover, .ad-copy:hover { background: var(--surface-sunk); }
+.ad-icon:hover, .ad-copy:hover { color: var(--ink); }
+
+/* Dashboard: its heading, cards, memories and tools. */
+.ad-h1 { margin-bottom: 16px; font-size: 24px; font-weight: 600; letter-spacing: -0.01em; }
 .ad-card { display: flex; flex-direction: column; gap: 14px; padding: 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
 .ad-card + .ad-card { margin-top: 14px; }
 .ad-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
 .ad-card-text { display: flex; flex-direction: column; gap: 5px; }
 .ad-card-title { font-size: 16px; font-weight: 500; }
 .ad-card-sub { font-size: 13px; color: var(--subtext); }
-.ad-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; white-space: nowrap; }
+.ad-plan { font-size: 15px; font-weight: 500; }
+.ad-link { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; font-size: 13px; white-space: nowrap; }
 .ad-mems, .ad-tools, .ad-notes { margin: 0; padding: 0; list-style: none; }
-.ad-mem { display: grid; gap: 2px; padding: 8px 0; }
+.ad-mem { display: grid; gap: 2px; padding: 6px 0; }
 .ad-mem + .ad-mem, .ad-tool + .ad-tool { border-top: 1px solid var(--border); }
-.ad-mem-name { font-size: 14px; font-weight: 500; }
+.ad-mem-name { justify-self: start; padding: 5px 10px; font-size: 14px; font-weight: 500; }
 .ad-mem-meta { font-size: 13px; color: var(--subtext); }
-.ad-mem-tools { display: inline-flex; gap: 6px; vertical-align: -3px; }
+/* The tools as their marks; hovering them says which, as in the app. */
+.ad-mem-tools { position: relative; display: inline-flex; gap: 6px; vertical-align: -3px; }
+.ad-mem-tools::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  z-index: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s ease;
+}
+.ad-mem-tools:hover::after { opacity: 1; transition-delay: 0.15s; }
 .ad-tool { display: grid; grid-template-columns: 22px minmax(0, 1fr); align-items: center; gap: 10px 12px; padding: 12px 0; }
+.ad-tool:first-child { padding-top: 0; }
 .ad-tool-text { display: flex; flex-direction: column; gap: 3px; }
 .ad-tool-name { font-size: 15px; font-weight: 500; }
 .ad-tool-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
 .ad-dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--ink); }
-.ad-btn { grid-column: 2; justify-self: start; display: inline-flex; align-items: center; height: 32px; padding: 0 12px; border-radius: var(--radius-btn); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong); font-size: 13px; font-weight: 500; }
+.ad-btn { justify-self: start; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 34px; padding: 0 14px; border-radius: var(--radius-btn); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong); font-size: 13px; font-weight: 500; white-space: nowrap; }
+.ad-btn:hover { background: var(--surface-sunk); }
+.ad-btn-primary { background: var(--ink); color: var(--on-ink); box-shadow: none; }
+.ad-btn-primary:hover { background: var(--ink-hover); }
+.ad-tool .ad-btn { grid-column: 2; }
+.ad-card-row .ad-btn { align-self: stretch; }
 
-/* Memory: the picker, search and ⋯, the header, and the notes. */
+/* Memory: the picker, search and ⋯, the header, the notes and the footnote. */
 .ad-controls { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
 .ad-pill { display: inline-flex; align-items: center; gap: 12px; height: 38px; padding: 0 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 13px; white-space: nowrap; }
+.ad-pill:hover { border-color: var(--border-strong); }
 .ad-pill svg { flex: none; color: var(--muted); }
 .ad-search { gap: 10px; width: 180px; color: var(--muted); }
-.ad-more { display: flex; margin-left: auto; color: var(--ink); }
+.ad-more { display: flex; margin-left: auto; border-radius: 10px; color: var(--ink); }
 .ad-title { font-size: 22px; font-weight: 600; letter-spacing: -0.01em; }
 .ad-sub { margin-top: 6px; font-size: 13px; color: var(--subtext); }
 .ad-say { display: flex; flex-wrap: wrap; align-items: center; column-gap: 6px; }
 .ad-phrase { font-weight: 500; color: var(--ink); }
+.ad-copy { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 999px; color: var(--muted); }
 .ad-topic { margin-top: 26px; }
 .ad-topic-title { margin-bottom: 12px; font-size: 16px; font-weight: 600; }
 .ad-notes { display: flex; flex-direction: column; gap: 14px; }
 /* On a phone, as in the app: date and buttons above the note. */
-.ad-note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date acts" "body body"; align-items: center; gap: 6px 12px; }
+.ad-note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date acts" "body body"; align-items: center; gap: 4px 12px; }
 .ad-note-date { grid-area: date; font-size: 13px; color: var(--subtext); }
 .ad-note-body { grid-area: body; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; font-size: 15px; line-height: 1.5; }
-.ad-acts { grid-area: acts; display: flex; gap: 12px; color: var(--muted); }
-/* The note just saved: a wash that fades, so the eye goes to it. */
-.ad-note.is-new .ad-note-body { animation: demo-note 1.8s ease-out; }
-@keyframes demo-note { from { background: var(--surface-sunk); border-color: var(--border-strong); } to { background: var(--surface); } }
+.ad-acts { grid-area: acts; display: flex; gap: 2px; }
+.ad-icon { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 10px; color: var(--muted); }
+.ad-footnote { margin-top: 36px; font-size: 12px; color: var(--subtext); }
 @media (max-width: 480px) { .ad-search { display: none; } }
 @media (prefers-reduced-motion: reduce) {
+  .demo *, .demo *::before, .demo *::after { animation: none !important; transition: none !important; }
 }
 
 .logo { display: block; flex: none; }
@@ -379,12 +423,15 @@ a { color: inherit; }
   .ad-bar { padding: 0 28px; }
   .ad-page { padding: 24px 28px; }
   .ad-card { padding: 22px 24px; }
-  .ad-mem { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 10px 0; }
+  .ad-card-row { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
+  .ad-card-row .ad-btn { align-self: auto; }
+  .ad-mem { grid-template-columns: minmax(0, 1fr) auto; align-items: center; padding: 6px 0; }
+  .ad-mem-tools::after { left: 50%; transform: translateX(-50%); }
   .ad-tool { grid-template-columns: 22px minmax(0, 1fr) auto; }
-  .ad-btn { grid-column: auto; justify-self: end; }
-  .ad-note { grid-template-columns: 104px minmax(0, 1fr) 54px; grid-template-areas: "date body acts"; column-gap: 16px; }
+  .ad-tool .ad-btn { grid-column: auto; justify-self: end; }
+  .ad-note { grid-template-columns: 104px minmax(0, 1fr) 66px; grid-template-areas: "date body acts"; column-gap: 16px; }
   .ad-note-date { align-self: start; padding-top: 14px; }
-  .ad-topic-title { padding-left: 120px; }
+  .ad-topic-title, .ad-footnote { padding-left: 120px; }
   .container { --gutter-x: 24px; }
   .hero { padding-top: 80px; }
   .hero-lead { font-size: 20px; }

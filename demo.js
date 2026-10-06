@@ -1,17 +1,20 @@
 // The demo: the SkyOS app itself, drawn in index.html from the app's own
-// Dashboard and Memory pages. It shows the Dashboard, then the memory's page,
-// where the note just saved from ChatGPT lights up, and loops.
+// Dashboard and Memory pages. It shows the Dashboard, opened scrolled to its
+// memories, then the memory's page, and loops.
 //
 // It pauses while the window is off screen or the tab is hidden, and picks
-// up where it stopped. Picking Dashboard or Memory in the app's bar shows
-// that page and stops the loop there. With reduced motion it doesn't play by
-// itself: it stays on the memory's page.
+// up where it stopped. Once the visitor scrolls or clicks in it, it stops
+// for good and is theirs: the bar, "All memories" and "Northwind pricing"
+// move between the pages, and nothing else does anything. Each page fades
+// out at the bottom until it is scrolled to its end. With reduced motion it
+// doesn't play by itself: it stays on the memory's page.
 (function () {
   var demo = document.querySelector('[data-demo]');
   if (!demo) return;
   var screens = demo.querySelectorAll('[data-screen]');
   var picks = demo.querySelectorAll('[data-show]');
-  var fresh = demo.querySelector('[data-fresh]');
+  var tabs = demo.querySelectorAll('.ad-nav [data-show]');
+  var start = demo.querySelector('[data-start]');
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var STOP = {};
@@ -21,15 +24,12 @@
 
   function show(i) {
     Array.prototype.forEach.call(screens, function (s, j) { s.classList.toggle('is-active', i === j); });
-    Array.prototype.forEach.call(picks, function (p) { p.setAttribute('aria-pressed', String(Number(p.dataset.show) === i)); });
+    Array.prototype.forEach.call(tabs, function (p) { p.setAttribute('aria-pressed', String(Number(p.dataset.show) === i)); });
+    Array.prototype.forEach.call(screens, edge);
   }
 
-  // The just-saved note's wash, from the start again.
-  function lightUp() {
-    fresh.classList.remove('is-new');
-    void fresh.offsetWidth;
-    fresh.classList.add('is-new');
-  }
+  // The fade at the bottom of a page, until it is scrolled to its end.
+  function edge(s) { s.classList.toggle('at-end', s.scrollTop + s.clientHeight >= s.scrollHeight - 2); }
 
   // A pause that counts only while the demo can be seen, and ends the loop if
   // a newer one has started.
@@ -52,21 +52,25 @@
     function loop() {
       show(0);
       return wait(3600, id)
-        .then(function () { show(1); return wait(500, id); })
-        .then(function () { lightUp(); return wait(4800, id); })
+        .then(function () { show(1); return wait(5300, id); })
         .then(loop);
     }
     loop().catch(function (e) { if (e !== STOP) throw e; });
   }
 
   Array.prototype.forEach.call(picks, function (pick) {
-    pick.addEventListener('click', function () {
-      run += 1;
-      var i = Number(pick.dataset.show);
-      show(i);
-      if (i === 1) lightUp();
-    });
+    pick.addEventListener('click', function () { show(Number(pick.dataset.show)); });
   });
+  // Any hand on it ends the loop, so it never switches pages under someone.
+  ['pointerdown', 'wheel', 'touchstart', 'keydown'].forEach(function (type) {
+    demo.addEventListener(type, function () { run += 1; }, { passive: true });
+  });
+  Array.prototype.forEach.call(screens, function (s) {
+    s.addEventListener('scroll', function () { edge(s); }, { passive: true });
+  });
+  // The Dashboard opens where its memories begin, as if scrolled there.
+  screens[0].scrollTop = start.offsetTop - 12;
+  Array.prototype.forEach.call(screens, edge);
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver(function (entries) {
