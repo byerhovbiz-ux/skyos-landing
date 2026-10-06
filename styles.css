@@ -113,8 +113,9 @@ a { color: inherit; }
 
 /* The demo: the SkyOS app in a window, drawn with dashboard.html's and
    memory.html's own pieces on the app's page colour, a little smaller. Each
-   page scrolls inside the window and fades out at the bottom until it is
-   scrolled to its end. Controls show the app's hover effects. */
+   page, its top bar included (the app's bar isn't fixed), scrolls inside the
+   window and fades out at the bottom until it is scrolled to its end.
+   Controls show the app's hover effects. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -123,14 +124,14 @@ a { color: inherit; }
   box-shadow: 0 24px 60px -32px color-mix(in srgb, var(--ink) 22%, transparent);
   overflow: hidden;
 }
-.ad-bar { display: flex; align-items: center; gap: 28px; height: 56px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+.ad-bar { display: flex; align-items: center; gap: 16px; height: 56px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
 .ad-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
 .ad-nav { display: flex; gap: 4px; }
 /* The app's nav: a pill round the page you are on. */
 .ad-nav button { height: 26px; padding: 0 11px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 13px; cursor: pointer; transition: color 0.12s ease; }
 .ad-nav button:hover { color: var(--ink); }
 .ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
-.ad-stage { position: relative; height: 470px; }
+.ad-stage { position: relative; height: 526px; }
 .ad-screen {
   position: absolute;
   inset: 0;
@@ -420,7 +421,7 @@ a { color: inherit; }
 /* ---- wider ------------------------------------------------------------- */
 @media (min-width: 720px) {
   /* The app's wider layouts, as in dashboard.html and memory.html. */
-  .ad-bar { padding: 0 28px; }
+  .ad-bar { gap: 56px; padding: 0 28px; }
   .ad-page { padding: 24px 28px; }
   .ad-card { padding: 22px 24px; }
   .ad-card-row { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
@@ -451,7 +452,7 @@ a { color: inherit; }
 
 
 @media (min-width: 1080px) {
-  .ad-stage { height: 500px; }
+  .ad-stage { height: 556px; }
   .ad-page { padding: 32px 48px; }
   /* More air between sections on a wide screen. */
   .section { padding-top: 168px; }

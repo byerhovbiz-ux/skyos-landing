@@ -83,30 +83,30 @@
 
       <!-- The demo is the SkyOS app itself, drawn in code from dashboard.html
            and memory.html with the same sample memories as the rest of the
-           page. Each page is whole and scrolls inside the window; the
-           Dashboard opens scrolled to its memories. Its controls show the
+           page. Each page is whole, its top bar included, and scrolls inside
+           the window from its top, as the app's pages do. Its controls show the
            app's hover effects but change nothing: only moving between the two
            pages works (the bar, "All memories", "Northwind pricing").
            demo.js switches pages by itself until the visitor scrolls or
            clicks in it. Without JavaScript it shows the memory's page. -->
       <div class="hero-stage">
       <figure class="demo" data-demo aria-label="The SkyOS app: the Dashboard with your memories and connected tools, and a memory's page with its notes.">
-        <div class="ad-bar">
-          <span class="ad-brand"><svg class="brand-mark" width="24" height="22" aria-hidden="true"><use href="#i-mark"/></svg>SkyOS</span>
-          <span class="ad-nav">
-            <button type="button" data-show="0" aria-pressed="false">Dashboard</button>
-            <button type="button" data-show="1" aria-pressed="true">Memory</button>
-          </span>
-        </div>
         <div class="ad-stage">
           <div class="ad-screen" data-screen="0">
+            <div class="ad-bar">
+              <span class="ad-brand"><svg class="brand-mark" width="24" height="22" aria-hidden="true"><use href="#i-mark"/></svg>SkyOS</span>
+              <span class="ad-nav">
+                <button type="button" data-show="0" aria-pressed="true">Dashboard</button>
+                <button type="button" data-show="1" aria-pressed="false">Memory</button>
+              </span>
+            </div>
             <div class="ad-page">
               <p class="ad-h1">Your AI memory</p>
               <section class="ad-card ad-card-row">
                 <span class="ad-card-text"><span class="ad-card-title">Connect your AI tool</span><span class="ad-card-sub">Link Claude, ChatGPT or Codex over MCP. One setup per tool, a few minutes each.</span></span>
                 <span class="ad-btn ad-btn-primary">Connect a tool<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
               </section>
-              <section class="ad-card" data-start>
+              <section class="ad-card">
                 <div class="ad-card-head">
                   <span class="ad-card-text"><span class="ad-card-title">Memories</span><span class="ad-card-sub">3 memories</span></span>
                   <button type="button" class="ad-link" data-show="1">All memories<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
@@ -135,6 +135,13 @@
             </div>
           </div>
           <div class="ad-screen is-active" data-screen="1">
+            <div class="ad-bar">
+              <span class="ad-brand"><svg class="brand-mark" width="24" height="22" aria-hidden="true"><use href="#i-mark"/></svg>SkyOS</span>
+              <span class="ad-nav">
+                <button type="button" data-show="0" aria-pressed="false">Dashboard</button>
+                <button type="button" data-show="1" aria-pressed="true">Memory</button>
+              </span>
+            </div>
             <div class="ad-page">
               <div class="ad-controls">
                 <span class="ad-pill">Northwind pricing<svg width="11" height="7" viewBox="0 0 11.2514 6.75083" fill="none" aria-hidden="true"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>

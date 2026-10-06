@@ -1,6 +1,7 @@
 // The demo: the SkyOS app itself, drawn in index.html from the app's own
-// Dashboard and Memory pages. It shows the Dashboard, opened scrolled to its
-// memories, then the memory's page, and loops.
+// Dashboard and Memory pages, each with the app's top bar, which scrolls away
+// with the page as it does in the app. It shows the Dashboard, then the
+// memory's page, and loops.
 //
 // It pauses while the window is off screen or the tab is hidden, and picks
 // up where it stopped. Once the visitor scrolls or clicks in it, it stops
@@ -13,8 +14,6 @@
   if (!demo) return;
   var screens = demo.querySelectorAll('[data-screen]');
   var picks = demo.querySelectorAll('[data-show]');
-  var tabs = demo.querySelectorAll('.ad-nav [data-show]');
-  var start = demo.querySelector('[data-start]');
   var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   var STOP = {};
@@ -24,7 +23,6 @@
 
   function show(i) {
     Array.prototype.forEach.call(screens, function (s, j) { s.classList.toggle('is-active', i === j); });
-    Array.prototype.forEach.call(tabs, function (p) { p.setAttribute('aria-pressed', String(Number(p.dataset.show) === i)); });
     Array.prototype.forEach.call(screens, edge);
   }
 
@@ -68,8 +66,6 @@
   Array.prototype.forEach.call(screens, function (s) {
     s.addEventListener('scroll', function () { edge(s); }, { passive: true });
   });
-  // The Dashboard opens where its memories begin, as if scrolled there.
-  screens[0].scrollTop = start.offsetTop - 12;
   Array.prototype.forEach.call(screens, edge);
 
   if ('IntersectionObserver' in window) {
