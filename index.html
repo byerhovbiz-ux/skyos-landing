@@ -245,24 +245,25 @@
 
   <!-- ========================================================= FAQ
        Every answer is also in privacy.html or on the tools' own plan pages;
-       nothing here goes further than they do. -->
+       nothing here goes further than they do. Closed until picked: the
+       questions are what most people read. -->
   <section class="section">
     <div class="container">
       <div class="section-head"><h2 class="section-title">Questions</h2></div>
-      <dl class="faq">
-        <div class="faq-item">
-          <dt class="faq-q">What does SkyOS keep?</dt>
-          <dd class="faq-a">Your notes, which you can delete any time. Each chat’s last five messages and replies, until it’s been quiet for 30 days.</dd>
-        </div>
-        <div class="faq-item">
-          <dt class="faq-q">Who can read my notes?</dt>
-          <dd class="faq-a">You, and SkyOS’s operator if needed, for example when you ask for help. OpenAI processes them to write notes and doesn’t train on them. More in <a href="/privacy">Privacy</a>.</dd>
-        </div>
-        <div class="faq-item">
-          <dt class="faq-q">What does it cost?</dt>
-          <dd class="faq-a">Free during the beta, up to 1,000 saved messages a month. Claude and Codex work on free plans; ChatGPT needs a paid plan.</dd>
-        </div>
-      </dl>
+      <div class="faq">
+        <details class="faq-item">
+          <summary class="faq-q">What does SkyOS keep?<span class="faq-icon" aria-hidden="true"></span></summary>
+          <p class="faq-a">Your notes, which you can delete any time. Each chat’s last five messages and replies, until it’s been quiet for 30 days.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Who can read my notes?<span class="faq-icon" aria-hidden="true"></span></summary>
+          <p class="faq-a">You, and SkyOS’s operator if needed, for example when you ask for help. OpenAI processes them to write notes and doesn’t train on them. More in <a href="/privacy">Privacy</a>.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What does it cost?<span class="faq-icon" aria-hidden="true"></span></summary>
+          <p class="faq-a">Free during the beta, up to 1,000 saved messages a month. Claude and Codex work on free plans; ChatGPT needs a paid plan.</p>
+        </details>
+      </div>
     </div>
   </section>
 
