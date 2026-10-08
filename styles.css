@@ -189,6 +189,10 @@ a { color: inherit; }
 .logo-chatgpt { color: var(--logo-openai); }
 .logo-codex { color: var(--logo-codex); }
 
+/* Blocks rising into place (motion.js): a short fade up, once. */
+.motion [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: var(--reveal-delay, 0ms); }
+.motion [data-reveal].is-in { opacity: 1; transform: none; }
+
 /* ---- sections ---------------------------------------------------------- */
 .section { padding: 80px 0 0; }
 /* Every section opens with a centred title, then its content. */

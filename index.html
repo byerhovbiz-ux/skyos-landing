@@ -31,6 +31,15 @@
 
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="styles.css">
+  <!-- Blocks start hidden and rise into place as they scroll into view
+       (motion.js). Not for people who ask for less motion, and never
+       without the script that brings them back. -->
+  <script>
+    if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.add('motion');
+      setTimeout(function () { if (!window.skyosMotion) document.documentElement.classList.remove('motion'); }, 3000);
+    }
+  </script>
 </head>
 <body>
 
@@ -70,12 +79,12 @@
   <section class="hero">
     <div class="container">
       <div class="hero-copy">
-        <p class="hero-pill">Now in beta</p>
-        <h1 class="hero-title">One memory for Claude, ChatGPT and Codex.</h1>
-        <p class="hero-lead">Tell ChatGPT what you decided, and Claude and Codex remember it too.</p>
+        <p data-reveal class="hero-pill">Now in beta</p>
+        <h1 data-reveal style="--reveal-delay: 60ms" class="hero-title">One memory for Claude, ChatGPT and Codex.</h1>
+        <p data-reveal style="--reveal-delay: 120ms" class="hero-lead">Tell ChatGPT what you decided, and Claude and Codex remember it too.</p>
         <!-- The Connect page works without an account, so the setup can be
              seen before signing up. -->
-        <div class="hero-actions">
+        <div data-reveal style="--reveal-delay: 180ms" class="hero-actions">
           <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
           <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
         </div>
@@ -87,7 +96,7 @@
            page is whole, its top bar included, and scrolls inside the window
            from its top, as the app's page does. Its controls show the app's
            hover effects but change nothing. -->
-      <div class="hero-stage">
+      <div data-reveal style="--reveal-delay: 280ms" class="hero-stage">
       <figure class="demo" data-demo aria-label="The SkyOS app: a memory's page with its notes, each dated, grouped by topic.">
         <div class="ad-stage">
           <div class="ad-screen" data-screen>
@@ -135,7 +144,7 @@
 
       <!-- The three logos never split across lines: on a narrow phone "Works
            with" goes above them instead. -->
-      <p class="works-with">
+      <p data-reveal class="works-with">
         <span class="works-label">Works with</span>
         <span class="works-tools">
           <span class="works-tool"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span>
@@ -150,15 +159,15 @@
   <!-- ===================================================== COMPARE -->
   <section class="section">
     <div class="container">
-      <div class="section-head"><h2 class="section-title">The exact answer, not a summary.</h2></div>
+      <div data-reveal class="section-head"><h2 class="section-title">The exact answer, not a summary.</h2></div>
       <div class="compare">
-        <div class="compare-col">
+        <div data-reveal style="--reveal-delay: 80ms" class="compare-col">
           <h3 class="compare-head">With SkyOS</h3>
           <p class="compare-line">“$15 a month, annual billing only.”</p>
           <p class="compare-line">“Live before 15 October.”</p>
           <p class="compare-line">“Supabase — you already use it for the database.”</p>
         </div>
-        <div class="compare-col compare-col-without">
+        <div data-reveal style="--reveal-delay: 160ms" class="compare-col compare-col-without">
           <h3 class="compare-head">Without it</h3>
           <p class="compare-line">“We discussed pricing.”</p>
           <p class="compare-line">“You mentioned launching soon.”</p>
@@ -174,13 +183,13 @@
        memory product is named. -->
   <section class="section">
     <div class="container">
-      <div class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
+      <div data-reveal class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
       <!-- Each card shows its point in SkyOS's own pieces: the three apps
            joined to SkyOS, two memories kept apart, and a note rewritten when
            the user changes their mind.
            The pictures are decoration; the words carry the meaning. -->
       <div class="why">
-        <article class="why-card">
+        <article data-reveal style="--reveal-delay: 80ms" class="why-card">
           <div class="why-visual why-visual-hub" aria-hidden="true">
             <div class="hub-apps"><span class="hub-app"><svg class="logo logo-claude" width="20" height="20"><use href="#i-claude"/></svg></span><span class="hub-app"><svg class="logo logo-chatgpt" width="20" height="20"><use href="#i-chatgpt"/></svg></span><span class="hub-app"><svg class="logo logo-codex" width="20" height="20"><use href="#i-codex"/></svg></span></div>
             <span class="hub-join"></span>
@@ -189,7 +198,7 @@
           <h3 class="why-claim">One memory, every app</h3>
           <p class="why-text">Claude, ChatGPT and Codex read the same notes.</p>
         </article>
-        <article class="why-card">
+        <article data-reveal style="--reveal-delay: 160ms" class="why-card">
           <div class="why-visual" aria-hidden="true">
             <span class="mini-card"><span class="mini-card-name">Northwind pricing</span><span class="mini-card-note">$15 a month, annual billing only.</span></span>
             <span class="mini-card"><span class="mini-card-name">Lisbon offsite</span><span class="mini-card-note">12 people, a hotel near Alfama.</span></span>
@@ -197,7 +206,7 @@
           <h3 class="why-claim">Projects stay apart</h3>
           <p class="why-text">Each chat starts its own memory, so projects never mix.</p>
         </article>
-        <article class="why-card">
+        <article data-reveal style="--reveal-delay: 240ms" class="why-card">
           <div class="why-visual" aria-hidden="true">
             <p class="mini-bubble">Make it $17 instead.</p>
             <span class="mini-note"><span class="mini-date">Today</span><span class="mini-note-text">$17 a month, annual billing only.</span></span>
@@ -212,10 +221,10 @@
   <!-- ================================================ HOW IT WORKS -->
   <section class="section" id="how">
     <div class="container">
-      <div class="section-head"><h2 class="section-title">How it works</h2></div>
+      <div data-reveal class="section-head"><h2 class="section-title">How it works</h2></div>
       <!-- The steps beside what step 1 really is: one address per tool, the
            same ones the Connect page hands out (server/lib/config.ts). -->
-      <div class="how">
+      <div data-reveal style="--reveal-delay: 80ms" class="how">
         <ol class="timeline">
           <li class="tl-step">
             <span class="tl-num" aria-hidden="true">1</span>
@@ -249,8 +258,8 @@
        questions are what most people read. -->
   <section class="section">
     <div class="container">
-      <div class="section-head"><h2 class="section-title">Questions</h2></div>
-      <div class="faq">
+      <div data-reveal class="section-head"><h2 class="section-title">Questions</h2></div>
+      <div data-reveal style="--reveal-delay: 80ms" class="faq">
         <details class="faq-item">
           <summary class="faq-q">What does SkyOS keep?<span class="faq-icon" aria-hidden="true"></span></summary>
           <p class="faq-a">Your notes, which you can delete any time. Each chat’s last five messages and replies, until it’s been quiet for 30 days.</p>
@@ -270,12 +279,12 @@
   <!-- ======================================================= CLOSE -->
   <section class="section close">
     <div class="container">
-      <h2 class="close-title">Stop re-explaining your project.</h2>
-      <div class="close-actions">
+      <h2 data-reveal class="close-title">Stop re-explaining your project.</h2>
+      <div data-reveal style="--reveal-delay: 80ms" class="close-actions">
         <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
       </div>
-      <p class="close-note">Free while in beta. No card needed.</p>
+      <p data-reveal style="--reveal-delay: 160ms" class="close-note">Free while in beta. No card needed.</p>
     </div>
   </section>
 
@@ -325,6 +334,7 @@
 <!-- The Contact form: every [data-contact] link opens it (contact.js). -->
 <script src="contact.js"></script>
 <script src="demo.js"></script>
+<script src="motion.js"></script>
 
 <!-- Vercel Web Analytics: cookieless, so no consent banner. Served by Vercel
      itself, so it 404s harmlessly locally. -->
