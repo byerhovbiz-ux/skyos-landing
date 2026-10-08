@@ -111,12 +111,12 @@ a { color: inherit; }
 .hero-stage .demo { max-width: none; margin: 0 auto; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
-/* The demo: the SkyOS app in a window, drawn at the app's own sizes with
-   dashboard.html's and memory.html's own pieces, on the app's page colour.
-   Each page, its top bar included (the app's bar isn't fixed), scrolls
-   inside the window and fades out at the bottom until it is scrolled to its
-   end. Controls show the app's hover effects. Phone sizes first, as in the
-   app below 640px; wider from 720px. */
+/* The demo: the SkyOS app's Memory page in a window, drawn at the app's own
+   sizes with memory.html's own pieces, on the app's page colour. The page,
+   its top bar included (the app's bar isn't fixed), scrolls inside the window
+   and fades out at the bottom until it is scrolled to its end. Controls show
+   the app's hover effects. Phone sizes first, as in the app below 640px;
+   wider from 720px. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -134,12 +134,8 @@ a { color: inherit; }
   scrollbar-color: var(--border-strong) transparent;
   -webkit-mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
   mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease, visibility 0s linear 0.3s;
 }
 .ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
-.ad-screen.is-active { visibility: visible; opacity: 1; transition: opacity 0.3s ease; }
 
 /* The app's top bar. */
 .ad-bar { display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
@@ -152,66 +148,12 @@ a { color: inherit; }
 .ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
 .ad-page { padding: 28px 16px 48px; }
 
-/* The quiet controls' soft square, and the buttons, as in the app. */
-.ad-link, .ad-mem-name, .ad-icon, .ad-more, .ad-copy, .ad-btn, .ad-pill { cursor: pointer; transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease; }
-.ad-link, .ad-mem-name { margin: 0 -10px; border: 0; border-radius: 10px; background: transparent; color: var(--ink); font: inherit; text-align: left; }
-.ad-link:hover, .ad-mem-name:hover, .ad-icon:hover, .ad-more:hover, .ad-copy:hover { background: var(--surface-sunk); }
+/* The quiet controls' soft square, as in the app. */
+.ad-icon, .ad-more, .ad-copy, .ad-pill { cursor: pointer; transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease; }
+.ad-icon:hover, .ad-more:hover, .ad-copy:hover { background: var(--surface-sunk); }
 .ad-icon:hover, .ad-copy:hover { color: var(--ink); }
-.ad-btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 44px; padding: 0 18px; border-radius: var(--radius-btn); background: var(--surface); box-shadow: inset 0 0 0 1px var(--border-strong); font-size: 15px; font-weight: 500; white-space: nowrap; }
-.ad-btn:hover { background: var(--surface-sunk); }
-.ad-btn-primary { background: var(--ink); color: var(--on-ink); box-shadow: none; }
-.ad-btn-primary:hover { background: var(--ink-hover); }
-.ad-btn-sm { height: 36px; padding: 0 14px; font-size: 14px; }
 
-/* Dashboard: its heading, cards, memories and tools. */
-.ad-h1 { margin-bottom: 24px; font-size: 28px; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; }
-.ad-card { display: flex; flex-direction: column; gap: 16px; padding: 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.ad-card + .ad-card { margin-top: 16px; }
-.ad-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; }
-.ad-card-text { display: flex; flex-direction: column; gap: 6px; }
-.ad-card-title { font-size: 18px; font-weight: 500; }
-.ad-card-sub { font-size: 14px; color: var(--subtext); }
-.ad-plan { font-size: 16px; font-weight: 500; }
-.ad-link { display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; font-size: 14px; white-space: nowrap; }
-.ad-mems, .ad-tools, .ad-notes { margin: 0; padding: 0; list-style: none; }
-.ad-mem { display: grid; gap: 2px; padding: 6px 0 10px; }
-.ad-mem + .ad-mem, .ad-tool + .ad-tool { border-top: 1px solid var(--border); }
-.ad-mem-name { justify-self: start; padding: 6px 10px; font-size: 15px; font-weight: 500; }
-.ad-mem-meta { font-size: 14px; color: var(--subtext); }
-/* The tools as their marks; hovering them says which, as in the app. */
-.ad-mem-tools { position: relative; display: inline-flex; gap: 8px; vertical-align: -4px; }
-.ad-mem-tools .logo { width: 18px; height: 18px; }
-.ad-mem-tools::after {
-  content: attr(data-tip);
-  position: absolute;
-  bottom: calc(100% + 8px);
-  left: 0;
-  z-index: 1;
-  padding: 6px 10px;
-  border-radius: 8px;
-  background: var(--ink);
-  color: var(--on-ink);
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.35;
-  white-space: nowrap;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.12s ease;
-}
-.ad-mem-tools:hover::after { opacity: 1; transition-delay: 0.15s; }
-.ad-card-tools { gap: 20px; }
-.ad-tool { display: grid; grid-template-columns: 24px minmax(0, 1fr); align-items: center; gap: 12px 14px; padding: 16px 0; }
-.ad-tool:first-child { padding-top: 0; }
-.ad-tool:last-child { padding-bottom: 0; }
-.ad-tool .logo { width: 24px; height: 24px; }
-.ad-tool-text { display: flex; flex-direction: column; gap: 4px; }
-.ad-tool-name { font-size: 16px; font-weight: 500; line-height: 1.35; }
-.ad-tool-status { display: flex; align-items: center; gap: 8px; font-size: 14px; line-height: 1.4; color: var(--subtext); }
-.ad-dot { flex: none; width: 8px; height: 8px; border-radius: 999px; background: var(--ink); }
-.ad-tool .ad-btn { grid-column: 2; justify-self: start; }
-/* On a phone the card's own button takes the width, as in the app. */
-.ad-card-row .ad-btn { width: 100%; }
+.ad-notes { margin: 0; padding: 0; list-style: none; }
 
 /* Memory: the picker, search and ⋯, the header, the notes and the footnote. */
 .ad-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-bottom: 28px; }
@@ -440,15 +382,6 @@ a { color: inherit; }
   .ad-nav { gap: 8px; }
   .ad-nav button { padding: 0 12px; }
   .ad-page { padding: 40px var(--ad-gutter) 56px; }
-  .ad-h1 { font-size: 34px; }
-  .ad-card { padding: 28px; gap: 20px; }
-  .ad-card-tools { gap: 24px; }
-  .ad-card-row { flex-direction: row; align-items: center; justify-content: space-between; gap: 24px; }
-  .ad-card-row .ad-btn { width: auto; }
-  .ad-mem { grid-template-columns: minmax(0, 1fr) auto; align-items: center; column-gap: 14px; min-height: 44px; padding: 0; }
-  .ad-mem-tools::after { left: 50%; transform: translateX(-50%); }
-  .ad-tool { grid-template-columns: 24px minmax(0, 1fr) auto; column-gap: 16px; padding: 18px 0; }
-  .ad-tool .ad-btn { grid-column: auto; justify-self: end; }
   .ad-controls { display: flex; gap: 16px; margin-bottom: 40px; }
   .ad-search { width: 210px; }
   .ad-more { margin-left: auto; }

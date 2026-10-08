@@ -1,29 +1,11 @@
-// The demo: the SkyOS app itself, drawn in index.html at the app's own sizes
-// from its Dashboard and Memory pages, each with the app's top bar, which
-// scrolls away with the page as it does in the app. It opens on the memory's
-// page and stays there: the bar, "All memories" and "Northwind pricing" move
-// between the pages, and nothing else does anything. Each page fades out at
-// the bottom until it is scrolled to its end.
+// The demo: the SkyOS app's Memory page, drawn in index.html at the app's own
+// sizes. It scrolls inside its window and fades out at the bottom until it is
+// scrolled to its end. Nothing in it does anything else.
 (function () {
-  var demo = document.querySelector('[data-demo]');
-  if (!demo) return;
-  var screens = demo.querySelectorAll('[data-screen]');
-  var picks = demo.querySelectorAll('[data-show]');
-
-  // The fade at the bottom of a page, until it is scrolled to its end.
-  function edge(s) { s.classList.toggle('at-end', s.scrollTop + s.clientHeight >= s.scrollHeight - 2); }
-
-  function show(i) {
-    Array.prototype.forEach.call(screens, function (s, j) { s.classList.toggle('is-active', i === j); });
-    Array.prototype.forEach.call(screens, edge);
-  }
-
-  Array.prototype.forEach.call(picks, function (pick) {
-    pick.addEventListener('click', function () { show(Number(pick.dataset.show)); });
-  });
-  Array.prototype.forEach.call(screens, function (s) {
-    s.addEventListener('scroll', function () { edge(s); }, { passive: true });
-  });
-  window.addEventListener('resize', function () { Array.prototype.forEach.call(screens, edge); });
-  Array.prototype.forEach.call(screens, edge);
+  var page = document.querySelector('[data-demo] [data-screen]');
+  if (!page) return;
+  function edge() { page.classList.toggle('at-end', page.scrollTop + page.clientHeight >= page.scrollHeight - 2); }
+  page.addEventListener('scroll', edge, { passive: true });
+  window.addEventListener('resize', edge);
+  edge();
 })();

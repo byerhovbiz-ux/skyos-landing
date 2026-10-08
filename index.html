@@ -81,65 +81,21 @@
         </div>
       </div>
 
-      <!-- The demo is the SkyOS app itself, drawn in code from dashboard.html
-           and memory.html with the same sample memories as the rest of the
-           page. Each page is whole, its top bar included, and scrolls inside
-           the window from its top, as the app's pages do. Its controls show the
-           app's hover effects but change nothing: only moving between the two
-           pages works (the bar, "All memories", "Northwind pricing"). It
-           opens on the memory's page, the simplest and the point of SkyOS,
-           and moves only when the visitor picks the other page. -->
+      <!-- The demo is the SkyOS app's Memory page, drawn in code from
+           memory.html with the same sample memory as the rest of the page:
+           the notes themselves, exact and dated, are the point of SkyOS. The
+           page is whole, its top bar included, and scrolls inside the window
+           from its top, as the app's page does. Its controls show the app's
+           hover effects but change nothing. -->
       <div class="hero-stage">
-      <figure class="demo" data-demo aria-label="The SkyOS app: the Dashboard with your memories and connected tools, and a memory's page with its notes.">
+      <figure class="demo" data-demo aria-label="The SkyOS app: a memory's page with its notes, each dated, grouped by topic.">
         <div class="ad-stage">
-          <div class="ad-screen" data-screen="0">
+          <div class="ad-screen" data-screen>
             <div class="ad-bar">
               <span class="ad-brand"><svg class="brand-mark" width="24" height="22" aria-hidden="true"><use href="#i-mark"/></svg>SkyOS</span>
               <span class="ad-nav">
-                <button type="button" data-show="0" aria-pressed="true">Dashboard</button>
-                <button type="button" data-show="1" aria-pressed="false">Memory</button>
-              </span>
-            </div>
-            <div class="ad-page">
-              <p class="ad-h1">Your AI memory</p>
-              <section class="ad-card ad-card-row">
-                <span class="ad-card-text"><span class="ad-card-title">Connect your AI tool</span><span class="ad-card-sub">Link Claude, ChatGPT or Codex over MCP. One setup per tool, a few minutes each.</span></span>
-                <span class="ad-btn ad-btn-primary">Connect a tool<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-              </section>
-              <section class="ad-card">
-                <div class="ad-card-head">
-                  <span class="ad-card-text"><span class="ad-card-title">Memories</span><span class="ad-card-sub">3 memories</span></span>
-                  <button type="button" class="ad-link" data-show="1">All memories<svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-                </div>
-                <ul class="ad-mems">
-                  <li class="ad-mem"><button type="button" class="ad-mem-name" data-show="1">Northwind pricing</button><span class="ad-mem-meta"><span class="ad-mem-tools" data-tip="Used in ChatGPT and Claude"><svg class="logo logo-chatgpt" width="16" height="16" aria-hidden="true"><use href="#i-chatgpt"/></svg><svg class="logo logo-claude" width="16" height="16" aria-hidden="true"><use href="#i-claude"/></svg></span> · 4 notes · used just now</span></li>
-                  <li class="ad-mem"><span class="ad-mem-name">Lisbon offsite</span><span class="ad-mem-meta"><span class="ad-mem-tools" data-tip="Used in Claude"><svg class="logo logo-claude" width="16" height="16" aria-hidden="true"><use href="#i-claude"/></svg></span> · 5 notes · used yesterday</span></li>
-                  <li class="ad-mem"><span class="ad-mem-name">Meridian launch</span><span class="ad-mem-meta"><span class="ad-mem-tools" data-tip="Used in ChatGPT and Codex"><svg class="logo logo-chatgpt" width="16" height="16" aria-hidden="true"><use href="#i-chatgpt"/></svg><svg class="logo logo-codex" width="16" height="16" aria-hidden="true"><use href="#i-codex"/></svg></span> · 9 notes · used 4 days ago</span></li>
-                </ul>
-              </section>
-              <section class="ad-card ad-card-tools">
-                <span class="ad-card-text"><span class="ad-card-title">Connected tools</span><span class="ad-card-sub">18 notes saved. Every one is listed in Memory, and you can delete any of them.</span></span>
-                <ul class="ad-tools">
-                  <li class="ad-tool"><svg class="logo logo-claude" width="22" height="22" aria-hidden="true"><use href="#i-claude"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Claude</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 5 min ago</span></span><span class="ad-btn ad-btn-sm">Disconnect</span></li>
-                  <li class="ad-tool"><svg class="logo logo-chatgpt" width="22" height="22" aria-hidden="true"><use href="#i-chatgpt"/></svg><span class="ad-tool-text"><span class="ad-tool-name">ChatGPT</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved just now</span></span><span class="ad-btn ad-btn-sm">Disconnect</span></li>
-                  <li class="ad-tool"><svg class="logo logo-codex" width="22" height="22" aria-hidden="true"><use href="#i-codex"/></svg><span class="ad-tool-text"><span class="ad-tool-name">Codex</span><span class="ad-tool-status"><span class="ad-dot"></span>Connected · last saved 4 days ago</span></span><span class="ad-btn ad-btn-sm">Disconnect</span></li>
-                </ul>
-              </section>
-              <section class="ad-card">
-                <span class="ad-card-text"><span class="ad-card-title">Plan</span><span class="ad-plan">Beta</span><span class="ad-card-sub">Free while in beta</span><span class="ad-card-sub">86 of 1,000 saved messages this month</span></span>
-              </section>
-              <section class="ad-card ad-card-row">
-                <span class="ad-card-text"><span class="ad-card-title">Export all memories</span><span class="ad-card-sub">Every memory in one Markdown file, with each note and its date.</span></span>
-                <span class="ad-btn">Export</span>
-              </section>
-            </div>
-          </div>
-          <div class="ad-screen is-active" data-screen="1">
-            <div class="ad-bar">
-              <span class="ad-brand"><svg class="brand-mark" width="24" height="22" aria-hidden="true"><use href="#i-mark"/></svg>SkyOS</span>
-              <span class="ad-nav">
-                <button type="button" data-show="0" aria-pressed="false">Dashboard</button>
-                <button type="button" data-show="1" aria-pressed="true">Memory</button>
+                <button type="button">Dashboard</button>
+                <button type="button" aria-pressed="true">Memory</button>
               </span>
             </div>
             <div class="ad-page">
