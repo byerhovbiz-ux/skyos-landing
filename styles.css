@@ -136,6 +136,12 @@ a { color: inherit; }
   mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
 }
 .ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
+/* On a touch screen a finger on the demo moves the page, not the demo: it
+   shows its top and fades out, so the page never has to be scrolled
+   through it or caught at the edges. */
+@media (hover: none) {
+  .ad-screen { overflow-y: hidden; }
+}
 
 /* The app's top bar. */
 .ad-bar { display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
