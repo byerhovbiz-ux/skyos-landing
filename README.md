@@ -41,7 +41,8 @@ changes any of that, change these pages in the same go.
 `contact.js` posts to `https://api.skyos.ink/contact` (the app's server,
 `api/contact.ts`), which accepts only skyos.ink and www.skyos.ink, saves the
 message and emails it through Resend with the sender as reply-to. Mail needs
-`RESEND_API_KEY` and `FEEDBACK_TO` set on the portage-mcp project in Vercel.
+`RESEND_API_KEY` on the skyos-api project in Vercel; it goes to `FEEDBACK_TO`,
+or to `OWNER_EMAIL` when that isn't set.
 
 ## Preview and deploy
 
