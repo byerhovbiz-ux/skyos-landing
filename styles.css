@@ -114,8 +114,9 @@ a { color: inherit; }
 /* The demo: the SkyOS app's Memory page in a window, drawn at the app's own
    sizes with memory.html's own pieces, on the app's page colour. The page,
    its top bar included (the app's bar isn't fixed), scrolls inside the window
-   as the app's does, with nothing added. Controls show the app's hover
-   effects. Phone sizes first, as in the app below 640px; wider from 720px. */
+   and fades out at the bottom until it is scrolled to its end. Controls show
+   the app's hover effects. Phone sizes first, as in the app below 640px;
+   wider from 720px. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -131,7 +132,10 @@ a { color: inherit; }
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--border-strong) transparent;
+  -webkit-mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
+  mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
 }
+.ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
 
 /* The app's top bar. */
 .ad-bar { display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
