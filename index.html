@@ -185,8 +185,8 @@
     <div class="container">
       <div data-reveal class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
       <!-- Each card shows its point in SkyOS's own pieces: the three apps
-           joined to SkyOS, two memories kept apart, and a note rewritten when
-           the user changes their mind.
+           joined to SkyOS, the Memory page's picker open on one memory per
+           project, and a note rewritten when the user changes their mind.
            The pictures are decoration; the words carry the meaning. -->
       <div class="why">
         <article data-reveal style="--reveal-delay: 80ms" class="why-card">
@@ -199,9 +199,13 @@
           <p class="why-text">Claude, ChatGPT and Codex read the same notes.</p>
         </article>
         <article data-reveal style="--reveal-delay: 160ms" class="why-card">
-          <div class="why-visual" aria-hidden="true">
-            <span class="mini-card"><span class="mini-card-name">Northwind pricing</span><span class="mini-card-note">$15 a month, annual billing only.</span></span>
-            <span class="mini-card"><span class="mini-card-name">Lisbon offsite</span><span class="mini-card-note">12 people, a hotel near Alfama.</span></span>
+          <div class="why-visual why-visual-picker" aria-hidden="true">
+            <span class="mini-pill">Northwind pricing<svg width="10" height="6" viewBox="0 0 11.2514 6.75083" fill="none"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span class="mini-menu">
+              <span class="mini-item is-current"><span class="mini-item-name">Northwind pricing</span><span class="mini-item-meta">ChatGPT, Claude · 4 notes</span><span class="mini-tick"><svg width="12" height="10" viewBox="0 0 14 11" fill="none"><path d="M1 5.6 5 9.6 13 1.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></span>
+              <span class="mini-item"><span class="mini-item-name">Lisbon offsite</span><span class="mini-item-meta">Claude · 5 notes</span></span>
+              <span class="mini-item"><span class="mini-item-name">Meridian launch</span><span class="mini-item-meta">ChatGPT, Codex · 9 notes</span></span>
+            </span>
           </div>
           <h3 class="why-claim">Projects stay apart</h3>
           <p class="why-text">Each chat starts its own memory, so projects never mix.</p>

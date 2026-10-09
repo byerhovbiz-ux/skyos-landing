@@ -241,9 +241,17 @@ a { color: inherit; }
 /* SkyOS, larger than the apps it joins. */
 .hub-core { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
 .mini-bubble { align-self: flex-end; max-width: 85%; padding: 8px 12px; background: var(--surface); border-radius: 12px; font-size: 14px; }
-.mini-card { display: grid; gap: 2px; padding: 10px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
-.mini-card-name { font-size: 14px; font-weight: 600; }
-.mini-card-note { overflow: hidden; font-size: 13px; color: var(--subtext); white-space: nowrap; text-overflow: ellipsis; }
+/* The Memory page's picker, open: its pill, and a menu of memories cut off
+   at the bottom of the picture like a screenshot. */
+.why-visual-picker { justify-content: flex-start; gap: 6px; padding-bottom: 0; overflow: hidden; }
+.mini-pill { display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; height: 30px; padding: 0 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; }
+.mini-pill svg { color: var(--muted); }
+.mini-menu { display: flex; flex-direction: column; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 10%, transparent); }
+.mini-item { display: grid; grid-template-columns: minmax(0, 1fr) 12px; align-items: center; column-gap: 8px; padding: 5px 8px; }
+.mini-item-name { font-size: 13px; line-height: 1.35; }
+.mini-item.is-current .mini-item-name { font-weight: 500; }
+.mini-item-meta { grid-column: 1; font-size: 11px; line-height: 1.35; color: var(--subtext); }
+.mini-tick { grid-column: 2; grid-row: 1 / 3; display: flex; }
 .mini-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; }
 .mini-date { font-size: 12px; color: var(--subtext); }
 .mini-note-text { padding: 8px 12px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; font-size: 14px; }
