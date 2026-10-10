@@ -4,8 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SkyOS — one memory for Claude, ChatGPT and Codex</title>
-  <meta name="description" content="Tell one AI what you decided and the others know it too. SkyOS keeps your decisions as notes that Claude, ChatGPT and Codex all read — exact numbers, names and reasons, dated, and yours to edit.">
+  <meta name="description" content="SkyOS gives Claude, ChatGPT and Codex one memory: exact, dated notes of what you decide, to pick up in any chat. Free during the beta.">
+  <link rel="canonical" href="https://www.skyos.ink/">
 
+  <meta property="og:site_name" content="SkyOS">
   <meta property="og:title" content="SkyOS — one memory for Claude, ChatGPT and Codex">
   <meta property="og:description" content="Tell one AI what you decided and the others know it too.">
   <meta property="og:type" content="website">
@@ -31,6 +33,49 @@
 
   <link rel="stylesheet" href="tokens.css">
   <link rel="stylesheet" href="styles.css">
+
+  <!-- What the page says, for search and answer engines. The questions are
+       the page's own, word for word; keep them the same when the FAQ changes. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://www.skyos.ink/#org",
+        "name": "SkyOS",
+        "url": "https://www.skyos.ink/",
+        "logo": "https://www.skyos.ink/icons/icon-192.png",
+        "email": "hello@skyos.ink"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.skyos.ink/#site",
+        "name": "SkyOS",
+        "url": "https://www.skyos.ink/",
+        "publisher": { "@id": "https://www.skyos.ink/#org" }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "name": "SkyOS",
+        "url": "https://www.skyos.ink/",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web",
+        "description": "One memory for Claude, ChatGPT and Codex. SkyOS turns what you decide in your AI chats into short, dated notes that all three read. A number or status older than a month is given with its date. To use a memory in another chat or app, say “continue” and the memory’s name.",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free during the beta, up to 1,000 saved messages a month." },
+        "publisher": { "@id": "https://www.skyos.ink/#org" }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Does SkyOS store my chats?", "acceptedAnswer": { "@type": "Answer", "text": "No, just short notes, which you can see and delete on your dashboard. It briefly keeps a chat’s last few messages so it understands what you mean. The details are in Privacy." } },
+          { "@type": "Question", "name": "Who can read my notes?", "acceptedAnswer": { "@type": "Answer", "text": "You, and SkyOS’s operator if needed, for example when you ask for help. OpenAI processes them to write notes and doesn’t train on them. More in Privacy." } },
+          { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Free during the beta, up to 1,000 saved messages a month. Claude and Codex work on free plans; ChatGPT needs a paid plan." } }
+        ]
+      }
+    ]
+  }
+  </script>
   <!-- Blocks start hidden and rise into place as they scroll into view
        (motion.js). Not for people who ask for less motion, and never
        without the script that brings them back. -->
@@ -173,6 +218,36 @@
           <p class="compare-line">“You mentioned launching soon.”</p>
           <p class="compare-line">“You were choosing a sign-in service.”</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================================= LONG PROJECTS
+       What a project that runs for weeks needs: its memory in any chat, and
+       old facts told apart from current ones. Both pictures are what SkyOS
+       really does: skyos_use_memory's own confirmation line, and recall
+       telling the AI to date a number or status older than a month
+       (server/lib/mcp.ts and tools.ts in the app). -->
+  <section class="section">
+    <div class="container">
+      <div data-reveal class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
+      <div class="pair">
+        <article data-reveal style="--reveal-delay: 80ms" class="why-card">
+          <div class="why-visual" aria-hidden="true">
+            <p class="mini-bubble">continue Northwind pricing</p>
+            <p class="mini-reply"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg><span>Continuing Northwind pricing: last used 2 days ago in ChatGPT.</span></p>
+          </div>
+          <h3 class="why-claim">Continue in any chat</h3>
+          <p class="why-text">In a new chat, in any app, say “continue” and the memory’s name.</p>
+        </article>
+        <article data-reveal style="--reveal-delay: 160ms" class="why-card">
+          <div class="why-visual" aria-hidden="true">
+            <span class="mini-note"><span class="mini-date">2 months ago</span><span class="mini-note-text">40 teams on the waitlist.</span></span>
+            <p class="mini-reply"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg><span><strong>As of 8 August</strong>, 40 teams were on the waitlist.</span></p>
+          </div>
+          <h3 class="why-claim">Knows what’s out of date</h3>
+          <p class="why-text">Every note is dated. Once a number is over a month old, the AI says when it was true.</p>
+        </article>
       </div>
     </div>
   </section>

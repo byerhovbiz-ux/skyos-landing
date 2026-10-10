@@ -214,8 +214,9 @@ a { color: inherit; }
 .compare-line { margin-top: 14px; font-size: 17px; line-height: 1.45; }
 .compare-col-without .compare-line { color: var(--subtext); }
 
-/* Why: three cards in a row, each a small picture of its point above a short line. */
-.why { display: grid; gap: 16px; }
+/* Why: three cards in a row, each a small picture of its point above a short
+   line. Long projects: two of the same cards side by side. */
+.why, .pair { display: grid; gap: 16px; }
 .why-card { padding: 8px 8px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
 .why-visual {
   display: flex;
@@ -252,6 +253,10 @@ a { color: inherit; }
 .mini-item.is-current .mini-item-name { font-weight: 500; }
 .mini-item-meta { grid-column: 1; font-size: 11px; line-height: 1.35; color: var(--subtext); }
 .mini-tick { grid-column: 2; grid-row: 1 / 3; display: flex; }
+/* The AI's answer: plain text beside the app's logo, as chat apps show it. */
+.mini-reply { display: flex; align-self: flex-start; align-items: flex-start; gap: 8px; max-width: 92%; font-size: 14px; line-height: 1.4; }
+.mini-reply .logo { margin-top: 2px; }
+.mini-reply strong { font-weight: 600; }
 .mini-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; }
 .mini-date { font-size: 12px; color: var(--subtext); }
 .mini-note-text { padding: 8px 12px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; font-size: 14px; }
@@ -432,7 +437,7 @@ a { color: inherit; }
   .hero { padding-top: 80px; }
   .hero-lead { font-size: 20px; }
   .hero-stage { margin-top: 64px; }
-  .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .compare, .pair { grid-template-columns: 1fr 1fr; gap: 16px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .section { padding-top: 128px; }
   .section-head { margin-bottom: 48px; }

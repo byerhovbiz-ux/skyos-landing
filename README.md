@@ -11,6 +11,8 @@ styles.css      all styling — phone first, widens at 720px and 960px
 tokens.css      the app's palette, copied from the app's tokens.css
 contact.js      the Contact form, built on any page with a data-contact link
 vercel.json     cleanUrls, so /privacy and /terms work without .html
+robots.txt, sitemap.xml   for search engines; sitemap dates follow each page's "Last updated"
+llms.txt        what SkyOS is, in plain Markdown, for answer engines; keep it true to the page
 icons/, favicon.ico   the SkyOS mark, the same files as the app
 og.png          the link preview image (generated, see below)
 scripts/

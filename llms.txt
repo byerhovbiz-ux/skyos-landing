@@ -1,0 +1,25 @@
+# SkyOS
+
+> SkyOS is one memory for Claude, ChatGPT and Codex. It turns what you decide in your AI chats into short, dated notes that all three apps read, so you don't re-explain your project in every chat.
+
+## What it does
+
+- Connects to Claude, ChatGPT and Codex as an MCP server. Every connected app reads and saves the same notes.
+- Notes keep the exact numbers, names and reasons you gave, not a summary, and each note is dated.
+- When a note older than a month holds a number or a status, the AI says when it was true ("as of 18 August, …") instead of presenting it as current.
+- Each new chat starts its own memory, so projects stay apart. To use a memory in another chat, in any connected app, say "continue" and the memory's name.
+- Notes are rewritten when you change your mind. You can read, edit, export and delete them on the dashboard at app.skyos.ink.
+- SkyOS keeps only the last five exchanges of each chat, deleted after 30 quiet days. Everything older exists only as notes.
+
+## Pricing
+
+- Free during the beta, up to 1,000 saved messages a month.
+- Claude and Codex work on free plans; ChatGPT needs a paid plan.
+
+## Links
+
+- [Get started](https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&signup=1)
+- [How to connect Claude, ChatGPT and Codex](https://app.skyos.ink/connect.html)
+- [Privacy Policy](https://www.skyos.ink/privacy)
+- [Terms of Service](https://www.skyos.ink/terms)
+- Contact: hello@skyos.ink
