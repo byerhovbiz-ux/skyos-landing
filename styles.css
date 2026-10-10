@@ -218,47 +218,30 @@ a { color: inherit; }
 .compare-line { margin-top: 14px; font-size: 17px; line-height: 1.45; }
 .compare-col-without .compare-line { color: var(--subtext); }
 
-/* Why: three cards in a row, each a small picture of its point above a short line. */
+/* Why: three cards in a row, each a small picture of its point above a short
+   line. The pictures are drawn light, straight on the card: no grey panel,
+   no box inside a box, no bold. */
 .why { display: grid; gap: 16px; }
-.why-card { padding: 8px 8px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.why-visual {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
-  height: 152px;
-  padding: 16px max(16px, calc(50% - 170px));
-  border-radius: 10px;
-  background: var(--surface-sunk);
-}
-.why-claim { margin: 18px 14px 0; font-size: 17px; font-weight: 600; }
-.why-text { margin: 4px 14px 0; font-size: 15px; color: var(--subtext); }
-/* The pictures' pieces, in the demo's own style. */
+.why-card { padding: 8px 8px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.why-visual { display: flex; flex-direction: column; justify-content: center; gap: 12px; height: 168px; padding: 16px max(16px, calc(50% - 150px)); }
+.why-claim { margin: 8px 16px 0; font-size: 17px; font-weight: 600; }
+.why-text { margin: 4px 16px 0; font-size: 15px; color: var(--subtext); }
+/* The three apps, joined by thin lines to SkyOS. */
 .why-visual-hub { align-items: center; gap: 0; }
-.hub-apps { display: flex; gap: 14px; }
-.hub-app { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
-/* Lines from the three apps down to the one memory. */
-.hub-join { position: relative; width: 116px; height: 18px; border: 1px solid var(--border-strong); border-top: 0; border-radius: 0 0 12px 12px; }
+.hub-apps { display: flex; gap: 40px; }
+.hub-app { display: inline-flex; }
+.hub-join { position: relative; width: 128px; height: 20px; margin-top: 12px; border: 1px solid var(--border-strong); border-top: 0; border-radius: 0 0 12px 12px; }
 .hub-join::before, .hub-join::after { content: ""; position: absolute; left: calc(50% - 0.5px); width: 1px; background: var(--border-strong); }
 .hub-join::before { top: 0; height: 100%; }
 .hub-join::after { top: 100%; height: 14px; }
-/* SkyOS, larger than the apps it joins. */
-.hub-core { display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; margin-top: 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; }
-.mini-bubble { align-self: flex-end; max-width: 85%; padding: 8px 12px; background: var(--surface); border-radius: 12px; font-size: 14px; }
-/* The Memory page's picker, open: its pill, and a menu of memories cut off
-   at the bottom of the picture like a screenshot. */
-.why-visual-picker { justify-content: flex-start; gap: 6px; padding-bottom: 0; overflow: hidden; }
-.mini-pill { display: inline-flex; align-self: flex-start; align-items: center; gap: 10px; height: 30px; padding: 0 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 12px; }
-.mini-pill svg { color: var(--muted); }
-.mini-menu { display: flex; flex-direction: column; padding: 4px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 8px 20px color-mix(in srgb, var(--ink) 10%, transparent); }
-.mini-item { display: grid; grid-template-columns: minmax(0, 1fr) 12px; align-items: center; column-gap: 8px; padding: 5px 8px; }
-.mini-item-name { font-size: 13px; line-height: 1.35; }
-.mini-item.is-current .mini-item-name { font-weight: 500; }
-.mini-item-meta { grid-column: 1; font-size: 11px; line-height: 1.35; color: var(--subtext); }
-.mini-tick { grid-column: 2; grid-row: 1 / 3; display: flex; }
-.mini-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 10px; }
-.mini-date { font-size: 12px; color: var(--subtext); }
-.mini-note-text { padding: 8px 12px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; font-size: 14px; }
+.hub-core { display: inline-flex; margin-top: 18px; }
+/* A memory chip per project, the open one outlined in ink. */
+.why-visual-chips { align-items: center; gap: 10px; }
+.mini-chip { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; border: 1px solid var(--border); border-radius: 999px; font-size: 14px; color: var(--subtext); }
+.mini-chip.is-current { border-color: var(--ink); color: var(--ink); }
+/* What the user said, and the note it rewrote. */
+.mini-bubble { align-self: flex-end; max-width: 85%; padding: 8px 14px; background: var(--surface-sunk); border-radius: 16px; font-size: 14px; }
+.mini-note-text { align-self: flex-start; max-width: 92%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 14px; }
 
 /* Long projects: one feature per row, a short line beside a small picture
    of it; on a wide screen the second row flips. */
@@ -268,21 +251,21 @@ a { color: inherit; }
 .feature-body { max-width: 26em; margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: balance; }
 /* A phrase to say, kept on one line. */
 .nowrap { white-space: nowrap; }
-/* The picture: one small chat, centred in its grey panel. */
-.feature-visual { display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: var(--radius-card); background: var(--surface-sunk); }
-.feature-visual > * { width: 100%; max-width: 440px; }
-/* A chat in SkyOS's own style: the app on top, the user's messages on the
-   right, the AI's on the left. */
-.chat { display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
-.chat-head { display: flex; align-items: center; gap: 8px; margin-bottom: 2px; font-size: 13px; font-weight: 500; }
-.chat-when { margin-left: auto; font-weight: 400; color: var(--subtext); }
-.chat-user { align-self: flex-end; max-width: 85%; padding: 8px 14px; background: var(--surface-sunk); border-radius: 16px; font-size: 15px; line-height: 1.45; }
-.chat-ai { align-self: flex-start; max-width: 90%; font-size: 15px; line-height: 1.5; }
-.chat-ai strong { font-weight: 600; }
+/* The picture: a white card with the chat drawn straight on it, as light as
+   the cards around it. */
+.feature-visual { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 232px; padding: 32px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.feature-visual > * { width: 100%; max-width: 420px; }
+/* A chat in SkyOS's own style: the app, then the user's message on the
+   right and the AI's answer on the left. */
+.chat { display: flex; flex-direction: column; gap: 12px; }
+.chat-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
+.chat-when { margin-left: auto; }
+.chat-user { align-self: flex-end; max-width: 85%; padding: 9px 15px; background: var(--surface-sunk); border-radius: 18px; font-size: 16px; line-height: 1.45; }
+.chat-ai { align-self: flex-start; max-width: 92%; font-size: 16px; line-height: 1.5; }
 /* A note with its date, as on the Memory page, above the chat that asks about it. */
-.dated-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 14px; }
-.dated-when { font-size: 13px; font-weight: 500; }
-.dated-text { padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
+.dated-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 8px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+.dated-when { font-size: 13px; color: var(--subtext); }
+.dated-text { padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
 .how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
@@ -463,7 +446,7 @@ a { color: inherit; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
-  .feature-visual { padding: 28px; }
+  .feature-visual { min-height: 256px; padding: 40px 32px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .section { padding-top: 144px; }
   .section-head { margin-bottom: 48px; }
@@ -486,6 +469,6 @@ a { color: inherit; }
   .feature-flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .feature-flip .feature-copy { order: 2; }
   .feature + .feature { margin-top: 128px; }
-  .feature-visual { padding: 36px 44px; }
+  .feature-visual { min-height: 280px; padding: 48px 56px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }
