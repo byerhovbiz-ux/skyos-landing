@@ -250,15 +250,17 @@
 
       <div class="feature feature-flip">
         <div class="feature-copy">
-          <h3 class="feature-title">Knows what day it is.</h3>
+          <h3 class="feature-title">Keeps track of time.</h3>
           <p class="feature-body">Every note is dated, and <span class="nowrap">“next Friday”</span> is saved as the real day.</p>
         </div>
-        <figure data-play class="feature-visual" aria-label="On Saturday 10 October the user tells Claude “Send the invites next Friday.”, and SkyOS saves the note “Invites go out on 16 October.”, dated today.">
+        <figure data-play class="feature-visual" aria-label="The user says “Send the invites next Friday.”, and SkyOS saves the note “Invites go out on 16 October.”">
           <div class="chat" aria-hidden="true">
-            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Sat 10 Oct</span></p>
             <p class="chat-user">Send the invites next Friday.</p>
           </div>
-          <p style="--play-delay: 500ms" class="dated-note" aria-hidden="true"><span class="dated-when">Today</span><span class="dated-text">Invites go out on 16 October.</span></p>
+          <div style="--play-delay: 500ms" class="saved-note" aria-hidden="true">
+            <p class="saved-label"><svg class="brand-mark" width="16" height="14"><use href="#i-mark"/></svg>Saved to SkyOS</p>
+            <p class="saved-text">Invites go out on 16 October.</p>
+          </div>
         </figure>
       </div>
     </div>

@@ -200,8 +200,8 @@ a { color: inherit; }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
 /* A chat demo playing once it is well in view (motion.js): each message,
    and the note saved from it, comes in after the one before, as in a chat. */
-.motion [data-play] .chat-user, .motion [data-play] .chat-ai, .motion [data-play] .dated-note { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
-.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai, .motion [data-play].is-playing .dated-note { opacity: 1; transform: none; }
+.motion [data-play] .chat-user, .motion [data-play] .chat-ai, .motion [data-play] .saved-note { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
+.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai, .motion [data-play].is-playing .saved-note { opacity: 1; transform: none; }
 
 /* ---- sections ---------------------------------------------------------- */
 .section { padding: 96px 0 0; }
@@ -262,10 +262,12 @@ a { color: inherit; }
 .chat-when { margin-left: auto; }
 .chat-user { align-self: flex-end; max-width: 85%; padding: 9px 15px; background: var(--surface-sunk); border-radius: 18px; font-size: 16px; line-height: 1.45; }
 .chat-ai { align-self: flex-start; max-width: 92%; font-size: 16px; line-height: 1.5; }
-/* The note SkyOS saved from the message, with its date, as on the Memory page. */
-.dated-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-top: 20px; }
-.dated-when { font-size: 13px; color: var(--subtext); }
-.dated-text { padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
+/* The note SkyOS saved from the message, under the chat rather than in it:
+   the AI answers as usual, and the note is written in SkyOS. */
+.saved-note { margin-top: 20px; }
+.saved-label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
+.saved-label .brand-mark { color: var(--ink); }
+.saved-text { margin-top: 8px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
 .how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
