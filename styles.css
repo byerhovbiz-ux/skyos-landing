@@ -200,7 +200,7 @@ a { color: inherit; }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
 
 /* ---- sections ---------------------------------------------------------- */
-.section { padding: 80px 0 0; }
+.section { padding: 104px 0 0; }
 /* Every section opens with a centred title, then its content. */
 .section-head { max-width: 760px; margin: 0 auto 32px; text-align: center; }
 .section-title { font-size: 28px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance; }
@@ -259,7 +259,7 @@ a { color: inherit; }
 /* Long projects: one feature per row, its words beside a picture of it; on
    a wide screen the second row flips. */
 .feature { display: grid; gap: 24px; align-items: center; }
-.feature + .feature { margin-top: 56px; }
+.feature + .feature { margin-top: 72px; }
 .feature-kicker { font-size: 14px; font-weight: 500; color: var(--subtext); }
 .feature-title { margin-top: 10px; font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance; }
 .feature-body { max-width: 30em; margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--subtext); }
@@ -461,11 +461,11 @@ a { color: inherit; }
   .hero-lead { font-size: 20px; }
   .hero-stage { margin-top: 64px; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
-  .feature + .feature { margin-top: 80px; }
+  .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
   .feature-visual { padding: 28px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
-  .section { padding-top: 128px; }
+  .section { padding-top: 168px; }
   .section-head { margin-bottom: 48px; }
   .section-title { font-size: 34px; }
   .close { padding-bottom: 144px; }
@@ -479,13 +479,13 @@ a { color: inherit; }
 @media (min-width: 1080px) {
   .ad-stage { height: 640px; }
   /* More air between sections on a wide screen. */
-  .section { padding-top: 168px; }
+  .section { padding-top: 224px; }
   /* Three across once each card has room for its picture. */
   .why { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .feature { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; }
   .feature-flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .feature-flip .feature-copy { order: 2; }
-  .feature + .feature { margin-top: 112px; }
+  .feature + .feature { margin-top: 152px; }
   .feature-visual { padding: 36px 44px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }
