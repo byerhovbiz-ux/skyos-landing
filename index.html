@@ -76,8 +76,8 @@
     ]
   }
   </script>
-  <!-- Blocks start hidden and rise into place as they scroll into view
-       (motion.js). Not for people who ask for less motion, and never
+  <!-- The hero rises into place on load, and the chat demos play once in
+       view (motion.js). Not for people who ask for less motion, and never
        without the script that brings them back. -->
   <script>
     if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -204,15 +204,15 @@
   <!-- ===================================================== COMPARE -->
   <section class="section">
     <div class="container">
-      <div data-reveal class="section-head"><h2 class="section-title">The exact answer, not a summary.</h2></div>
+      <div class="section-head"><h2 class="section-title">The exact answer, not a summary.</h2></div>
       <div class="compare">
-        <div data-reveal style="--reveal-delay: 80ms" class="compare-col">
+        <div class="compare-col">
           <h3 class="compare-head">With SkyOS</h3>
           <p class="compare-line">“$15 a month, annual billing only.”</p>
           <p class="compare-line">“Live before 15 October.”</p>
           <p class="compare-line">“Supabase — you already use it for the database.”</p>
         </div>
-        <div data-reveal style="--reveal-delay: 160ms" class="compare-col compare-col-without">
+        <div class="compare-col compare-col-without">
           <h3 class="compare-head">Without it</h3>
           <p class="compare-line">“We discussed pricing.”</p>
           <p class="compare-line">“You mentioned launching soon.”</p>
@@ -230,50 +230,50 @@
        "continue my last chat"; it hands over the notes and the last few
        messages; the note-writer saves "next Friday" as a date; and recall
        tells the AI to date a number or status older than a month. The chats
-       are SkyOS's own style, not copies of the apps; the messages appear one
-       by one as they scroll into view. -->
+       are SkyOS's own style, not copies of the apps; once a chat is well in
+       view its messages come in one by one. -->
   <section class="section">
     <div class="container">
-      <div data-reveal class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
+      <div class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
 
       <div class="feature">
-        <div data-reveal class="feature-copy">
+        <div class="feature-copy">
           <p class="feature-kicker">Between chats</p>
           <h3 class="feature-title">Pick up where you left off, in any app.</h3>
           <p class="feature-body">Every new chat starts fresh. Say “continue my last chat”, or “continue” and a memory’s name, and it carries on with the same notes and your last few messages.</p>
         </div>
-        <figure class="feature-visual" aria-label="A chat in ChatGPT two days ago settles the price. A new chat in Claude says “continue my last chat”, SkyOS continues the Northwind pricing memory, and Claude answers with the same price.">
+        <figure data-play class="feature-visual" aria-label="A chat in ChatGPT two days ago settles the price. A new chat in Claude says “continue my last chat”, SkyOS continues the Northwind pricing memory, and Claude answers with the same price.">
           <div class="chat" aria-hidden="true">
-            <p data-reveal class="chat-head"><svg class="logo logo-chatgpt" width="16" height="16"><use href="#i-chatgpt"/></svg>ChatGPT<span class="chat-when">2 days ago</span></p>
-            <p data-reveal style="--reveal-delay: 120ms" class="chat-user">Let’s go annual-only, $15 a month.</p>
-            <p data-reveal style="--reveal-delay: 240ms" class="chat-ai">Done: $15 a month, annual billing only.</p>
+            <p class="chat-head"><svg class="logo logo-chatgpt" width="16" height="16"><use href="#i-chatgpt"/></svg>ChatGPT<span class="chat-when">2 days ago</span></p>
+            <p class="chat-user">Let’s go annual-only, $15 a month.</p>
+            <p style="--play-delay: 300ms" class="chat-ai">Done: $15 a month, annual billing only.</p>
           </div>
-          <div data-reveal style="--reveal-delay: 360ms" class="chat-link" aria-hidden="true"><span class="chat-memory"><svg class="brand-mark" width="18" height="16"><use href="#i-mark"/></svg>Northwind pricing</span></div>
+          <div class="chat-link" aria-hidden="true"><span class="chat-memory"><svg class="brand-mark" width="18" height="16"><use href="#i-mark"/></svg>Northwind pricing</span></div>
           <div class="chat" aria-hidden="true">
-            <p data-reveal style="--reveal-delay: 480ms" class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">New chat, today</span></p>
-            <p data-reveal style="--reveal-delay: 600ms" class="chat-user">continue my last chat</p>
-            <p data-reveal style="--reveal-delay: 720ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in ChatGPT.</p>
-            <p data-reveal style="--reveal-delay: 840ms" class="chat-user">what price did we pick?</p>
-            <p data-reveal style="--reveal-delay: 960ms" class="chat-ai">$15 a month, annual billing only.</p>
+            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">New chat, today</span></p>
+            <p style="--play-delay: 800ms" class="chat-user">continue my last chat</p>
+            <p style="--play-delay: 1100ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in ChatGPT.</p>
+            <p style="--play-delay: 1600ms" class="chat-user">what price did we pick?</p>
+            <p style="--play-delay: 1900ms" class="chat-ai">$15 a month, annual billing only.</p>
           </div>
         </figure>
       </div>
 
       <div class="feature feature-flip">
-        <div data-reveal class="feature-copy">
+        <div class="feature-copy">
           <p class="feature-kicker">Dated notes</p>
           <h3 class="feature-title">Knows what’s out of date.</h3>
           <p class="feature-body">Every note keeps the day it was saved, and “next Friday” is saved as the real date. Once a number or status is more than a month old, your AI says when it was true instead of passing it off as today’s.</p>
         </div>
-        <figure class="feature-visual" aria-label="Two notes in the Northwind pricing memory, saved 6 days and 2 months ago. Asked about the older one, Claude answers “As of 8 August, 40 teams were on it.”">
+        <figure data-play class="feature-visual" aria-label="Two notes in the Northwind pricing memory, saved 6 days and 2 months ago. Asked about the older one, Claude answers “As of 8 August, 40 teams were on it.”">
           <ul class="dated" aria-hidden="true">
-            <li data-reveal class="dated-note"><span class="dated-when">6 days ago</span><span class="dated-text">Live before 15 October.</span></li>
-            <li data-reveal style="--reveal-delay: 120ms" class="dated-note dated-note-old"><span class="dated-when">2 months ago</span><span class="dated-text">40 teams on the waitlist.</span></li>
+            <li class="dated-note"><span class="dated-when">6 days ago</span><span class="dated-text">Live before 15 October.</span></li>
+            <li class="dated-note dated-note-old"><span class="dated-when">2 months ago</span><span class="dated-text">40 teams on the waitlist.</span></li>
           </ul>
           <div class="chat" aria-hidden="true">
-            <p data-reveal style="--reveal-delay: 240ms" class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Today</span></p>
-            <p data-reveal style="--reveal-delay: 360ms" class="chat-user">How big is the waitlist?</p>
-            <p data-reveal style="--reveal-delay: 480ms" class="chat-ai"><strong>As of 8 August</strong>, 40 teams were on it.</p>
+            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Today</span></p>
+            <p class="chat-user">How big is the waitlist?</p>
+            <p style="--play-delay: 400ms" class="chat-ai"><strong>As of 8 August</strong>, 40 teams were on it.</p>
           </div>
         </figure>
       </div>
@@ -286,13 +286,13 @@
        memory product is named. -->
   <section class="section">
     <div class="container">
-      <div data-reveal class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
+      <div class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
       <!-- Each card shows its point in SkyOS's own pieces: the three apps
            joined to SkyOS, the Memory page's picker open on one memory per
            project, and a note rewritten when the user changes their mind.
            The pictures are decoration; the words carry the meaning. -->
       <div class="why">
-        <article data-reveal style="--reveal-delay: 80ms" class="why-card">
+        <article class="why-card">
           <div class="why-visual why-visual-hub" aria-hidden="true">
             <div class="hub-apps"><span class="hub-app"><svg class="logo logo-claude" width="20" height="20"><use href="#i-claude"/></svg></span><span class="hub-app"><svg class="logo logo-chatgpt" width="20" height="20"><use href="#i-chatgpt"/></svg></span><span class="hub-app"><svg class="logo logo-codex" width="20" height="20"><use href="#i-codex"/></svg></span></div>
             <span class="hub-join"></span>
@@ -301,7 +301,7 @@
           <h3 class="why-claim">One memory, every app</h3>
           <p class="why-text">Claude, ChatGPT and Codex read the same notes.</p>
         </article>
-        <article data-reveal style="--reveal-delay: 160ms" class="why-card">
+        <article class="why-card">
           <div class="why-visual why-visual-picker" aria-hidden="true">
             <span class="mini-pill">Northwind pricing<svg width="10" height="6" viewBox="0 0 11.2514 6.75083" fill="none"><path d="M0.675087 0.675087L5.6257 6.07575L10.5763 0.675087" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
             <span class="mini-menu">
@@ -313,7 +313,7 @@
           <h3 class="why-claim">Projects stay apart</h3>
           <p class="why-text">Each chat starts its own memory, so projects never mix.</p>
         </article>
-        <article data-reveal style="--reveal-delay: 240ms" class="why-card">
+        <article class="why-card">
           <div class="why-visual" aria-hidden="true">
             <p class="mini-bubble">Make it $17 instead.</p>
             <span class="mini-note"><span class="mini-date">Today</span><span class="mini-note-text">$17 a month, annual billing only.</span></span>
@@ -328,10 +328,10 @@
   <!-- ================================================ HOW IT WORKS -->
   <section class="section" id="how">
     <div class="container">
-      <div data-reveal class="section-head"><h2 class="section-title">How it works</h2></div>
+      <div class="section-head"><h2 class="section-title">How it works</h2></div>
       <!-- The steps beside what step 1 really is: one address per tool, the
            same ones the Connect page hands out (server/lib/config.ts). -->
-      <div data-reveal style="--reveal-delay: 80ms" class="how">
+      <div class="how">
         <ol class="timeline">
           <li class="tl-step">
             <span class="tl-num" aria-hidden="true">1</span>
@@ -365,8 +365,8 @@
        questions are what most people read. -->
   <section class="section">
     <div class="container">
-      <div data-reveal class="section-head"><h2 class="section-title">Questions</h2></div>
-      <div data-reveal style="--reveal-delay: 80ms" class="faq">
+      <div class="section-head"><h2 class="section-title">Questions</h2></div>
+      <div class="faq">
         <details class="faq-item">
           <summary class="faq-q">Does SkyOS store my chats?<span class="faq-icon" aria-hidden="true"></span></summary>
           <p class="faq-a">No, just short notes, which you can see and delete on your dashboard. It briefly keeps a chat’s last few messages so it understands what you mean. The details are in <a href="/privacy">Privacy</a>.</p>
@@ -386,12 +386,12 @@
   <!-- ======================================================= CLOSE -->
   <section class="section close">
     <div class="container">
-      <h2 data-reveal class="close-title">Stop re-explaining your project.</h2>
-      <div data-reveal style="--reveal-delay: 80ms" class="close-actions">
+      <h2 class="close-title">Stop re-explaining your project.</h2>
+      <div class="close-actions">
         <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
         <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
       </div>
-      <p data-reveal style="--reveal-delay: 160ms" class="close-note">Free while in beta. No card needed.</p>
+      <p class="close-note">Free while in beta. No card needed.</p>
     </div>
   </section>
 
