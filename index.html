@@ -61,7 +61,7 @@
         "url": "https://www.skyos.ink/",
         "applicationCategory": "ProductivityApplication",
         "operatingSystem": "Web",
-        "description": "One memory for Claude, ChatGPT and Codex. SkyOS turns what you decide in your AI chats into short, dated notes that all three read. A number or status older than a month is given with its date. To use a memory in another chat or app, say “continue” and the memory’s name.",
+        "description": "One memory for Claude, ChatGPT and Codex. SkyOS turns what you decide in your AI chats into short, dated notes that all three read. Every note is dated, and “next Friday” is saved as the real date; a number or status older than a month is given with its date. To pick up in another chat or app, say “continue my last chat”, or “continue” and the memory’s name.",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free during the beta, up to 1,000 saved messages a month." },
         "publisher": { "@id": "https://www.skyos.ink/#org" }
       },
@@ -224,30 +224,58 @@
 
   <!-- ================================================= LONG PROJECTS
        What a project that runs for weeks needs: its memory in any chat, and
-       old facts told apart from current ones. Both pictures are what SkyOS
-       really does: skyos_use_memory's own confirmation line, and recall
-       telling the AI to date a number or status older than a month
-       (server/lib/mcp.ts and tools.ts in the app). -->
+       old facts told apart from current ones. Everything in the two pictures
+       is what SkyOS really does (server/lib in the app): "Continuing …: last
+       used … in …" is skyos_use_memory's own line, for a name or for
+       "continue my last chat"; it hands over the notes and the last few
+       messages; the note-writer saves "next Friday" as a date; and recall
+       tells the AI to date a number or status older than a month. The chats
+       are SkyOS's own style, not copies of the apps; the messages appear one
+       by one as they scroll into view. -->
   <section class="section">
     <div class="container">
       <div data-reveal class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
-      <div class="pair">
-        <article data-reveal style="--reveal-delay: 80ms" class="why-card">
-          <div class="why-visual" aria-hidden="true">
-            <p class="mini-bubble">continue Northwind pricing</p>
-            <p class="mini-reply"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg><span>Continuing Northwind pricing: last used 2 days ago in ChatGPT.</span></p>
+
+      <div class="feature">
+        <div data-reveal class="feature-copy">
+          <p class="feature-kicker">Between chats</p>
+          <h3 class="feature-title">Pick up where you left off, in any app.</h3>
+          <p class="feature-body">Every new chat starts fresh. Say “continue my last chat”, or “continue” and a memory’s name, and it carries on with the same notes and your last few messages.</p>
+        </div>
+        <figure class="feature-visual" aria-label="A chat in ChatGPT two days ago settles the price. A new chat in Claude says “continue my last chat”, SkyOS continues the Northwind pricing memory, and Claude answers with the same price.">
+          <div class="chat" aria-hidden="true">
+            <p data-reveal class="chat-head"><svg class="logo logo-chatgpt" width="16" height="16"><use href="#i-chatgpt"/></svg>ChatGPT<span class="chat-when">2 days ago</span></p>
+            <p data-reveal style="--reveal-delay: 120ms" class="chat-user">Let’s go annual-only, $15 a month.</p>
+            <p data-reveal style="--reveal-delay: 240ms" class="chat-ai">Done: $15 a month, annual billing only.</p>
           </div>
-          <h3 class="why-claim">Continue in any chat</h3>
-          <p class="why-text">In a new chat, in any app, say “continue” and the memory’s name.</p>
-        </article>
-        <article data-reveal style="--reveal-delay: 160ms" class="why-card">
-          <div class="why-visual" aria-hidden="true">
-            <span class="mini-note"><span class="mini-date">2 months ago</span><span class="mini-note-text">40 teams on the waitlist.</span></span>
-            <p class="mini-reply"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg><span><strong>As of 8 August</strong>, 40 teams were on the waitlist.</span></p>
+          <div data-reveal style="--reveal-delay: 360ms" class="chat-link" aria-hidden="true"><span class="chat-memory"><svg class="brand-mark" width="18" height="16"><use href="#i-mark"/></svg>Northwind pricing</span></div>
+          <div class="chat" aria-hidden="true">
+            <p data-reveal style="--reveal-delay: 480ms" class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">New chat, today</span></p>
+            <p data-reveal style="--reveal-delay: 600ms" class="chat-user">continue my last chat</p>
+            <p data-reveal style="--reveal-delay: 720ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in ChatGPT.</p>
+            <p data-reveal style="--reveal-delay: 840ms" class="chat-user">what price did we pick?</p>
+            <p data-reveal style="--reveal-delay: 960ms" class="chat-ai">$15 a month, annual billing only.</p>
           </div>
-          <h3 class="why-claim">Knows what’s out of date</h3>
-          <p class="why-text">Every note is dated. Once a number is over a month old, the AI says when it was true.</p>
-        </article>
+        </figure>
+      </div>
+
+      <div class="feature feature-flip">
+        <div data-reveal class="feature-copy">
+          <p class="feature-kicker">Dated notes</p>
+          <h3 class="feature-title">Knows what’s out of date.</h3>
+          <p class="feature-body">Every note keeps the day it was saved, and “next Friday” is saved as the real date. Once a number or status is more than a month old, your AI says when it was true instead of passing it off as today’s.</p>
+        </div>
+        <figure class="feature-visual" aria-label="Two notes in the Northwind pricing memory, saved 6 days and 2 months ago. Asked about the older one, Claude answers “As of 8 August, 40 teams were on it.”">
+          <ul class="dated" aria-hidden="true">
+            <li data-reveal class="dated-note"><span class="dated-when">6 days ago</span><span class="dated-text">Live before 15 October.</span></li>
+            <li data-reveal style="--reveal-delay: 120ms" class="dated-note dated-note-old"><span class="dated-when">2 months ago</span><span class="dated-text">40 teams on the waitlist.</span></li>
+          </ul>
+          <div class="chat" aria-hidden="true">
+            <p data-reveal style="--reveal-delay: 240ms" class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Today</span></p>
+            <p data-reveal style="--reveal-delay: 360ms" class="chat-user">How big is the waitlist?</p>
+            <p data-reveal style="--reveal-delay: 480ms" class="chat-ai"><strong>As of 8 August</strong>, 40 teams were on it.</p>
+          </div>
+        </figure>
       </div>
     </div>
   </section>

@@ -5,9 +5,9 @@
 ## What it does
 
 - Connects to Claude, ChatGPT and Codex as an MCP server. Every connected app reads and saves the same notes.
-- Notes keep the exact numbers, names and reasons you gave, not a summary, and each note is dated.
+- Notes keep the exact numbers, names and reasons you gave, not a summary. Each note is dated, and relative dates ("next Friday") are saved as real ones.
 - When a note older than a month holds a number or a status, the AI says when it was true ("as of 18 August, …") instead of presenting it as current.
-- Each new chat starts its own memory, so projects stay apart. To use a memory in another chat, in any connected app, say "continue" and the memory's name.
+- Each new chat starts its own memory, so projects stay apart. To pick up in another chat, in any connected app, say "continue my last chat", or "continue" and the memory's name: the chat carries on with the same notes and the last few messages.
 - Notes are rewritten when you change your mind. You can read, edit, export and delete them on the dashboard at app.skyos.ink.
 - SkyOS keeps only the last five exchanges of each chat, deleted after 30 quiet days. Everything older exists only as notes.
 
