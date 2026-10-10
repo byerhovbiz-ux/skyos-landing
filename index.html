@@ -224,56 +224,41 @@
 
   <!-- ================================================= LONG PROJECTS
        What a project that runs for weeks needs: its memory in any chat, and
-       old facts told apart from current ones. Everything in the two pictures
-       is what SkyOS really does (server/lib in the app): "Continuing …: last
-       used … in …" is skyos_use_memory's own line, for a name or for
-       "continue my last chat"; it hands over the notes and the last few
-       messages; the note-writer saves "next Friday" as a date; and recall
-       tells the AI to date a number or status older than a month. The chats
-       are SkyOS's own style, not copies of the apps; once a chat is well in
-       view its messages come in one by one. -->
+       old facts told apart from current ones. One short line and one small
+       picture each, to read at a glance. Both pictures are what SkyOS really
+       does (server/lib in the app): "Continuing …: last used … in …" is
+       skyos_use_memory's own line, and recall tells the AI to date a number
+       or status older than a month. The chats are SkyOS's own style, not
+       copies of the apps; once one is well in view its reply comes in. -->
   <section class="section">
     <div class="container">
       <div class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
 
       <div class="feature">
         <div class="feature-copy">
-          <p class="feature-kicker">Between chats</p>
-          <h3 class="feature-title">Pick up where you left off, in any app.</h3>
-          <p class="feature-body">Every new chat starts fresh. Say “continue my last chat”, or “continue” and a memory’s name, and it carries on with the same notes and your last few messages.</p>
+          <h3 class="feature-title">Pick up where you left off.</h3>
+          <p class="feature-body">Start a new chat in any app and say <span class="nowrap">“continue my last chat”.</span></p>
         </div>
-        <figure data-play class="feature-visual" aria-label="A chat in ChatGPT two days ago settles the price. A new chat in Claude says “continue my last chat”, SkyOS continues the Northwind pricing memory, and Claude answers with the same price.">
+        <figure data-play class="feature-visual" aria-label="A new chat in Claude. The user says “continue my last chat”, and Claude replies “Continuing Northwind pricing: last used 2 days ago in ChatGPT.”">
           <div class="chat" aria-hidden="true">
-            <p class="chat-head"><svg class="logo logo-chatgpt" width="16" height="16"><use href="#i-chatgpt"/></svg>ChatGPT<span class="chat-when">2 days ago</span></p>
-            <p class="chat-user">Let’s go annual-only, $15 a month.</p>
-            <p style="--play-delay: 300ms" class="chat-ai">Done: $15 a month, annual billing only.</p>
-          </div>
-          <div class="chat-link" aria-hidden="true"><span class="chat-memory"><svg class="brand-mark" width="18" height="16"><use href="#i-mark"/></svg>Northwind pricing</span></div>
-          <div class="chat" aria-hidden="true">
-            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">New chat, today</span></p>
-            <p style="--play-delay: 800ms" class="chat-user">continue my last chat</p>
-            <p style="--play-delay: 1100ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in ChatGPT.</p>
-            <p style="--play-delay: 1600ms" class="chat-user">what price did we pick?</p>
-            <p style="--play-delay: 1900ms" class="chat-ai">$15 a month, annual billing only.</p>
+            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">New chat</span></p>
+            <p class="chat-user">continue my last chat</p>
+            <p style="--play-delay: 500ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in ChatGPT.</p>
           </div>
         </figure>
       </div>
 
       <div class="feature feature-flip">
         <div class="feature-copy">
-          <p class="feature-kicker">Dated notes</p>
           <h3 class="feature-title">Knows what’s out of date.</h3>
-          <p class="feature-body">Every note keeps the day it was saved, and “next Friday” is saved as the real date. Once a number or status is more than a month old, your AI says when it was true instead of passing it off as today’s.</p>
+          <p class="feature-body">Every note is dated. If it’s over a month old, your AI says when it was true.</p>
         </div>
-        <figure data-play class="feature-visual" aria-label="Two notes in the Northwind pricing memory, saved 6 days and 2 months ago. Asked about the older one, Claude answers “As of 8 August, 40 teams were on it.”">
-          <ul class="dated" aria-hidden="true">
-            <li class="dated-note"><span class="dated-when">6 days ago</span><span class="dated-text">Live before 15 October.</span></li>
-            <li class="dated-note dated-note-old"><span class="dated-when">2 months ago</span><span class="dated-text">40 teams on the waitlist.</span></li>
-          </ul>
+        <figure data-play class="feature-visual" aria-label="A note saved 2 months ago: 40 teams on the waitlist. Asked how big the waitlist is, Claude answers “As of 8 August, 40 teams were on it.”">
+          <p class="dated-note" aria-hidden="true"><span class="dated-when">2 months ago</span><span class="dated-text">40 teams on the waitlist.</span></p>
           <div class="chat" aria-hidden="true">
             <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Today</span></p>
             <p class="chat-user">How big is the waitlist?</p>
-            <p style="--play-delay: 400ms" class="chat-ai"><strong>As of 8 August</strong>, 40 teams were on it.</p>
+            <p style="--play-delay: 500ms" class="chat-ai"><strong>As of 8 August</strong>, 40 teams were on it.</p>
           </div>
         </figure>
       </div>

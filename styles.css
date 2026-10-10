@@ -260,14 +260,17 @@ a { color: inherit; }
 .mini-date { font-size: 12px; color: var(--subtext); }
 .mini-note-text { padding: 8px 12px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; font-size: 14px; }
 
-/* Long projects: one feature per row, its words beside a picture of it; on
-   a wide screen the second row flips. */
+/* Long projects: one feature per row, a short line beside a small picture
+   of it; on a wide screen the second row flips. */
 .feature { display: grid; gap: 24px; align-items: center; }
 .feature + .feature { margin-top: 72px; }
-.feature-kicker { font-size: 14px; font-weight: 500; color: var(--subtext); }
-.feature-title { margin-top: 10px; font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance; }
-.feature-body { max-width: 30em; margin-top: 14px; font-size: 17px; line-height: 1.6; color: var(--subtext); }
-.feature-visual { display: flex; flex-direction: column; padding: 20px; border-radius: var(--radius-card); background: var(--surface-sunk); }
+.feature-title { font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; text-wrap: balance; }
+.feature-body { max-width: 26em; margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: balance; }
+/* A phrase to say, kept on one line. */
+.nowrap { white-space: nowrap; }
+/* The picture: one small chat, centred in its grey panel. */
+.feature-visual { display: flex; flex-direction: column; align-items: center; padding: 20px; border-radius: var(--radius-card); background: var(--surface-sunk); }
+.feature-visual > * { width: 100%; max-width: 440px; }
 /* A chat in SkyOS's own style: the app on top, the user's messages on the
    right, the AI's on the left. */
 .chat { display: flex; flex-direction: column; gap: 10px; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; }
@@ -276,16 +279,9 @@ a { color: inherit; }
 .chat-user { align-self: flex-end; max-width: 85%; padding: 8px 14px; background: var(--surface-sunk); border-radius: 16px; font-size: 15px; line-height: 1.45; }
 .chat-ai { align-self: flex-start; max-width: 90%; font-size: 15px; line-height: 1.5; }
 .chat-ai strong { font-weight: 600; }
-/* The one memory both chats use, on the line between them. */
-.chat-link { position: relative; display: flex; justify-content: center; padding: 14px 0; }
-.chat-link::before { content: ""; position: absolute; top: 0; bottom: 0; left: calc(50% - 0.5px); width: 1px; background: var(--border-strong); }
-.chat-memory { position: relative; display: inline-flex; align-items: center; gap: 8px; height: 32px; padding: 0 14px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: 999px; font-size: 13px; font-weight: 500; }
-/* The memory's notes with their dates, as on the Memory page; the old one's
-   date stands out. */
-.dated { display: flex; flex-direction: column; gap: 10px; margin: 0 0 16px; padding: 0; list-style: none; }
-.dated-note { display: grid; grid-template-columns: 92px minmax(0, 1fr); align-items: center; gap: 12px; }
-.dated-when { font-size: 13px; color: var(--subtext); }
-.dated-note-old .dated-when { font-weight: 500; color: var(--ink); }
+/* A note with its date, as on the Memory page, above the chat that asks about it. */
+.dated-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 14px; }
+.dated-when { font-size: 13px; font-weight: 500; }
 .dated-text { padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
