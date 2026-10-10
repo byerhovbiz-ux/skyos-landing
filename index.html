@@ -227,8 +227,8 @@
        old facts told apart from current ones. One short line and one small
        picture each, to read at a glance. Both pictures are what SkyOS really
        does (server/lib in the app): "Continuing …: last used … in …" is
-       skyos_use_memory's own line, and recall tells the AI to date a number
-       or status older than a month. The chats are SkyOS's own style, not
+       skyos_use_memory's own line, and the note-writer saves "next Friday"
+       as the day it means, read from a calendar of the user's own dates. The chats are SkyOS's own style, not
        copies of the apps; once one is well in view its reply comes in. -->
   <section class="section">
     <div class="container">
@@ -250,16 +250,15 @@
 
       <div class="feature feature-flip">
         <div class="feature-copy">
-          <h3 class="feature-title">Knows what’s out of date.</h3>
-          <p class="feature-body">Every note is dated. If it’s over a month old, your AI says when it was true.</p>
+          <h3 class="feature-title">Knows what day it is.</h3>
+          <p class="feature-body">Every note is dated, and <span class="nowrap">“next Friday”</span> is saved as the real day.</p>
         </div>
-        <figure data-play class="feature-visual" aria-label="A note saved 2 months ago: 40 teams on the waitlist. Asked how big the waitlist is, Claude answers “As of 8 August, 40 teams were on it.”">
-          <p class="dated-note" aria-hidden="true"><span class="dated-when">2 months ago</span><span class="dated-text">40 teams on the waitlist.</span></p>
+        <figure data-play class="feature-visual" aria-label="On Saturday 10 October the user tells Claude “Send the invites next Friday.”, and SkyOS saves the note “Invites go out on 16 October.”, dated today.">
           <div class="chat" aria-hidden="true">
-            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Today</span></p>
-            <p class="chat-user">How big is the waitlist?</p>
-            <p style="--play-delay: 500ms" class="chat-ai">As of 8 August, 40 teams were on it.</p>
+            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">Sat 10 Oct</span></p>
+            <p class="chat-user">Send the invites next Friday.</p>
           </div>
+          <p style="--play-delay: 500ms" class="dated-note" aria-hidden="true"><span class="dated-when">Today</span><span class="dated-text">Invites go out on 16 October.</span></p>
         </figure>
       </div>
     </div>

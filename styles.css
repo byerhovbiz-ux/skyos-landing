@@ -198,10 +198,10 @@ a { color: inherit; }
 /* The hero rising into place on load (motion.js): a short fade up, once. */
 .motion [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: var(--reveal-delay, 0ms); }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
-/* A chat demo playing once it is well in view (motion.js): each message
-   comes in after the one before, as in a chat. */
-.motion [data-play] .chat-user, .motion [data-play] .chat-ai { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
-.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai { opacity: 1; transform: none; }
+/* A chat demo playing once it is well in view (motion.js): each message,
+   and the note saved from it, comes in after the one before, as in a chat. */
+.motion [data-play] .chat-user, .motion [data-play] .chat-ai, .motion [data-play] .dated-note { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
+.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai, .motion [data-play].is-playing .dated-note { opacity: 1; transform: none; }
 
 /* ---- sections ---------------------------------------------------------- */
 .section { padding: 96px 0 0; }
@@ -262,8 +262,8 @@ a { color: inherit; }
 .chat-when { margin-left: auto; }
 .chat-user { align-self: flex-end; max-width: 85%; padding: 9px 15px; background: var(--surface-sunk); border-radius: 18px; font-size: 16px; line-height: 1.45; }
 .chat-ai { align-self: flex-start; max-width: 92%; font-size: 16px; line-height: 1.5; }
-/* A note with its date, as on the Memory page, above the chat that asks about it. */
-.dated-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-bottom: 8px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+/* The note SkyOS saved from the message, with its date, as on the Memory page. */
+.dated-note { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px; margin-top: 20px; }
 .dated-when { font-size: 13px; color: var(--subtext); }
 .dated-text { padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
 
