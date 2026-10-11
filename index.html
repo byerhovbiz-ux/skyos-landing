@@ -226,13 +226,14 @@
   </section>
 
   <!-- ================================================= LONG PROJECTS
-       What a project that runs for weeks needs: its memory in any chat, and
-       old facts told apart from current ones. One short line and one small
-       picture each, to read at a glance. Both pictures are what SkyOS really
-       does (server/lib in the app): "Continuing …: last used … in …" is
-       skyos_use_memory's own line, and the note-writer saves "next Friday"
-       as the day it means, read from a calendar of the user's own dates. The chats are SkyOS's own style, not
-       copies of the apps; once one is well in view its reply comes in. -->
+       What a project that runs for weeks needs: its memory in any new chat,
+       and old facts told apart from current ones. One short line and one
+       small chat each, to read at a glance, in a card no bigger than the
+       chat. Both are what SkyOS really does (server/lib in the app):
+       "Continuing …: last used … in …" is skyos_use_memory's own line, and
+       recall tells the AI to give a number older than a month with its date
+       ("as of …"). The chats are SkyOS's own style, not copies of the apps;
+       once one is well in view its reply comes in. -->
   <section class="section">
     <div class="container">
       <div class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
@@ -242,9 +243,8 @@
           <h3 class="feature-title">Pick up where you left off.</h3>
           <p class="feature-body">Start a new chat and say <span class="nowrap">“continue my last chat”.</span></p>
         </div>
-        <figure data-play class="feature-visual" aria-label="A new chat in Claude. The user says “continue my last chat”, and Claude replies “Continuing Northwind pricing: last used 2 days ago in Claude.”">
+        <figure data-play class="feature-visual" aria-label="In a new chat, the user says “continue my last chat”, and the AI replies “Continuing Northwind pricing: last used 2 days ago in Claude.”">
           <div class="chat" aria-hidden="true">
-            <p class="chat-head"><svg class="logo logo-claude" width="16" height="16"><use href="#i-claude"/></svg>Claude<span class="chat-when">New chat</span></p>
             <p class="chat-user">continue my last chat</p>
             <p style="--play-delay: 500ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in Claude.</p>
           </div>
@@ -254,15 +254,12 @@
       <div class="feature feature-flip">
         <div class="feature-copy">
           <h3 class="feature-title">Keeps track of time.</h3>
-          <p class="feature-body">Every note is dated, and <span class="nowrap">“next Friday”</span> is saved as the real day.</p>
+          <p class="feature-body">Every note is dated, so old numbers never pass as current.</p>
         </div>
-        <figure data-play class="feature-visual" aria-label="The user says “Send the invites next Friday.”, and SkyOS saves the note “Invites go out on 16 October.”">
+        <figure data-play class="feature-visual" aria-label="The user asks “How many customers now?”, and the AI replies “As of 18 August, 75 paying customers.”">
           <div class="chat" aria-hidden="true">
-            <p class="chat-user">Send the invites next Friday.</p>
-          </div>
-          <div style="--play-delay: 500ms" class="saved-note" aria-hidden="true">
-            <p class="saved-label"><svg class="brand-mark" width="16" height="14"><use href="#i-mark"/></svg>Saved to SkyOS</p>
-            <p class="saved-text">Invites go out on 16 October.</p>
+            <p class="chat-user">How many customers now?</p>
+            <p style="--play-delay: 500ms" class="chat-ai">As of 18 August, 75 paying customers.</p>
           </div>
         </figure>
       </div>

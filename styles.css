@@ -198,10 +198,10 @@ a { color: inherit; }
 /* The hero rising into place on load (motion.js): a short fade up, once. */
 .motion [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.2, 0.7, 0.2, 1); transition-delay: var(--reveal-delay, 0ms); }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
-/* A chat demo playing once it is well in view (motion.js): each message,
-   and the note saved from it, comes in after the one before, as in a chat. */
-.motion [data-play] .chat-user, .motion [data-play] .chat-ai, .motion [data-play] .saved-note { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
-.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai, .motion [data-play].is-playing .saved-note { opacity: 1; transform: none; }
+/* A chat demo playing once it is well in view (motion.js): each message comes
+   in after the one before, as in a chat. */
+.motion [data-play] .chat-user, .motion [data-play] .chat-ai { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
+.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai { opacity: 1; transform: none; }
 
 /* ---- sections ---------------------------------------------------------- */
 .section { padding: 96px 0 0; }
@@ -251,23 +251,14 @@ a { color: inherit; }
 .feature-body { max-width: 26em; margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: balance; }
 /* A phrase to say, kept on one line. */
 .nowrap { white-space: nowrap; }
-/* The picture: a white card with the chat drawn straight on it, as light as
-   the cards around it. */
-.feature-visual { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 232px; padding: 32px 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.feature-visual > * { width: 100%; max-width: 420px; }
-/* A chat in SkyOS's own style: the app, then the user's message on the
-   right and the AI's answer on the left. */
+/* The picture: a white card no bigger than the chat on it, as light as the
+   cards around it. */
+.feature-visual { justify-self: center; width: 100%; max-width: 440px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+/* A chat in SkyOS's own style: the user's message on the right and the AI's
+   answer on the left. */
 .chat { display: flex; flex-direction: column; gap: 12px; }
-.chat-head { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
-.chat-when { margin-left: auto; }
 .chat-user { align-self: flex-end; max-width: 85%; padding: 9px 15px; background: var(--surface-sunk); border-radius: 18px; font-size: 16px; line-height: 1.45; }
 .chat-ai { align-self: flex-start; max-width: 92%; font-size: 16px; line-height: 1.5; }
-/* The note SkyOS saved from the message, under the chat rather than in it:
-   the AI answers as usual, and the note is written in SkyOS. */
-.saved-note { margin-top: 20px; }
-.saved-label { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--subtext); }
-.saved-label .brand-mark { color: var(--ink); }
-.saved-text { margin-top: 8px; padding: 10px 14px; border: 1px solid var(--border); border-radius: 12px; font-size: 15px; }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
 .how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
@@ -448,7 +439,6 @@ a { color: inherit; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
-  .feature-visual { min-height: 256px; padding: 40px 32px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .section { padding-top: 144px; }
   .section-head { margin-bottom: 48px; }
@@ -471,6 +461,5 @@ a { color: inherit; }
   .feature-flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .feature-flip .feature-copy { order: 2; }
   .feature + .feature { margin-top: 128px; }
-  .feature-visual { min-height: 280px; padding: 48px 56px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }
