@@ -112,12 +112,11 @@ a { color: inherit; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
 /* The demo: the SkyOS app's Memory page in a window, drawn at the app's own
-   sizes with memory.html's own pieces, on the app's page colour. The window
-   shows the page from its top, top bar included (the app's bar isn't fixed),
-   and fades out at the bottom. It never scrolls by itself: a wheel or a finger
-   on it always moves the landing page, which a window scrolling inside the
-   page kept catching at its end. Controls show the app's hover effects. Phone
-   sizes first, as in the app below 640px; wider from 720px. */
+   sizes with memory.html's own pieces, on the app's page colour. The whole
+   page shows, top bar to footnote, at its own height: nothing scrolls inside
+   it to catch the wheel, and no crop leaves a heading with nothing under it.
+   Controls show the app's hover effects. Phone sizes first, as in the app
+   below 640px; wider from 720px. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -126,15 +125,6 @@ a { color: inherit; }
   box-shadow: 0 24px 60px -32px color-mix(in srgb, var(--ink) 22%, transparent);
   overflow: hidden;
 }
-.ad-stage { position: relative; height: 560px; }
-.ad-screen {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
-  mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
-}
-.ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
 
 /* The app's top bar. */
 .ad-bar { display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
@@ -416,7 +406,6 @@ a { color: inherit; }
 @media (min-width: 720px) {
   /* The app's wider layouts, at its own sizes. Side margins in proportion to
      the window: about 30px in the narrowest, 48px in the widest. */
-  .ad-stage { height: 600px; }
   .ad-screen { --ad-gutter: clamp(24px, 4.5%, 48px); }
   .ad-bar { gap: 72px; height: 68px; padding: 0 var(--ad-gutter); }
   .ad-nav { gap: 8px; }
@@ -454,7 +443,6 @@ a { color: inherit; }
 
 
 @media (min-width: 1080px) {
-  .ad-stage { height: 640px; }
   /* More air between sections on a wide screen. */
   .section { padding-top: 192px; }
   /* Three across once each card has room for its picture. */
