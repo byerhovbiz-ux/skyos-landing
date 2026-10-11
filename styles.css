@@ -235,11 +235,10 @@ a { color: inherit; }
 .hub-join::before { top: 0; height: 100%; }
 .hub-join::after { top: 100%; height: 14px; }
 .hub-core { display: inline-flex; margin-top: 18px; }
-/* A memory chip per project, the open one outlined in ink. */
+/* A memory chip per project, all alike: separate projects, none picked. */
 /* In rows, two then one, so the card has as much air above and below as on its sides. */
 .why-visual-chips { flex-direction: row; flex-wrap: wrap; justify-content: center; align-content: center; gap: 10px; }
-.mini-chip { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; border: 1px solid var(--border); border-radius: 999px; font-size: 14px; color: var(--subtext); }
-.mini-chip.is-current { border-color: var(--ink); color: var(--ink); }
+.mini-chip { display: inline-flex; align-items: center; height: 34px; padding: 0 16px; border: 1px solid var(--border); border-radius: 999px; font-size: 14px; color: var(--ink); }
 /* What the user said, then the note SkyOS rewrote from it, the old figure struck out. */
 .mini-bubble { align-self: flex-end; max-width: 85%; padding: 8px 14px; background: var(--surface-sunk); border-radius: 16px; font-size: 14px; }
 .mini-saved { display: flex; flex-direction: column; gap: 6px; }
