@@ -94,15 +94,23 @@ a { color: inherit; }
 }
 .hero-lead { max-width: 30em; margin-top: 24px; font-size: 18px; color: var(--subtext); text-wrap: balance; }
 .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px; }
-/* The demo is the product shot, as wide as the page's content. */
-.hero-stage { margin-top: 48px; }
+/* The demo is the product shot, as wide as the page's content. Its last note
+   fades into the page with the window round it: the fade starts at that
+   note's top edge and runs over the note and the page's bottom padding. */
+.hero-stage {
+  --demo-fade: 108px;
+  margin-top: 48px;
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(100% - var(--demo-fade)), transparent);
+  mask-image: linear-gradient(to bottom, #000 calc(100% - var(--demo-fade)), transparent);
+}
 .hero-stage .demo { max-width: none; margin: 0 auto; }
 .hero .works-with { justify-content: center; margin-top: 36px; }
 
 /* The demo: the SkyOS app's Memory page in a window, drawn at the app's own
-   sizes with memory.html's own pieces, on the app's page colour. The whole
-   page shows, top bar to footnote, at its own height: nothing scrolls inside
-   it to catch the wheel, and no crop leaves a heading with nothing under it.
+   sizes with memory.html's own pieces, on the app's page colour. It shows the
+   page from its top bar down to the Launch note, which fades out (above), so
+   the shot reads as a page that goes on. Nothing scrolls inside it to catch
+   the wheel, and the fade runs through a note, never under a lone heading.
    Controls show the app's hover effects. Phone sizes first, as in the app
    below 640px; wider from 720px. */
 .demo {
@@ -110,7 +118,6 @@ a { color: inherit; }
   background: var(--bg);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
-  box-shadow: 0 24px 60px -32px color-mix(in srgb, var(--ink) 22%, transparent);
   overflow: hidden;
 }
 
@@ -132,7 +139,7 @@ a { color: inherit; }
 
 .ad-notes { margin: 0; padding: 0; list-style: none; }
 
-/* Memory: the picker, search and ⋯, the header, the notes and the footnote. */
+/* Memory: the picker, search and ⋯, the header and the notes. */
 .ad-controls { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 10px; margin-bottom: 28px; }
 .ad-pill { display: inline-flex; align-items: center; height: 46px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; font-size: 14px; white-space: nowrap; }
 .ad-pill:hover { border-color: var(--border-strong); }
@@ -156,7 +163,6 @@ a { color: inherit; }
 .ad-note-body { grid-area: body; padding: 16px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); font-size: 17px; line-height: 1.55; }
 .ad-acts { grid-area: acts; display: flex; gap: 4px; }
 .ad-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; color: var(--muted); }
-.ad-footnote { margin-top: 40px; font-size: 13px; color: var(--subtext); }
 @media (prefers-reduced-motion: reduce) {
   .demo *, .demo *::before, .demo *::after { animation: none !important; transition: none !important; }
 }
@@ -408,12 +414,11 @@ a { color: inherit; }
   .ad-note { grid-template-columns: 140px minmax(0, 1fr) 84px; grid-template-areas: "date body acts"; column-gap: 20px; }
   .ad-note-date { align-self: start; padding-top: 20px; }
   .ad-note-body { padding: 18px 22px; font-size: 18px; }
-  .ad-topic-title, .ad-footnote { padding-left: 160px; }
-  .ad-footnote { margin-top: 56px; }
+  .ad-topic-title { padding-left: 160px; }
   .container { --gutter-x: 24px; }
   .hero { padding-top: 112px; }
   .hero-lead { font-size: 20px; }
-  .hero-stage { margin-top: 80px; }
+  .hero-stage { --demo-fade: 122px; margin-top: 80px; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
