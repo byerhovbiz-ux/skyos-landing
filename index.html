@@ -232,8 +232,10 @@
        chat. Both are what SkyOS really does (server/lib in the app):
        "Continuing …: last used … in …" is skyos_use_memory's own line, and
        recall tells the AI to give a number older than a month with its date
-       ("as of …"). The chats are SkyOS's own style, not copies of the apps;
-       once one is well in view its reply comes in. -->
+       ("as of …"). Between message and answer, the step the apps show while
+       the AI uses SkyOS, with the tool's own title. The chats are SkyOS's own
+       style, not copies of the apps; once one is well in view, its step and
+       reply come in one after the other. -->
   <section class="section">
     <div class="container">
       <div class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
@@ -243,10 +245,14 @@
           <h3 class="feature-title">Pick up where you left off.</h3>
           <p class="feature-body">Start a new chat and say <span class="nowrap">“continue my last chat”.</span></p>
         </div>
-        <figure data-play class="feature-visual" aria-label="In a new chat, the user says “continue my last chat”, and the AI replies “Continuing Northwind pricing: last used 2 days ago in Claude.”">
+        <figure data-play class="feature-visual" aria-label="In a new chat, the user says “continue my last chat”. The AI uses SkyOS (Continue a SkyOS memory) and replies “Continuing Northwind pricing: last used 2 days ago in Claude. You’d just set $15 a month, annual billing only. Shall we write the pricing page?”">
           <div class="chat" aria-hidden="true">
             <p class="chat-user">continue my last chat</p>
-            <p style="--play-delay: 500ms" class="chat-ai">Continuing Northwind pricing: last used 2 days ago in Claude.</p>
+            <p style="--play-delay: 450ms" class="chat-step"><svg class="brand-mark" width="16" height="14"><use href="#i-mark"/></svg>Continue a SkyOS memory</p>
+            <div style="--play-delay: 900ms" class="chat-ai">
+              <p>Continuing Northwind pricing: last used 2 days ago in Claude.</p>
+              <p>You’d just set $15 a month, annual billing only. Shall we write the pricing page?</p>
+            </div>
           </div>
         </figure>
       </div>
@@ -256,10 +262,14 @@
           <h3 class="feature-title">Keeps track of time.</h3>
           <p class="feature-body">Every note is dated, so old numbers never pass as current.</p>
         </div>
-        <figure data-play class="feature-visual" aria-label="The user asks “How many customers now?”, and the AI replies “As of 18 August, 75 paying customers.”">
+        <figure data-play class="feature-visual" aria-label="The user asks “How many customers now?”. The AI uses SkyOS (Recall from SkyOS) and replies “As of 18 August, 75 paying customers. That’s the last number you gave me.”">
           <div class="chat" aria-hidden="true">
             <p class="chat-user">How many customers now?</p>
-            <p style="--play-delay: 500ms" class="chat-ai">As of 18 August, 75 paying customers.</p>
+            <p style="--play-delay: 450ms" class="chat-step"><svg class="brand-mark" width="16" height="14"><use href="#i-mark"/></svg>Recall from SkyOS</p>
+            <div style="--play-delay: 900ms" class="chat-ai">
+              <p>As of 18 August, 75 paying customers.</p>
+              <p>That’s the last number you gave me.</p>
+            </div>
           </div>
         </figure>
       </div>

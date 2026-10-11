@@ -200,8 +200,8 @@ a { color: inherit; }
 .motion [data-reveal].is-in { opacity: 1; transform: none; }
 /* A chat demo playing once it is well in view (motion.js): each message comes
    in after the one before, as in a chat. */
-.motion [data-play] .chat-user, .motion [data-play] .chat-ai { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
-.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-ai { opacity: 1; transform: none; }
+.motion [data-play] .chat-user, .motion [data-play] .chat-step, .motion [data-play] .chat-ai { opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; transition-delay: var(--play-delay, 0ms); }
+.motion [data-play].is-playing .chat-user, .motion [data-play].is-playing .chat-step, .motion [data-play].is-playing .chat-ai { opacity: 1; transform: none; }
 
 /* ---- sections ---------------------------------------------------------- */
 .section { padding: 96px 0 0; }
@@ -254,11 +254,15 @@ a { color: inherit; }
 /* The picture: a white card around the chat, as tall as the chat needs, as
    light as the cards around it. */
 .feature-visual { justify-self: center; width: 100%; max-width: 560px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-/* A chat in SkyOS's own style: the user's message on the right and the AI's
-   answer on the left. */
+/* A chat in SkyOS's own style: the user's message on the right, the step the
+   app shows while the AI uses SkyOS (its mark and the tool's own title), then
+   the AI's answer on the left. */
 .chat { display: flex; flex-direction: column; gap: 12px; }
 .chat-user { align-self: flex-end; max-width: 85%; padding: 9px 15px; background: var(--surface-sunk); border-radius: 18px; font-size: 16px; line-height: 1.45; }
+.chat-step { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--subtext); }
+.chat-step .brand-mark { flex: none; color: var(--ink); }
 .chat-ai { align-self: flex-start; max-width: 92%; font-size: 16px; line-height: 1.5; }
+.chat-ai p + p { margin-top: 8px; }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
 .how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
