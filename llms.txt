@@ -1,6 +1,6 @@
 # SkyOS
 
-> SkyOS is one memory for Claude, ChatGPT and Codex. It turns what you decide in your AI chats into short, dated notes that all three apps read, so you don't re-explain your project in every chat.
+> SkyOS is the main memory for Claude, ChatGPT or Codex. It turns what you decide in your AI chats into short, dated notes, kept per project, so a new chat picks up where the last one stopped and you don't re-explain your project. If you use more than one of these apps, they share the same notes.
 
 ## What it does
 

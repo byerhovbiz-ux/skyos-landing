@@ -3,16 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SkyOS — one memory for Claude, ChatGPT and Codex</title>
-  <meta name="description" content="SkyOS gives Claude, ChatGPT and Codex one memory: exact, dated notes of what you decide, to pick up in any chat. Free during the beta.">
+  <title>SkyOS — the main memory for Claude, ChatGPT or Codex</title>
+  <meta name="description" content="SkyOS is the main memory for Claude, ChatGPT or Codex: exact, dated notes of each project, so a new chat picks up where you left off. Free during the beta.">
   <link rel="canonical" href="https://www.skyos.ink/">
   <!-- Proves to Google Search Console that this site is ours (URL prefix
        https://www.skyos.ink/). Not a secret; keep it, or verification lapses. -->
   <meta name="google-site-verification" content="w3UZVh0ULUTgdRYBIrcAd0iDRdIfkSLIPk4VwpUlotU">
 
   <meta property="og:site_name" content="SkyOS">
-  <meta property="og:title" content="SkyOS — one memory for Claude, ChatGPT and Codex">
-  <meta property="og:description" content="Tell one AI what you decided and the others know it too.">
+  <meta property="og:title" content="SkyOS — the main memory for Claude, ChatGPT or Codex">
+  <meta property="og:description" content="Each project remembered exactly. Start a new chat and pick up where you left off.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://www.skyos.ink/">
   <!-- The link preview Reddit, X, Slack and iMessage show. Absolute and on www:
@@ -21,7 +21,7 @@
   <meta property="og:image" content="https://www.skyos.ink/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="SkyOS: one memory for Claude, ChatGPT and Codex.">
+  <meta property="og:image:alt" content="SkyOS: the main memory for your AI. Works with Claude, ChatGPT and Codex.">
   <meta name="twitter:card" content="summary_large_image">
 
   <!-- The same mark as app.skyos.ink. Google's favicon service reads these for
@@ -64,7 +64,7 @@
         "url": "https://www.skyos.ink/",
         "applicationCategory": "ProductivityApplication",
         "operatingSystem": "Web",
-        "description": "One memory for Claude, ChatGPT and Codex. SkyOS turns what you decide in your AI chats into short, dated notes that all three read. Every note is dated, and “next Friday” is saved as the real date; a number or status older than a month is given with its date. To pick up in another chat or app, say “continue my last chat”, or “continue” and the memory’s name.",
+        "description": "The main memory for Claude, ChatGPT or Codex. SkyOS turns what you decide in your AI chats into short, dated notes, kept per project, so a new chat picks up where the last one stopped; if you use more than one of the three, they share the same notes. Every note is dated, and “next Friday” is saved as the real date; a number or status older than a month is given with its date. To pick up in another chat or app, say “continue my last chat”, or “continue” and the memory’s name.",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free during the beta, up to 1,000 saved messages a month." },
         "publisher": { "@id": "https://www.skyos.ink/#org" }
       },
@@ -128,8 +128,8 @@
     <div class="container">
       <div class="hero-copy">
         <p data-reveal class="hero-pill">Now in beta</p>
-        <h1 data-reveal style="--reveal-delay: 60ms" class="hero-title">One memory for Claude, ChatGPT and Codex.</h1>
-        <p data-reveal style="--reveal-delay: 120ms" class="hero-lead">Tell ChatGPT what you decided, and Claude and Codex remember it too.</p>
+        <h1 data-reveal style="--reveal-delay: 60ms" class="hero-title">The main memory for your AI.</h1>
+        <p data-reveal style="--reveal-delay: 120ms" class="hero-lead">Each project remembered exactly. Start a new chat, say “continue&nbsp;my&nbsp;last&nbsp;chat”, and pick up where you left off.</p>
         <!-- The Connect page works without an account, so the setup can be
              seen before signing up. -->
         <div data-reveal style="--reveal-delay: 180ms" class="hero-actions">
@@ -276,21 +276,13 @@
   <section class="section">
     <div class="container">
       <div class="section-head"><h2 class="section-title">Why use SkyOS?</h2></div>
-      <!-- Each card shows its point in SkyOS's own pieces: the three apps
-           joined to SkyOS, a memory chip per project, and a note rewritten
-           when the user changes their mind. Drawn light: no grey panels, no
-           box inside a box, no bold. The pictures are decoration; the words
-           carry the meaning. -->
+      <!-- Each card shows its point in SkyOS's own pieces: a memory chip per
+           project, a note rewritten when the user changes their mind, and the
+           three apps joined to SkyOS. Sharing between apps comes last: the
+           pitch is the main memory for the one AI a person uses. Drawn light:
+           no grey panels, no box inside a box, no bold. The pictures are
+           decoration; the words carry the meaning. -->
       <div class="why">
-        <article class="why-card">
-          <div class="why-visual why-visual-hub" aria-hidden="true">
-            <div class="hub-apps"><span class="hub-app"><svg class="logo logo-claude" width="24" height="24"><use href="#i-claude"/></svg></span><span class="hub-app"><svg class="logo logo-chatgpt" width="24" height="24"><use href="#i-chatgpt"/></svg></span><span class="hub-app"><svg class="logo logo-codex" width="24" height="24"><use href="#i-codex"/></svg></span></div>
-            <span class="hub-join"></span>
-            <span class="hub-core"><svg class="brand-mark" width="38" height="34"><use href="#i-mark"/></svg></span>
-          </div>
-          <h3 class="why-claim">One memory, every app</h3>
-          <p class="why-text">Claude, ChatGPT and Codex read the same notes.</p>
-        </article>
         <article class="why-card">
           <div class="why-visual why-visual-chips" aria-hidden="true">
             <span class="mini-chip is-current">Northwind pricing</span>
@@ -307,6 +299,15 @@
           </div>
           <h3 class="why-claim">Nothing to manage</h3>
           <p class="why-text">No “remember this”. Change your mind, and the note is rewritten.</p>
+        </article>
+        <article class="why-card">
+          <div class="why-visual why-visual-hub" aria-hidden="true">
+            <div class="hub-apps"><span class="hub-app"><svg class="logo logo-claude" width="24" height="24"><use href="#i-claude"/></svg></span><span class="hub-app"><svg class="logo logo-chatgpt" width="24" height="24"><use href="#i-chatgpt"/></svg></span><span class="hub-app"><svg class="logo logo-codex" width="24" height="24"><use href="#i-codex"/></svg></span></div>
+            <span class="hub-join"></span>
+            <span class="hub-core"><svg class="brand-mark" width="38" height="34"><use href="#i-mark"/></svg></span>
+          </div>
+          <h3 class="why-claim">Switch apps anytime</h3>
+          <p class="why-text">Claude, ChatGPT and Codex read the same notes.</p>
         </article>
       </div>
     </div>
@@ -394,7 +395,7 @@
           <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
           <span class="wordmark">SkyOS</span>
         </a>
-        <p class="footer-tagline">One memory for Claude, ChatGPT and Codex.</p>
+        <p class="footer-tagline">The main memory for your AI.</p>
       </div>
       <nav class="footer-cols" aria-label="More">
         <div class="footer-col">
