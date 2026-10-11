@@ -123,7 +123,7 @@ a { color: inherit; }
 .ad-nav button { height: 28px; padding: 0 10px; border: 1px solid transparent; border-radius: 999px; background: transparent; color: var(--subtext); font: inherit; font-size: 14px; cursor: pointer; transition: color 0.12s ease; }
 .ad-nav button:hover { color: var(--ink); }
 .ad-nav button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); }
-.ad-page { padding: 28px 16px 48px; }
+.ad-page { padding: 24px 16px 32px; }
 
 /* The quiet controls' soft square, as in the app. */
 .ad-icon, .ad-more, .ad-copy, .ad-pill { cursor: pointer; transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease; }
@@ -147,16 +147,16 @@ a { color: inherit; }
 .ad-phrase { font-weight: 500; color: var(--ink); }
 .ad-copy { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 999px; color: var(--muted); }
 .ad-copy svg { width: 15px; height: 15px; }
-.ad-topic { margin-top: 36px; }
-.ad-topic-title { margin-bottom: 16px; font-size: 18px; font-weight: 600; line-height: 1.4; }
-.ad-notes { display: flex; flex-direction: column; gap: 20px; }
+.ad-topic { margin-top: 28px; }
+.ad-topic-title { margin-bottom: 12px; font-size: 18px; font-weight: 600; line-height: 1.4; }
+.ad-notes { display: flex; flex-direction: column; gap: 16px; }
 /* On a phone, as in the app: date and buttons above the note. */
 .ad-note { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "date acts" "body body"; align-items: center; gap: 2px 12px; }
 .ad-note-date { grid-area: date; font-size: 15px; color: var(--subtext); }
-.ad-note-body { grid-area: body; padding: 16px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); font-size: 17px; line-height: 1.55; }
+.ad-note-body { grid-area: body; padding: 13px 18px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); font-size: 17px; line-height: 1.55; }
 .ad-acts { grid-area: acts; display: flex; gap: 4px; }
 .ad-icon { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 10px; color: var(--muted); }
-.ad-footnote { margin-top: 40px; font-size: 13px; color: var(--subtext); }
+.ad-footnote { margin-top: 28px; font-size: 13px; color: var(--subtext); }
 @media (prefers-reduced-motion: reduce) {
   .demo *, .demo *::before, .demo *::after { animation: none !important; transition: none !important; }
 }
@@ -398,18 +398,18 @@ a { color: inherit; }
   .ad-bar { gap: 72px; height: 68px; padding: 0 var(--ad-gutter); }
   .ad-nav { gap: 8px; }
   .ad-nav button { padding: 0 12px; }
-  .ad-page { padding: 40px var(--ad-gutter) 56px; }
-  .ad-controls { display: flex; gap: 16px; margin-bottom: 40px; }
+  .ad-page { padding: 32px var(--ad-gutter) 40px; }
+  .ad-controls { display: flex; gap: 16px; margin-bottom: 32px; }
   .ad-search { width: 210px; }
   .ad-more { margin-left: auto; }
   .ad-title { font-size: 28px; }
-  .ad-topic { margin-top: 44px; }
-  .ad-notes { gap: 14px; }
+  .ad-topic { margin-top: 32px; }
+  .ad-notes { gap: 12px; }
   .ad-note { grid-template-columns: 140px minmax(0, 1fr) 84px; grid-template-areas: "date body acts"; column-gap: 20px; }
-  .ad-note-date { align-self: start; padding-top: 20px; }
-  .ad-note-body { padding: 18px 22px; font-size: 18px; }
+  .ad-note-date { align-self: start; padding-top: 16px; }
+  .ad-note-body { padding: 14px 22px; font-size: 18px; }
   .ad-topic-title, .ad-footnote { padding-left: 160px; }
-  .ad-footnote { margin-top: 56px; }
+  .ad-footnote { margin-top: 36px; }
   .container { --gutter-x: 24px; }
   .hero { padding-top: 112px; }
   .hero-lead { font-size: 20px; }
