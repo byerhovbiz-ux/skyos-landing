@@ -112,11 +112,12 @@ a { color: inherit; }
 .hero .works-with { justify-content: center; margin-top: 28px; }
 
 /* The demo: the SkyOS app's Memory page in a window, drawn at the app's own
-   sizes with memory.html's own pieces, on the app's page colour. The page,
-   its top bar included (the app's bar isn't fixed), scrolls inside the window
-   and fades out at the bottom until it is scrolled to its end. Controls show
-   the app's hover effects. Phone sizes first, as in the app below 640px;
-   wider from 720px. */
+   sizes with memory.html's own pieces, on the app's page colour. The window
+   shows the page from its top, top bar included (the app's bar isn't fixed),
+   and fades out at the bottom. It never scrolls by itself: a wheel or a finger
+   on it always moves the landing page, which a window scrolling inside the
+   page kept catching at its end. Controls show the app's hover effects. Phone
+   sizes first, as in the app below 640px; wider from 720px. */
 .demo {
   width: 100%;
   background: var(--bg);
@@ -129,19 +130,11 @@ a { color: inherit; }
 .ad-screen {
   position: absolute;
   inset: 0;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border-strong) transparent;
+  overflow: hidden;
   -webkit-mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
   mask-image: linear-gradient(to bottom, var(--ink) calc(100% - 64px), transparent);
 }
 .ad-screen.at-end { -webkit-mask-image: none; mask-image: none; }
-/* On a touch screen a finger on the demo moves the page, not the demo: it
-   shows its top and fades out, so the page never has to be scrolled
-   through it or caught at the edges. */
-@media (hover: none) {
-  .ad-screen { overflow-y: hidden; }
-}
 
 /* The app's top bar. */
 .ad-bar { display: flex; align-items: center; gap: 16px; height: 64px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--border); }
