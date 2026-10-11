@@ -251,9 +251,9 @@ a { color: inherit; }
 .feature-body { max-width: 26em; margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: balance; }
 /* A phrase to say, kept on one line. */
 .nowrap { white-space: nowrap; }
-/* The picture: a white card no bigger than the chat on it, as light as the
-   cards around it. */
-.feature-visual { justify-self: center; width: 100%; max-width: 440px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+/* The picture: a white card around the chat, as tall as the chat needs, as
+   light as the cards around it. */
+.feature-visual { justify-self: center; width: 100%; max-width: 560px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
 /* A chat in SkyOS's own style: the user's message on the right and the AI's
    answer on the left. */
 .chat { display: flex; flex-direction: column; gap: 12px; }
@@ -439,6 +439,7 @@ a { color: inherit; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
+  .feature-visual { padding: 32px; }
   .addr { grid-template-columns: 112px minmax(0, 1fr); align-items: center; }
   .section { padding-top: 144px; }
   .section-head { margin-bottom: 48px; }
@@ -460,6 +461,8 @@ a { color: inherit; }
   .feature { grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; }
   .feature-flip { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); }
   .feature-flip .feature-copy { order: 2; }
+  /* The flipped row's card sits on the left edge, under the title above. */
+  .feature-flip .feature-visual { justify-self: start; }
   .feature + .feature { margin-top: 128px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
 }
