@@ -82,34 +82,22 @@ a { color: inherit; }
 /* ---- hero -------------------------------------------------------------- */
 /* Centred, the way the best-known product pages open, with the demo below
    as the product shot. */
-.hero { padding: 48px 0 0; }
+.hero { padding: 56px 0 0; }
 .hero-copy { display: flex; flex-direction: column; align-items: center; text-align: center; }
-.hero-pill {
-  display: inline-flex;
-  align-items: center;
-  height: 28px;
-  padding: 0 12px;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
-  font-size: 13px;
-  font-weight: 500;
-}
 .hero-title {
   max-width: 13em;
-  margin-top: 20px;
   font-size: clamp(38px, 6.2vw, 72px);
   font-weight: 600;
   line-height: 1.04;
   letter-spacing: -0.035em;
   text-wrap: balance;
 }
-.hero-lead { max-width: 30em; margin-top: 20px; font-size: 18px; color: var(--subtext); text-wrap: balance; }
-.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 32px; }
+.hero-lead { max-width: 30em; margin-top: 24px; font-size: 18px; color: var(--subtext); text-wrap: balance; }
+.hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 40px; }
 /* The demo is the product shot, as wide as the page's content. */
-.hero-stage { margin-top: 40px; }
+.hero-stage { margin-top: 48px; }
 .hero-stage .demo { max-width: none; margin: 0 auto; }
-.hero .works-with { justify-content: center; margin-top: 28px; }
+.hero .works-with { justify-content: center; margin-top: 36px; }
 
 /* The demo: the SkyOS app's Memory page in a window, drawn at the app's own
    sizes with memory.html's own pieces, on the app's page colour. The whole
@@ -423,9 +411,9 @@ a { color: inherit; }
   .ad-topic-title, .ad-footnote { padding-left: 160px; }
   .ad-footnote { margin-top: 56px; }
   .container { --gutter-x: 24px; }
-  .hero { padding-top: 80px; }
+  .hero { padding-top: 112px; }
   .hero-lead { font-size: 20px; }
-  .hero-stage { margin-top: 64px; }
+  .hero-stage { margin-top: 80px; }
   .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
