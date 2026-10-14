@@ -71,6 +71,9 @@
   Array.prototype.forEach.call(dialog.querySelectorAll('[data-close]'), function (b) { b.addEventListener('click', close); });
   // A click on the backdrop lands on the dialog element itself.
   dialog.addEventListener('click', function (e) { if (e.target === dialog) close(); });
+  // skyos.ink/#contact opens the form at once, so a support link elsewhere
+  // (ChatGPT's plugin directory) lands straight in it.
+  if (location.hash === '#contact') open({ preventDefault: function () {} });
   // An error is about what was there when Send was pressed; once the fields
   // change it is out of date, so it goes.
   form.addEventListener('input', function () {
