@@ -26,6 +26,7 @@
 - [ChatGPT memory full: what to do](https://www.skyos.ink/chatgpt-memory-full)
 - [Why does ChatGPT forget things in long chats?](https://www.skyos.ink/why-chatgpt-forgets)
 - [Codex memory: how to make Codex remember past chats](https://www.skyos.ink/codex-memory)
+- [Why does Codex lose context in long chats?](https://www.skyos.ink/codex-losing-context)
 - [A memory MCP server for Claude, ChatGPT and Codex](https://www.skyos.ink/memory-mcp-server)
 
 ## Links

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Why does Codex lose context in long chats? — SkyOS</title>
+  <meta name="description" content="What happens when the Codex context window fills up, how to keep the details in Codex, and how SkyOS keeps each decision as a dated note.">
+  <link rel="canonical" href="https://www.skyos.ink/codex-losing-context">
+
+  <meta property="og:site_name" content="SkyOS">
+  <meta property="og:title" content="Why does Codex lose context in long chats?">
+  <meta property="og:description" content="What happens when the Codex context window fills up, how to keep the details in Codex, and how SkyOS keeps each decision as a dated note.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.skyos.ink/codex-losing-context">
+  <meta property="og:image" content="https://www.skyos.ink/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SkyOS: the main memory for your AI. Works with Claude, ChatGPT and Codex.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="preload" href="fonts/inter-latin-v20.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"Why does Codex lose context in long chats?","description":"What happens when the Codex context window fills up, how to keep the details in Codex, and how SkyOS keeps each decision as a dated note.","datePublished":"2026-10-18","dateModified":"2026-10-18","image":"https://www.skyos.ink/og.png","mainEntityOfPage":"https://www.skyos.ink/codex-losing-context","author":{"@type":"Organization","name":"SkyOS","url":"https://www.skyos.ink/"},"publisher":{"@type":"Organization","name":"SkyOS","logo":{"@type":"ImageObject","url":"https://www.skyos.ink/icons/icon-192.png"}}}
+  </script>
+</head>
+<body>
+
+<!-- A guide: the honest way to do it in the app itself first, then what
+     SkyOS adds. Every claim about Claude, ChatGPT or Codex is from their own
+     help pages, linked under the steps, as of the date shown; check them
+     again when you change this page. Automatic compaction is from the
+     configuration reference (model_auto_compact_token_limit). -->
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 29 26"><path d="M13.4533 12.55H25.4775M4.74452 4.42994L13.2469 12.9323M8.63629 23.556L14.6484 13.1427" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="13.4532" cy="12.8322" r="4.5339" fill="currentColor"/><circle cx="3.9694" cy="3.9694" r="3.9694" fill="currentColor"/><circle cx="9.2193" cy="23.05" r="2.558" fill="currentColor"/><circle cx="25.4775" cy="12.8322" r="3.1226" fill="currentColor"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 12 12"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner container">
+    <a class="brand" href="/">
+      <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+      <span class="wordmark">SkyOS</span>
+    </a>
+    <nav class="topbar-links" aria-label="Account">
+      <a class="link" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F">Sign in</a>
+      <a class="btn btn-sm" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main class="container guide">
+  <article>
+    <h1>Why does Codex lose context in long chats?</h1>
+    <p class="guide-lead">When a chat fills its context window, Codex compacts the history to make room. Here’s how to keep the details.</p>
+    <p class="guide-updated">Updated 18 October 2026</p>
+
+    <section class="guide-row">
+      <div class="guide-copy">
+        <h2>In Codex</h2>
+        <p class="guide-note">Sources: <a href="https://learn.chatgpt.com/docs/reference/slash-commands">slash commands</a>, <a href="https://learn.chatgpt.com/docs/config-file/config-reference">configuration</a>, <a href="https://learn.chatgpt.com/docs/agent-configuration/agents-md">AGENTS.md</a>, <a href="https://learn.chatgpt.com/docs/customization/memories">memories</a>.</p>
+      </div>
+      <div class="guide-steps">
+        <ol class="timeline">
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">1</span>
+            <h3 class="tl-title">Watch the context</h3>
+            <p class="tl-body">Type /status to see how much of the chat’s context is in use. Near the limit, Codex compacts the history on its own to make room.</p>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">2</span>
+            <h3 class="tl-title">Keep rules and key facts in AGENTS.md</h3>
+            <p class="tl-body">Codex reads AGENTS.md before doing any work, each time it starts, so what’s there doesn’t depend on the chat.</p>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">3</span>
+            <h3 class="tl-title">Compact or start fresh when you choose</h3>
+            <p class="tl-body">/compact compacts the chat now. /new starts a blank chat in the same workspace.</p>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">4</span>
+            <h3 class="tl-title">Turn on Codex memories</h3>
+            <p class="tl-body">They carry details from past chats on the same computer. They’re off by default.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="guide-row">
+      <div class="guide-copy">
+        <h2>Or with SkyOS</h2>
+        <p class="guide-text">SkyOS keeps each decision as its own exact, dated note, outside the chat. With the memory instructions on, Codex reads the notes before it answers, so early decisions stay in view however long the chat gets.</p>
+        <p class="guide-note">SkyOS saves as you chat, so connect it before your next long one. It works on Codex’s free plan.</p>
+        <div class="guide-actions">
+          <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html#codex">See how to connect</a>
+        </div>
+        <p class="guide-note">Free while in beta. No card needed.</p>
+      </div>
+      <figure class="feature-visual" aria-label="A SkyOS memory, Northwind pricing, with its notes, each dated: 3 weeks ago, “$15 a month, annual billing only.”; 1 week ago, “No free tier, to keep support load down.”">
+        <div aria-hidden="true">
+          <span class="mini-chip">Northwind pricing</span>
+          <ul class="mini-notes">
+            <li><span class="mini-date">3 weeks ago</span><span class="mini-text">$15 a month, annual billing only.</span></li>
+            <li><span class="mini-date">1 week ago</span><span class="mini-text">No free tier, to keep support load down.</span></li>
+          </ul>
+        </div>
+      </figure>
+    </section>
+
+    <section class="guide-row">
+      <div class="guide-copy">
+        <h2>Related</h2>
+      </div>
+      <nav class="guide-links" aria-label="Related guides">
+        <a href="/codex-memory">Codex memory: how to make Codex remember past chats<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="/claude-losing-context">Why does Claude lose context in long chats?<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="/why-chatgpt-forgets">Why does ChatGPT forget things in long chats?<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </nav>
+    </section>
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+          <span class="wordmark">SkyOS</span>
+        </a>
+        <p class="footer-tagline">The main memory for your AI.</p>
+      </div>
+      <nav class="footer-cols" aria-label="More">
+        <div class="footer-col">
+          <p class="footer-head">Product</p>
+          <a href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started</a>
+          <a href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F">Sign in</a>
+          <a href="/#how">How it works</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-head">Connect</p>
+          <a href="https://app.skyos.ink/connect.html#claude">Claude</a>
+          <a href="https://app.skyos.ink/connect.html#chatgpt">ChatGPT</a>
+          <a href="https://app.skyos.ink/connect.html#codex">Codex</a>
+          <a href="https://app.skyos.ink/connect.html#claude-code">Claude Code</a>
+        </div>
+        <div class="footer-col footer-col-wide">
+          <p class="footer-head">Guides</p>
+          <a href="/claude-conversation-too-long">Claude chat too long</a>
+          <a href="/claude-remember-previous-chats">Claude memory</a>
+          <a href="/claude-losing-context">Why Claude loses context</a>
+          <a href="/chatgpt-maximum-length">ChatGPT maximum length</a>
+          <a href="/chatgpt-remember-previous-conversations">ChatGPT memory</a>
+          <a href="/chatgpt-memory-full">ChatGPT memory full</a>
+          <a href="/why-chatgpt-forgets">Why ChatGPT forgets</a>
+          <a href="/codex-memory">Codex memory</a>
+          <a href="/codex-losing-context" aria-current="page">Why Codex loses context</a>
+          <a href="/memory-mcp-server">Memory MCP server</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkyOS</span>
+      <nav class="footer-legal" aria-label="Legal and contact">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="contact.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
