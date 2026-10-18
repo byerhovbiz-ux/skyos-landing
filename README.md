@@ -7,6 +7,10 @@ app lives separately at app.skyos.ink and its server at api.skyos.ink.
 index.html      the page: what SkyOS is, how it works, the Memory page drawn
 privacy.html    Privacy Policy   → /privacy
 terms.html      Terms of Service → /terms
+claude-conversation-too-long.html, claude-remember-previous-chats.html,
+chatgpt-maximum-length.html, chatgpt-remember-previous-conversations.html,
+chatgpt-memory-full.html, codex-memory.html, memory-mcp-server.html
+                the guides, one search each → /<name> (see Guides below)
 styles.css      all styling — phone first, widens at 720px and 960px
 tokens.css      the app's palette, copied from the app's tokens.css
 contact.js      the Contact form, built on any page with a data-contact link
@@ -20,6 +24,15 @@ scripts/
   build-og.cjs  renders og.html to og.png with headless Chrome/Edge
 serve.mjs       local preview server
 ```
+
+## Guides
+
+Each guide answers one thing people type into Google: the way to do it in
+Claude, ChatGPT or Codex itself first, then what SkyOS adds. Every claim
+about those apps comes from their own help pages, linked under the steps, as
+of the "Updated" date; check them again when you edit a guide, and update the
+date. A new guide also goes in the footer's Guides column on every page, in
+sitemap.xml and in llms.txt.
 
 ## Same design as the app
 

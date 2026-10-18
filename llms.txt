@@ -1,20 +1,30 @@
 # SkyOS
 
-> SkyOS is the main memory for Claude, ChatGPT or Codex. It turns what you decide in your AI chats into short, dated notes, kept per project, so a new chat picks up where the last one stopped and you don't re-explain your project. If you use more than one of these apps, they share the same notes.
+> SkyOS is the main memory for Claude, ChatGPT or Codex. It turns what you decide in your AI chats into short, dated notes, kept per project, so you don't re-explain your project in a new chat. If you use more than one of these apps, they share the same notes.
 
 ## What it does
 
 - Connects to Claude, ChatGPT and Codex as an MCP server. Every connected app reads and saves the same notes.
 - Notes keep the exact numbers, names and reasons you gave, not a summary. Each note is dated, and relative dates ("next Friday") are saved as real ones.
 - The AI is told today's date and when the memory was started. When a note older than a month holds a number or a status, it says when it was true ("as of 18 August, …") instead of presenting it as current. It asks whether such a fact still holds only before it goes into something public, and asks once when a deadline in a note has passed with no word on how it went.
-- Each new chat starts its own memory, so projects stay apart. To pick up in a new chat, say "continue my last chat" (the last chat in that app, or in any app if it has none yet), "continue my last Claude chat" (another app's), or "continue" and the memory's name: the chat carries on with the same notes and the last few messages.
+- Each new chat starts its own memory, so projects stay apart. To pick one up in a new chat, say "continue" and the memory's name, shown on the Memory page at app.skyos.ink: the chat carries on with the same notes and the last few messages.
 - Notes are rewritten when you change your mind. You can read, edit, export and delete them on the dashboard at app.skyos.ink.
 - SkyOS keeps only the last five exchanges of each chat, deleted after 30 quiet days. Everything older exists only as notes.
 
 ## Pricing
 
 - Free during the beta, up to 1,000 saved messages a month.
-- Claude and Codex work on free plans; ChatGPT needs a paid plan.
+- Claude, ChatGPT and Codex all work on free plans.
+
+## Guides
+
+- [Claude says "This conversation is too long to continue"](https://www.skyos.ink/claude-conversation-too-long)
+- [How to make Claude remember previous chats](https://www.skyos.ink/claude-remember-previous-chats)
+- [ChatGPT says "You've reached the maximum length for this conversation"](https://www.skyos.ink/chatgpt-maximum-length)
+- [How to make ChatGPT remember previous conversations](https://www.skyos.ink/chatgpt-remember-previous-conversations)
+- [ChatGPT memory full: what to do](https://www.skyos.ink/chatgpt-memory-full)
+- [Codex memory: how to make Codex remember past chats](https://www.skyos.ink/codex-memory)
+- [A memory MCP server for Claude, ChatGPT and Codex](https://www.skyos.ink/memory-mcp-server)
 
 ## Links
 

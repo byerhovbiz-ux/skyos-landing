@@ -191,13 +191,6 @@ a { color: inherit; }
 .section-lead { max-width: 34em; margin: 12px auto 0; font-size: 17px; color: var(--subtext); text-wrap: balance; }
 .section-note { max-width: 44em; margin-top: 20px; font-size: 14px; color: var(--subtext); }
 
-.compare { display: grid; gap: 12px; }
-.compare-col { padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.compare-col-without { background: var(--surface-sunk); border-color: transparent; }
-.compare-head { font-size: 15px; font-weight: 600; }
-.compare-line { margin-top: 14px; font-size: 17px; line-height: 1.45; }
-.compare-col-without .compare-line { color: var(--subtext); }
-
 /* Why: three cards in a row, each a small picture of its point above a short
    line. The pictures are drawn light, straight on the card: no grey panel,
    no box inside a box, no bold. */
@@ -319,12 +312,14 @@ a { color: inherit; }
    columns on the right, then the copyright and legal links. */
 .footer { background: var(--surface-sunk); }
 .footer-top { display: grid; gap: 40px; padding: 56px 0 40px; }
-.footer-tagline { max-width: 22em; margin-top: 12px; font-size: 15px; color: var(--subtext); }
+.footer-tagline { max-width: 22em; margin-top: 12px; font-size: 15px; color: var(--subtext); text-wrap: balance; }
 .footer-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
 .footer-col { display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+/* The guides' column: under the other two on a phone, beside them wider. */
+.footer-col-wide { grid-column: 1 / -1; }
 .footer-head { margin-bottom: 4px; font-size: 14px; font-weight: 600; }
 .footer-col a, .footer-legal a { position: relative; font-size: 14px; color: var(--subtext); text-decoration: none; }
-.footer-col a:hover, .footer-legal a:hover, .footer-legal a[aria-current="page"] { color: var(--ink); }
+.footer-col a:hover, .footer-col a[aria-current="page"], .footer-legal a:hover, .footer-legal a[aria-current="page"] { color: var(--ink); }
 /* Finger-sized targets; the stacked links keep apart. */
 .footer-col a::after, .footer-legal a::after { content: ""; position: absolute; inset: -5px -6px; }
 .footer-bottom { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding: 20px 0 32px; border-top: 1px solid var(--border-strong); font-size: 13px; color: var(--subtext); }
@@ -344,6 +339,45 @@ a { color: inherit; }
 .legal table { width: 100%; min-width: 560px; border-collapse: collapse; font-size: 15px; line-height: 1.5; }
 .legal th, .legal td { padding: 10px 14px 10px 0; border-bottom: 1px solid var(--border); text-align: left; vertical-align: top; }
 .legal th { font-weight: 600; }
+
+/* ---- Guides ------------------------------------------------------------ */
+/* One column to read down, as wide as Terms and Privacy, built from the
+   landing's own pieces: the timeline for the steps in the app itself, a
+   white card with a chat or notes for SkyOS, rows split by thin lines for
+   the links to the other guides. */
+.guide { max-width: calc(720px + 2 * var(--gutter-x)); padding-top: 48px; padding-bottom: 96px; }
+.guide h1 { font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
+.guide-lead { margin-top: 16px; font-size: 18px; color: var(--subtext); text-wrap: pretty; }
+.guide-updated { margin-top: 12px; font-size: 14px; color: var(--subtext); }
+.guide h2 { margin-top: 56px; font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; text-wrap: balance; }
+.guide-text { margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: pretty; }
+.guide-steps { margin-top: 20px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
+.guide-note { margin-top: 12px; font-size: 14px; color: var(--subtext); }
+.guide-note a { color: inherit; text-underline-offset: 3px; }
+/* As wide as the steps' card above it, from the column's left edge. */
+.guide .feature-visual { justify-self: stretch; max-width: none; margin-top: 20px; }
+.guide-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.guide code { padding: 1px 6px; background: var(--surface-sunk); border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; overflow-wrap: anywhere; }
+.guide pre { margin-top: 10px; padding: 10px 14px; background: var(--surface-sunk); border-radius: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.guide pre code { padding: 0; background: none; font-size: 13px; }
+.guide .tl-step pre { grid-column: 2; }
+/* The other guides: a row each, the arrow at its end. */
+.guide-links { margin-top: 16px; border-top: 1px solid var(--border); }
+.guide-links a { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--border); font-size: 17px; font-weight: 600; text-decoration: none; }
+.guide-links a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.guide-links svg { flex: none; color: var(--subtext); }
+/* A memory's notes, drawn light: its chip, then each note under its date. */
+.mini-notes { display: grid; gap: 16px; margin: 16px 0 0; padding: 0; list-style: none; }
+.mini-notes li { display: grid; gap: 2px; }
+.mini-date { font-size: 13px; color: var(--subtext); }
+.mini-text { font-size: 16px; }
+/* SkyOS's address for each app, a thin line between them. */
+.url-list { margin: 0; padding: 0; list-style: none; }
+.url-list li { display: grid; gap: 4px; padding: 14px 0; border-top: 1px solid var(--border); }
+.url-list li:first-child { padding-top: 0; border-top: 0; }
+.url-list li:last-child { padding-bottom: 0; }
+.url-app { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 500; }
+.url-list code { padding: 0; background: none; font-size: 13px; color: var(--subtext); }
 
 /* ---- Contact (built by contact.js) ------------------------------------- */
 .contact {
@@ -422,7 +456,6 @@ a { color: inherit; }
   .hero { padding-top: 112px; }
   .hero-lead { font-size: 20px; }
   .hero-stage { --demo-fade: 208px; margin-top: 80px; }
-  .compare { grid-template-columns: 1fr 1fr; gap: 16px; }
   .feature + .feature { margin-top: 112px; }
   .feature-title { font-size: 32px; }
   .feature-visual { padding: 32px; }
@@ -434,8 +467,15 @@ a { color: inherit; }
   .close { padding-bottom: 144px; }
   .close-title { font-size: 52px; }
   .footer-top { grid-template-columns: minmax(0, 1fr) auto; padding: 72px 0 56px; }
-  .footer-cols { grid-template-columns: repeat(2, 180px); gap: 48px; }
+  /* Three columns as wide as their links, so the brand keeps its room beside them. */
+  .footer-cols { grid-template-columns: repeat(3, max-content); gap: 48px; }
+  .footer-col-wide { grid-column: auto; }
   .legal { padding-top: 72px; }
+  .guide { padding-top: 72px; padding-bottom: 144px; }
+  .guide h1 { font-size: 44px; }
+  .guide-lead { font-size: 20px; }
+  .guide h2 { margin-top: 72px; font-size: 28px; }
+  .guide-steps { padding: 32px; }
 }
 
 
@@ -452,4 +492,5 @@ a { color: inherit; }
   .feature-flip .feature-visual { justify-self: start; }
   .feature + .feature { margin-top: 128px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
+  .footer-cols { grid-template-columns: repeat(3, 180px); }
 }

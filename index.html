@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SkyOS — the main memory for Claude, ChatGPT or Codex</title>
-  <meta name="description" content="SkyOS is the main memory for Claude, ChatGPT or Codex: exact, dated notes of each project, so a new chat picks up where you left off. Free during the beta.">
+  <meta name="description" content="SkyOS is the main memory for Claude, ChatGPT or Codex: exact, dated notes of each project. In a new chat, say “continue” and a memory’s name. Free during the beta.">
   <link rel="canonical" href="https://www.skyos.ink/">
   <!-- Proves to Google Search Console that this site is ours (URL prefix
        https://www.skyos.ink/). Not a secret; keep it, or verification lapses. -->
@@ -64,7 +64,7 @@
         "url": "https://www.skyos.ink/",
         "applicationCategory": "ProductivityApplication",
         "operatingSystem": "Web",
-        "description": "The main memory for Claude, ChatGPT or Codex. SkyOS turns what you decide in your AI chats into short, dated notes, kept per project, so a new chat picks up where the last one stopped; if you use more than one of the three, they share the same notes. Every note is dated, and “next Friday” is saved as the real date; a number or status older than a month is given with its date. To pick up in a new chat, say “continue my last chat” for the last chat in that app, “continue my last Claude chat” for another app’s, or “continue” and the memory’s name.",
+        "description": "The main memory for Claude, ChatGPT or Codex. SkyOS turns what you decide in your AI chats into short, dated notes, kept per project; if you use more than one of the three, they share the same notes. Every note is dated, and “next Friday” is saved as the real date; a number or status older than a month is given with its date. To pick a project up in a new chat, say “continue” and its memory’s name, shown on the Memory page.",
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free during the beta, up to 1,000 saved messages a month." },
         "publisher": { "@id": "https://www.skyos.ink/#org" }
       },
@@ -73,7 +73,7 @@
         "mainEntity": [
           { "@type": "Question", "name": "Does SkyOS store my chats?", "acceptedAnswer": { "@type": "Answer", "text": "No, just short notes, which you can see and delete on your dashboard. It briefly keeps a chat’s last few messages so it understands what you mean. The details are in Privacy." } },
           { "@type": "Question", "name": "Who can read my notes?", "acceptedAnswer": { "@type": "Answer", "text": "You, and SkyOS’s operator if needed, for example when you ask for help. OpenAI processes them to write notes and doesn’t train on them. More in Privacy." } },
-          { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Free during the beta, up to 1,000 saved messages a month. Claude and Codex work on free plans; ChatGPT needs a paid plan." } }
+          { "@type": "Question", "name": "What does it cost?", "acceptedAnswer": { "@type": "Answer", "text": "Free during the beta, up to 1,000 saved messages a month. Claude, ChatGPT and Codex all work on free plans." } }
         ]
       }
     ]
@@ -128,7 +128,7 @@
     <div class="container">
       <div class="hero-copy">
         <h1 data-reveal style="--reveal-delay: 60ms" class="hero-title">The main memory for your AI.</h1>
-        <p data-reveal style="--reveal-delay: 120ms" class="hero-lead">Each project remembered exactly. Start a new chat, say “continue&nbsp;my&nbsp;last&nbsp;chat”, and pick up where you left off.</p>
+        <p data-reveal style="--reveal-delay: 120ms" class="hero-lead">Each project remembered exactly. Start a new chat, say “continue” and its name, and pick up where you left off.</p>
         <!-- The Connect page works without an account, so the setup can be
              seen before signing up. -->
         <div data-reveal style="--reveal-delay: 180ms" class="hero-actions">
@@ -195,50 +195,25 @@
   </section>
 
 
-  <!-- ===================================================== COMPARE -->
+  <!-- ===================================================== CONTINUE
+       First under the hero: any project picks up in a new chat by its
+       memory's name, the one the Memory page above shows under "To use this
+       memory in a new chat, say". The reply's first line is
+       skyos_use_memory's own ("Continuing …: last used … in …"); between
+       message and answer, the step the apps show while the AI uses SkyOS,
+       with the tool's own title. The chat is SkyOS's own style, not a copy
+       of an app; once it is well in view, its step and reply come in one
+       after the other. -->
   <section class="section">
     <div class="container">
-      <div class="section-head"><h2 class="section-title">The exact answer, not a summary.</h2></div>
-      <div class="compare">
-        <div class="compare-col">
-          <h3 class="compare-head">With SkyOS</h3>
-          <p class="compare-line">“$15 a month, annual billing only.”</p>
-          <p class="compare-line">“Live before 15 October.”</p>
-          <p class="compare-line">“Supabase — you already use it for the database.”</p>
-        </div>
-        <div class="compare-col compare-col-without">
-          <h3 class="compare-head">Without it</h3>
-          <p class="compare-line">“We discussed pricing.”</p>
-          <p class="compare-line">“You mentioned launching soon.”</p>
-          <p class="compare-line">“You were choosing a sign-in service.”</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ================================================= LONG PROJECTS
-       What a project that runs for weeks needs: its memory in any new chat,
-       and old facts told apart from current ones. One short line and one
-       small chat each, to read at a glance, in a card no bigger than the
-       chat. Both are what SkyOS really does (server/lib in the app):
-       "Continuing …: last used … in …" is skyos_use_memory's own line, and
-       recall tells the AI to give a number older than a month with its date
-       ("as of …"). Between message and answer, the step the apps show while
-       the AI uses SkyOS, with the tool's own title. The chats are SkyOS's own
-       style, not copies of the apps; once one is well in view, its step and
-       reply come in one after the other. -->
-  <section class="section">
-    <div class="container">
-      <div class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
-
       <div class="feature">
         <div class="feature-copy">
-          <h3 class="feature-title">Pick up where you left off.</h3>
-          <p class="feature-body">Start a new chat and say <span class="nowrap">“continue my last chat”.</span></p>
+          <h2 class="feature-title">Pick up any project in any AI app.</h2>
+          <p class="feature-body">Say “continue” and a memory’s name, in ChatGPT, Claude or Codex.</p>
         </div>
-        <figure data-play class="feature-visual" aria-label="In a new chat, the user says “continue my last chat”. The AI uses SkyOS (Continue a SkyOS memory) and replies “Continuing Northwind pricing: last used 2 days ago in Claude. You’d just set $15 a month, annual billing only. Shall we write the pricing page?”">
+        <figure data-play class="feature-visual" aria-label="In a new chat, the user says “continue Northwind pricing”. The AI uses SkyOS (Continue a SkyOS memory) and replies “Continuing Northwind pricing: last used 2 days ago in Claude. You’d just set $15 a month, annual billing only. Shall we write the pricing page?”">
           <div class="chat" aria-hidden="true">
-            <p class="chat-user">continue my last chat</p>
+            <p class="chat-user">continue Northwind pricing</p>
             <p style="--play-delay: 450ms" class="chat-step"><svg class="brand-mark" width="16" height="14"><use href="#i-mark"/></svg>Continue a SkyOS memory</p>
             <div style="--play-delay: 900ms" class="chat-ai">
               <p>Continuing Northwind pricing: last used 2 days ago in Claude.</p>
@@ -247,6 +222,21 @@
           </div>
         </figure>
       </div>
+    </div>
+  </section>
+
+  <!-- ================================================= LONG PROJECTS
+       What a project that runs for weeks needs besides its memory: old facts
+       told apart from current ones. One short line and one small chat, to
+       read at a glance, in a card no bigger than the chat. It is what SkyOS
+       really does (server/lib in the app): recall tells the AI to give a
+       number older than a month with its date ("as of …"). Between message
+       and answer, the step the apps show while the AI uses SkyOS, with the
+       tool's own title. On a wide screen the picture sits on the left, the
+       other way round from the chat above. -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head"><h2 class="section-title">For projects that run for weeks.</h2></div>
 
       <div class="feature feature-flip">
         <div class="feature-copy">
@@ -334,7 +324,7 @@
           <li class="tl-step">
             <span class="tl-num" aria-hidden="true">3</span>
             <h3 class="tl-title">Pick up anywhere</h3>
-            <p class="tl-body">In any connected app, start a new chat and say “continue my last chat”, or “continue &lt;SkyOS memory&gt;”.</p>
+            <p class="tl-body">In any connected app, start a new chat and say “continue” and a memory’s name, as your Memory page shows it.</p>
           </li>
         </ol>
         <figure class="how-visual" aria-label="The address you add for each tool">
@@ -349,7 +339,9 @@
 
   <!-- ========================================================= FAQ
        Every answer is also in privacy.html or on the tools' own plan pages;
-       nothing here goes further than they do. Closed until picked: the
+       nothing here goes further than they do. One exception: OpenAI lists
+       Developer mode for paid ChatGPT plans, yet SkyOS works on a free one
+       too (the owner's own account, 17 Oct 2026). Closed until picked: the
        questions are what most people read. -->
   <section class="section">
     <div class="container">
@@ -365,7 +357,7 @@
         </details>
         <details class="faq-item">
           <summary class="faq-q">What does it cost?<span class="faq-icon" aria-hidden="true"></span></summary>
-          <p class="faq-a">Free during the beta, up to 1,000 saved messages a month. Claude and Codex work on free plans; ChatGPT needs a paid plan.</p>
+          <p class="faq-a">Free during the beta, up to 1,000 saved messages a month. Claude, ChatGPT and Codex all work on free plans.</p>
         </details>
       </div>
     </div>
@@ -386,7 +378,8 @@
 </main>
 
 <!-- Brand and links on a full-width band, as the best-known product pages
-     end; only pages that exist, and each tool's own setup on Connect. -->
+     end; only pages that exist, each tool's own setup on Connect, and the
+     guides, so every page links to each of them. -->
 <footer class="footer">
   <div class="container">
     <div class="footer-top">
@@ -410,6 +403,16 @@
           <a href="https://app.skyos.ink/connect.html#chatgpt">ChatGPT</a>
           <a href="https://app.skyos.ink/connect.html#codex">Codex</a>
           <a href="https://app.skyos.ink/connect.html#claude-code">Claude Code</a>
+        </div>
+        <div class="footer-col footer-col-wide">
+          <p class="footer-head">Guides</p>
+          <a href="/claude-conversation-too-long">Claude chat too long</a>
+          <a href="/claude-remember-previous-chats">Claude memory</a>
+          <a href="/chatgpt-maximum-length">ChatGPT maximum length</a>
+          <a href="/chatgpt-remember-previous-conversations">ChatGPT memory</a>
+          <a href="/chatgpt-memory-full">ChatGPT memory full</a>
+          <a href="/codex-memory">Codex memory</a>
+          <a href="/memory-mcp-server">Memory MCP server</a>
         </div>
       </nav>
     </div>

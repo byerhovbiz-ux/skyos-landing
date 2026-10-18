@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How to make Claude remember previous chats — SkyOS</title>
+  <meta name="description" content="Claude’s memory is on by default. How to check it, let Claude search past chats, and pick up one project with its exact notes.">
+  <link rel="canonical" href="https://www.skyos.ink/claude-remember-previous-chats">
+
+  <meta property="og:site_name" content="SkyOS">
+  <meta property="og:title" content="How to make Claude remember previous chats">
+  <meta property="og:description" content="Claude’s memory is on by default. How to check it, let Claude search past chats, and pick up one project with its exact notes.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://www.skyos.ink/claude-remember-previous-chats">
+  <meta property="og:image" content="https://www.skyos.ink/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="SkyOS: the main memory for your AI. Works with Claude, ChatGPT and Codex.">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="icons/icon.svg?v=2" type="image/svg+xml">
+  <link rel="icon" href="icons/icon-192.png?v=2" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png?v=2">
+  <meta name="theme-color" content="#FFFFFF">
+
+  <link rel="preload" href="fonts/inter-latin-v20.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="fonts.css">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Article","headline":"How to make Claude remember previous chats","description":"Claude’s memory is on by default. How to check it, let Claude search past chats, and pick up one project with its exact notes.","datePublished":"2026-10-18","dateModified":"2026-10-18","image":"https://www.skyos.ink/og.png","mainEntityOfPage":"https://www.skyos.ink/claude-remember-previous-chats","author":{"@type":"Organization","name":"SkyOS","url":"https://www.skyos.ink/"},"publisher":{"@type":"Organization","name":"SkyOS","logo":{"@type":"ImageObject","url":"https://www.skyos.ink/icons/icon-192.png"}}}
+  </script>
+</head>
+<body>
+
+<!-- A guide: the honest way to do it in the app itself first, then what
+     SkyOS adds. Every claim about Claude, ChatGPT or Codex is from their own
+     help pages, linked under the steps, as of the date shown; check them
+     again when you change this page. -->
+<svg class="sprite" aria-hidden="true">
+  <symbol id="i-mark" viewBox="0 0 29 26"><path d="M13.4533 12.55H25.4775M4.74452 4.42994L13.2469 12.9323M8.63629 23.556L14.6484 13.1427" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="13.4532" cy="12.8322" r="4.5339" fill="currentColor"/><circle cx="3.9694" cy="3.9694" r="3.9694" fill="currentColor"/><circle cx="9.2193" cy="23.05" r="2.558" fill="currentColor"/><circle cx="25.4775" cy="12.8322" r="3.1226" fill="currentColor"/></symbol>
+  <symbol id="i-arrow-up-right" viewBox="0 0 12 12"><path d="M2.5 9.5 9.5 2.5M4 2.5h5.5V8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 12 12"><path d="M1.2 6h9.2M6.9 2.5 10.4 6 6.9 9.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+</svg>
+
+<header class="topbar">
+  <div class="topbar-inner container">
+    <a class="brand" href="/">
+      <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+      <span class="wordmark">SkyOS</span>
+    </a>
+    <nav class="topbar-links" aria-label="Account">
+      <a class="link" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F">Sign in</a>
+      <a class="btn btn-sm" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+    </nav>
+  </div>
+</header>
+
+<main class="container guide">
+  <article>
+    <h1>How to make Claude remember previous chats</h1>
+    <p class="guide-lead">Claude remembers on its own now. Here’s how to check, and what SkyOS adds.</p>
+    <p class="guide-updated">Updated 18 October 2026</p>
+
+    <h2>In Claude</h2>
+    <div class="guide-steps">
+      <ol class="timeline">
+        <li class="tl-step">
+          <span class="tl-num" aria-hidden="true">1</span>
+          <h3 class="tl-title">Check memory is on</h3>
+          <p class="tl-body">Settings → Memory → Generate memory from chats. It’s on by default on Free, Pro and Max.</p>
+        </li>
+        <li class="tl-step">
+          <span class="tl-num" aria-hidden="true">2</span>
+          <h3 class="tl-title">Let it search past chats</h3>
+          <p class="tl-body">On paid plans, just ask: “What did we discuss about pricing?” The switch is Search and reference chats, also in Settings → Memory.</p>
+        </li>
+        <li class="tl-step">
+          <span class="tl-num" aria-hidden="true">3</span>
+          <h3 class="tl-title">See what it remembers</h3>
+          <p class="tl-body">Settings → Memory lists each topic. Edit or delete any of them.</p>
+        </li>
+        <li class="tl-step">
+          <span class="tl-num" aria-hidden="true">4</span>
+          <h3 class="tl-title">Keep projects apart</h3>
+          <p class="tl-body">Each project has its own memory.</p>
+        </li>
+      </ol>
+    </div>
+    <p class="guide-note">Source: <a href="https://support.claude.com/en/articles/11817273-use-claude-s-chat-search-and-memory-to-build-on-previous-context">chat search and memory</a>.</p>
+
+    <h2>What SkyOS adds</h2>
+    <p class="guide-text">Exact, dated notes for each project. Say <span class="nowrap">“continue Northwind pricing”</span> and Claude gets that project’s notes and your last few messages.</p>
+    <figure class="feature-visual" aria-label="In a new chat, the user says “continue Northwind pricing”. The AI uses SkyOS (Continue a SkyOS memory) and replies “Continuing Northwind pricing: last used 2 days ago in Claude. You’d just set $15 a month, annual billing only. Shall we write the pricing page?”">
+      <div class="chat" aria-hidden="true">
+        <p class="chat-user">continue Northwind pricing</p>
+        <p class="chat-step"><svg class="brand-mark" width="16" height="14"><use href="#i-mark"/></svg>Continue a SkyOS memory</p>
+        <div class="chat-ai">
+          <p>Continuing Northwind pricing: last used 2 days ago in Claude.</p>
+          <p>You’d just set $15 a month, annual billing only. Shall we write the pricing page?</p>
+        </div>
+      </div>
+    </figure>
+    <p class="guide-note">The same notes work in ChatGPT and Codex.</p>
+    <div class="guide-actions">
+      <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+      <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html#claude">See how to connect</a>
+    </div>
+    <p class="guide-note">Free while in beta. No card needed.</p>
+
+    <h2>Related</h2>
+    <nav class="guide-links" aria-label="Related guides">
+      <a href="/claude-conversation-too-long">Claude says “This conversation is too long to continue”<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <a href="/chatgpt-remember-previous-conversations">How to make ChatGPT remember previous conversations<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </nav>
+  </article>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a class="brand" href="/">
+          <svg class="brand-mark" width="27" height="24" aria-hidden="true"><use href="#i-mark"/></svg>
+          <span class="wordmark">SkyOS</span>
+        </a>
+        <p class="footer-tagline">The main memory for your AI.</p>
+      </div>
+      <nav class="footer-cols" aria-label="More">
+        <div class="footer-col">
+          <p class="footer-head">Product</p>
+          <a href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started</a>
+          <a href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2F">Sign in</a>
+          <a href="/#how">How it works</a>
+        </div>
+        <div class="footer-col">
+          <p class="footer-head">Connect</p>
+          <a href="https://app.skyos.ink/connect.html#claude">Claude</a>
+          <a href="https://app.skyos.ink/connect.html#chatgpt">ChatGPT</a>
+          <a href="https://app.skyos.ink/connect.html#codex">Codex</a>
+          <a href="https://app.skyos.ink/connect.html#claude-code">Claude Code</a>
+        </div>
+        <div class="footer-col footer-col-wide">
+          <p class="footer-head">Guides</p>
+          <a href="/claude-conversation-too-long">Claude chat too long</a>
+          <a href="/claude-remember-previous-chats" aria-current="page">Claude memory</a>
+          <a href="/chatgpt-maximum-length">ChatGPT maximum length</a>
+          <a href="/chatgpt-remember-previous-conversations">ChatGPT memory</a>
+          <a href="/chatgpt-memory-full">ChatGPT memory full</a>
+          <a href="/codex-memory">Codex memory</a>
+          <a href="/memory-mcp-server">Memory MCP server</a>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SkyOS</span>
+      <nav class="footer-legal" aria-label="Legal and contact">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hello@skyos.ink" data-contact>Contact</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script src="contact.js"></script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
