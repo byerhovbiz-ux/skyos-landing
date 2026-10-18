@@ -66,51 +66,63 @@
     <p class="guide-lead">Run one yourself, or add SkyOS with one URL.</p>
     <p class="guide-updated">Updated 18 October 2026</p>
 
-    <h2>Run the reference server</h2>
-    <div class="guide-steps">
-      <ol class="timeline">
-        <li class="tl-step">
-          <span class="tl-num" aria-hidden="true">1</span>
-          <h3 class="tl-title">Add it to your app’s MCP config</h3>
-          <p class="tl-body">Its command:</p>
-          <pre><code>npx -y @modelcontextprotocol/<wbr>server-memory</code></pre>
-        </li>
-        <li class="tl-step">
-          <span class="tl-num" aria-hidden="true">2</span>
-          <h3 class="tl-title">What it keeps</h3>
-          <p class="tl-body">A knowledge graph of entities, relations and facts, in a local file, memory.jsonl.</p>
-        </li>
-        <li class="tl-step">
-          <span class="tl-num" aria-hidden="true">3</span>
-          <h3 class="tl-title">Where it runs</h3>
-          <p class="tl-body">On your computer. Each app starts its own copy.</p>
-        </li>
-      </ol>
-    </div>
-    <p class="guide-note">Source: <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/memory">modelcontextprotocol/servers on GitHub</a>.</p>
+    <section class="guide-row">
+      <div class="guide-copy">
+        <h2>Run the reference server</h2>
+        <p class="guide-note">Source: <a href="https://github.com/modelcontextprotocol/servers/tree/main/src/memory">modelcontextprotocol/servers on GitHub</a>.</p>
+      </div>
+      <div class="guide-steps">
+        <ol class="timeline">
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">1</span>
+            <h3 class="tl-title">Add it to your app’s MCP config</h3>
+            <p class="tl-body">Its command:</p>
+            <pre><code>npx -y @modelcontextprotocol/<wbr>server-memory</code></pre>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">2</span>
+            <h3 class="tl-title">What it keeps</h3>
+            <p class="tl-body">A knowledge graph of entities, relations and facts, in a local file, memory.jsonl.</p>
+          </li>
+          <li class="tl-step">
+            <span class="tl-num" aria-hidden="true">3</span>
+            <h3 class="tl-title">Where it runs</h3>
+            <p class="tl-body">On your computer. Each app starts its own copy.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
 
-    <h2>Or add SkyOS</h2>
-    <p class="guide-text">A hosted memory MCP server: add its URL, sign in, and each project gets dated notes you can read at app.skyos.ink.</p>
-    <figure class="feature-visual" aria-label="SkyOS’s address for Claude, ChatGPT and Codex, and the command for Claude Code">
-      <ul class="url-list">
-        <li><span class="url-app"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span><code>https://api.skyos.ink/mcp/claude</code></li>
-        <li><span class="url-app"><svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>ChatGPT</span><code>https://api.skyos.ink/mcp/chatgpt</code></li>
-        <li><span class="url-app"><svg class="logo logo-codex" width="18" height="18" aria-hidden="true"><use href="#i-codex"/></svg>Codex</span><code>https://api.skyos.ink/mcp/codex</code></li>
-        <li><span class="url-app"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude Code</span><code>claude mcp add --transport http --scope user skyos https://api.skyos.ink/mcp/claude</code></li>
-      </ul>
-    </figure>
-    <p class="guide-note">Three tools: skyos_recall, skyos_save and skyos_use_memory. In the MCP Registry as ink.skyos/memory.</p>
-    <div class="guide-actions">
-      <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
-      <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
-    </div>
-    <p class="guide-note">Free while in beta. No card needed.</p>
+    <section class="guide-row">
+      <div class="guide-copy">
+        <h2>Or add SkyOS</h2>
+        <p class="guide-text">A hosted memory MCP server: add its URL, sign in, and each project gets dated notes you can read at app.skyos.ink.</p>
+        <p class="guide-note">Three tools: skyos_recall, skyos_save and skyos_use_memory. In the MCP Registry as ink.skyos/memory.</p>
+        <div class="guide-actions">
+          <a class="btn" href="https://api.skyos.ink/auth/login?return=https%3A%2F%2Fapp.skyos.ink%2Fconnect.html&amp;signup=1">Get started<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow-up-right"/></svg></a>
+          <a class="btn btn-secondary" href="https://app.skyos.ink/connect.html">See how to connect</a>
+        </div>
+        <p class="guide-note">Free while in beta. No card needed.</p>
+      </div>
+      <figure class="feature-visual" aria-label="SkyOS’s address for Claude, ChatGPT and Codex, and the command for Claude Code">
+        <ul class="url-list">
+          <li><span class="url-app"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude</span><code>https://api.skyos.ink/mcp/claude</code></li>
+          <li><span class="url-app"><svg class="logo logo-chatgpt" width="18" height="18" aria-hidden="true"><use href="#i-chatgpt"/></svg>ChatGPT</span><code>https://api.skyos.ink/mcp/chatgpt</code></li>
+          <li><span class="url-app"><svg class="logo logo-codex" width="18" height="18" aria-hidden="true"><use href="#i-codex"/></svg>Codex</span><code>https://api.skyos.ink/mcp/codex</code></li>
+          <li><span class="url-app"><svg class="logo logo-claude" width="18" height="18" aria-hidden="true"><use href="#i-claude"/></svg>Claude Code</span><code>claude mcp add --transport http --scope user skyos https://api.skyos.ink/mcp/claude</code></li>
+        </ul>
+      </figure>
+    </section>
 
-    <h2>Related</h2>
-    <nav class="guide-links" aria-label="Related guides">
-      <a href="/codex-memory">Codex memory: how to make Codex remember past chats<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-      <a href="/claude-remember-previous-chats">How to make Claude remember previous chats<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
-    </nav>
+    <section class="guide-row">
+      <div class="guide-copy">
+        <h2>Related</h2>
+      </div>
+      <nav class="guide-links" aria-label="Related guides">
+        <a href="/codex-memory">Codex memory: how to make Codex remember past chats<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+        <a href="/claude-remember-previous-chats">How to make Claude remember previous chats<svg width="12" height="12" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </nav>
+    </section>
   </article>
 </main>
 
