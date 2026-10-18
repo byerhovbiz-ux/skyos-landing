@@ -343,26 +343,26 @@ a { color: inherit; }
 /* ---- Guides ------------------------------------------------------------ */
 /* Built from the landing's own pieces: the timeline for the steps in the app
    itself, a white card with a chat or notes for SkyOS, rows split by thin
-   lines for the links to the other guides. Each section is a row like the
-   home page's features: on a wide screen its title and words on the left,
-   its card on the right. Narrower, one column as wide as Terms and Privacy:
-   the title and line, the card, then the notes and buttons. */
-.guide { max-width: calc(720px + 2 * var(--gutter-x)); padding-top: 48px; padding-bottom: 96px; }
-.guide h1 { font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
-.guide-lead { margin-top: 16px; font-size: 18px; color: var(--subtext); text-wrap: pretty; }
+   lines for the links to the other guides. Everything centred, like the home
+   page's hero and section heads: the title and lead, then each section's
+   title and line, its card, and its notes and buttons under the card. Inside
+   the cards the steps and chats read from the left, as in the apps. */
+.guide { max-width: calc(800px + 2 * var(--gutter-x)); padding-top: 48px; padding-bottom: 96px; text-align: center; }
+.guide h1 { max-width: 16em; margin: 0 auto; font-size: 32px; font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; text-wrap: balance; }
+.guide-lead { max-width: 34em; margin: 16px auto 0; font-size: 18px; color: var(--subtext); text-wrap: balance; }
 .guide-updated { margin-top: 12px; font-size: 14px; color: var(--subtext); }
 .guide h2 { font-size: 24px; font-weight: 600; line-height: 1.25; letter-spacing: -0.015em; text-wrap: balance; }
-.guide-row { display: flex; flex-direction: column; margin-top: 56px; }
+.guide-row { display: flex; flex-direction: column; align-items: center; margin-top: 56px; }
 .guide-copy { display: contents; }
-.guide-row > .guide-steps, .guide-row > .feature-visual, .guide-row > .guide-links { order: 1; }
+.guide-row > .guide-steps, .guide-row > .feature-visual, .guide-row > .guide-links { order: 1; width: 100%; text-align: left; }
 .guide-copy > .guide-note, .guide-copy > .guide-actions { order: 2; }
-.guide-text { margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: pretty; }
+.guide-text { max-width: 34em; margin-top: 12px; font-size: 17px; line-height: 1.55; color: var(--subtext); text-wrap: balance; }
 .guide-steps { margin-top: 20px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }
-.guide-note { margin-top: 12px; font-size: 14px; color: var(--subtext); }
+.guide-note { margin-top: 12px; font-size: 14px; color: var(--subtext); text-wrap: balance; }
 .guide-note a { color: inherit; text-underline-offset: 3px; }
-/* As wide as the steps' card above it, from the column's left edge. */
-.guide .feature-visual { justify-self: stretch; max-width: none; margin-top: 20px; }
-.guide-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+/* As wide as the steps' card above it. */
+.guide .feature-visual { max-width: none; margin-top: 20px; }
+.guide-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
 .guide code { padding: 1px 6px; background: var(--surface-sunk); border-radius: 6px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.88em; overflow-wrap: anywhere; }
 .guide pre { margin-top: 10px; padding: 10px 14px; background: var(--surface-sunk); border-radius: 10px; white-space: pre-wrap; overflow-wrap: anywhere; }
 .guide pre code { padding: 0; background: none; font-size: 13px; }
@@ -500,11 +500,6 @@ a { color: inherit; }
   .feature + .feature { margin-top: 128px; }
   .how { grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 48px; padding: 40px; }
   .footer-cols { grid-template-columns: repeat(3, 180px); }
-  /* The guides as wide as the home page, each section a row like its features. */
-  .guide { max-width: calc(1120px + 2 * var(--gutter-x)); }
-  .guide h1 { max-width: 16em; font-size: 52px; }
-  .guide-lead { max-width: 36em; }
-  .guide-row { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: 64px; align-items: start; margin-top: 112px; }
-  .guide-copy { display: block; }
-  .guide-row > .guide-steps, .guide-row > .feature-visual, .guide-row > .guide-links { margin-top: 0; }
+  .guide h1 { font-size: 52px; }
+  .guide-row { margin-top: 96px; }
 }
