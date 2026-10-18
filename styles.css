@@ -240,11 +240,13 @@ a { color: inherit; }
 .chat-step .brand-mark { flex: none; color: var(--ink); }
 .chat-ai { align-self: flex-start; max-width: 92%; font-size: 16px; line-height: 1.5; }
 .chat-ai p + p { margin-top: 8px; }
-/* Long chats: the start of one, faded, then the app's own limit message;
-   under a thin line, the decision as SkyOS keeps it. */
-.limit-old { opacity: 0.4; }
-.limit-msg { padding: 12px 16px; background: var(--surface-sunk); border-radius: 12px; font-size: 14px; color: var(--subtext); text-align: center; text-wrap: balance; }
-.limit-kept { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
+/* AI forgets: a long chat whose oldest messages fade out at the top; under
+   a thin line, the decision as SkyOS keeps it. */
+.forget-chat {
+  -webkit-mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.12), #000 85%);
+  mask-image: linear-gradient(to bottom, rgb(0 0 0 / 0.12), #000 85%);
+}
+.forget-kept { margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border); }
 
 /* How it works: the steps on a timeline, beside what step 1 really is. */
 .how { display: grid; gap: 24px; padding: 24px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card); }

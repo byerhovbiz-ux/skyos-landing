@@ -195,28 +195,30 @@
   </section>
 
 
-  <!-- =================================================== LONG CHATS
-       First under the hero: what happens when a chat gets too long, as the
-       apps' own help pages and messages say (the guides link them), and what
-       SkyOS keeps instead. The picture is the end of a long chat: its start
-       faded, then Claude's own limit message, word for word; under a thin
-       line, the decision as the Memory page shows it, a dated note. On a
-       wide screen the picture sits on the left, the other way round from the
-       chat below. -->
+  <!-- ================================================= AI FORGETS
+       First under the hero: AI losing details in long chats, as the apps'
+       own help pages describe it (the guides link them): the start of a
+       chat squeezed into a summary or left out. The picture is a long chat
+       whose oldest part, the decision, fades out at the top; under a thin
+       line, the same decision as the Memory page shows it, a dated note.
+       No app is shown answering wrong. On a wide screen the picture sits on
+       the left, the other way round from the chat below. -->
   <section class="section">
     <div class="container">
       <div class="feature feature-flip">
         <div class="feature-copy">
-          <h2 class="feature-title">Long chats get cut off or summarized. Your decisions don’t.</h2>
-          <p class="feature-body">When a chat gets too long, Claude, ChatGPT and Codex stop it or squeeze the start into a summary. SkyOS keeps each decision as its own exact, dated note.</p>
+          <h2 class="feature-title">AI forgets details in long chats. SkyOS keeps them.</h2>
+          <p class="feature-body">As a chat grows, Claude, ChatGPT and Codex squeeze the start into a summary or leave it out, and exact numbers slip. SkyOS keeps each decision as its own exact, dated note.</p>
         </div>
-        <figure class="feature-visual" aria-label="The end of a long chat. Its start, faded: the user says “Let’s go with $15 a month, annual billing only.” Then the app says “This conversation is too long to continue. Start a new chat, or remove some tools to free up space.” Under it, the SkyOS memory Northwind pricing still has the decision, dated 3 weeks ago: “$15 a month, annual billing only.”">
+        <figure class="feature-visual" aria-label="A long chat, its oldest messages fading out at the top: three weeks ago the user said “Let’s go with $15 a month, annual billing only.”, and the chat moved on to onboarding emails. Under it, the SkyOS memory Northwind pricing keeps that decision as a note dated 3 weeks ago: “$15 a month, annual billing only.”">
           <div aria-hidden="true">
-            <div class="chat">
-              <p class="chat-user limit-old">Let’s go with $15 a month, annual billing only.</p>
-              <p class="limit-msg">This conversation is too long to continue. Start a new chat, or remove some tools to free up space.</p>
+            <div class="chat forget-chat">
+              <p class="chat-user">Let’s go with $15 a month, annual billing only.</p>
+              <div class="chat-ai"><p>Done: $15 a month, billed once a year.</p></div>
+              <p class="chat-user">Next, the onboarding emails.</p>
+              <div class="chat-ai"><p>Here’s a first draft of the welcome email.</p></div>
             </div>
-            <div class="limit-kept">
+            <div class="forget-kept">
               <span class="mini-chip">Northwind pricing</span>
               <ul class="mini-notes">
                 <li><span class="mini-date">3 weeks ago</span><span class="mini-text">$15 a month, annual billing only.</span></li>
