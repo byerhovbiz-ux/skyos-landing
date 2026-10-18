@@ -20,6 +20,7 @@
 
 - [Claude says "This conversation is too long to continue"](https://www.skyos.ink/claude-conversation-too-long)
 - [How to make Claude remember previous chats](https://www.skyos.ink/claude-remember-previous-chats)
+- [Why does Claude lose context in long chats?](https://www.skyos.ink/claude-losing-context)
 - [ChatGPT says "You've reached the maximum length for this conversation"](https://www.skyos.ink/chatgpt-maximum-length)
 - [How to make ChatGPT remember previous conversations](https://www.skyos.ink/chatgpt-remember-previous-conversations)
 - [ChatGPT memory full: what to do](https://www.skyos.ink/chatgpt-memory-full)
