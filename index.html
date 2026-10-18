@@ -195,8 +195,41 @@
   </section>
 
 
+  <!-- =================================================== LONG CHATS
+       First under the hero: what happens when a chat gets too long, as the
+       apps' own help pages and messages say (the guides link them), and what
+       SkyOS keeps instead. The picture is the end of a long chat: its start
+       faded, then Claude's own limit message, word for word; under a thin
+       line, the decision as the Memory page shows it, a dated note. On a
+       wide screen the picture sits on the left, the other way round from the
+       chat below. -->
+  <section class="section">
+    <div class="container">
+      <div class="feature feature-flip">
+        <div class="feature-copy">
+          <h2 class="feature-title">Long chats get cut off or summarized. Your decisions don’t.</h2>
+          <p class="feature-body">When a chat gets too long, Claude, ChatGPT and Codex stop it or squeeze the start into a summary. SkyOS keeps each decision as its own exact, dated note.</p>
+        </div>
+        <figure class="feature-visual" aria-label="The end of a long chat. Its start, faded: the user says “Let’s go with $15 a month, annual billing only.” Then the app says “This conversation is too long to continue. Start a new chat, or remove some tools to free up space.” Under it, the SkyOS memory Northwind pricing still has the decision, dated 3 weeks ago: “$15 a month, annual billing only.”">
+          <div aria-hidden="true">
+            <div class="chat">
+              <p class="chat-user limit-old">Let’s go with $15 a month, annual billing only.</p>
+              <p class="limit-msg">This conversation is too long to continue. Start a new chat, or remove some tools to free up space.</p>
+            </div>
+            <div class="limit-kept">
+              <span class="mini-chip">Northwind pricing</span>
+              <ul class="mini-notes">
+                <li><span class="mini-date">3 weeks ago</span><span class="mini-text">$15 a month, annual billing only.</span></li>
+              </ul>
+            </div>
+          </div>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================================================== CONTINUE
-       First under the hero: any project picks up in a new chat by its
+       Under the long chats: any project picks up in a new chat by its
        memory's name, the one the Memory page above shows under "To use this
        memory in a new chat, say". The reply's first line is
        skyos_use_memory's own ("Continuing …: last used … in …"); between
@@ -411,6 +444,7 @@
           <a href="/chatgpt-maximum-length">ChatGPT maximum length</a>
           <a href="/chatgpt-remember-previous-conversations">ChatGPT memory</a>
           <a href="/chatgpt-memory-full">ChatGPT memory full</a>
+          <a href="/why-chatgpt-forgets">Why ChatGPT forgets</a>
           <a href="/codex-memory">Codex memory</a>
           <a href="/memory-mcp-server">Memory MCP server</a>
         </div>

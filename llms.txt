@@ -23,6 +23,7 @@
 - [ChatGPT says "You've reached the maximum length for this conversation"](https://www.skyos.ink/chatgpt-maximum-length)
 - [How to make ChatGPT remember previous conversations](https://www.skyos.ink/chatgpt-remember-previous-conversations)
 - [ChatGPT memory full: what to do](https://www.skyos.ink/chatgpt-memory-full)
+- [Why does ChatGPT forget things in long chats?](https://www.skyos.ink/why-chatgpt-forgets)
 - [Codex memory: how to make Codex remember past chats](https://www.skyos.ink/codex-memory)
 - [A memory MCP server for Claude, ChatGPT and Codex](https://www.skyos.ink/memory-mcp-server)
 
